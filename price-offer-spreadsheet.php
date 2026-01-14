@@ -62,7 +62,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     foreach ($doors as $door) {
         $sheet->setCellValue("A$rowIdx", Width::getWidthString($door->width) ?: 60);
         $sheet->setCellValue("B$rowIdx", $door->type);
-        $sheet->setCellValue("C$rowIdx", DoorsJsonDataManipulation::getMaterialTranslation($door->material));
+        $sheet->setCellValue("C$rowIdx", $door->material ? DoorsJsonDataManipulation::getMaterialTranslation($door->material) : "");
         $sheet->setCellValue("E$rowIdx", "=IFERROR(VLOOKUP(B$rowIdx, Calc!A:B, 2, FALSE), 0)+IF(A$rowIdx<=69, 0,IF(A$rowIdx<=79, 3,IF(A$rowIdx<=89, 6, 9)))");
         $sheet->setCellValue("F$rowIdx", $door->isDoorFrameEnabled ? 'TRUE' : 'FALSE');
         $sheet->setCellValue("G$rowIdx", 1);

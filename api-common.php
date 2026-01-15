@@ -1,8 +1,6 @@
 <?php
 include_once "cart-model.php";
 
-session_start();
-
 function sendJsonResponse($data, int $statusCode)
 {
     header('Content-Type: application/json');

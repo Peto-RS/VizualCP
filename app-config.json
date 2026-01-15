@@ -33,7 +33,7 @@
     "reCaptchaSiteKey": "6Ld5jQMrAAAAAEgMhJDxVkJ7Du5Zpw62pBzUL4wl"
   },
   "DEV": {
-    "baseUrl": "localhost:8080",
+    "baseUrl": "http://localhost:8080",
     "dbFilename": "/Users/peterhutas/Desktop/db/db.sqlite",
     "isProductionSmtp": false,
     "isProductionVueBuild": false,
@@ -44,7 +44,7 @@
     "mailSmtpHost": "smtp.gmail.com",
     "mailSmtpUsername": "janicekd0@gmail.com",
     "mailSmtpPassword": "kvyj wbne nlkj hsxk",
-    "reCaptchaEnabled": true,
+    "reCaptchaEnabled": false,
     "reCaptchaSecretKey": "6Ldc_T0sAAAAAMSv0bV-KK0M2d6rP3kPmsDHbsp-",
     "reCaptchaSiteKey": "6Ldc_T0sAAAAACAxl6Rfk01Nji00Fqfpi1WK3YmM"
   }

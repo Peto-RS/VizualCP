@@ -1,5 +1,7 @@
 <?php
 include_once "cart-model.php";
+include_once "json-data-manipulation.php";
+
 session_start();
 //session_destroy();
 //Require https
@@ -18,7 +20,7 @@ if ($_SERVER['HTTPS'] != "on"){
     <meta name="description"
           content="Prezrite si našu VIZUALIZÁCIU interiérových dverí, kde nájdete viac ako 100 druhov dverí v 40 rôznych farebných dekoroch, usporiadaných v 8 prehľadných kategóriách."/>
     <link rel="stylesheet"
-          href="<?php AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/assets/main.css" ?>">
+          href="<?php echo AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/assets/main.css" ?>">
 
     <?php
     include_once "constants.php";

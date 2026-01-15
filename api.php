@@ -2,6 +2,7 @@
 include_once "api-common.php";
 include_once "cart-model.php";
 include_once "validation.php";
+
 session_start();
 
 // ---------------------
@@ -9,12 +10,12 @@ session_start();
 // ---------------------
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['getApiResponse'])) {
-        if (!isset($_SESSION['priceOffer'])) {
+        if (!isPriceOfferInSessionValid()) {
             sendJsonResponse(['error' => 'No price offer in session'], 404);
         }
 
         /** @var PriceOffer $sessionPriceOffer */
-        $sessionPriceOffer = $_SESSION['priceOffer'];
+        $sessionPriceOffer = getPriceOfferFromSessionOrUnset();
         $responsePriceOffer = $sessionPriceOffer->toResponse();
 
         sendJsonResponse(new ApiResponse(

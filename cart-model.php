@@ -461,8 +461,8 @@ class SpecialSurcharge
 class Door
 {
     const FEE_DTD = 30;
-    const FEE_FRAME = 93;
-    const FEE_FRAME_OFFER = 79;
+    const FEE_FRAME = 99;
+    const FEE_FRAME_OFFER = 80;
 
     /** @var string $category */
     public $category;
@@ -663,8 +663,8 @@ class Door
 
 class PriceOffer
 {
-    const ASSEMBLY_DOORS_COST = 25;
-    const ASSEMBLY_DOORS_COST_MIN = 150;
+    const ASSEMBLY_DOORS_COST = 35;
+    const ASSEMBLY_DOORS_COST_MIN = 210;
     const ASSEMBLY_PRICE_HANDLES_ROSETTES = 5;
     const DELIVERY_PRICE_PER_KM = 0.5;
     const VAT = 1.23;
@@ -1435,6 +1435,10 @@ function getCategoryFromDoorType($typ): string
                 return "Zuzana";
             case "R":
                 return "Renata";
+            case "B":
+                return "Barbora";
+            case "G":
+                return "Greta";
             default:
                 return "";
         }

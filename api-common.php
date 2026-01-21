@@ -11,5 +11,6 @@ function sendJsonResponse($data, int $statusCode)
 
 function isPriceOfferInSessionValid(array $session): bool
 {
-    return !(isset($session['priceOffer']) && $session['priceOffer'] instanceof __PHP_Incomplete_Class);
+    return isset($session['priceOffer'])
+        && !($session['priceOffer'] instanceof __PHP_Incomplete_Class);
 }

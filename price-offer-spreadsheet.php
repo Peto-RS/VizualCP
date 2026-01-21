@@ -12,7 +12,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 function generateSpreadSheet(PriceOfferResponse $priceOffer): string
 {
-    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_04012026.xlsx');
+    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_21012026.xlsx');
     addBusinessDataIntoSpreadsheet($spreadsheet, $priceOffer);
     return writeSpreadSheetToOutput($spreadsheet);
 }

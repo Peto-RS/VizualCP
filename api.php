@@ -11,8 +11,9 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['getApiResponse'])) {
         if (!isPriceOfferInSessionValid($_SESSION)) {
-            unset($_SESSION['priceOffer']);
-            sendJsonResponse(['error' => 'No price offer in session'], 404);
+            $_SESSION['priceOffer'] = new PriceOffer();
+            error_log("Session price offer is invalid, resetting." . json_encode($_SESSION));
+//            sendJsonResponse(['error' => 'No price offer in session'], 404);
         }
 
         /** @var PriceOffer $sessionPriceOffer */

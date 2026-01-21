@@ -32,7 +32,11 @@ const {t} = useI18n();
 const {addAlert} = useAlerts()
 
 const apiResponse: Ref<ApiResponse | undefined> = ref()
-const appConfigResponse: Ref<AppConfigResponse> = ref({reCaptchaEnabled: false, reCaptchaSiteKey: undefined})
+const appConfigResponse: Ref<AppConfigResponse> = ref({
+  baseUrl: window.location.origin,
+  reCaptchaEnabled: false,
+  reCaptchaSiteKey: undefined
+})
 let formWatchHandle: WatchHandle | undefined = undefined
 const cachedForm: Ref<string> = ref('')
 const reactiveForm: Ref<FormPriceOffer> = ref<FormPriceOffer>(constructReactiveFormPriceOffer(undefined))
@@ -162,14 +166,15 @@ function handleHandleCountChange(e: Event) {
   <div>
     <form novalidate>
       <div class="accordion mb-2">
-        <AccordionItem id="doors" :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.doors">
+        <AccordionItem id="doors"
+                       :is-open-by-default="true"
+                       :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.doors">
           <div class="row" v-if="apiResponse?.priceOffer?.doors">
             <div class="col-sm-6 col-lg-4 col-xl-2 g-1" v-for="(_, key) in reactiveForm.doors" :key="key">
               <div v-if="reactiveForm.doors[key]">
                 <div>
-                  <PriceOfferDoorImage :category="apiResponse.priceOffer.doors[key].category"
-                                       :material="apiResponse.priceOffer.doors[key].material"
-                                       :type="apiResponse.priceOffer.doors[key].type"/>
+                  <PriceOfferDoorImage :base-url="appConfigResponse.baseUrl"
+                                       :door="apiResponse.priceOffer.doors[key]"/>
                   <div class="text-align-center">{{ apiResponse.priceOffer.doors[key].type?.toUpperCase() }}</div>
                 </div>
                 <div class="container-door-form-group">
@@ -213,6 +218,7 @@ function handleHandleCountChange(e: Event) {
           </div>
         </AccordionItem>
         <AccordionItem id="handles"
+                       :is-open-by-default="true"
                        :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.handlesAndRosettes">
           <div class="row">
             <p>
@@ -310,7 +316,9 @@ function handleHandleCountChange(e: Event) {
             </div>
           </div>
         </AccordionItem>
-        <AccordionItem id="delivery" :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.delivery">
+        <AccordionItem id="delivery"
+                       :is-open-by-default="true"
+                       :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.delivery">
           <div class="row mb-2">
             <div class="col-sm-12 col-xl-6">{{ t("delivery.district") }}</div>
             <div class="col-sm-8 col-xl-4">
@@ -376,6 +384,7 @@ function handleHandleCountChange(e: Event) {
           </div>
         </AccordionItem>
         <AccordionItem id="assemblyDoors"
+                       :is-open-by-default="true"
                        :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.assemblyDoors">
           <div class="row">
             <div class="col-sm-12 col-xl-8 text-align-justify">{{ t("assemblyDoors.note") }}</div>
@@ -400,6 +409,7 @@ function handleHandleCountChange(e: Event) {
           </div>
         </AccordionItem>
         <AccordionItem id="specialAccessories"
+                       :is-open-by-default="false"
                        :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.specialAccessories">
           <div v-for="it of reactiveForm.specialAccessories"
                :key="it.id"
@@ -447,6 +457,7 @@ function handleHandleCountChange(e: Event) {
           />
         </AccordionItem>
         <AccordionItem id="possibleAdditionalCharges"
+                       :is-open-by-default="false"
                        :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.possibleAdditionalCharges">
           <div v-for="it of reactiveForm.possibleAdditionalCharges"
                :key="it.id"
@@ -482,6 +493,7 @@ function handleHandleCountChange(e: Event) {
           />
         </AccordionItem>
         <AccordionItem id="specialSurcharges"
+                       :is-open-by-default="false"
                        :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.specialSurcharges">
           <ul class="list-group list-group-flush mb-1">
             <li v-for="it of reactiveForm.specialSurcharges"
@@ -540,7 +552,8 @@ function handleHandleCountChange(e: Event) {
               :line-items-response="apiResponse?.priceOffer.specialSurchargesLineItems"
           />
         </AccordionItem>
-        <AccordionItem id="contact">
+        <AccordionItem id="contact"
+                       :is-open-by-default="true">
           <div class="row">
             <div class="col-sm-6 col-xl-6">
               <div class="form-floating">

@@ -1,4 +1,4 @@
-import {DoorResponse} from "./DoorResponse.js";
+import {SelectedDoorResponse} from "./SelectedDoorResponse.js";
 import {RosetteResponse} from "./RosetteResponse.js";
 import {HandleResponse} from "./HandleResponse.js";
 import {AddressResponse} from "./AddressResponse.js";
@@ -19,7 +19,7 @@ export interface PriceOfferResponse {
     calculatedPriceVat: number
     contact: ContactResponse
     deliveryPrice: number
-    doors: Record<string, DoorResponse>
+    doors: Record<string, SelectedDoorResponse>
     handle: HandleResponse | null
     isAssemblyDoorsCountDirty: boolean
     note: string

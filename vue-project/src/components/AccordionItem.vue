@@ -2,8 +2,9 @@
 import BadgePrice from "./BadgePrice.vue";
 import {useI18n} from "vue-i18n";
 
-const props = defineProps<{
+defineProps<{
   id: string,
+  isOpenByDefault: boolean,
   sectionPrice?: number
 }>()
 
@@ -13,25 +14,27 @@ const {t} = useI18n();
 <template>
   <div class="accordion-item">
     <div class="accordion-header"
-         :id="`accordion-header-${props.id}`">
+         :id="`accordion-header-${id}`">
       <button
           type="button"
+          :class="{'collapsed': !isOpenByDefault}"
           class="accordion-button d-flex"
           data-bs-toggle="collapse"
-          :data-bs-target="`#accordion-collapse-${props.id}`"
+          :data-bs-target="`#accordion-collapse-${id}`"
           aria-expanded="true"
-          :aria-controls="`accordion-collapse-${props.id}`">
-        <span class="flex-grow-1">{{ t('accordionHeaders.' + props.id) }}</span>
+          :aria-controls="`accordion-collapse-${id}`">
+        <span class="flex-grow-1">{{ t('accordionHeaders.' + id) }}</span>
         <BadgePrice class="accordion-badge"
-                    v-if="props.sectionPrice !== undefined"
-                    :price="props.sectionPrice"/>
+                    v-if="sectionPrice !== undefined"
+                    :price="sectionPrice"/>
       </button>
     </div>
 
     <div
-        class="accordion-collapse collapse show"
-        :id="`accordion-collapse-${props.id}`"
-        :aria-labelledby="`accordion-header-${props.id}`">
+        :class="{'show': isOpenByDefault}"
+        class="accordion-collapse collapse"
+        :id="`accordion-collapse-${id}`"
+        :aria-labelledby="`accordion-header-${id}`">
       <div class="accordion-body">
         <slot></slot>
       </div>

@@ -298,14 +298,18 @@ class ApiRequest
 //Responses
 class AppConfigResponse
 {
+    /** @var string $baseUrl */
+    public $baseUrl;
+
     /** @var boolean $reCaptchaEnabled */
     public $reCaptchaEnabled;
 
     /** @var string $reCaptchaSiteKey */
     public $reCaptchaSiteKey;
 
-    public function __construct($reCaptchaEnabled, $reCaptchaSiteKey)
+    public function __construct($baseUrl, $reCaptchaEnabled, $reCaptchaSiteKey)
     {
+        $this->baseUrl = $baseUrl;
         $this->reCaptchaEnabled = $reCaptchaEnabled;
         $this->reCaptchaSiteKey = $reCaptchaSiteKey;
     }

@@ -1,5 +1,5 @@
 import {ApiResponse} from "../res/ApiResponse.js";
-import {DoorResponse} from "../res/DoorResponse.js";
+import {SelectedDoorResponse} from "../res/SelectedDoorResponse.js";
 import {HandleResponse} from "../res/HandleResponse.js";
 import {AddressResponse} from "../res/AddressResponse.js";
 import {ContactResponse} from "../res/ContactResponse.js";
@@ -123,9 +123,9 @@ export function constructReactiveFormAddress(address: AddressResponse | undefine
     }
 }
 
-export function constructReactiveFormDoors(doors: Record<string, DoorResponse>): Record<string, FormDoor> {
+export function constructReactiveFormDoors(doors: Record<string, SelectedDoorResponse>): Record<string, FormDoor> {
     const reduceDoors: any = {}
-    for (const [key, value] of Object.entries(doors) as [string, DoorResponse][]) {
+    for (const [key, value] of Object.entries(doors) as [string, SelectedDoorResponse][]) {
         reduceDoors[key] = {
             doorWidth: value.width,
             isDtdSelected: value.isDtdSelected,

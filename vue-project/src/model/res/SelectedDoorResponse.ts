@@ -1,4 +1,4 @@
-export interface DoorResponse {
+export interface SelectedDoorResponse {
     category: string//e.g. Alica
     isDoorFrameEnabled: boolean
     isDtdAvailable: boolean

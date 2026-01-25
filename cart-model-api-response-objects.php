@@ -3,311 +3,18 @@
 include_once('constants.php');
 include_once('functions.php');
 
-//Requests
-class AddressRequest
-{
-    /** @var string $city */
-    public $city;
-
-    /** @var string $district */
-    public $district;
-
-    /** @var string $street */
-    public $street;
-
-    /** @var string $streetNumber */
-    public $streetNumber;
-
-    /** @var string $zipCode */
-    public $zipCode;
-
-    public function __construct(array $json)
-    {
-        $this->city = $json['city'];
-        $this->district = $json['district'];
-        $this->street = $json['street'];
-        $this->streetNumber = $json['streetNumber'];
-        $this->zipCode = $json['zipCode'];
-    }
-}
-
-class ContactRequest
-{
-    /** @var string $email */
-    public $email;
-
-    /** @var string $fullName */
-    public $fullName;
-
-    /** @var string $phoneNumber */
-    public $phoneNumber;
-
-    public function __construct(array $json)
-    {
-        $this->email = $json['email'];
-        $this->fullName = $json['fullName'];
-        $this->phoneNumber = $json['phoneNumber'];
-    }
-}
-
-class HandleRequest
-{
-    /** @var int $count */
-    public $count;
-
-    /** @var string $name */
-    public $name;
-
-    /** @var float $price */
-    public $price;
-
-    public function __construct(array $json)
-    {
-        $this->count = $json['count'];
-        $this->name = $json['name'];
-        $this->price = $json['price'];
-    }
-}
-
-class LineItemRequest
-{
-    /** @var int $count */
-    public $count;
-
-    /** @var string $name */
-    public $name;
-
-    /** @var float $price */
-    public $price;
-
-    public function __construct(array $json)
-    {
-        $this->count = $json['count'];
-        $this->name = $json['name'];
-        $this->price = $json['price'];
-    }
-}
-
-class PossibleAdditionalChargeRequest
-{
-    /** @var string id */
-    public $id;
-
-    /** @var int $count */
-    public $count;
-
-    /** @var boolean $isCountDirty */
-    public $isCountDirty;
-
-    public function __construct(array $json)
-    {
-        $this->id = $json['id'];
-        $this->count = $json['count'];
-        $this->isCountDirty = $json['isCountDirty'];
-    }
-}
-
-class RosetteRequest
-{
-    /** @var string $id */
-    public $id;
-
-    /** @var int $count */
-    public $count;
-
-    public function __construct(array $json)
-    {
-        $this->id = $json['id'];
-        $this->count = $json['count'];
-    }
-}
-
-class SpecialAccessoryRequest
-{
-    /** @var string $id */
-    public $id;
-
-    /** @var int $count */
-    public $count;
-
-    /** @var float $selectedPrice */
-    public $selectedPrice;
-
-    public function __construct(array $json)
-    {
-        $this->id = $json['id'];
-        $this->count = $json['count'];
-        $this->selectedPrice = $json['selectedPrice'];
-    }
-}
-
-class SpecialSurchargeRequest
-{
-    /** @var string $id */
-    public $id;
-
-    /** @var int $count */
-    public $count;
-
-    /** @var boolean $isAssemblySelected */
-    public $isAssemblySelected;
-
-    /** @var boolean $isAssemblySelectedDirty */
-    public $isAssemblySelectedDirty;
-
-    public function __construct(array $json)
-    {
-        $this->id = $json['id'];
-        $this->count = $json['count'];
-        $this->isAssemblySelected = $json['isAssemblySelected'];
-        $this->isAssemblySelectedDirty = $json['isAssemblySelectedDirty'];
-    }
-}
-
-class DoorRequest
-{
-    /** @var string $category */
-    public $category;
-
-    /** @var boolean $isDoorFrameEnabled */
-    public $isDoorFrameEnabled;
-
-    /** @var boolean $isDtdSelected */
-    public $isDtdSelected;
-
-    /** @var string $material */
-    public $material;
-
-    /** @var string $type */
-    public $type;
-
-    /** @var string $width */
-    public $width;
-
-    public function __construct(array $json)
-    {
-        $this->category = $json['category'];
-        $this->isDoorFrameEnabled = $json['isDoorFrameEnabled'];
-        $this->isDtdSelected = $json['isDtdSelected'];
-        $this->material = $json['material'];
-        $this->type = $json['type'];
-        $this->width = $json['width'];
-    }
-}
-
-class PriceOfferRequest
-{
-    /** @var AddressRequest $address */
-    public $address;
-
-    /** @var int $assemblyDoorsCount */
-    public $assemblyDoorsCount;
-
-    /** @var int $assemblyPriceHandlesRosettesCount */
-    public $assemblyPriceHandlesRosettesCount;
-
-    /** @var ContactRequest $contact */
-    public $contact;
-
-    /** @var HandleRequest $handle */
-    public $handle;
-
-    /** @var boolean $isAssemblyDoorsCountDirty */
-    public $isAssemblyDoorsCountDirty;
-
-    /** @var DoorRequest[] $doors */
-    public $doors = array();
-
-    /** @var string $note */
-    public $note;
-
-    /** @var PossibleAdditionalChargeRequest[] $possibleAdditionalCharges */
-    public $possibleAdditionalCharges = array();
-
-    /** @var LineItemRequest[] $possibleAdditionalChargesLineItems */
-    public $possibleAdditionalChargesLineItems = array();
-
-    /** @var RosetteRequest[] $rosettes */
-    public $rosettes = array();
-
-    /** @var LineItemRequest[] $rosettesLineItems */
-    public $rosettesLineItems = array();
-
-    /** @var SpecialAccessoryRequest[] $specialAccessories */
-    public $specialAccessories = array();
-
-    /** @var LineItemRequest[] $specialAccessoriesLineItems */
-    public $specialAccessoriesLineItems = array();
-
-    /** @var SpecialSurchargeRequest[] $specialSurcharges */
-    public $specialSurcharges = array();
-
-    /** @var LineItemRequest[] $specialSurchargesLineItems */
-    public $specialSurchargesLineItems = array();
-
-    public function __construct(array $json)
-    {
-        $this->address = $json['address'] ? new AddressRequest($json['address']) : null;
-        $this->assemblyDoorsCount = $json['assemblyDoorsCount'] ?? 0;
-        $this->assemblyPriceHandlesRosettesCount = $json['assemblyPriceHandlesRosettesCount'] ?? 0;
-        $this->contact = $json['contact'] ? new ContactRequest($json['contact']) : null;
-        $this->doors = array_map(function ($doorData) {
-            return new DoorRequest($doorData);
-        }, $json['doors'] ?? array());
-        $this->handle = new HandleRequest($json['handle']);
-        $this->isAssemblyDoorsCountDirty = $json['isAssemblyDoorsCountDirty'];
-        $this->note = $json['note'] ?? "";
-        $this->possibleAdditionalCharges = array_map(function ($p) {
-            return new PossibleAdditionalChargeRequest($p);
-        }, $json['possibleAdditionalCharges'] ?? array());
-        $this->possibleAdditionalChargesLineItems = array_map(function ($p) {
-            return new LineItemRequest($p);
-        }, $json['possibleAdditionalChargesLineItems'] ?? array());
-        $this->rosettes = array_map(function ($rosetteData) {
-            return new RosetteRequest($rosetteData);
-        }, $json['rosettes'] ?? array());
-        $this->rosettesLineItems = array_map(function ($p) {
-            return new LineItemRequest($p);
-        }, $json['rosettesLineItems'] ?? array());
-        $this->specialAccessories = array_map(function ($specialAccessoryData) {
-            return new SpecialAccessoryRequest($specialAccessoryData);
-        }, $json['specialAccessories'] ?? array());
-        $this->specialAccessoriesLineItems = array_map(function ($p) {
-            return new LineItemRequest($p);
-        }, $json['specialAccessoriesLineItems'] ?? array());
-        $this->specialSurcharges = array_map(function ($specialSurchargeData) {
-            return new SpecialSurchargeRequest($specialSurchargeData);
-        }, $json['specialSurcharges'] ?? array());
-        $this->specialSurchargesLineItems = array_map(function ($p) {
-            return new LineItemRequest($p);
-        }, $json['specialSurchargesLineItems'] ?? array());
-    }
-}
-
-class ApiRequest
-{
-    /** @var PriceOfferRequest $priceOffer */
-    public $priceOffer;
-
-    public function __construct(array $json)
-    {
-        $this->priceOffer = new PriceOfferRequest($json['priceOffer']);
-    }
-}
-
-//Responses
 class AppConfigResponse
 {
-    /** @var string $baseUrl */
+    /** @var string|null $baseUrl */
     public $baseUrl;
 
     /** @var boolean $reCaptchaEnabled */
     public $reCaptchaEnabled;
 
-    /** @var string $reCaptchaSiteKey */
+    /** @var string|null $reCaptchaSiteKey */
     public $reCaptchaSiteKey;
 
-    public function __construct($baseUrl, $reCaptchaEnabled, $reCaptchaSiteKey)
+    public function __construct(?string $baseUrl, bool $reCaptchaEnabled, ?string $reCaptchaSiteKey)
     {
         $this->baseUrl = $baseUrl;
         $this->reCaptchaEnabled = $reCaptchaEnabled;
@@ -317,28 +24,33 @@ class AppConfigResponse
 
 class AddressResponse implements JsonSerializable
 {
-    /** @var string $city */
+    /** @var string|null $city */
     public $city;
 
-    /** @var string $district */
+    /** @var string|null $district */
     public $district;
 
-    /** @var string $street */
+    /** @var string|null $street */
     public $street;
 
-    /** @var string $streetNumber */
+    /** @var string|null $streetNumber */
     public $streetNumber;
 
-    /** @var string $zipCode */
+    /** @var string|null $zipCode */
     public $zipCode;
 
-    public function __construct($city, $district, $street, $streetNumber, $zipCode)
+    public function __construct(?string $city, ?string $district, ?string $street, ?string $streetNumber, ?string $zipCode)
     {
         $this->city = $city;
         $this->district = $district;
         $this->street = $street;
         $this->streetNumber = $streetNumber;
         $this->zipCode = $zipCode;
+    }
+
+    public static function empty(): AddressResponse
+    {
+        return new AddressResponse(null, null, null, null, null);
     }
 
     public function jsonSerialize(): array
@@ -355,20 +67,25 @@ class AddressResponse implements JsonSerializable
 
 class ContactResponse implements JsonSerializable
 {
-    /** @var string $email */
+    /** @var string|null $email */
     public $email;
 
-    /** @var string $fullName */
+    /** @var string|null $fullName */
     public $fullName;
 
-    /** @var string $phoneNumber */
+    /** @var string|null $phoneNumber */
     public $phoneNumber;
 
-    public function __construct($email, $fullName, $phoneNumber)
+    public function __construct(?string $email, ?string $fullName, ?string $phoneNumber)
     {
         $this->email = $email;
         $this->fullName = $fullName;
         $this->phoneNumber = $phoneNumber;
+    }
+
+    public static function empty(): ContactResponse
+    {
+        return new ContactResponse(null, null, null);
     }
 
     public function jsonSerialize(): array
@@ -386,38 +103,30 @@ class DoorResponse implements JsonSerializable
     /** @var float $calculatedPrice */
     public $calculatedPrice;
 
-    /** @var string $category */
+    /** @var string|null $category */
     public $category;
 
-    /** @var boolean $isDoorFrameEnabled */
+    /** @var boolean|null $isDoorFrameEnabled */
     public $isDoorFrameEnabled;
 
     /** @var boolean $isDtdAvailable */
     public $isDtdAvailable;
 
-    /** @var boolean $isDtdSelected */
+    /** @var boolean|null $isDtdSelected */
     public $isDtdSelected;
 
-    /** @var string $material */
+    /** @var string|null $material */
     public $material;
 
-    /** @var string $type */
+    /** @var string|null $type */
     public $type;
 
-    /** @var string $width */
+    /** @var string|null $width */
     public $width;
 
-    /**
-     * @param $calculatedPrice
-     * @param $category
-     * @param $isDoorFrameEnabled
-     * @param $isDtdAvailable
-     * @param $isDtdSelected
-     * @param $material
-     * @param $type
-     * @param $width
-     */
-    public function __construct($calculatedPrice, $category, $isDoorFrameEnabled, $isDtdAvailable, $isDtdSelected, $material, $type, $width)
+    public function __construct(float   $calculatedPrice, ?string $category, ?bool $isDoorFrameEnabled,
+                                bool    $isDtdAvailable, ?bool $isDtdSelected, ?string $material, ?string $type,
+                                ?string $width)
     {
         $this->calculatedPrice = $calculatedPrice;
         $this->category = $category;
@@ -444,26 +153,69 @@ class DoorResponse implements JsonSerializable
     }
 }
 
+class SelectedDoorLineItemResponse implements JsonSerializable
+{
+    /** @var float $calculatedPrice */
+    public $calculatedPrice;
+
+    /** @var boolean|null $isDoorFrameEnabled */
+    public $isDoorFrameEnabled;
+
+    /** @var string|null $name */
+    public $name;
+
+    /** @var float|null $price */
+    public $price;
+
+    /** @var string|null $width */
+    public $width;
+
+    public function __construct(float   $calculatedPrice, ?bool $isDoorFrameEnabled, ?string $name, ?float $price,
+                                ?string $width)
+    {
+        $this->calculatedPrice = $calculatedPrice;
+        $this->isDoorFrameEnabled = $isDoorFrameEnabled;
+        $this->name = $name;
+        $this->price = $price;
+        $this->width = $width;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'calculatedPrice' => $this->calculatedPrice,
+            'isDoorFrameEnabled' => $this->isDoorFrameEnabled,
+            'name' => $this->name,
+            'price' => $this->price,
+            'width' => $this->width
+        ];
+    }
+}
+
 class HandleResponse implements JsonSerializable
 {
     /** @var float $calculatedPrice */
     public $calculatedPrice;
 
-    /** @var int $count */
+    /** @var int|null $count */
     public $count;
 
-    /** @var string $name */
+    /** @var string|null $name */
     public $name;
 
-    /** @var float $price */
+    /** @var float|null $price */
     public $price;
 
-    public function __construct($calculatedPrice, $count, $name, $price)
+    public function __construct(float $calculatedPrice, ?int $count, ?string $name, ?float $price)
     {
         $this->calculatedPrice = $calculatedPrice;
         $this->count = $count;
         $this->name = $name;
         $this->price = $price;
+    }
+
+    public static function empty(): HandleResponse {
+        return new HandleResponse(0, null, null, null);
     }
 
     public function jsonSerialize(): array
@@ -482,16 +234,16 @@ class LineItemResponse implements JsonSerializable
     /** @var float $calculatedPrice */
     public $calculatedPrice;
 
-    /** @var int $count */
+    /** @var int|null $count */
     public $count;
 
-    /** @var string $name */
+    /** @var string|null $name */
     public $name;
 
-    /** @var float $price */
+    /** @var float|null $price */
     public $price;
 
-    public function __construct($calculatedPrice, $count, $name, $price)
+    public function __construct(float $calculatedPrice, ?int $count, ?string $name, ?float $price)
     {
         $this->calculatedPrice = $calculatedPrice;
         $this->count = $count;
@@ -518,43 +270,45 @@ class PossibleAdditionalChargeResponse implements JsonSerializable
     /** @var float $calculatedPrice */
     public $calculatedPrice;
 
-    /** @var float $configuredPrice */
+    /** @var float|null $configuredPrice */
     public $configuredPrice;
 
-    /** @var int $count */
+    /** @var int|null $count */
     public $count;
 
-    /** @var string $header */
+    /** @var string|null $header */
     public $header;
 
-    /** @var string $hint */
+    /** @var string|null $hint */
     public $hint;
 
-    /** @var string $imgSrc */
+    /** @var string|null $imgSrc */
     public $imgSrc;
 
-    /** @var boolean $isCountDirty */
+    /** @var boolean|null $isCountDirty */
     public $isCountDirty;
 
-    /** @var string $label */
+    /** @var string|null $label */
     public $label;
 
-    /** @var string $youtubeVideoCode */
+    /** @var string|null $youtubeVideoCode */
     public $youtubeVideoCode;
 
-    /** @var string $videoSrc */
+    /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct($id, $calculatedPrice, $configuredPrice, $count, $isCountDirty, $header, $hint, $imgSrc, $label, $youtubeVideoCode, $videoSrc)
+    public function __construct(string $id, float $calculatedPrice, ?float $configuredPrice, ?int $count,
+                                ?string $isCountDirty, ?string $header, ?string $hint, ?string $imgSrc, ?string $label,
+                                ?string $youtubeVideoCode, ?string $videoSrc)
     {
         $this->id = $id;
-        $this->calculatedPrice = $calculatedPrice ?? 0;
-        $this->configuredPrice = $configuredPrice ?? 0;
-        $this->count = $count ?? 0;
+        $this->calculatedPrice = $calculatedPrice;
+        $this->configuredPrice = $configuredPrice;
+        $this->count = $count;
         $this->header = $header;
         $this->hint = $hint;
         $this->imgSrc = $imgSrc;
-        $this->isCountDirty = $isCountDirty ?? false;
+        $this->isCountDirty = $isCountDirty;
         $this->label = $label;
         $this->youtubeVideoCode = $youtubeVideoCode;
         $this->videoSrc = $videoSrc;
@@ -586,35 +340,37 @@ class RosetteResponse implements JsonSerializable
     /** @var float $calculatedPrice */
     public $calculatedPrice;
 
-    /** @var int $count */
+    /** @var int|null $count */
     public $count;
 
-    /** @var string $header */
+    /** @var string|null $header */
     public $header;
 
-    /** @var string $hint */
+    /** @var string|null $hint */
     public $hint;
 
-    /** @var string $imgSrc */
+    /** @var string|null $imgSrc */
     public $imgSrc;
 
-    /** @var string $label */
+    /** @var string|null $label */
     public $label;
 
-    /** @var float $price */
+    /** @var float|null $price */
     public $price;
 
-    /** @var string $youtubeVideoCode */
+    /** @var string|null $youtubeVideoCode */
     public $youtubeVideoCode;
 
-    /** @var string $videoSrc */
+    /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct($id, $calculatedPrice, $count, $header, $hint, $imgSrc, $label, $price, $youtubeVideoCode, $videoSrc)
+    public function __construct(string  $id, float $calculatedPrice, ?int $count, ?string $header, ?string $hint,
+                                ?string $imgSrc, ?string $label, ?float $price, ?string $youtubeVideoCode,
+                                ?string $videoSrc)
     {
         $this->id = $id;
-        $this->calculatedPrice = $calculatedPrice ?? 0;
-        $this->count = $count ?? 0;
+        $this->calculatedPrice = $calculatedPrice;
+        $this->count = $count;
         $this->header = $header;
         $this->hint = $hint;
         $this->imgSrc = $imgSrc;
@@ -664,15 +420,16 @@ class SectionsCalculatedPriceResponse implements JsonSerializable
     /** @var float $specialSurcharges */
     public $specialSurcharges;
 
-    public function __construct($doors, $handlesAndRosettes, $delivery, $assemblyDoors, $specialAccessories, $possibleAdditionalCharges, $specialSurcharges)
+    public function __construct(float $doors, float $handlesAndRosettes, float $delivery, float $assemblyDoors,
+                                float $specialAccessories, float $possibleAdditionalCharges, float $specialSurcharges)
     {
-        $this->doors = $doors ?? 0.0;
-        $this->handlesAndRosettes = $handlesAndRosettes ?? 0.0;
-        $this->delivery = $delivery ?? 0.0;
-        $this->assemblyDoors = $assemblyDoors ?? 0.0;
-        $this->specialAccessories = $specialAccessories ?? 0.0;
-        $this->possibleAdditionalCharges = $possibleAdditionalCharges ?? 0.0;
-        $this->specialSurcharges = $specialSurcharges ?? 0.0;
+        $this->doors = $doors;
+        $this->handlesAndRosettes = $handlesAndRosettes;
+        $this->delivery = $delivery;
+        $this->assemblyDoors = $assemblyDoors;
+        $this->specialAccessories = $specialAccessories;
+        $this->possibleAdditionalCharges = $possibleAdditionalCharges;
+        $this->specialSurcharges = $specialSurcharges;
     }
 
     public function jsonSerialize(): array
@@ -691,46 +448,47 @@ class SectionsCalculatedPriceResponse implements JsonSerializable
 
 class SpecialAccessoryResponse implements JsonSerializable
 {
-    /** @var string id */
+    /** @var string $id */
     public $id;
 
     /** @var float $calculatedPrice */
     public $calculatedPrice;
 
-    /** @var float $configuredPrice */
+    /** @var float|null $configuredPrice */
     public $configuredPrice;
 
-    /** @var int $count */
+    /** @var int|null $count */
     public $count;
 
-    /** @var string $header */
+    /** @var string|null $header */
     public $header;
 
-    /** @var string $hint */
+    /** @var string|null $hint */
     public $hint;
 
-    /** @var string $imgSrc */
+    /** @var string|null $imgSrc */
     public $imgSrc;
 
-    /** @var string $label */
+    /** @var string|null $label */
     public $label;
 
-    /** @var float $selectedPrice */
+    /** @var float|null $selectedPrice */
     public $selectedPrice;
 
-    /** @var string $youtubeVideoCode */
+    /** @var string|null $youtubeVideoCode */
     public $youtubeVideoCode;
 
-    /** @var string $videoSrc */
+    /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct($id, $calculatedPrice, $configuredPrice, $count, $header, $hint, $imgSrc, $label, $selectedPrice,
-                                $youtubeVideoCode, $videoSrc)
+    public function __construct(string  $id, float $calculatedPrice, ?float $configuredPrice, ?int $count, ?string $header,
+                                ?string $hint, ?string $imgSrc, ?string $label, ?float $selectedPrice,
+                                ?string $youtubeVideoCode, ?string $videoSrc)
     {
         $this->id = $id;
-        $this->calculatedPrice = $calculatedPrice ?? 0;
-        $this->count = $count ?? 0;
+        $this->calculatedPrice = $calculatedPrice;
         $this->configuredPrice = $configuredPrice;
+        $this->count = $count;
         $this->header = $header;
         $this->hint = $hint;
         $this->imgSrc = $imgSrc;
@@ -766,50 +524,53 @@ class SpecialSurchargeResponse implements JsonSerializable
     /** @var float $calculatedPrice */
     public $calculatedPrice;
 
-    /** @var float $configuredPrice */
+    /** @var float|null $configuredPrice */
     public $configuredPrice;
 
-    /** @var int $count */
+    /** @var int|null $count */
     public $count;
 
-    /** @var string $header */
+    /** @var string|null $header */
     public $header;
 
-    /** @var string $hint */
+    /** @var string|null $hint */
     public $hint;
 
-    /** @var string $imgSrc */
+    /** @var string|null $imgSrc */
     public $imgSrc;
 
-    /** @var boolean $isAssemblySelected */
+    /** @var boolean|null $isAssemblySelected */
     public $isAssemblySelected;
 
-    /** @var boolean $isAssemblySelectedDirty */
+    /** @var boolean|null $isAssemblySelectedDirty */
     public $isAssemblySelectedDirty;
 
-    /** @var string $label */
+    /** @var string|null $label */
     public $label;
 
-    /** @var string $labelAssembly */
+    /** @var string|null $labelAssembly */
     public $labelAssembly;
 
-    /** @var string $youtubeVideoCode */
+    /** @var string|null $youtubeVideoCode */
     public $youtubeVideoCode;
 
-    /** @var string $videoSrc */
+    /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct($id, $calculatedPrice, $configuredPrice, $count, $header, $hint, $imgSrc, $isAssemblySelected, $isAssemblySelectedDirty, $label, $labelAssembly, $youtubeVideoCode, $videoSrc)
+    public function __construct(string  $id, float $calculatedPrice, ?float $configuredPrice, ?int $count, ?string $header,
+                                ?string $hint, ?string $imgSrc, ?bool $isAssemblySelected,
+                                ?bool   $isAssemblySelectedDirty, ?string $label, ?string $labelAssembly,
+                                ?string $youtubeVideoCode, ?string $videoSrc)
     {
         $this->id = $id;
-        $this->calculatedPrice = $calculatedPrice ?? 0;
-        $this->configuredPrice = $configuredPrice ?? 0;
-        $this->count = $count ?? 0;
+        $this->calculatedPrice = $calculatedPrice;
+        $this->configuredPrice = $configuredPrice;
+        $this->count = $count;
         $this->header = $header;
         $this->hint = $hint;
         $this->imgSrc = $imgSrc;
-        $this->isAssemblySelected = $isAssemblySelected ?? false;
-        $this->isAssemblySelectedDirty = $isAssemblySelectedDirty ?? false;
+        $this->isAssemblySelected = $isAssemblySelected;
+        $this->isAssemblySelectedDirty = $isAssemblySelectedDirty;
         $this->label = $label;
         $this->labelAssembly = $labelAssembly;
         $this->youtubeVideoCode = $youtubeVideoCode;
@@ -844,10 +605,10 @@ class PriceOfferResponse implements JsonSerializable
     /** @var float $assemblyDoorsCalculatedPrice */
     public $assemblyDoorsCalculatedPrice;
 
-    /** @var int $assemblyDoorsCount */
+    /** @var int|null $assemblyDoorsCount */
     public $assemblyDoorsCount;
 
-    /** @var int $assemblyPriceHandlesRosettesCount */
+    /** @var int|null $assemblyPriceHandlesRosettesCount */
     public $assemblyPriceHandlesRosettesCount;
 
     /** @var float $assemblyPriceHandlesRosettesCalculatedPrice */
@@ -871,10 +632,10 @@ class PriceOfferResponse implements JsonSerializable
     /** @var HandleResponse $handle */
     public $handle;
 
-    /** @var boolean $isAssemblyDoorsCountDirty */
+    /** @var boolean|null $isAssemblyDoorsCountDirty */
     public $isAssemblyDoorsCountDirty;
 
-    /** @var string $note */
+    /** @var string|null $note */
     public $note;
 
     /** @var PossibleAdditionalChargeResponse[] $possibleAdditionalCharges */
@@ -892,6 +653,9 @@ class PriceOfferResponse implements JsonSerializable
     /** @var SectionsCalculatedPriceResponse $sectionsCalculatedPrice */
     public $sectionsCalculatedPrice;
 
+    /** @var SelectedDoorLineItemResponse[] $selectedDoorsLineItems */
+    public $selectedDoorsLineItems;
+
     /** @var SpecialAccessoryResponse[] $specialAccessories */
     public $specialAccessories;
 
@@ -905,52 +669,54 @@ class PriceOfferResponse implements JsonSerializable
     public $specialSurchargesLineItems;
 
     public function __construct(
-        $address,
-        $assemblyDoorsCalculatedPrice,
-        $assemblyDoorsCount,
-        $assemblyPriceHandlesRosettesCount,
-        $assemblyPriceHandlesRosettesCalculatedPrice,
-        $calculatedPrice,
-        $calculatedPriceVat,
-        $contact,
-        $deliveryPrice,
-        $doors,
-        $handle,
-        $isAssemblyDoorsCountDirty,
-        $note,
-        $possibleAdditionalCharges,
-        $possibleAdditionalChargesLineItems,
-        $rosettes,
-        $rosettesLineItems,
-        $sectionsCalculatedPrice,
-        $specialAccessories,
-        $specialAccessoriesLineItems,
-        $specialSurcharges,
-        $specialSurchargesLineItems
+        AddressResponse                 $address,
+        float                           $assemblyDoorsCalculatedPrice,
+        ?int                            $assemblyDoorsCount,
+        ?int                            $assemblyPriceHandlesRosettesCount,
+        float                           $assemblyPriceHandlesRosettesCalculatedPrice,
+        float                           $calculatedPrice,
+        float                           $calculatedPriceVat,
+        ContactResponse                 $contact,
+        float                           $deliveryPrice,
+        array                           $doors,
+        HandleResponse                  $handle,
+        ?bool                           $isAssemblyDoorsCountDirty,
+        ?string                         $note,
+        array                           $possibleAdditionalCharges,
+        array                           $possibleAdditionalChargesLineItems,
+        array                           $rosettes,
+        array                           $rosettesLineItems,
+        SectionsCalculatedPriceResponse $sectionsCalculatedPrice,
+        array                           $selectedDoorsLineItems,
+        array                           $specialAccessories,
+        array                           $specialAccessoriesLineItems,
+        array                           $specialSurcharges,
+        array                           $specialSurchargesLineItems
     )
     {
         $this->address = $address;
         $this->assemblyDoorsCalculatedPrice = $assemblyDoorsCalculatedPrice;
-        $this->assemblyDoorsCount = $assemblyDoorsCount ?? 0;
-        $this->assemblyPriceHandlesRosettesCount = $assemblyPriceHandlesRosettesCount ?? 0;
-        $this->assemblyPriceHandlesRosettesCalculatedPrice = $assemblyPriceHandlesRosettesCalculatedPrice ?? 0;
-        $this->calculatedPrice = $calculatedPrice ?? 0;
-        $this->calculatedPriceVat = $calculatedPriceVat ?? 0;
+        $this->assemblyDoorsCount = $assemblyDoorsCount;
+        $this->assemblyPriceHandlesRosettesCount = $assemblyPriceHandlesRosettesCount;
+        $this->assemblyPriceHandlesRosettesCalculatedPrice = $assemblyPriceHandlesRosettesCalculatedPrice;
+        $this->calculatedPrice = $calculatedPrice;
+        $this->calculatedPriceVat = $calculatedPriceVat;
         $this->contact = $contact;
-        $this->deliveryPrice = $deliveryPrice ?? 0;
+        $this->deliveryPrice = $deliveryPrice;
         $this->doors = $doors;
         $this->handle = $handle;
         $this->isAssemblyDoorsCountDirty = $isAssemblyDoorsCountDirty;
         $this->note = $note;
         $this->possibleAdditionalCharges = $possibleAdditionalCharges;
-        $this->possibleAdditionalChargesLineItems = $possibleAdditionalChargesLineItems ?? [];
+        $this->possibleAdditionalChargesLineItems = $possibleAdditionalChargesLineItems;
         $this->rosettes = $rosettes;
-        $this->rosettesLineItems = $rosettesLineItems ?? [];
+        $this->rosettesLineItems = $rosettesLineItems;
         $this->sectionsCalculatedPrice = $sectionsCalculatedPrice;
+        $this->selectedDoorsLineItems = $selectedDoorsLineItems;
         $this->specialAccessories = $specialAccessories;
-        $this->specialAccessoriesLineItems = $specialAccessoriesLineItems ?? [];
+        $this->specialAccessoriesLineItems = $specialAccessoriesLineItems;
         $this->specialSurcharges = $specialSurcharges;
-        $this->specialSurchargesLineItems = $specialSurchargesLineItems ?? [];
+        $this->specialSurchargesLineItems = $specialSurchargesLineItems;
     }
 
     public function jsonSerialize(): array
@@ -974,6 +740,7 @@ class PriceOfferResponse implements JsonSerializable
             'rosettes' => $this->rosettes,
             'rosettesLineItems' => $this->rosettesLineItems,
             'sectionsCalculatedPrice' => $this->sectionsCalculatedPrice,
+            'selectedDoorsLineItems' => $this->selectedDoorsLineItems,
             'specialAccessories' => $this->specialAccessories,
             'specialAccessoriesLineItems' => $this->specialAccessoriesLineItems,
             'specialSurcharges' => $this->specialSurcharges,
@@ -984,10 +751,13 @@ class PriceOfferResponse implements JsonSerializable
 
 class ApiResponse implements JsonSerializable
 {
+    /** @var array $districts */
     public $districts;
+
+    /** @var PriceOfferResponse $priceOffer */
     public $priceOffer;
 
-    public function __construct($districts, $priceOffer)
+    public function __construct(array $districts, PriceOfferResponse $priceOffer)
     {
         $this->districts = $districts;
         $this->priceOffer = $priceOffer;

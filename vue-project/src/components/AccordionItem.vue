@@ -35,7 +35,7 @@ const {t} = useI18n();
         class="accordion-collapse collapse"
         :id="`accordion-collapse-${id}`"
         :aria-labelledby="`accordion-header-${id}`">
-      <div class="accordion-body">
+      <div class="accordion-body p-0">
         <slot></slot>
       </div>
     </div>
@@ -51,13 +51,13 @@ const {t} = useI18n();
   height: $input-height;
   margin-left: 1em;
   order: 1;
-  flex: 0 0 107px;
+  flex: 0 0 105px;
+  min-width: 105px;
 }
 
 .accordion button {
-  color: #555;
   text-transform: uppercase;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 .accordion button:hover {

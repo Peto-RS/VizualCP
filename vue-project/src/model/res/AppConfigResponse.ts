@@ -1,5 +1,5 @@
 export interface AppConfigResponse {
-    baseUrl: string
+    baseUrl: string | null
     reCaptchaEnabled: boolean
-    reCaptchaSiteKey: string | undefined
+    reCaptchaSiteKey: string | null
 }

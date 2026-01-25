@@ -1,23 +1,26 @@
 <script setup lang="ts">
 
 import {SelectedDoorResponse} from "../model/res/SelectedDoorResponse.js";
+import {computed} from "vue";
 
-defineProps<{
-  baseUrl: string,
+const props = defineProps<{
+  baseUrl: string | null | undefined,
   door: SelectedDoorResponse
 }>()
+
+const getBaseUrl = computed(() => props.baseUrl ?? window.location.origin)
 </script>
 
 <template>
   <div class="container-door-image">
-    <img :src="`${baseUrl}/images/materials/${door.material}.png`"
+    <img :src="`${getBaseUrl}/images/materials/${door.material}.png`"
          alt="DoorResponse material"
          class="door-layer layer-material">
     <img
-        :src="`${baseUrl}/images/doors/${door.category}/${door.type}.png`"
+        :src="`${getBaseUrl}/images/doors/${door.category}/${door.type}.png`"
         alt="DoorResponse"
         class="door-layer layer-door">
-    <img :src="`${baseUrl}/images/zarubna.png`" alt="DoorResponse frame" class="door-layer layer-frame">
+    <img :src="`${getBaseUrl}/images/zarubna.png`" alt="DoorResponse frame" class="door-layer layer-frame">
   </div>
 </template>
 

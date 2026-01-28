@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 function generateSpreadSheet(PriceOfferResponse $priceOffer): string
 {
-    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_21012026.xlsx');
+    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_26012026.xlsx');
     addBusinessDataIntoSpreadsheet($spreadsheet, $priceOffer);
     return writeSpreadSheetToOutput($spreadsheet);
 }
@@ -23,6 +23,9 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     $sheetNameCalculations = 'cena_dvere';
     $priceFrame = FEE_FRAME;
     $priceFrameOffer = Door::FEE_FRAME_OFFER;
+    $trueValue = 'Áno';
+    $falseValue = 'Nie';
+
     $rowIdx = 1;
 
     /*** Contact ***/
@@ -71,11 +74,11 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
         $sheet->setCellValue("B$rowIdx", $door->type);
         $sheet->setCellValue("C$rowIdx", $door->material ? DoorsJsonDataManipulation::getMaterialTranslation($door->material) : "");
         $sheet->setCellValue("E$rowIdx", "=IFERROR(VLOOKUP(B$rowIdx, $sheetNameCalculations!A:B, 2, FALSE), 0)+IF(A$rowIdx<=69, 0,IF(A$rowIdx<=79, 3,IF(A$rowIdx<=89, 6, 9)))");
-        $sheet->setCellValue("F$rowIdx", $door->isDoorFrameEnabled ? 'TRUE' : 'FALSE');
+        $sheet->setCellValue("F$rowIdx", $door->isDoorFrameEnabled ? $trueValue : $falseValue);
         $sheet->setCellValue("G$rowIdx", 1);
         $sheet->setCellValue(
             "H$rowIdx",
-            "=IF(ISBLANK(B$rowIdx),0, G$rowIdx*E$rowIdx+IF(F$rowIdx, IF(B$rowIdx=\"v1\", $priceFrameOffer, $priceFrame), 0))"
+            "=IF(ISBLANK(B$rowIdx),0, G$rowIdx*E$rowIdx+IF(F$rowIdx=\"$trueValue\", IF(B$rowIdx=\"v1\", $priceFrameOffer, $priceFrame), 0))"
         );
         $rowIdx = $rowIdx + 1;
     }
@@ -84,7 +87,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
         $sheet->setCellValue("A$rowIdx", Width::getWidthString($door->width) ?: 60);
         $sheet->setCellValue("B$rowIdx", $door->name);
         $sheet->setCellValue("E$rowIdx", $door->price);
-        $sheet->setCellValue("F$rowIdx", $door->isDoorFrameEnabled ? 'TRUE' : 'FALSE');
+        $sheet->setCellValue("F$rowIdx", $door->isDoorFrameEnabled ? $trueValue : $falseValue);
         $sheet->setCellValue("G$rowIdx", 1);
         $sheet->setCellValue("H$rowIdx", $door->calculatedPrice);
         $rowIdx = $rowIdx + 1;
@@ -206,7 +209,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     $rowIdx = $rowIdx + 3;
     foreach ($priceOffer->specialSurcharges as $item) {
         $isAssemblySelected = $item->isAssemblySelected;
-        $sheet->setCellValue("F" . $rowIdx, $isAssemblySelected ? 'TRUE' : 'FALSE');
+        $sheet->setCellValue("F" . $rowIdx, $isAssemblySelected ? $trueValue : $falseValue);
 
         $count = $item->count;
         if ($count) {

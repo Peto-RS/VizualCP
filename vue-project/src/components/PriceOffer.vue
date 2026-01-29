@@ -149,7 +149,7 @@ async function handleFormSubmit(e: Event): Promise<void> {
     const response = await submitForm(recaptchaToken);
 
     if (response.ok) {
-      // await handleFormSaveAndReRender(constructReactiveFormPriceOffer(undefined));
+      await handleFormSaveAndReRender(constructReactiveFormPriceOffer(undefined));
       sessionStorage.setItem('offerCompleted', 'true')
       await router.push('/price-offer-finished')
     } else {

@@ -1,12 +1,17 @@
-import {ApiRequest} from "./req/ApiRequest.js";
-import {AppConfigResponse} from "./res/AppConfigResponse.js";
+import {ApiRequest} from "./req/price-offer/ApiRequest.js";
+import {AppConfigResponse} from "./res/price-offer/AppConfigResponse.js";
 
 const API_URL = 'api.php';
+const API_CONFIGURATOR_URL = 'api-configurator.php';
 const API_URL_SUBMISSION = 'api-submission.php';
 const API_URL_CONFIG = 'api-app-config.php';
 
 export async function getAppConfig(): Promise<AppConfigResponse> {
     return fetch(API_URL_CONFIG).then(response => response.json())
+}
+
+export function getConfigurator(): Promise<any> {
+    return fetch(API_CONFIGURATOR_URL)
 }
 
 export function getForm(): Promise<any> {

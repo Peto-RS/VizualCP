@@ -1,10 +1,8 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import PriceOfferFinished from "./views/PriceOfferFinished.vue";
-import PriceOffer from "./views/PriceOffer.vue";
+import Home from "./views/Home.vue";
 
 const routes = [
-    {path: '/', component: PriceOffer},
-    {path: '/price-offer-finished', component: PriceOfferFinished}
+    {path: '/?test', component: Home}
 ]
 
 export const router = createRouter({

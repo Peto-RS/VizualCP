@@ -1,14 +1,14 @@
-import {ApiResponse} from "../res/ApiResponse.js";
-import {SelectedDoorResponse} from "../res/SelectedDoorResponse.js";
-import {HandleResponse} from "../res/HandleResponse.js";
-import {AddressResponse} from "../res/AddressResponse.js";
-import {ContactResponse} from "../res/ContactResponse.js";
-import {RosetteResponse} from "../res/RosetteResponse.js";
-import {SpecialAccessoriesResponse} from "../res/SpecialAccessoriesResponse.js";
-import {SpecialSurchargeResponse} from "../res/SpecialSurchargeResponse.js";
-import {PossibleAdditionalChargeResponse} from "../res/PossibleAdditionalChargeResponse.js";
-import {LineItemResponse} from "../res/LineItemResponse.js";
-import {SelectedDoorLineItemResponse} from "../res/SelectedDoorLineItemResponse.js";
+import {ApiResponse} from "../res/price-offer/ApiResponse.js";
+import {SelectedDoorResponse} from "../res/price-offer/SelectedDoorResponse.js";
+import {HandleResponse} from "../res/price-offer/HandleResponse.js";
+import {AddressResponse} from "../res/price-offer/AddressResponse.js";
+import {ContactResponse} from "../res/price-offer/ContactResponse.js";
+import {RosetteResponse} from "../res/price-offer/RosetteResponse.js";
+import {SpecialAccessoriesResponse} from "../res/price-offer/SpecialAccessoriesResponse.js";
+import {SpecialSurchargeResponse} from "../res/price-offer/SpecialSurchargeResponse.js";
+import {PossibleAdditionalChargeResponse} from "../res/price-offer/PossibleAdditionalChargeResponse.js";
+import {LineItemResponse} from "../res/price-offer/LineItemResponse.js";
+import {SelectedDoorLineItemResponse} from "../res/price-offer/SelectedDoorLineItemResponse.js";
 
 interface FormContact {
     email: string

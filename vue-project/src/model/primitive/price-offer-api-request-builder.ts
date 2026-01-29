@@ -1,13 +1,13 @@
 import {FormLineItem, FormPriceOffer, FormSelectedDoorLineItem} from "./form-builder.js";
-import {ApiResponse} from "../res/ApiResponse.js";
-import {ApiRequest} from "../req/ApiRequest.js";
-import {DoorReq} from "../req/DoorReq.js";
-import {RosetteReq} from "../req/RosetteReq.js";
-import {SpecialAccessoriesReq} from "../req/SpecialAccessoriesReq.js";
-import {PossibleAdditionalChargeReq} from "../req/PossibleAdditionalChargeReq.js";
-import {SpecialSurchargeReq} from "../req/SpecialSurchargeReq.js";
-import {LineItemReq} from "../req/LineItemReq.js";
-import {SelectedDoorLineItemRequest} from "../req/SelectedDoorLineItemRequest.js";
+import {ApiResponse} from "../res/price-offer/ApiResponse.js";
+import {ApiRequest} from "../req/price-offer/ApiRequest.js";
+import {DoorReq} from "../req/price-offer/DoorReq.js";
+import {RosetteReq} from "../req/price-offer/RosetteReq.js";
+import {SpecialAccessoriesReq} from "../req/price-offer/SpecialAccessoriesReq.js";
+import {PossibleAdditionalChargeReq} from "../req/price-offer/PossibleAdditionalChargeReq.js";
+import {SpecialSurchargeReq} from "../req/price-offer/SpecialSurchargeReq.js";
+import {LineItemReq} from "../req/price-offer/LineItemReq.js";
+import {SelectedDoorLineItemRequest} from "../req/price-offer/SelectedDoorLineItemRequest.js";
 
 export function prepareRequest(
     reactiveForm: FormPriceOffer,

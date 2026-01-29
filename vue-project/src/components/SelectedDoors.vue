@@ -2,7 +2,7 @@
 import {FormDoor} from "../model/primitive/form-builder.js";
 import BadgePrice from "../components/BadgePrice.vue";
 import {useI18n} from "vue-i18n";
-import {SelectedDoorResponse} from "../model/res/SelectedDoorResponse.js";
+import {SelectedDoorResponse} from "../model/res/price-offer/SelectedDoorResponse.js";
 import PriceOfferDoorImage from "../components/PriceOfferDoorImage.vue";
 
 const selectedDoors = defineModel<Record<string, FormDoor>>('selectedDoors', {

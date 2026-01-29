@@ -4,7 +4,9 @@ import App from './App.vue'
 import 'bootstrap';
 import {createI18n} from "vue-i18n";
 import sk from './locales/sk.json'
+import {routerPriceOffer} from "./routerPriceOffer.js";
 import {router} from "./router.js";
+import Home from "./views/Home.vue";
 
 let vueAppInstance: ReturnType<typeof createApp> | null = null
 const i18n = createI18n({
@@ -32,7 +34,15 @@ window.addEventListener("DOMContentLoaded", () => {
         vueAppInstance = app;
         app
             .use(i18n)
-            .use(router)
+            .use(routerPriceOffer)
             .mount('#vueApp');
     });
 });
+
+//full page version
+const app = createApp(Home);
+vueAppInstance = app;
+app
+    .use(i18n)
+    .use(router)
+    .mount('#vueAppFull');

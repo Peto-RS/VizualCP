@@ -111,4 +111,11 @@ class AppConfigJsonDataManipulation
     }
 }
 
+class RoomsJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/rooms.json");
+    }
+}
 ?>

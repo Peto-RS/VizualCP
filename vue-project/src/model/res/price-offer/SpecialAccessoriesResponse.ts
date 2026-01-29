@@ -1,6 +1,6 @@
-import {HintInterface} from "../interface/HintInterface.js";
+import {HintInterface} from "../../interface/HintInterface.js";
 
-export interface PossibleAdditionalChargeResponse extends HintInterface {
+export interface SpecialAccessoriesResponse extends HintInterface {
     id: string
     calculatedPrice: number
     configuredPrice: number | null
@@ -8,8 +8,8 @@ export interface PossibleAdditionalChargeResponse extends HintInterface {
     header: string | null
     hint: string | null
     imgSrc: string | null
-    isCountDirty: boolean | null
     label: string | null
+    selectedPrice: number | null
     youtubeVideoCode: string | null
     videoSrc: string | null
 }

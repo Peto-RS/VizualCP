@@ -12,6 +12,21 @@
   "assemblyDoors": {
     "note": "Akciová montáž dverí so zárubňou 35 € / kus. Akcia platí pri počte 6 a viac kusov. Minimálna suma na dvoch montážnikov je 210 €."
   },
+  "components": {
+    "hint": {
+      "modal": {
+        "close": "Zavrieť"
+      }
+    },
+    "lineItems": {
+      "add": "Pridať",
+      "namePlaceholder": "Zadajte názov"
+    },
+    "Navbar": {
+      "configurator": "Konfigurátor",
+      "priceOffer": "Cenová ponuka"
+    }
+  },
   "contact": {
     "email": "Email",
     "fullName": "Meno",
@@ -44,17 +59,7 @@
     "invalidEmailFormat": "Nesprávny tvar emailu.",
     "required": "Toto pole je povinné."
   },
-  "components": {
-    "hint": {
-      "modal": {
-        "close": "Zavrieť"
-      }
-    },
-    "lineItems": {
-      "add": "Pridať",
-      "namePlaceholder": "Zadajte názov"
-    }
-  },
+
   "alerts": {
     "FORM_SAVE_ERROR": "Nastala chyba pri ukladaní formuláru. Pri pretrvávajúcich problémov kontaktujte administrátora.",
     "FORM_VALIDATIONS_ERROR": "Vo formulári sa nachádzajú chybné polia.",

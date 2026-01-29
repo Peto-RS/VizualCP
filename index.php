@@ -23,21 +23,33 @@ if ($_SERVER['HTTPS'] != "on"){
           href="<?php echo AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/assets/main.css" ?>">
 
     <?php
-    include_once "constants.php";
-    include "_import.php";
-    include_once "functions.php";
+    include_once "json-data-manipulation.php";
+
+    if (!AppConfigJsonDataManipulation::getAll()["isSinglePageApp"]) {
+        include_once "constants.php";
+        include "_import.php";
+        include_once "functions.php";
+    }
     ?>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body>
 <?php
+include_once "json-data-manipulation.php";
 
-include "mobile_alert.php";
-include "header.php";
-include "content.php";
-include "cart.php";
-include "cart-new.php";
-//include "footer.php";
+if (!AppConfigJsonDataManipulation::getAll()["isSinglePageApp"]) {
+    include "mobile_alert.php";
+    include "header.php";
+    include "content.php";
+    include "cart.php";
+    include "cart-new.php";
+    //include "footer.php";
+}
 ?>
+<script type="module"
+        src="<?php echo(AppConfigJsonDataManipulation::getAll()["isProductionVueBuild"] ? AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/app.js" : "http://localhost:5173/src/main.ts") ?>"></script>
+<div id="vueAppFull"></div>
 </body>
 </html>

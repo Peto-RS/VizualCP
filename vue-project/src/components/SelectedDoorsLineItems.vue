@@ -2,7 +2,7 @@
 import {FormSelectedDoorLineItem} from "../model/primitive/form-builder.js";
 import BadgePrice from "../components/BadgePrice.vue";
 import {useI18n} from "vue-i18n";
-import {SelectedDoorLineItemResponse} from "../model/res/SelectedDoorLineItemResponse.js";
+import {SelectedDoorLineItemResponse} from "../model/res/price-offer/SelectedDoorLineItemResponse.js";
 import PriceOfferDoorLineItemImage from "../components/PriceOfferDoorLineItemImage.vue";
 
 const selectedDoorsLineItems = defineModel<FormSelectedDoorLineItem[]>('lineItems', {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, onBeforeUnmount, onMounted, Ref, ref, watch, WatchHandle} from 'vue'
-import {ApiResponse} from "../model/res/ApiResponse.js";
+import {ApiResponse} from "../model/res/price-offer/ApiResponse.js";
 import {
   constructReactiveFormPriceOffer,
   findPossibleAdditionalChargeById,
@@ -8,25 +8,24 @@ import {
   findSpecialAccessoryById,
   findSpecialSurchargeById,
   FormPriceOffer
-} from "../model/primitive/form-builder.js";
-import {prepareRequest} from "../model/primitive/api-request-builder.js";
-import BadgePrice from "../components/BadgePrice.vue";
-import AccordionItem from "../components/AccordionItem.vue";
+} from "../model/primitive/price-offer-form-builder.js";
+import {prepareRequest} from "../model/primitive/price-offer-api-request-builder.js";
+import BadgePrice from "./BadgePrice.vue";
+import AccordionItem from "./AccordionItem.vue";
 import {formatPrice} from "../model/primitive/formatters.js";
-import PriceOfferDoorImage from "../components/PriceOfferDoorImage.vue";
 import {getAppConfig, getForm, submitForm, updateForm} from "../model/rest.js";
 import {ValidationMessage} from "../model/validation-message.js";
-import ValidationMessages from "../components/ValidationMessages.vue";
-import Hint from "../components/Hint.vue";
-import LineItems from "../components/LineItems.vue";
-import {AppConfigResponse} from "../model/res/AppConfigResponse.js";
+import ValidationMessages from "./ValidationMessages.vue";
+import Hint from "./Hint.vue";
+import LineItems from "./LineItems.vue";
+import {AppConfigResponse} from "../model/res/price-offer/AppConfigResponse.js";
 import {useAlerts} from "../composables/alert-composables.js";
 import {useI18n} from "vue-i18n";
-import Toasts from "../components/Toasts.vue";
+import Toasts from "./Toasts.vue";
 import {useRouter} from "vue-router";
 import {HintInterface} from "../model/interface/HintInterface.js";
-import SelectedDoorsLineItems from "../components/SelectedDoorsLineItems.vue";
-import SelectedDoors from "../components/SelectedDoors.vue";
+import SelectedDoorsLineItems from "./SelectedDoorsLineItems.vue";
+import SelectedDoors from "./SelectedDoors.vue";
 
 const router = useRouter()
 const {t} = useI18n();
@@ -185,7 +184,8 @@ function handleHandleCountChange(e: Event) {
                 <SelectedDoorsLineItems v-model:line-items="reactiveForm.selectedDoorsLineItems"
                                         :selected-doors-line-items-response="apiResponse?.priceOffer?.selectedDoorsLineItems"/>
               </div>
-              <div class="row" v-if="!Object.keys(reactiveForm.doors).length && !reactiveForm.selectedDoorsLineItems.length">
+              <div class="row"
+                   v-if="!Object.keys(reactiveForm.doors).length && !reactiveForm.selectedDoorsLineItems.length">
                 <div class="col-sm-12">{{ t('doors.notSelected') }}</div>
               </div>
             </li>
@@ -608,7 +608,7 @@ function handleHandleCountChange(e: Event) {
           </ul>
         </AccordionItem>
       </div>
-      <div v-if="apiResponse" class="price-sticky py-1 px-3 rounded">
+      <div v-if="apiResponse" class="price-sticky py-1 px-3 rounded mb-2">
         <div class="row mb-2">
           <div class="col-sm-8 col-xl-10 align-content-center">
             CENA SPOLU BEZ DPH

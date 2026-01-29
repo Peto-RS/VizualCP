@@ -1,4 +1,4 @@
-import {HintInterface} from "../interface/HintInterface.js";
+import {HintInterface} from "../../interface/HintInterface.js";
 
 export interface RosetteResponse extends HintInterface {
     id: string

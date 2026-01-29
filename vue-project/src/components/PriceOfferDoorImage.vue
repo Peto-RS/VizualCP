@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {SelectedDoorResponse} from "../model/res/SelectedDoorResponse.js";
+import {SelectedDoorResponse} from "../model/res/price-offer/SelectedDoorResponse.js";
 import {computed} from "vue";
 
 const props = defineProps<{

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {FormLineItem} from "../model/primitive/form-builder.js";
-import {LineItemResponse} from "../model/res/LineItemResponse.js";
+import {LineItemResponse} from "../model/res/price-offer/LineItemResponse.js";
 import BadgePrice from "../components/BadgePrice.vue";
 import {useI18n} from "vue-i18n";
 

@@ -608,7 +608,7 @@ function handleHandleCountChange(e: Event) {
           </ul>
         </AccordionItem>
       </div>
-      <div v-if="apiResponse" class="price-sticky py-1 px-3 rounded">
+      <div v-if="apiResponse" class="price-sticky py-1 px-3 mb-2 rounded">
         <div class="row mb-2">
           <div class="col-sm-8 col-xl-10 align-content-center">
             CENA SPOLU BEZ DPH

@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 function generateSpreadSheet(PriceOfferResponse $priceOffer): string
 {
-    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_26012026.xlsx');
+    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_30012026.xlsx');
     addBusinessDataIntoSpreadsheet($spreadsheet, $priceOffer);
     return writeSpreadSheetToOutput($spreadsheet);
 }
@@ -198,7 +198,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
             $sheet->setCellValue("G" . $rowIdx, $count);
         }
 
-        $sheet->getRowDimension($rowIdx)->setRowHeight(70);
+        $sheet->getRowDimension($rowIdx)->setRowHeight(100);
         $rowIdx = $rowIdx + 1;
     }
 
@@ -216,7 +216,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
             $sheet->setCellValue("G" . $rowIdx, $count);
         }
 
-        $sheet->getRowDimension($rowIdx)->setRowHeight(30);
+        $sheet->getRowDimension($rowIdx)->setRowHeight(40);
         $rowIdx = $rowIdx + 1;
     }
 

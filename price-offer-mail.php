@@ -32,11 +32,12 @@ function sendMailWithExcelAttachment(string $excelSpreadsheet, PriceOfferRespons
         );
 
         $priceOfferSequentialId = str_pad(queryPriceOfferNumber(getDb()), 3, '0', STR_PAD_LEFT);
-        $email->Subject = '💥 STOLÁRSTVO SUČANSKÝ 💥 - CENOVÁ PONUKA - 🚪 INTERIÉROVÉ DVERE 🚪 ČÍSLO - ' . date('y-m') . "-" . $priceOfferSequentialId;
+        $priceOfferNumber = date('y-m') . "-" . $priceOfferSequentialId;
+        $email->Subject = '💥 STOLÁRSTVO SUČANSKÝ 💥 - CENOVÁ PONUKA - 🚪 INTERIÉROVÉ DVERE 🚪 ČÍSLO - ' . $priceOfferNumber;
         $email->Body = file_get_contents(__DIR__ . '/price-offer-mail.html');
         $email->addStringAttachment(
             $excelSpreadsheet,
-            'cenova_ponuka.xlsx',
+            "cenova_ponuka_$priceOfferNumber.xlsx",
             'base64',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         );

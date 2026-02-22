@@ -1,6 +1,6 @@
 <?php
 
-include_once 'cart-model-api-request-objects.php';
+include_once('php/api/request-objects/api-price-offer-request-objects.php');
 
 class ValidationMessage implements JsonSerializable
 {
@@ -22,7 +22,7 @@ class ValidationMessage implements JsonSerializable
     }
 }
 
-function validate(ApiRequest $apiRequest): array
+function validate(PriceOfferApiRequest $apiRequest): array
 {
     return array_merge(
         validateContactEmail($apiRequest->priceOffer->contact)

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import {FormSelectedDoorLineItem} from "../model/primitive/form-builder.js";
+import {FormSelectedDoorLineItem} from "@/model/functions/price-offer-form-builder.js";
 import BadgePrice from "../components/BadgePrice.vue";
 import {useI18n} from "vue-i18n";
-import {SelectedDoorLineItemResponse} from "../model/res/price-offer/SelectedDoorLineItemResponse.js";
+import {SelectedDoorLineItemResponse} from "@/model/api/res/price-offer/SelectedDoorLineItemResponse.js";
 import PriceOfferDoorLineItemImage from "../components/PriceOfferDoorLineItemImage.vue";
 
+const grid = "col-3 col-lg-4 col-xl-2 g-1";
 const selectedDoorsLineItems = defineModel<FormSelectedDoorLineItem[]>('lineItems', {
   required: true
 })
@@ -37,7 +38,7 @@ function findLineItemByOrderIdx(orderIdx: number) {
 </script>
 
 <template>
-  <div class="col-sm-6 col-lg-4 col-xl-2 g-1" v-for="(it, idx) in selectedDoorsLineItems" :key="idx">
+  <div :class="grid" v-for="(it, idx) in selectedDoorsLineItems" :key="idx">
     <div class="row gy-1">
       <div class="col-12">
         <PriceOfferDoorLineItemImage/>
@@ -88,20 +89,20 @@ function findLineItemByOrderIdx(orderIdx: number) {
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-lg-4 col-xl-2 g-1" v-if="selectedDoorsLineItems.length === 0">
+  <div :class="grid" v-if="selectedDoorsLineItems.length === 0">
     <div class="col-12">
       <button type="button"
-              class="btn btn-outline-success w-100"
+              class="btn btn-outline-primary w-100"
               @click="addLineItem">
         <span class="fas fa-plus me-1"/>
         {{ t("components.lineItems.add") }}
       </button>
     </div>
   </div>
-  <div class="col-sm-6 col-lg-4 col-xl-2 g-1" v-if="selectedDoorsLineItems.length > 0">
+  <div :class="grid" v-if="selectedDoorsLineItems.length > 0">
     <div class="col-12">
       <button type="button"
-              class="btn btn-outline-success w-100"
+              class="btn btn-outline-primary w-100"
               @click="addLineItem"
               style="aspect-ratio: 0.46">
         <span class="fas fa-plus me-1"/>

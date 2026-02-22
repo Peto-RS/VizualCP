@@ -1,0 +1,230 @@
+{
+  "laminates": {
+    "lamino-biela": {
+      "label": "Biela",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "wien-biela": {
+      "label": "Striekaná biela",
+      "availableFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-seda": {
+      "label": "Seda",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-pinia-korzika": {
+      "label": "Pinia korzika",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-buk": {
+      "label": "Buk",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-chamonix": {
+      "label": "Chamonix",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "JASEN-PIESOCNY": {
+      "label": "Jaseň piesočný",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "KREM": {
+      "label": "Krém",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-javor": {
+      "label": "Javor",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-javor-kralovsky": {
+      "label": "Javor kráľovský",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-jelsa": {
+      "label": "Jelsa",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "DUB-HALIFAX": {
+      "label": "Dub halifax",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "DUB-HALIFAX-TABAKOVY": {
+      "label": "Dub halifax tabakový",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "DUB-BARDOLINO": {
+      "label": "Dub bardolino",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "DUB-HAMILTON": {
+      "label": "Dub hamilton",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "DUB-KRONGERG": {
+      "label": "Dub krongerg",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "DUB-WOTAN": {
+      "label": "Dub wotan",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "canyon-dark": {
+      "label": "Canyon tmavý",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "canyon-light": {
+      "label": "Canyon bledý",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "gardena": {
+      "label": "Gardena",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "ORECH": {
+      "label": "Orech",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "ANTRACIT": {
+      "label": "Antracit",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    }
+  },
+  "veneers": {
+    "buk": {
+      "label": "Buk",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "dub": {
+      "label": "Dub",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "javor": {
+      "label": "Javor",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "macore": {
+      "label": "Macore",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "mahagon": {
+      "label": "Mahagon",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "smrek": {
+      "label": "Smrek",
+      "hiddenFor": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    }
+  }
+}

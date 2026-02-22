@@ -1,47 +1,49 @@
 <script setup lang="ts">
 
-import Navbar from "../components/Navbar.vue";
-// import {useLoadingBar} from "../composables/loading-bar-composables.js"; //TODO:
-import ImgWithLoadingPlaceholder from "../components/ImageWithLoadingPlaceholder.vue";
-import {getConfigurator} from "../model/rest.js";
-import {onMounted, Ref, ref} from "vue";
-import {Room} from "../model/res/configurator/Room.js";
+import {onBeforeMount} from "vue";
+import {useAppState} from "../composables/app-state.js";
+import {getAppConfig} from "../model/api/rest.js";
+import AppOffCanvas from "@/components/AppOffCanvas.vue";
+import Toasts from "@/components/Toasts.vue";
 
-// let {displayLoadingBar} = useLoadingBar();//TODO:
+const {appConfig} = useAppState()
 
-//example door layer on top of room image
-//configuration component init
-//room selector
-//door categories selector
-//door model selector
-//refactor price offer to proper array of doors
-//material selector
+//example door layer on top of room image - OK
+//configuration component init - OK
+//room selector - OK
+//door categories selector - OK
+//door model selector - OK
+//refactor price offer to proper array of doors - OK
+//material selector - OK
+//wien special materials - OK
+//typy skiel - OK
+//have only one modal per all videos
+//nove features - OK
+//cena kluciek chyba
+//popis a cena dveri - OK
+//footer style
 
-const rooms: Ref<Room[]> = ref([])
-
-async function getRooms(): Promise<void> {
-  const response = await getConfigurator()
-  if (response.ok) {
-    const json = await response.json()
-    rooms.value = json as Room[]
-  } else {
-    throw new Error("Error fetching rooms")
-  }
-}
-
-onMounted(() => {
-  getRooms()
+onBeforeMount(async () => {
+  appConfig.value = await getAppConfig()
 })
 </script>
 
 <template>
-  <Navbar/>
-  <ImgWithLoadingPlaceholder class="w-100 h-100"
-                             alt="logo"
-                             src="http://localhost:8080/assets/img/rooms/Miestnosti vizualizácia 2026 4.png"/>
   <router-view/>
+  <Toasts/>
+  <AppOffCanvas/>
 </template>
 
-<style scoped>
+<style lang="scss">
+* {
+  box-sizing: border-box;
+}
 
+.btn-primary {
+  color: white;
+}
+
+.btn-outline-primary:hover {
+  color: white;
+}
 </style>

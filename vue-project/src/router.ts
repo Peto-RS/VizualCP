@@ -1,8 +1,15 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import Home from "./views/Home.vue";
+import DoorsView from "./views/DoorsView.vue";
 
 const routes = [
-    {path: '/?test', component: Home}
+    {
+        path: '/',
+        redirect: '/doors'
+    },
+    {
+        path: '/doors',
+        component: DoorsView
+    }
 ]
 
 export const router = createRouter({

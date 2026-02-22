@@ -1,0 +1,770 @@
+[
+  {
+    "categoryId": "Najpredavanejsie",
+    "description": "Do kategórie najpredávanejšie sme pre Vás vybrali zoznam interiérových dverí, ktoré si naši zákazníci najčastejšie objednávajú a zároveň predstavujú najpriaznivejší pomer medzi kvalitou a cenou.",
+    "name": "Najpredávanejšie",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "lamino-jelsa",
+      "type": "v1"
+    },
+    "doorTypes": {
+      "v1": {
+        "price": 139
+      },
+      "v3": {
+        "price": 179
+      },
+      "v5": {
+        "price": 179
+      },
+      "v12": {
+        "price": 192
+      },
+      "p10": {
+        "price": 169
+      },
+      "r4": {
+        "price": 222
+      },
+      "r5": {
+        "price": 235
+      },
+      "k2": {
+        "price": 192
+      },
+      "k8": {
+        "price": 242
+      },
+      "k11": {
+        "price": 212
+      },
+      "k12": {
+        "price": 242
+      }
+    },
+    "gallery": [],
+    "hiddenConfiguratorCategories": [],
+    "wien": 0
+  },
+  {
+    "categoryId": "Renata",
+    "description": "Klasika je nadčasová, v tomto duchu sa nesie kategória interiérových dverí Renata. Pohodlný a prívetivý dizajn vnesie eleganciu do každého interiéru.",
+    "name": "Renata",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "lamino-buk",
+      "type": "r5"
+    },
+    "doorTypes": {
+      "r1": {
+        "price": 192
+      },
+      "r2": {
+        "price": 192
+      },
+      "r3": {
+        "price": 232
+      },
+      "r4": {
+        "price": 222
+      },
+      "r5": {
+        "price": 235
+      },
+      "r6": {
+        "price": 275
+      },
+      "r7": {
+        "price": 275
+      },
+      "r8": {
+        "price": 259
+      },
+      "r9": {
+        "price": 269
+      },
+      "r10": {
+        "price": 242
+      },
+      "r11": {
+        "price": 232
+      },
+      "r13": {
+        "price": 232
+      }
+    },
+    "gallery": [],
+    "hiddenConfiguratorCategories": [],
+    "wien": 0
+  },
+  {
+    "categoryId": "Vanesa",
+    "description": "Upustite uzdu svojej fantázií. Pohrajte sa s rozmermi a upravte si štýl dverí podľa predstáv. Dvere Vanesa sú kombináciou moderného dizajnu a rozumnej ceny.",
+    "name": "Vanesa",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "lamino-jelsa",
+      "type": "v3"
+    },
+    "doorTypes": {
+      "v1": {
+        "price": 139
+      },
+      "v2": {
+        "price": 179
+      },
+      "v3": {
+        "price": 179
+      },
+      "v4": {
+        "price": 192
+      },
+      "v5": {
+        "price": 179
+      },
+      "v6": {
+        "price": 192
+      },
+      "v7": {
+        "price": 192
+      },
+      "v8": {
+        "price": 192
+      },
+      "v9": {
+        "price": 192
+      },
+      "v10": {
+        "price": 192
+      },
+      "v11": {
+        "price": 192
+      },
+      "v12": {
+        "price": 192
+      },
+      "v13": {
+        "price": 192
+      },
+      "v14": {
+        "price": 192
+      }
+    },
+    "gallery": [],
+    "hiddenConfiguratorCategories": [],
+    "wien": 0
+  },
+  {
+    "categoryId": "Kristina",
+    "description": "Dajte svoj štýl do perspektívy. Byť „in“ a trendy je hlavným cieľom tejto kategórie. Interiérové dvere Kristína budú žiariť v každom interiéri.",
+    "name": "Kristína",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "lamino-chamonix",
+      "type": "k8"
+    },
+    "doorTypes": {
+      "k1": {
+        "price": 192
+      },
+      "k2": {
+        "price": 192
+      },
+      "k3": {
+        "price": 212
+      },
+      "k4": {
+        "price": 262
+      },
+      "k5": {
+        "price": 262
+      },
+      "k6": {
+        "price": 262
+      },
+      "k7": {
+        "price": 242
+      },
+      "k8": {
+        "price": 242
+      },
+      "k9": {
+        "price": 242
+      },
+      "k10": {
+        "price": 212
+      },
+      "k11": {
+        "price": 212
+      },
+      "k12": {
+        "price": 242
+      }
+    },
+    "gallery": [],
+    "hiddenConfiguratorCategories": [],
+    "wien": 0
+  },
+  {
+    "categoryId": "Petra",
+    "description": "Pravidelné tvary a jemné línie dotvárajú estetický dojem kategórie interiérových dverí Petra. Hliníkové doplnky oživia všetky moderné interiéry.",
+    "name": "Petra",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "lamino-javor-kralovsky",
+      "type": "p10"
+    },
+    "doorTypes": {
+      "p1": {
+        "price": 169
+      },
+      "p2": {
+        "price": 169
+      },
+      "p3": {
+        "price": 169
+      },
+      "p4": {
+        "price": 169
+      },
+      "p5": {
+        "price": 179
+      },
+      "p6": {
+        "price": 219
+      },
+      "p7": {
+        "price": 179
+      },
+      "p8": {
+        "price": 179
+      },
+      "p9": {
+        "price": 169
+      },
+      "p10": {
+        "price": 169
+      },
+      "p11": {
+        "price": 149
+      },
+      "p12": {
+        "price": 169
+      },
+      "p13": {
+        "price": 159
+      },
+      "p14": {
+        "price": 159
+      },
+      "p15": {
+        "price": 149
+      },
+      "p16": {
+        "price": 159
+      }
+    },
+    "gallery": [],
+    "hiddenConfiguratorCategories": [],
+    "wien": 0
+  },
+  {
+    "categoryId": "Zuzana",
+    "description": "Jednoduchý a zároveň elegantný dizajn Interiérových dverí Zuzana dokáže naplniť očakávania aj tých najnáročnejších zákazníkov.",
+    "name": "Zuzana",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "canyon-dark",
+      "type": "z3"
+    },
+    "doorTypes": {
+      "z1": {
+        "price": 292
+      },
+      "z2": {
+        "price": 292
+      },
+      "z3": {
+        "price": 292
+      },
+      "z4": {
+        "price": 292
+      },
+      "z5": {
+        "price": 292
+      },
+      "z6": {
+        "price": 292
+      },
+      "z7": {
+        "price": 292
+      },
+      "z8": {
+        "price": 292
+      },
+      "z9": {
+        "price": 292
+      }
+    },
+    "gallery": [],
+    "hiddenConfiguratorCategories": [],
+    "wien": 0
+  },
+  {
+    "categoryId": "Wien_1",
+    "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
+    "name": "Wien 1",
+    "doorConfiguratorDefault": {
+      "handle": null,
+      "material": "wien-biela",
+      "type": "W1_L2_K2_O1"
+    },
+    "doorTypes": {
+      "W1_L1_K1_O1": {
+        "price": 491
+      },
+      "W1_L1_K1_O1_S": {
+        "price": 491
+      },
+      "W1_L2_K1_O1": {
+        "price": 591
+      },
+      "W1_L2_K1_O1_S": {
+        "price": 591
+      },
+      "W1_L1_K2_O1": {
+        "price": 650
+      },
+      "W1_L2_K2_O1": {
+        "price": 709
+      },
+      "W1_L1_K1_O2": {
+        "price": 791
+      },
+      "W1_L1_K1_O2_S": {
+        "price": 791
+      },
+      "W1_L2_K1_O2": {
+        "price": 891
+      },
+      "W1_L2_K1_O2_S": {
+        "price": 891
+      },
+      "W1_L1_K2_O2": {
+        "price": 950
+      },
+      "W1_L2_K2_O2": {
+        "price": 1009
+      }
+    },
+    "gallery": [
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-1.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-2.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-3.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-4.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-5.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-6.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-7.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-8.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-9.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-10.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-11.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-12.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-13.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-14.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-15.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-16.jpg"
+      }
+    ],
+    "hiddenConfiguratorCategories": [
+      "handles"
+    ],
+    "wien": 1
+  },
+  {
+    "categoryId": "Wien_2",
+    "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
+    "name": "Wien 2",
+    "doorConfiguratorDefault": {
+      "handle": null,
+      "material": "wien-biela",
+      "type": "W2_L2_K2_O1"
+    },
+    "doorTypes": {
+      "W2_L1_K1_O1": {
+        "price": 499
+      },
+      "W2_L1_K1_O1_S": {
+        "price": 499
+      },
+      "W2_L2_K1_O1": {
+        "price": 599
+      },
+      "W2_L2_K1_O1_S": {
+        "price": 599
+      },
+      "W2_L1_K2_O1": {
+        "price": 659
+      },
+      "W2_L1_K2_O1_S": {
+        "price": 659
+      },
+      "W2_L2_K2_O1": {
+        "price": 791
+      },
+      "W2_L2_K2_O1_S": {
+        "price": 719
+      },
+      "W2_L1_K1_O2": {
+        "price": 799
+      },
+      "W2_L1_K1_O2_S": {
+        "price": 799
+      },
+      "W2_L2_K1_O2": {
+        "price": 899
+      },
+      "W2_L2_K1_O2_S": {
+        "price": 899
+      },
+      "W2_L1_K2_O2": {
+        "price": 959
+      },
+      "W2_L1_K2_O2_S": {
+        "price": 959
+      },
+      "W2_L2_K2_O2": {
+        "price": 1019
+      },
+      "W2_L2_K2_O2_S": {
+        "price": 1019
+      }
+    },
+    "gallery": [
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-1.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-2.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-3.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-4.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-5.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-6.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-7.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-8.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-9.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-10.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-11.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-12.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-13.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-14.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-15.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-16.jpg"
+      }
+    ],
+    "hiddenConfiguratorCategories": [
+      "handles"
+    ],
+    "wien": 1
+  },
+  {
+    "categoryId": "Wien_3",
+    "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
+    "name": "Wien 3",
+    "doorConfiguratorDefault": {
+      "handle": null,
+      "material": "wien-biela",
+      "type": "W3_L2_K2_O1"
+    },
+    "doorTypes": {
+      "W3_L1_K1_O1": {
+        "price": 599
+      },
+      "W3_L1_K1_O1_S": {
+        "price": 599
+      },
+      "W3_L2_K1_O1": {
+        "price": 699
+      },
+      "W3_L2_K1_O1_S": {
+        "price": 699
+      },
+      "W3_L1_K2_O1": {
+        "price": 759
+      },
+      "W3_L1_K2_O1_S": {
+        "price": 759
+      },
+      "W3_L2_K2_O1": {
+        "price": 891
+      },
+      "W3_L2_K2_O1_S": {
+        "price": 891
+      },
+      "W3_L1_K1_O2": {
+        "price": 899
+      },
+      "W3_L1_K1_O2_S": {
+        "price": 899
+      },
+      "W3_L2_K1_O2": {
+        "price": 999
+      },
+      "W3_L2_K1_O2_S": {
+        "price": 999
+      },
+      "W3_L1_K2_O2": {
+        "price": 1059
+      },
+      "W3_L1_K2_O2_S": {
+        "price": 1059
+      },
+      "W3_L2_K2_O2": {
+        "price": 1119
+      },
+      "W3_L2_K2_O2_S": {
+        "price": 1119
+      }
+    },
+    "gallery": [
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-1.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-2.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-3.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-4.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-5.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-6.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-7.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-8.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-9.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-10.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-11.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-12.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-13.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-14.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-15.jpg"
+      },
+      {
+        "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-16.jpg"
+      }
+    ],
+    "hiddenConfiguratorCategories": [
+      "handles"
+    ],
+    "wien": 1
+  },
+  {
+    "categoryId": "Barbora",
+    "description": "",
+    "name": "Barbora",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "DUB-HALIFAX",
+      "type": "b1"
+    },
+    "doorTypes": {
+      "b1": {
+        "price": 169
+      },
+      "b2": {
+        "price": 169
+      },
+      "b3": {
+        "price": 169
+      },
+      "b4": {
+        "price": 169
+      },
+      "b5": {
+        "price": 179
+      },
+      "b6": {
+        "price": 219
+      },
+      "b7": {
+        "price": 179
+      },
+      "b8": {
+        "price": 179
+      },
+      "b9": {
+        "price": 169
+      },
+      "b10": {
+        "price": 169
+      },
+      "b11": {
+        "price": 149
+      },
+      "b12": {
+        "price": 169
+      },
+      "b13": {
+        "price": 159
+      },
+      "b14": {
+        "price": 159
+      },
+      "b15": {
+        "price": 149
+      },
+      "b16": {
+        "price": 159
+      }
+    },
+    "gallery": [],
+    "hiddenConfiguratorCategories": [],
+    "wien": 0
+  },
+  {
+    "categoryId": "Greta",
+    "description": "",
+    "name": "Gréta",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "ORECH",
+      "type": "g1"
+    },
+    "doorTypes": {
+      "g1": {
+        "price": 169
+      },
+      "g2": {
+        "price": 169
+      },
+      "g3": {
+        "price": 169
+      },
+      "g4": {
+        "price": 169
+      },
+      "g5": {
+        "price": 179
+      },
+      "g6": {
+        "price": 219
+      },
+      "g7": {
+        "price": 179
+      },
+      "g8": {
+        "price": 179
+      },
+      "g9": {
+        "price": 169
+      },
+      "g10": {
+        "price": 169
+      },
+      "g11": {
+        "price": 149
+      },
+      "g12": {
+        "price": 169
+      },
+      "g13": {
+        "price": 159
+      },
+      "g14": {
+        "price": 159
+      },
+      "g15": {
+        "price": 149
+      },
+      "g16": {
+        "price": 159
+      }
+    },
+    "gallery": [],
+    "hiddenConfiguratorCategories": [],
+    "wien": 0
+  }
+]

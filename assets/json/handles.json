@@ -1,0 +1,86 @@
+{
+  "Nova_nerez_R": {
+    "label": "Nova nerez R",
+    "price": 15
+  },
+  "Nova_nerez_HR": {
+    "label": "Nova nerez HR",
+    "price": 19
+  },
+  "Proxima_nerez_R": {
+    "label": "Proxima nerez R",
+    "price": 15
+  },
+  "Proxima_nerez_HR": {
+    "label": "Proxima nerez HR",
+    "price": 19
+  },
+  "Neptun_nerez_R": {
+    "label": "Neptun nerez R",
+    "price": 15
+  },
+  "Roma_nerez_R": {
+    "label": "Roma nerez R",
+    "price": 19
+  },
+  "Roma_nerez_HR": {
+    "label": "Roma nerez HR",
+    "price": 23
+  },
+  "Rio_grafit_HR": {
+    "label": "Rio grafit HR",
+    "price": 23
+  },
+  "Rio_nikel_satenovy_HR": {
+    "label": "Rio nikel saténový HR",
+    "price": 23
+  },
+  "Rio_patina_HR": {
+    "label": "Rio patina HR",
+    "price": 23
+  },
+  "Quanta_Fit_mosadz_brusena_HR": {
+    "label": "Quanta Fit mosadz brúsená HR",
+    "price": 24
+  },
+  "Beta_nikel_satenovy_HR": {
+    "label": "Beta nikel saténový HR",
+    "price": 23
+  },
+  "Euforia_grafit_HR": {
+    "label": "Eufória grafit HR",
+    "price": 23
+  },
+  "Euforia_patina_HR": {
+    "label": "Eufória patina HR",
+    "price": 23
+  },
+  "Topaz_nerez_HR": {
+    "label": "Topaz nerez HR",
+    "price": 19
+  },
+  "Foks_cierna_matna_HR": {
+    "label": "Foks čierna matná HR",
+    "price": 23
+  },
+  "Qubik_mosadz_brusena_HR": {
+    "label": "Qubik mosadz brúsená HR",
+    "price": 24
+  },
+  "Qubik_nikel_satenovy_HR": {
+    "label": "Qubik nikel saténový HR",
+    "price": 24
+  },
+  "Qubik_chrom_leskly_HR": {
+    "label": "Qubik chróm lesklý HR",
+    "price": 24
+  },
+  "Qubik_biela_matna_HR": {
+    "label": "Qubik biela matná HR",
+    "price": 24
+  },
+  "Qubik_cierna_matna_HR": {
+    "label": "Qubik čierna matná HR",
+    "price": 24
+  }
+}

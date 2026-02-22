@@ -1,43 +1,48 @@
 <script setup lang="ts">
 import {computed, Ref, ref} from 'vue'
 import {useI18n} from 'vue-i18n'
-import PriceOffer from "./PriceOffer.vue";
 import LoadingBar from "../components/LoadingBar.vue";
-import Configurator from "../components/Configurator.vue";
+import {useAppState} from "../composables/app-state.js";
 
-const navbarUrl = 'http://localhost:8080'
+const {appConfig} = useAppState()
 const {t} = useI18n()
 
-const isConfiguratorActive: Ref<boolean> = ref(false)
-const isPriceOfferActive: Ref<boolean> = ref(false)
+const emit = defineEmits<{
+  (e: 'handle-configurator-click'): void,
+  (e: 'handle-price-offer-click'): void
+}>()
+
+type OffCanvasViews = "configurator" | "priceOffer";
+const offCanvasActiveView: Ref<OffCanvasViews> = ref("configurator")
 
 const navbarImgSrc = computed(
-    () => navbarUrl + '/assets/img/logo-stolarstvo-sucansky.png'
+    () => appConfig.value ? (appConfig.value.baseUrl + '/assets/img/logo-stolarstvo-sucansky.png') : null
 )
 </script>
 
 <template>
-  <nav class="navbar border">
+  <nav class="navbar border d-none d-lg-flex bg-white">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
-        <img :src="navbarImgSrc" alt="Logo" class="navbar-logo"/>
+        <img v-if="navbarImgSrc"
+             :src="navbarImgSrc"
+             alt="Logo"
+             class="navbar-logo"/>
       </router-link>
 
       <ul class="nav nav-underline">
         <li class="nav-item">
-          <a data-bs-toggle="offcanvas"
-             data-bs-target="#offcanvasConfigurator"
-             class="nav-link"
-             :class="{ active: isConfiguratorActive }">
+          <a class="nav-link"
+             :class="{ active: offCanvasActiveView === 'configurator' }"
+             @click="emit('handle-configurator-click'); offCanvasActiveView = 'configurator';">
             {{ t('components.Navbar.configurator') }}
           </a>
         </li>
 
         <li class="nav-item">
-          <a data-bs-toggle="offcanvas"
-             data-bs-target="#offcanvasPriceOffer"
-             class="nav-link"
-             :class="{ active: isPriceOfferActive }">
+          <a class="nav-link"
+             :class="{ active: offCanvasActiveView === 'priceOffer' }"
+             @click="emit('handle-price-offer-click'); offCanvasActiveView = 'priceOffer';">
             {{ t('components.Navbar.priceOffer') }}
           </a>
         </li>
@@ -45,50 +50,35 @@ const navbarImgSrc = computed(
     </div>
   </nav>
 
-  <!--  <nav class="navbar fixed-bottom border">-->
-  <!--    <div class="container-fluid">-->
-  <!--      <ul class="nav nav-underline">-->
-  <!--        <li class="nav-item">-->
-  <!--          <a class="nav-link"-->
-  <!--             :class="{ active: true }">-->
-  <!--            {{ t('components.Navbar.configurator') }}-->
-  <!--          </a>-->
-  <!--        </li>-->
-  <!--        <li class="nav-item">-->
-  <!--          <a data-bs-toggle="offcanvas"-->
-  <!--             data-bs-target="#offcanvasPriceOffer"-->
-  <!--             class="nav-link"-->
-  <!--             :class="{ active: true }">-->
-  <!--            {{ t('components.Navbar.priceOffer') }}-->
-  <!--          </a>-->
-  <!--        </li>-->
-  <!--      </ul>-->
-  <!--    </div>-->
-  <!--  </nav>-->
-  <LoadingBar/>
+  <nav class="navbar fixed-bottom border d-lg-none bg-white">
+    <div class="container-fluid">
+      <ul class="nav nav-underline w-100 nav-justified">
+        <li class="nav-item">
+          <a class="nav-link"
+             :class="{ active: offCanvasActiveView === 'configurator' }"
+             @click="emit('handle-configurator-click'); offCanvasActiveView = 'configurator';">
+            {{ t('components.Navbar.configurator') }}
+          </a>
+        </li>
 
-  <Teleport to="body">
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasConfigurator"
-         aria-labelledby="offcanvasConfiguratorLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasConfiguratorLabel">Konfigurátor</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <Configurator/>
-      </div>
+        <li class="nav-item">
+          <a class="nav-link"
+             :class="{ active: offCanvasActiveView === 'priceOffer' }"
+             @click="emit('handle-price-offer-click'); offCanvasActiveView = 'priceOffer';">
+            {{ t('components.Navbar.priceOffer') }}
+          </a>
+        </li>
+      </ul>
+
+      <router-link class="navbar-brand" to="/">
+        <img v-if="navbarImgSrc"
+             :src="navbarImgSrc"
+             alt="Logo"
+             class="navbar-logo justify-content-center"/>
+      </router-link>
     </div>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasPriceOffer"
-         aria-labelledby="offcanvasPriceOfferLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasPriceOfferLabel">Cenová ponuka</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <PriceOffer/>
-      </div>
-    </div>
-  </Teleport>
+  </nav>
+  <LoadingBar/>
 </template>
 
 <style lang="scss">

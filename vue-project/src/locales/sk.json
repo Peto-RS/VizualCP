@@ -1,4 +1,19 @@
 {
+  "configurator": {
+    "buttonAddToPriceOffer": "Pridať do cenovej ponuky",
+    "category": "Kategória",
+    "doorFramePrice": "Zárubňa: {price}. Ceny sú bez DPH.",
+    "priceFrom": "Cena dverí od",
+    "illustrationOnlyImage": "Obrázok dverí je len ilustračný!",
+    "gallery": "Fotogaléria",
+    "glasses": "Typy skiel",
+    "selectDoorCategory": "Kategórie interiérových dverí",
+    "selectDoorType": "Typy interiérových dverí v kategórií: {doorType}",
+    "selectHandles": "varianty kľučiek - všetky kľučky nájdete na",
+    "selectLaminate": "Druhy laminátov",
+    "selectRoom": "Výber miestnosti",
+    "selectVeneers": "Druhy dýh"
+  },
   "accordionHeaders": {
     "doors": "Interiérové dvere",
     "handles": "Kľučky",
@@ -59,7 +74,6 @@
     "invalidEmailFormat": "Nesprávny tvar emailu.",
     "required": "Toto pole je povinné."
   },
-
   "alerts": {
     "FORM_SAVE_ERROR": "Nastala chyba pri ukladaní formuláru. Pri pretrvávajúcich problémov kontaktujte administrátora.",
     "FORM_VALIDATIONS_ERROR": "Vo formulári sa nachádzajú chybné polia.",

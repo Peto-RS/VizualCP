@@ -111,6 +111,39 @@ class AppConfigJsonDataManipulation
     }
 }
 
+//Configurator
+class DoorCategoriesJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/doorCategories.json");
+    }
+}
+
+class GlassesJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/glasses.json");
+    }
+}
+
+class HandlesJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/handles.json");
+    }
+}
+
+class MaterialsJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/materials.json");
+    }
+}
+
 class RoomsJsonDataManipulation
 {
     public static function getAll(): array

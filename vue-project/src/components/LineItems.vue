@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {FormLineItem} from "../model/primitive/form-builder.js";
-import {LineItemResponse} from "../model/res/price-offer/LineItemResponse.js";
+import {FormLineItem} from "@/model/functions/price-offer-form-builder.js";
+import {LineItemResponse} from "@/model/api/res/price-offer/LineItemResponse.js";
 import BadgePrice from "../components/BadgePrice.vue";
 import {useI18n} from "vue-i18n";
 
@@ -97,7 +97,7 @@ function findLineItemByOrderIdx(orderIdx: number) {
   <li class="list-group-item">
     <button
         type="button"
-        class="btn btn-outline-success"
+        class="btn btn-outline-primary"
         @click="addLineItem">
       <span class="fas fa-plus me-1"/>
       {{ t("components.lineItems.add") }}

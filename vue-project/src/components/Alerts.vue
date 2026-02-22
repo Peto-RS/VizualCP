@@ -21,25 +21,23 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <Teleport to="body">
-    <div class="alert-stack">
-      <div
-          v-for="alert in alerts"
-          :key="alert.id"
-          class="alert alert-dismissible fade show"
-          :class="`alert-${alert.type}`"
-          role="alert"
-          :ref="el => registerAlert(el as HTMLElement, alert.id)">
-        {{ alert.message }}
-        <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-        ></button>
-      </div>
+  <div class="alert-stack">
+    <div
+        v-for="alert in alerts"
+        :key="alert.id"
+        class="alert alert-dismissible fade show"
+        :class="`alert-${alert.type}`"
+        role="alert"
+        :ref="el => registerAlert(el as HTMLElement, alert.id)">
+      {{ alert.message }}
+      <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+      ></button>
     </div>
-  </Teleport>
+  </div>
 </template>
 
 <style scoped>

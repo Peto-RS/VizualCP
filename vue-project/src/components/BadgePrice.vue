@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {formatPrice} from "../model/primitive/formatters.js";
+import {formatPrice} from "@/model/functions/formatters.js";
 
 const props = defineProps<{ price: number | undefined }>()
 </script>

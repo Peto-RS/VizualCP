@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {FormDoor} from "../model/primitive/form-builder.js";
+import {FormDoor} from "@/model/functions/price-offer-form-builder.js";
 import BadgePrice from "../components/BadgePrice.vue";
 import {useI18n} from "vue-i18n";
-import {SelectedDoorResponse} from "../model/res/price-offer/SelectedDoorResponse.js";
-import PriceOfferDoorImage from "../components/PriceOfferDoorImage.vue";
+import {SelectedDoorResponse} from "@/model/api/res/price-offer/SelectedDoorResponse.js";
+import DoorImage from "../components/DoorImage.vue";
 
 const selectedDoors = defineModel<Record<string, FormDoor>>('selectedDoors', {
   required: true
@@ -23,12 +23,15 @@ const handleDoorRemove = (key: string) => {
 </script>
 
 <template>
-  <div class="col-sm-6 col-lg-4 col-xl-2 g-1" v-for="(_, key) in selectedDoors" :key="key">
+  <div class="col-3 col-lg-4 col-xl-2 g-1" v-for="(_, key) in selectedDoors" :key="key">
     <div class="row gy-1" v-if="selectedDoorsResponse && selectedDoors[key]">
       <div class="col-12">
-        <PriceOfferDoorImage :base-url="baseUrl"
-                             :door="selectedDoorsResponse[key]"/>
-        <div class="text-align-center">{{ selectedDoorsResponse[key].type?.toUpperCase() }}</div>
+        <DoorImage :base-url="baseUrl"
+                   :door-category="selectedDoorsResponse[key].category"
+                   :door-handle="null"
+                   :door-material="selectedDoorsResponse[key].material"
+                   :door-type="selectedDoorsResponse[key].type"/>
+        <div class="text-center">{{ selectedDoorsResponse[key].type?.toUpperCase() }}</div>
       </div>
       <div class="col-12">
         <select class="form-select" v-model="selectedDoors[key].doorWidth">

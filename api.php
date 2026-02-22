@@ -1,8 +1,9 @@
 <?php
 include_once "api-common.php";
 include_once "cart-model.php";
-include_once "cart-model-api-request-objects.php";
-include_once "cart-model-api-response-objects.php";
+include_once("php/api/request-objects/api-price-offer-request-objects.php");
+include_once("php/api/response-objects/api-price-offer-response-objects.php");
+include_once("php/api/request-objects/api-configurator-request-objects.php");
 include_once "validation.php";
 
 session_start();
@@ -46,12 +47,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sendJsonResponse(['error' => 'Invalid JSON'], 400);
     }
 
-    $parsedObject = new ApiRequest($requestBody);
-    $priceOffer = PriceOffer::fromRequest($parsedObject->priceOffer);
-    $_SESSION['priceOffer'] = $priceOffer;
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $path = str_replace('/api.php', '', $path);
 
-    $validations = validate($parsedObject);
-    sendJsonResponse($validations, 200);
+    if ($path === '/add-door') {
+        $parsedObject = new ConfiguratorAddDoorRequest($requestBody);
+        $priceOffer = PriceOffer::fromSession($_SESSION['priceOffer']);
+        $priceOffer->addDoorFromConfigurator($parsedObject);
+        $_SESSION['priceOffer'] = $priceOffer;
+
+        sendJsonResponse($priceOffer, 200);
+    } else {
+        $parsedObject = new PriceOfferApiRequest($requestBody);
+        $priceOffer = PriceOffer::fromRequest($parsedObject->priceOffer);
+        $_SESSION['priceOffer'] = $priceOffer;
+
+        $validations = validate($parsedObject);
+        sendJsonResponse($validations, 200);
+    }
 }
 
 // ---------------------

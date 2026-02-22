@@ -22,26 +22,24 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <Teleport to="body">
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-      <div
-          v-for="alert in alerts"
-          :key="alert.id"
-          class="toast align-items-center bg-white show"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-          :ref="el => registerToast(el as HTMLElement, alert.id)">
-        <div class="d-flex">
-          <div class="toast-body">
-            {{ alert.message }}
-          </div>
-          <button type="button"
-                  class="btn-close me-2 m-auto"
-                  data-bs-dismiss="toast"
-                  aria-label="Close"/>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div
+        v-for="alert in alerts"
+        :key="alert.id"
+        class="toast align-items-center bg-primary show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        :ref="el => registerToast(el as HTMLElement, alert.id)">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ alert.message }}
         </div>
+        <button type="button"
+                class="btn-close me-2 m-auto"
+                data-bs-dismiss="toast"
+                aria-label="Close"/>
       </div>
     </div>
-  </Teleport>
+  </div>
 </template>

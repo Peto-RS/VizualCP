@@ -35,7 +35,7 @@ onMounted(() => {
   // Popover
   if (popoverBtn.value) {
     new Popover(popoverBtn.value, {
-      trigger: 'click',
+      trigger: 'hover focus',
       fallbackPlacements: ['top'],
       placement: 'bottom',
       html: true,

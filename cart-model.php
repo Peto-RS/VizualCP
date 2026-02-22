@@ -2,8 +2,8 @@
 
 include_once('constants.php');
 include_once('functions.php');
-include_once('cart-model-api-response-objects.php');
-include_once('cart-model-api-request-objects.php');
+include_once('php/api/response-objects/api-configurator-response-objects.php');
+include_once('php/api/request-objects/api-price-offer-request-objects.php');
 include_once('json-data-manipulation.php');
 
 const FEE_FRAME = 99;
@@ -526,7 +526,7 @@ class Door
             $req->category,
             $req->type,
             $req->material,
-            $req->width,
+            $req->width ?? "",
             1,
             null,
             $req->isDoorFrameEnabled,
@@ -878,6 +878,23 @@ class PriceOffer
         }, $req->specialSurchargesLineItems) : array();
 
         return $instance;
+    }
+
+    public function addDoorFromConfigurator(ConfiguratorAddDoorRequest $request)
+    {
+        $door = new Door(
+            $request->category,
+            $request->type,
+            $request->material,
+            null,
+            1,
+            null,
+            null,
+            null,
+            null
+        );
+
+        $this->doors[] = $door;
     }
 
     public function toResponse(): PriceOfferResponse

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, onBeforeUnmount, onMounted, Ref, ref, watch, WatchHandle} from 'vue'
-import {ApiResponse} from "../model/res/price-offer/ApiResponse.js";
+import {ApiResponse} from "@/model/api/res/price-offer/ApiResponse.js";
 import {
   constructReactiveFormPriceOffer,
   findPossibleAdditionalChargeById,
@@ -8,17 +8,16 @@ import {
   findSpecialAccessoryById,
   findSpecialSurchargeById,
   FormPriceOffer
-} from "../model/primitive/price-offer-form-builder.js";
-import {prepareRequest} from "../model/primitive/price-offer-api-request-builder.js";
+} from "@/model/functions/price-offer-form-builder.js";
+import {prepareRequest} from "@/model/functions/price-offer-api-request-builder.js";
 import BadgePrice from "./BadgePrice.vue";
 import AccordionItem from "./AccordionItem.vue";
-import {formatPrice} from "../model/primitive/formatters.js";
-import {getAppConfig, getForm, submitForm, updateForm} from "../model/rest.js";
+import {formatPrice} from "@/model/functions/formatters.js";
+import {getForm, submitForm, updateForm} from "../model/api/rest.js";
 import {ValidationMessage} from "../model/validation-message.js";
 import ValidationMessages from "./ValidationMessages.vue";
 import Hint from "./Hint.vue";
 import LineItems from "./LineItems.vue";
-import {AppConfigResponse} from "../model/res/price-offer/AppConfigResponse.js";
 import {useAlerts} from "../composables/alert-composables.js";
 import {useI18n} from "vue-i18n";
 import Toasts from "./Toasts.vue";
@@ -26,13 +25,14 @@ import {useRouter} from "vue-router";
 import {HintInterface} from "../model/interface/HintInterface.js";
 import SelectedDoorsLineItems from "./SelectedDoorsLineItems.vue";
 import SelectedDoors from "./SelectedDoors.vue";
+import {useAppState} from "../composables/app-state.js";
 
 const router = useRouter()
 const {t} = useI18n();
 const {addAlert} = useAlerts()
+const {appConfig} = useAppState()
 
 const apiResponse: Ref<ApiResponse | undefined> = ref()
-const appConfigResponse: Ref<AppConfigResponse | null> = ref(null)
 let formWatchHandle: WatchHandle | undefined = undefined
 const cachedForm: Ref<string> = ref('')
 const reactiveForm: Ref<FormPriceOffer> = ref<FormPriceOffer>(constructReactiveFormPriceOffer(undefined))
@@ -40,7 +40,7 @@ const formValidations: Ref<Record<string, ValidationMessage[]>> = ref({})
 const reCaptchaToken: Ref<string | undefined> = ref()
 
 const submitButtonDisabled = computed(() => {
-  const isReCaptchaEnabled = appConfigResponse.value?.reCaptchaEnabled ?? false;
+  const isReCaptchaEnabled = appConfig.value?.reCaptchaEnabled ?? false;
   const reCaptchaCond = isReCaptchaEnabled ? !reCaptchaToken : false;
   const validationsCond = Object.keys(formValidations.value).length > 0;
 
@@ -86,9 +86,9 @@ async function fetchDataAndReRenderForm(): Promise<void> {
 }
 
 function renderReCaptcha(): void {
-  if (window.grecaptcha && appConfigResponse.value?.reCaptchaSiteKey) {
+  if (window.grecaptcha && appConfig.value?.reCaptchaSiteKey) {
     window.grecaptcha.render('recaptcha', {
-      sitekey: appConfigResponse.value?.reCaptchaSiteKey,
+      sitekey: appConfig.value?.reCaptchaSiteKey,
       callback: (token: string) => {
         reCaptchaToken.value = token;
       },
@@ -116,9 +116,7 @@ const debouncedHandleFormSave = debounce((newForm: FormPriceOffer) => {
 }, 250);
 
 onMounted(async () => {
-  appConfigResponse.value = await getAppConfig()
-
-  if (appConfigResponse.value?.reCaptchaEnabled) {
+  if (appConfig.value?.reCaptchaEnabled) {
     renderReCaptcha();
   }
 
@@ -177,7 +175,7 @@ function handleHandleCountChange(e: Event) {
             <li class="list-group-item">
               <div class="row mb-1" v-if="apiResponse?.priceOffer?.doors">
                 <SelectedDoors v-model:selected-doors="reactiveForm.doors"
-                               :base-url="appConfigResponse?.baseUrl"
+                               :base-url="appConfig?.baseUrl"
                                :selected-doors-response="apiResponse?.priceOffer?.doors"/>
               </div>
               <div class="row">
@@ -396,7 +394,6 @@ function handleHandleCountChange(e: Event) {
                       :price="apiResponse?.priceOffer.assemblyDoorsCalculatedPrice"/>
                 </div>
               </div>
-
             </li>
           </ul>
         </AccordionItem>
@@ -634,7 +631,7 @@ function handleHandleCountChange(e: Event) {
         <div id="recaptcha"
              class="mb-1"></div>
         <button type="submit"
-                class="btn bg-primary text-white bold"
+                class="btn btn-lg bg-primary text-white bold"
                 :disabled="submitButtonDisabled"
                 v-on:click="handleFormSubmit($event)">{{ t('submitButton') }}
         </button>
@@ -669,10 +666,6 @@ function handleHandleCountChange(e: Event) {
   gap: 5px;
 }
 
-.text-align-center {
-  text-align: center;
-}
-
 .text-transform-none {
   text-transform: none;
 }
@@ -691,9 +684,9 @@ function handleHandleCountChange(e: Event) {
 
 .price-sticky {
   position: sticky;
-  bottom: 0; // or 0 if you want it glued to the top
+  bottom: 0;
   z-index: 10;
-  background: white; // important so content doesn’t show through
+  background: white;
   padding-top: 0.5rem;
 }
 </style>

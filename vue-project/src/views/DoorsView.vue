@@ -11,23 +11,27 @@ import {ConfiguratorResponse} from "@/model/api/res/configurator/ConfiguratorRes
 import {getConfigurator} from "@/model/api/rest.js";
 import Navbar from "@/components/Navbar.vue";
 import PriceOffer from "@/components/PriceOffer.vue";
+import {useLoadingBar} from "@/composables/loading-bar-composables.js";
 
 const {appConfig} = useAppState()
+const {displayLoadingBar, hideLoadingBar} = useLoadingBar()
 const configuratorApiResponse: Ref<ConfiguratorResponse | null> = ref(null)
 const selectedDoor = ref<SelectedDoor | null>(null)
 const selectedRoom = ref<Room | null>(null)
 const roomBackgroundImg = ref<string | null>(null)
 
-const isMobile = window.innerWidth < window.innerHeight;
-
 async function handleDoorChange(door: SelectedDoor) {
   selectedDoor.value = door
-  roomBackgroundImg.value = await generateCanvas(appConfig.value?.baseUrl!, selectedRoom.value, selectedDoor.value, isMobile)
+  displayLoadingBar()
+  roomBackgroundImg.value = await generateCanvas(appConfig.value?.baseUrl!, selectedRoom.value, selectedDoor.value, window.innerWidth < window.innerHeight)
+  hideLoadingBar()
 }
 
 async function handleRoomChange(room: Room | null) {
   selectedRoom.value = room
-  roomBackgroundImg.value = await generateCanvas(appConfig.value?.baseUrl!, selectedRoom.value, selectedDoor.value, isMobile)
+  displayLoadingBar()
+  roomBackgroundImg.value = await generateCanvas(appConfig.value?.baseUrl!, selectedRoom.value, selectedDoor.value, window.innerWidth < window.innerHeight)
+  hideLoadingBar()
 }
 
 const handleResize = async () => {

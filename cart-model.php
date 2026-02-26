@@ -512,7 +512,7 @@ class Door
         $this->isDtdSelected = $isDtdSelected;
         $this->type = $t;
         $this->material = $m;
-        $this->width = $w;
+        $this->width = $w ?? "";
         $this->count = $cn;
         $this->info = $nfo;
         $this->price = $this->getRawPrice($t);

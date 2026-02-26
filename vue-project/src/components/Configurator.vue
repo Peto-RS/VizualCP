@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-import {computed, nextTick, onBeforeMount, onMounted, ref, Ref} from "vue";
+import {computed, nextTick, onBeforeMount, onMounted, ref, Ref, watch} from "vue";
 import {Room} from "@/model/api/res/configurator/Room.js";
-import {getConfigurator, postAddDoor} from "../model/api/rest.js";
+import {postAddDoor} from "../model/api/rest.js";
 import {useAppState} from "../composables/app-state.js";
 import {useI18n} from "vue-i18n";
 import DoorMiniature from "@/components/DoorMiniature.vue";
@@ -13,9 +13,10 @@ import {SelectedDoor} from "@/model/interface/configurator/SelectedDoor.js";
 import ImageWithLoadingPlaceholder from "@/components/ImageWithLoadingPlaceholder.vue";
 import 'photoswipe/style.css';
 import {useAlerts} from "@/composables/alert-composables.js";
-import {usePhotoSwipeGalleryWithWatcher} from "@/model/functions/photoswipe-utils.js";
+import {usePhotoSwipeGallery} from "@/model/functions/photoswipe-utils.js";
 import {formatPrice} from "@/model/functions/formatters.js";
 import BadgePrice from "@/components/BadgePrice.vue";
+import PhotoSwipeLightbox from "photoswipe/lightbox";
 
 const {addAlert} = useAlerts()
 const {appConfig} = useAppState()
@@ -31,17 +32,9 @@ const emit = defineEmits<{
 }>()
 
 const selectedDoorCategory: Ref<DoorCategory | null> = ref(null)
-const doorClasses = "col-2 col-lg-2 gx-1 gy-1";
-
-usePhotoSwipeGalleryWithWatcher(
-    '#glass-gallery',
-    () => props.configuratorApiResponse.glasses
-);
-
-usePhotoSwipeGalleryWithWatcher(
-    '#doors-gallery',
-    () => selectedDoorCategory.value
-);
+const doorsGallery = ref<HTMLElement | null>(null)
+const glassGallery = ref<HTMLElement | null>(null)
+const doorClasses = "col-3 col-lg-2 gx-1 gy-1";
 
 const doorTypesSelectionSection = ref<HTMLElement | null>(null);
 const selectedDoor: Ref<SelectedDoor | null> = ref(null)
@@ -147,6 +140,20 @@ onBeforeMount(async () => {
     handleHandleChange(Object.keys(props.configuratorApiResponse.handles)[0]);
   }
 })
+
+onMounted(() => {
+  watch(props.configuratorApiResponse.glasses, () => {
+    if (glassGallery.value) {
+      usePhotoSwipeGallery(glassGallery.value);
+    }
+  }, {immediate: true})
+
+  watch(selectedDoorCategory, () => {
+    if (doorsGallery.value) {
+      usePhotoSwipeGallery(doorsGallery.value);
+    }
+  }, {immediate: true})
+})
 </script>
 
 <template>
@@ -179,11 +186,12 @@ onBeforeMount(async () => {
                          :door-category="selectedDoorCategory.categoryId"
                          :door-state="doorTypeState(doorType)"
                          :door-type="doorType"
-                         @click="handleDoorTypeChange(doorType)"/>
-          <div class="door-category-word-break text-uppercase">{{ doorType }}</div>
+                         @click="handleDoorTypeChange(doorType)"
+                         class="mb-1"/>
           <BadgePrice
-              class="badge-full-width"
+              class="w-100"
               :price="value.price"/>
+          <div class="door-category-word-break text-uppercase">{{ doorType }}</div>
         </div>
       </div>
       <div>{{ t('configurator.doorFramePrice', {price: formatPrice(99)}) }}</div>
@@ -243,7 +251,7 @@ onBeforeMount(async () => {
              :class="`${doorClasses} text-center door-miniature`">
           <ImageWithLoadingPlaceholder
               :alt="key"
-              class="img-fluid w-100 ratio-1x1 border"
+              class="img-fluid w-100 ratio-1x1 border mb-1"
               :class="{
                 'border-primary': selectedDoor?.handle === key,
                 'border-5': selectedDoor?.handle === key
@@ -251,6 +259,9 @@ onBeforeMount(async () => {
               @click="handleHandleChange(key)"
               :src="appConfig?.baseUrl + '/images/handles/min/' + key + '.jpg'"
           />
+          <BadgePrice
+              class="w-100"
+              :price="value.price"/>
           <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
         </div>
       </div>
@@ -258,7 +269,7 @@ onBeforeMount(async () => {
 
     <div class="mb-2">
       <h4 class="text-uppercase">{{ t('configurator.glasses') }}</h4>
-      <div class="row" id="glass-gallery">
+      <div class="row" ref="glassGallery">
         <div v-for="(value, key) in configuratorApiResponse?.glasses"
              :key="key"
              :class="`${doorClasses} text-center door-miniature`">
@@ -281,7 +292,7 @@ onBeforeMount(async () => {
     <div class="mb-2"
          v-show="selectedDoorCategory?.gallery && selectedDoorCategory?.gallery?.length">
       <h4 class="text-uppercase">{{ t('configurator.gallery') }}</h4>
-      <div class="row" id="doors-gallery">
+      <div class="row" ref="doorsGallery">
         <div v-for="(value, key) in selectedDoorCategory?.gallery"
              :key="key"
              class="col-sm-6 gx-1 gy-1 text-center">
@@ -309,7 +320,55 @@ onBeforeMount(async () => {
         </div>
       </div>
     </div>
+
+    <div class="row mt-3">
+      <h4 class="text-uppercase">{{ t('configurator.currentActions') }}</h4>
+      <div class="col-12 col-lg-4">
+        <ImageWithLoadingPlaceholder
+            alt="interierove-dvere-cena.jpg"
+            class="img-fluid w-100 ratio-1x1"
+            :src="appConfig?.baseUrl + '/images/interierove-dvere-cena.jpg'"/>
+        <div class="p-3">
+          <div class="text-uppercase text-center mb-3">Interiérové <b>dvere so zárubňou</b> od <b>219,- €</b></div>
+          <div class="text-align-justify">Interiérové dvere a zárubne Vám vo všetkých druhoch laminátov ponúkame za
+            akciovú cenu 219€. Cena platí aj pre dvere, ktoré prídeme pred výrobou osobne zamerať.
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <ImageWithLoadingPlaceholder
+            alt="zameranie-zadarmo.jpg"
+            class="img-fluid w-100 ratio-1x1"
+            :src="appConfig?.baseUrl + '/images/zameranie-zadarmo.jpg'"
+        />
+        <div class="p-3">
+          <div class="text-uppercase text-center mb-3"><b>Zameranie</b> stavebných otvorov <b>zadarmo</b></div>
+          <div class="text-align-justify">Trápia Vás atypické miery otvorov? Pre nás nie sú žiadnym problémom. Každý
+            otvor
+            osobne zameriame a dvere vyrobíme tak, aby čo najpresnejšie zapasovali. Dvere na mieru sú u nás BEZ
+            PRÍPLATKU.
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <ImageWithLoadingPlaceholder
+            alt="montaz-dveri.jpg"
+            class="img-fluid w-100 ratio-1x1"
+            :src="appConfig?.baseUrl + '/images/montaz-dveri.jpg'"
+        />
+        <div class="p-3">
+          <div class="text-uppercase text-center mb-3"><b>Montáž</b> inte&shy;rié&shy;ro&shy;vých dverí a zárubne <b>35,-
+            €</b>
+          </div>
+          <div class="text-align-justify">Montáž kompletu interiérové dvere so zárubňou Vám ponúkame za zvýhodnenú cenu
+            od
+            35€/ks. Táto akciová cena platí pri montáži šiestich a viac kusov dverí a zárubní.
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
 
   <button @click="handleAddDoorButtonClick"
           class="btn btn-primary btn-lg text-white btn-add-to-price-offer"
@@ -318,7 +377,7 @@ onBeforeMount(async () => {
   </button>
 </template>
 
-<style>
+<style lang="scss">
 .btn-add-to-price-offer {
   position: absolute;
   bottom: 25px;
@@ -326,7 +385,6 @@ onBeforeMount(async () => {
 }
 
 .door-miniature:hover {
-  filter: brightness(1.08);
   transform: scale(1.02);
   cursor: pointer;
 }
@@ -338,8 +396,11 @@ onBeforeMount(async () => {
 }
 
 .door-selector-img:hover {
-  filter: brightness(1.08);
   transform: scale(1.02);
   cursor: pointer;
+}
+
+.text-align-justify {
+  text-align: justify;
 }
 </style>

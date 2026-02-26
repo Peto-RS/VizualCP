@@ -6,7 +6,7 @@ const el = ref<HTMLElement | null>(null)
 const windowWidth = ref(window.innerWidth);
 
 const canvasPlacement = computed(() => {
-  return windowWidth.value >= 992 ? "offcanvas-end" : "offcanvas-bottom";
+  return windowWidth.value >= 576 ? "offcanvas-end" : "offcanvas-bottom";
 });
 
 const handleResize = async () => {
@@ -34,12 +34,12 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="offcanvas offcanvas-end"
-       data-bs-scroll="true"
+       data-bs-scroll="false"
        data-bs-backdrop="false"
        tabindex="-1"
        ref="el"
        aria-labelledby="offcanvasConfiguratorLabel">
-    <div class="offcanvas-header">
+    <div class="offcanvas-header pt-1 pb-1">
       <button
           type="button"
           class="btn-close"
@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 * {
-  --bs-navbar-height: 60px;
+  --bs-navbar-height: 57px;
 }
 
 .offcanvas-bottom {

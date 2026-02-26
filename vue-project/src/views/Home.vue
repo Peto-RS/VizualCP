@@ -5,6 +5,8 @@ import {useAppState} from "../composables/app-state.js";
 import {getAppConfig} from "../model/api/rest.js";
 import AppOffCanvas from "@/components/AppOffCanvas.vue";
 import Toasts from "@/components/Toasts.vue";
+import LoadingBar from "@/components/LoadingBar.vue";
+import AppModal from "@/components/AppModal.vue";
 
 const {appConfig} = useAppState()
 
@@ -17,9 +19,9 @@ const {appConfig} = useAppState()
 //material selector - OK
 //wien special materials - OK
 //typy skiel - OK
-//have only one modal per all videos
+//have only one modal per all videos - OK
 //nove features - OK
-//cena kluciek chyba
+//cena kluciek chyba - OK
 //popis a cena dveri - OK
 //footer style
 
@@ -29,9 +31,11 @@ onBeforeMount(async () => {
 </script>
 
 <template>
+  <LoadingBar/>
   <router-view/>
   <Toasts/>
   <AppOffCanvas/>
+  <AppModal/>
 </template>
 
 <style lang="scss">

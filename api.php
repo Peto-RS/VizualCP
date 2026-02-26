@@ -48,11 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $path = str_replace('/api.php', '', $path);
 
-    if ($path === '/add-door') {
+    if (preg_match('#/add-door$#', $path)) {
         $parsedObject = new ConfiguratorAddDoorRequest($requestBody);
-        $priceOffer = PriceOffer::fromSession($_SESSION['priceOffer']);
+        $priceOffer = $_SESSION['priceOffer'] ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer();
         $priceOffer->addDoorFromConfigurator($parsedObject);
         $_SESSION['priceOffer'] = $priceOffer;
 

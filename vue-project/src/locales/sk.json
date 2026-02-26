@@ -2,6 +2,7 @@
   "configurator": {
     "buttonAddToPriceOffer": "Pridať do cenovej ponuky",
     "category": "Kategória",
+    "currentActions": "Aktuálne akcie",
     "doorFramePrice": "Zárubňa: {price}. Ceny sú bez DPH.",
     "priceFrom": "Cena dverí od",
     "illustrationOnlyImage": "Obrázok dverí je len ilustračný!",

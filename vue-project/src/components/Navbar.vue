@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {computed, Ref, ref} from 'vue'
 import {useI18n} from 'vue-i18n'
-import LoadingBar from "../components/LoadingBar.vue";
 import {useAppState} from "../composables/app-state.js";
 
 const {appConfig} = useAppState()
@@ -21,7 +20,7 @@ const navbarImgSrc = computed(
 </script>
 
 <template>
-  <nav class="navbar border d-none d-lg-flex bg-white">
+  <nav class="navbar border d-none d-sm-flex bg-white">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
         <img v-if="navbarImgSrc"
@@ -50,7 +49,19 @@ const navbarImgSrc = computed(
     </div>
   </nav>
 
-  <nav class="navbar fixed-bottom border d-lg-none bg-white">
+  <!--  Mobile-->
+  <nav class="navbar border d-sm-none bg-white">
+    <div class="container-fluid justify-content-center">
+      <router-link class="navbar-brand" to="/">
+        <img v-if="navbarImgSrc"
+             :src="navbarImgSrc"
+             alt="Logo"
+             class="navbar-logo"/>
+      </router-link>
+    </div>
+  </nav>
+
+  <nav class="navbar fixed-bottom border d-sm-none bg-white">
     <div class="container-fluid">
       <ul class="nav nav-underline w-100 nav-justified">
         <li class="nav-item">
@@ -69,16 +80,8 @@ const navbarImgSrc = computed(
           </a>
         </li>
       </ul>
-
-      <router-link class="navbar-brand" to="/">
-        <img v-if="navbarImgSrc"
-             :src="navbarImgSrc"
-             alt="Logo"
-             class="navbar-logo justify-content-center"/>
-      </router-link>
     </div>
   </nav>
-  <LoadingBar/>
 </template>
 
 <style lang="scss">

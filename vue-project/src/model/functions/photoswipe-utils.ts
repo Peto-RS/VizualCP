@@ -1,12 +1,11 @@
-import {nextTick, onBeforeUnmount, Ref, ref, watch} from "vue";
+import {onBeforeUnmount, ref} from "vue";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 
-export async function usePhotoSwipeGallery(
+export function usePhotoSwipeGallery(
     galleryElement: HTMLElement
 ) {
     const lightbox = ref<PhotoSwipeLightbox | null>(null)
     lightbox.value?.destroy()
-    await nextTick()
 
     lightbox.value = new PhotoSwipeLightbox({
         gallery: galleryElement,

@@ -79,5 +79,6 @@
     "FORM_SAVE_ERROR": "Nastala chyba pri ukladaní formuláru. Pri pretrvávajúcich problémov kontaktujte administrátora.",
     "FORM_VALIDATIONS_ERROR": "Vo formulári sa nachádzajú chybné polia.",
     "MAIL_SENDING_ERROR": "Nastala chyba pri posielaní emailu."
-  }
+  },
+  "returnToHomepage": "Vrátiť sa na domovskú stránku"
 }

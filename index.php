@@ -37,6 +37,7 @@ if ($_SERVER['HTTPS'] != "on"){
 </head>
 
 <body>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69678858-3"></script>
 <script>
     window.dataLayer = window.dataLayer || [];

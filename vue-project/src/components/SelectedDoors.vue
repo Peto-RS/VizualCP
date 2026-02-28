@@ -26,13 +26,15 @@ const handleDoorRemove = (key: string) => {
   <div class="row mb-1">
     <div class="col-3 col-lg-4 col-xl-2 g-1" v-for="(_, key) in selectedDoors" :key="key">
       <div class="row gy-1" v-if="selectedDoorsResponse && selectedDoors[key]">
-        <div class="col-12">
+        <div class="d-flex flex-column w-100 h-100 gap-1">
           <DoorImage :base-url="baseUrl"
                      :door-category="selectedDoorsResponse[key].category"
                      :door-handle="null"
                      :door-material="selectedDoorsResponse[key].material"
                      :door-type="selectedDoorsResponse[key].type"/>
-          <div class="text-center">{{ selectedDoorsResponse[key].type?.toUpperCase() }}</div>
+          <div class="text-center" style="word-break: break-all;min-height: 3rem">
+            {{ selectedDoorsResponse[key].type?.toUpperCase() }}
+          </div>
         </div>
         <div class="col-12">
           <select class="form-select" v-model="selectedDoors[key].doorWidth">
@@ -52,7 +54,7 @@ const handleDoorRemove = (key: string) => {
         </div>
         <div class="col-12">
           <BadgePrice
-              class="badge-full-width"
+              class="selected-doors-badge w-100"
               :price="selectedDoorsResponse[key]?.calculatedPrice"/>
         </div>
         <div class="col-12">
@@ -70,8 +72,7 @@ const handleDoorRemove = (key: string) => {
 </template>
 
 <style lang="scss">
-.badge-full-width {
+.selected-doors-badge {
   height: $input-height;
-  width: 100%;
 }
 </style>

@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             sendMailWithExcelAttachment($spreadsheet, $priceOffer);
             sendJsonResponse(array(), 200);
         } catch (Throwable $e) {
+            error_log($e);
             sendJsonResponse(["error" => "ERROR_SENDING_MAIL"], 500);
         }
     } else {

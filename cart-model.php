@@ -4,6 +4,7 @@ include_once('constants.php');
 include_once('functions.php');
 include_once('php/api/response-objects/api-configurator-response-objects.php');
 include_once('php/api/request-objects/api-price-offer-request-objects.php');
+include_once('php/api/response-objects/api-price-offer-response-objects.php');
 include_once('json-data-manipulation.php');
 
 const FEE_FRAME = 99;

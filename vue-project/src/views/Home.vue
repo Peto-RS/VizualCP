@@ -3,9 +3,9 @@
 import {onBeforeMount} from "vue";
 import {useAppState} from "../composables/app-state.js";
 import {getAppConfig} from "../model/api/rest.js";
-import AppOffCanvas from "@/components/AppOffCanvas.vue";
-import Toasts from "@/components/Toasts.vue";
-import AppModal from "@/components/AppModal.vue";
+import AppOffCanvas from "@/components/generic/AppOffCanvas.vue";
+import Toasts from "@/components/generic/Toasts.vue";
+import AppModal from "@/components/generic/AppModal.vue";
 
 const {appConfig} = useAppState()
 

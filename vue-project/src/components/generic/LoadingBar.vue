@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useLoadingBar} from "../composables/loading-bar-composables.js";
+import {useLoadingBar} from "@/composables/loading-bar-composables.js";
 
 const {isVisible} = useLoadingBar()
 </script>

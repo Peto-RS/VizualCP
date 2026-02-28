@@ -13,11 +13,11 @@ const props = defineProps<{
 }>()
 
 // const popoverBtn = ref<HTMLElement | null>(null)
-const modalEl = ref<HTMLElement | null>(null)
-const videoEl = ref<HTMLVideoElement | null>(null)
+// const modalEl = ref<HTMLElement | null>(null)
+// const videoEl = ref<HTMLVideoElement | null>(null)
 const galleryContainer = ref<HTMLElement | null>(null)
 
-const showIframe = ref<Boolean>(false)
+// const showIframe = ref<Boolean>(false)
 
 const {appConfig} = useAppState()
 

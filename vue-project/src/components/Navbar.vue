@@ -2,7 +2,7 @@
 import {computed, Ref, ref} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {useAppState} from "../composables/app-state.js";
-import LoadingBar from "@/components/LoadingBar.vue";
+import LoadingBar from "@/components/generic/LoadingBar.vue";
 
 const {appConfig} = useAppState()
 const {t} = useI18n()

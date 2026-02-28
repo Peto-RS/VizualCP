@@ -10,7 +10,7 @@ import {ConfiguratorResponse, Material} from "@/model/api/res/configurator/Confi
 import {DoorCategory} from "@/model/api/res/configurator/DoorCategory.js";
 import {DoorState} from "@/model/interface/configurator/DoorState.js";
 import {SelectedDoor} from "@/model/interface/configurator/SelectedDoor.js";
-import ImageWithLoadingPlaceholder from "@/components/ImageWithLoadingPlaceholder.vue";
+import ImageWithLoadingPlaceholder from "@/components/generic/ImageWithLoadingPlaceholder.vue";
 import 'photoswipe/style.css';
 import {useAlerts} from "@/composables/alert-composables.js";
 import {usePhotoSwipeGallery} from "@/model/functions/photoswipe-utils.js";

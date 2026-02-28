@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import {HintInterface} from "@/model/interface/HintInterface.js";
 
 const props = defineProps<{

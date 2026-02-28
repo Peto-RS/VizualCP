@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onBeforeUnmount} from "vue"
-import {useAlerts} from "../composables/alert-composables.js"
+import {useAlerts} from "@/composables/alert-composables.js"
 
 const {alerts, removeAlert} = useAlerts()
 

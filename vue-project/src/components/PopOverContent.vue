@@ -12,6 +12,3 @@ const props = defineProps<{
     <div v-if="props.hint">{{ props.hint }}</div>
   </div>
 </template>
-
-<style scoped>
-</style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref, onMounted, computed, onBeforeUnmount} from 'vue'
-import {offcanvas} from '@/composables/offcanvas'
+import {offcanvas} from '@/composables/offcanvas.js'
 
 const el = ref<HTMLElement | null>(null)
 const windowWidth = ref(window.innerWidth);

@@ -20,7 +20,7 @@ import Hint from "./Hint.vue";
 import LineItems from "./LineItems.vue";
 import {useAlerts} from "../composables/alert-composables.js";
 import {useI18n} from "vue-i18n";
-import Toasts from "./Toasts.vue";
+import Toasts from "./generic/Toasts.vue";
 import {useRouter} from "vue-router";
 import {HintInterface} from "../model/interface/HintInterface.js";
 import SelectedDoorsLineItems from "./SelectedDoorsLineItems.vue";
@@ -175,15 +175,12 @@ function handleHandleCountChange(e: Event) {
                        :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.doors">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <div class="row mb-1" v-if="apiResponse?.priceOffer?.doors">
-                <SelectedDoors v-model:selected-doors="reactiveForm.doors"
-                               :base-url="appConfig?.baseUrl"
-                               :selected-doors-response="apiResponse?.priceOffer?.doors"/>
-              </div>
-              <div class="row">
-                <SelectedDoorsLineItems v-model:line-items="reactiveForm.selectedDoorsLineItems"
-                                        :selected-doors-line-items-response="apiResponse?.priceOffer?.selectedDoorsLineItems"/>
-              </div>
+              <SelectedDoors v-if="apiResponse?.priceOffer?.doors"
+                             v-model:selected-doors="reactiveForm.doors"
+                             :base-url="appConfig?.baseUrl"
+                             :selected-doors-response="apiResponse?.priceOffer?.doors"/>
+              <SelectedDoorsLineItems v-model:line-items="reactiveForm.selectedDoorsLineItems"
+                                      :selected-doors-line-items-response="apiResponse?.priceOffer?.selectedDoorsLineItems"/>
               <div class="row"
                    v-if="!Object.keys(reactiveForm.doors).length && !reactiveForm.selectedDoorsLineItems.length">
                 <div class="col-sm-12">{{ t('doors.notSelected') }}</div>
@@ -235,7 +232,7 @@ function handleHandleCountChange(e: Event) {
                 </div>
                 <div class="col-sm-4 col-xl-2">
                   <BadgePrice
-                      class="badge-full-width"
+                      class="price-offer-badge w-100"
                       :price="apiResponse?.priceOffer?.handle?.calculatedPrice ?? 0.0"/>
                 </div>
               </div>
@@ -263,7 +260,7 @@ function handleHandleCountChange(e: Event) {
                   </div>
                   <div class="col-sm-4 col-xl-2">
                     <BadgePrice
-                        class="badge-full-width"
+                        class="price-offer-badge w-100"
                         :price="findRosetteById(r.id, apiResponse)?.calculatedPrice"/>
                   </div>
                 </div>
@@ -290,7 +287,7 @@ function handleHandleCountChange(e: Event) {
                 </div>
                 <div class="col-sm-4 col-xl-2">
                   <BadgePrice
-                      class="badge-full-width"
+                      class="price-offer-badge w-100"
                       :price="apiResponse?.priceOffer.assemblyPriceHandlesRosettesCalculatedPrice"/>
                 </div>
               </div>
@@ -315,7 +312,7 @@ function handleHandleCountChange(e: Event) {
                 </div>
                 <div class="col-sm-4 col-xl-2">
                   <BadgePrice
-                      class="badge-full-width"
+                      class="price-offer-badge w-100"
                       :price="apiResponse?.priceOffer.deliveryPrice"/>
                 </div>
               </div>
@@ -392,7 +389,7 @@ function handleHandleCountChange(e: Event) {
                 </div>
                 <div class="col-sm-4 col-xl-2">
                   <BadgePrice
-                      class="badge-full-width"
+                      class="price-offer-badge w-100"
                       :price="apiResponse?.priceOffer.assemblyDoorsCalculatedPrice"/>
                 </div>
               </div>
@@ -442,7 +439,7 @@ function handleHandleCountChange(e: Event) {
                 </div>
                 <div class="col-sm-4 col-xl-2">
                   <BadgePrice
-                      class="badge-full-width"
+                      class="price-offer-badge w-100"
                       :price="findSpecialAccessoryById(it.id, apiResponse)?.calculatedPrice"/>
                 </div>
               </div>
@@ -482,7 +479,7 @@ function handleHandleCountChange(e: Event) {
                 </div>
                 <div class="col-sm-4 col-xl-2">
                   <BadgePrice
-                      class="badge-full-width"
+                      class="price-offer-badge w-100"
                       :price="findPossibleAdditionalChargeById(it.id, apiResponse)?.calculatedPrice"/>
                 </div>
               </div>
@@ -525,7 +522,7 @@ function handleHandleCountChange(e: Event) {
                 </div>
                 <div class="col-sm-4 col-xl-2">
                   <BadgePrice
-                      class="badge-full-width"
+                      class="price-offer-badge w-100"
                       :price="findSpecialSurchargeById(it.id, apiResponse)?.calculatedPrice"/>
                 </div>
               </div>
@@ -614,7 +611,7 @@ function handleHandleCountChange(e: Event) {
           </div>
           <div class="col-sm-4 col-xl-2">
             <BadgePrice
-                class="badge-full-width"
+                class="price-offer-badge w-100"
                 :price="apiResponse.priceOffer.calculatedPrice"/>
           </div>
         </div>
@@ -624,7 +621,7 @@ function handleHandleCountChange(e: Event) {
           </div>
           <div class="col-sm-4 col-xl-2">
             <BadgePrice
-                class="badge-full-width"
+                class="price-offer-badge w-100"
                 :price="apiResponse.priceOffer.calculatedPriceVat"/>
           </div>
         </div>
@@ -644,20 +641,13 @@ function handleHandleCountChange(e: Event) {
 </template>
 
 <style lang="scss">
-.badge-full-width {
+.price-offer-badge {
   height: $input-height;
-  width: 100%;
   min-width: 105px;
 }
 
 .color-dark-red {
   color: darkred;
-}
-
-.container-door-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
 }
 
 .text-transform-none {
@@ -677,15 +667,17 @@ function handleHandleCountChange(e: Event) {
 }
 
 .price-sticky {
-  z-index: 10;
+  background-color: white;
   padding-top: 0.5rem;
   position: static;
+  z-index: 10;
 }
 
 @media (min-width: 1200px) {
   .price-sticky {
-    position: sticky;
+    background-color: white;
     bottom: 0;
+    position: sticky;
   }
 }
 </style>

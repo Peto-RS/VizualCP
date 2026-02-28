@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {computed} from "vue";
-import ImageWithLoadingPlaceholder from "@/components/ImageWithLoadingPlaceholder.vue";
+import ImageWithLoadingPlaceholder from "@/components/generic/ImageWithLoadingPlaceholder.vue";
 import {DoorState} from "@/model/interface/configurator/DoorState.js";
 
 const props = defineProps<{

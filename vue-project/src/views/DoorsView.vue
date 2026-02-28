@@ -70,17 +70,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Navbar
-      @handle-configurator-click="offcanvas.open(Configurator, {configuratorApiResponse, onDoorSelected: handleDoorChange, onRoomSelected: handleRoomChange})"
-      @handle-price-offer-click="offcanvas.open(PriceOffer)"></Navbar>
   <div
       class="configurator-canvas"
       :style="roomBackgroundImg ? `background-image: url('${roomBackgroundImg}')` : null">
-    <!--    <div>-->
-    <!--      <div class="w-50">-->
-    <!--        {{ t('configurator.illustrationOnlyImage') }}-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <Navbar
+        @handle-configurator-click="offcanvas.open(Configurator, {configuratorApiResponse, onDoorSelected: handleDoorChange, onRoomSelected: handleRoomChange})"
+        @handle-price-offer-click="offcanvas.open(PriceOffer, {}, true)"/>
   </div>
 </template>
 

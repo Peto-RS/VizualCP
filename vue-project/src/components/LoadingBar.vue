@@ -5,7 +5,7 @@ const {isVisible} = useLoadingBar()
 </script>
 
 <template>
-  <p v-if="isVisible" class="placeholder-glow bg-primary mb-0">
+  <p v-if="isVisible" class="placeholder-glow mb-0 p-0">
     <span class="placeholder placeholder-xs col-12"></span>
   </p>
 </template>

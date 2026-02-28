@@ -16,7 +16,7 @@ import {useAlerts} from "@/composables/alert-composables.js";
 import {usePhotoSwipeGallery} from "@/model/functions/photoswipe-utils.js";
 import {formatPrice} from "@/model/functions/formatters.js";
 import BadgePrice from "@/components/BadgePrice.vue";
-import PhotoSwipeLightbox from "photoswipe/lightbox";
+import Footer from "@/components/Footer.vue";
 
 const {addAlert} = useAlerts()
 const {appConfig} = useAppState()
@@ -31,13 +31,13 @@ const emit = defineEmits<{
   (e: 'room-selected', room: Room): void
 }>()
 
-const selectedDoorCategory: Ref<DoorCategory | null> = ref(null)
+const doorTypesSelectionSection = ref<HTMLElement | null>(null);
 const doorsGallery = ref<HTMLElement | null>(null)
 const glassGallery = ref<HTMLElement | null>(null)
-const doorClasses = "col-3 col-lg-2 gx-1 gy-1";
-
-const doorTypesSelectionSection = ref<HTMLElement | null>(null);
 const selectedDoor: Ref<SelectedDoor | null> = ref(null)
+const selectedDoorCategory: Ref<DoorCategory | null> = ref(null)
+
+const doorClasses = "col-3 col-lg-2 gx-1 gy-1";
 
 const availableMaterialsForDoorCategories = computed(() => {
   return (materials: Record<string, Material>): Record<string, Material> => {
@@ -368,8 +368,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-
-
+  <Footer/>
   <button @click="handleAddDoorButtonClick"
           class="btn btn-primary btn-lg text-white btn-add-to-price-offer"
           type="button">

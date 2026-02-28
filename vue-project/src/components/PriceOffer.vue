@@ -26,6 +26,7 @@ import {HintInterface} from "../model/interface/HintInterface.js";
 import SelectedDoorsLineItems from "./SelectedDoorsLineItems.vue";
 import SelectedDoors from "./SelectedDoors.vue";
 import {useAppState} from "../composables/app-state.js";
+import Footer from "@/components/Footer.vue";
 
 const router = useRouter()
 const {t} = useI18n();
@@ -33,11 +34,12 @@ const {addAlert} = useAlerts()
 const {appConfig} = useAppState()
 
 const apiResponse: Ref<ApiResponse | undefined> = ref()
-let formWatchHandle: WatchHandle | undefined = undefined
 const cachedForm: Ref<string> = ref('')
-const reactiveForm: Ref<FormPriceOffer> = ref<FormPriceOffer>(constructReactiveFormPriceOffer(undefined))
 const formValidations: Ref<Record<string, ValidationMessage[]>> = ref({})
+const reactiveForm: Ref<FormPriceOffer> = ref<FormPriceOffer>(constructReactiveFormPriceOffer(undefined))
 const reCaptchaToken: Ref<string | undefined> = ref()
+
+let formWatchHandle: WatchHandle | undefined = undefined
 
 const submitButtonDisabled = computed(() => {
   const isReCaptchaEnabled = appConfig.value?.reCaptchaEnabled ?? false;
@@ -49,6 +51,15 @@ const submitButtonDisabled = computed(() => {
 
 function getFieldValidations(id: string): ValidationMessage[] {
   return formValidations.value[id] ?? []
+}
+
+const fetchDataFromApi = async (): Promise<ApiResponse> => {
+  const response = await getForm();
+  const json = await response.json()
+  if (response.ok)
+    return json as ApiResponse;
+  else
+    throw new Error(json);
 }
 
 async function handleFormSaveAndReRender(form: FormPriceOffer): Promise<void> {
@@ -67,15 +78,6 @@ async function handleFormSaveAndReRender(form: FormPriceOffer): Promise<void> {
   } else {
     return Promise.resolve()
   }
-}
-
-const fetchDataFromApi = async (): Promise<ApiResponse> => {
-  const response = await getForm();
-  const json = await response.json()
-  if (response.ok)
-    return json as ApiResponse;
-  else
-    throw new Error(json);
 }
 
 async function fetchDataAndReRenderForm(): Promise<void> {
@@ -638,15 +640,7 @@ function handleHandleCountChange(e: Event) {
       </div>
     </form>
   </div>
-  <div class="mt-auto footer h-auto">
-    <div>Created by</div>
-    <div>Ing. Peter Sučanský</div>
-    <div>peter@sucansky.sk</div>
-    <div>+421 904 901 799</div>
-    <div>Ing. Peter Hutáš</div>
-    <div>Ing. Dominik Janíček</div>
-    <div>Copyright © {{ new Date().getFullYear() }}. All rights reserved</div>
-  </div>
+  <Footer/>
 </template>
 
 <style lang="scss">
@@ -683,10 +677,15 @@ function handleHandleCountChange(e: Event) {
 }
 
 .price-sticky {
-  position: sticky;
-  bottom: 0;
   z-index: 10;
-  background: white;
   padding-top: 0.5rem;
+  position: static;
+}
+
+@media (min-width: 1200px) {
+  .price-sticky {
+    position: sticky;
+    bottom: 0;
+  }
 }
 </style>

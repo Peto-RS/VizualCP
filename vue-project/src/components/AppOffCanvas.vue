@@ -39,7 +39,7 @@ onBeforeUnmount(() => {
        tabindex="-1"
        ref="el"
        aria-labelledby="offcanvasConfiguratorLabel">
-    <div class="offcanvas-header pt-1 pb-1">
+    <div class="offcanvas-header pt-2 pb-2">
       <button
           type="button"
           class="btn-close"
@@ -47,11 +47,13 @@ onBeforeUnmount(() => {
       />
     </div>
     <div class="offcanvas-body">
-      <component
-          v-if="offcanvas.component.value"
-          :is="offcanvas.component.value"
-          v-bind="offcanvas.props.value"
-      />
+      <keep-alive>
+        <component
+            :is="offcanvas.component.value"
+            :key="offcanvas.component.value ? offcanvas.keys.get(offcanvas.component.value) : 0"
+            v-bind="offcanvas.props.value"
+        />
+      </keep-alive>
     </div>
   </div>
 </template>

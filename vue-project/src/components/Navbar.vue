@@ -2,6 +2,7 @@
 import {computed, Ref, ref} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {useAppState} from "../composables/app-state.js";
+import LoadingBar from "@/components/LoadingBar.vue";
 
 const {appConfig} = useAppState()
 const {t} = useI18n()
@@ -47,6 +48,9 @@ const navbarImgSrc = computed(
         </li>
       </ul>
     </div>
+    <div class="loading-bar-wrapper">
+      <LoadingBar />
+    </div>
   </nav>
 
   <!--  Mobile-->
@@ -58,6 +62,9 @@ const navbarImgSrc = computed(
              alt="Logo"
              class="navbar-logo"/>
       </router-link>
+    </div>
+    <div class="loading-bar-wrapper">
+      <LoadingBar />
     </div>
   </nav>
 
@@ -82,9 +89,18 @@ const navbarImgSrc = computed(
       </ul>
     </div>
   </nav>
+
 </template>
 
 <style lang="scss">
+.loading-bar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050;
+}
+
 .navbar-logo {
   width: 300px;
 }

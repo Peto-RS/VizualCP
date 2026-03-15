@@ -1,5 +1,5 @@
 export interface HandleReq {
     count: number
-    name: string
-    price: number
+    id: string
+    isCountDirty: boolean | null
 }

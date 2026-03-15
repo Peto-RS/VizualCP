@@ -1,6 +1,9 @@
+import {DoorCategory} from "@/model/api/res/configurator/DoorCategory.js";
+
 export interface SelectedDoor {
-    category: string
-    handle: string | null
+    categoryId: string
+    doorCategory: DoorCategory
+    handleId: string | null
     material: string
     type: string
 }

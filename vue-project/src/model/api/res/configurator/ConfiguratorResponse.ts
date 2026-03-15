@@ -1,9 +1,17 @@
 import {Room} from "@/model/api/res/configurator/Room.js";
 import {DoorCategory} from "@/model/api/res/configurator/DoorCategory.js";
 
+export interface Handle {
+    availableForDoorCategory?: string[]
+    hiddenForDoorCategory?: string[]
+    imgSrc: string
+    label: string
+    price: number
+}
+
 export interface Material {
-    availableFor?: string[]
-    hiddenFor?: string[]
+    availableForDoorCategory?: string[]
+    hiddenForDoorCategory?: string[]
     label: string
 }
 
@@ -12,10 +20,7 @@ export interface ConfiguratorResponse {
     glasses: Record<string, {
         label: string
     }>
-    handles: Record<string, {
-        label: string
-        price: number
-    }>
+    handles: Record<string, Handle>
     materials: {
         laminates: Record<string, Material>,
         veneers: Record<string, Material>

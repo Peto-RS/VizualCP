@@ -50,7 +50,7 @@ class ContactRequest
     }
 }
 
-class HandleRequest
+class CustomHandleRequest
 {
     /** @var int|null $count */
     public $count;
@@ -66,6 +66,25 @@ class HandleRequest
         $this->count = $json['count'] ?? null;
         $this->name = $json['name'] ?? null;
         $this->price = $json['price'] ?? null;
+    }
+}
+
+class HandleRequest
+{
+    /** @var int|null $count */
+    public $count;
+
+    /** @var string|null $id */
+    public $id;
+
+    /** @var bool|null $isCountDirty */
+    public $isCountDirty;
+
+    public function __construct(array $json)
+    {
+        $this->count = $json['count'] ?? null;
+        $this->id = $json['id'] ?? null;
+        $this->isCountDirty = $json['isCountDirty'] ?? null;
     }
 }
 
@@ -238,6 +257,9 @@ class PriceOfferRequest
     /** @var DoorRequest[]|null $doors */
     public $doors;
 
+    /** @var CustomHandleRequest|null $customHandle */
+    public $customHandle;
+
     /** @var HandleRequest|null $handle */
     public $handle;
 
@@ -283,6 +305,7 @@ class PriceOfferRequest
         $this->doors = is_array($json['doors']) ? array_map(function ($doorData) {
             return new DoorRequest($doorData);
         }, $json['doors']) : null;
+        $this->customHandle = $json['customHandle'] ? new CustomHandleRequest($json['customHandle']) : null;
         $this->handle = $json['handle'] ? new HandleRequest($json['handle']) : null;
         $this->isAssemblyDoorsCountDirty = $json['isAssemblyDoorsCountDirty'] ?? null;
         $this->note = $json['note'] ?? null;

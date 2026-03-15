@@ -2,7 +2,7 @@
   "laminates": {
     "lamino-biela": {
       "label": "Biela",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -10,7 +10,7 @@
     },
     "wien-biela": {
       "label": "Striekaná biela",
-      "availableFor": [
+      "availableForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -18,7 +18,7 @@
     },
     "lamino-seda": {
       "label": "Seda",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -26,7 +26,7 @@
     },
     "lamino-pinia-korzika": {
       "label": "Pinia korzika",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -34,7 +34,7 @@
     },
     "lamino-buk": {
       "label": "Buk",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -42,7 +42,7 @@
     },
     "lamino-chamonix": {
       "label": "Chamonix",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -50,7 +50,7 @@
     },
     "JASEN-PIESOCNY": {
       "label": "Jaseň piesočný",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -58,7 +58,7 @@
     },
     "KREM": {
       "label": "Krém",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -66,7 +66,7 @@
     },
     "lamino-javor": {
       "label": "Javor",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -74,7 +74,7 @@
     },
     "lamino-javor-kralovsky": {
       "label": "Javor kráľovský",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -82,7 +82,7 @@
     },
     "lamino-jelsa": {
       "label": "Jelsa",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -90,7 +90,7 @@
     },
     "DUB-HALIFAX": {
       "label": "Dub halifax",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -98,7 +98,7 @@
     },
     "DUB-HALIFAX-TABAKOVY": {
       "label": "Dub halifax tabakový",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -106,7 +106,7 @@
     },
     "DUB-BARDOLINO": {
       "label": "Dub bardolino",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -114,7 +114,7 @@
     },
     "DUB-HAMILTON": {
       "label": "Dub hamilton",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -122,7 +122,7 @@
     },
     "DUB-KRONGERG": {
       "label": "Dub krongerg",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -130,7 +130,7 @@
     },
     "DUB-WOTAN": {
       "label": "Dub wotan",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -138,7 +138,7 @@
     },
     "canyon-dark": {
       "label": "Canyon tmavý",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -146,7 +146,7 @@
     },
     "canyon-light": {
       "label": "Canyon bledý",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -154,7 +154,7 @@
     },
     "gardena": {
       "label": "Gardena",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -162,7 +162,7 @@
     },
     "ORECH": {
       "label": "Orech",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -170,7 +170,7 @@
     },
     "ANTRACIT": {
       "label": "Antracit",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -180,7 +180,7 @@
   "veneers": {
     "buk": {
       "label": "Buk",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -188,7 +188,7 @@
     },
     "dub": {
       "label": "Dub",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -196,7 +196,7 @@
     },
     "javor": {
       "label": "Javor",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -204,7 +204,7 @@
     },
     "macore": {
       "label": "Macore",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -212,7 +212,7 @@
     },
     "mahagon": {
       "label": "Mahagon",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"
@@ -220,7 +220,7 @@
     },
     "smrek": {
       "label": "Smrek",
-      "hiddenFor": [
+      "hiddenForDoorCategory": [
         "Wien_1",
         "Wien_2",
         "Wien_3"

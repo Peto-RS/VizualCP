@@ -45,7 +45,7 @@ onMounted(() => {
        v-bind="attrs">
 </template>
 
-<style scoped>
+<style>
 img {
   transition: opacity 0.3s ease;
 }

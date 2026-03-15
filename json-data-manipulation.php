@@ -134,6 +134,12 @@ class HandlesJsonDataManipulation
     {
         return getArrayFromJsonFile("./assets/json/handles.json");
     }
+
+    public static function findByIdOrFalse(?string $id)
+    {
+        $obj = HandlesJsonDataManipulation::getAll();
+        return $obj[$id] ?? false;
+    }
 }
 
 class MaterialsJsonDataManipulation

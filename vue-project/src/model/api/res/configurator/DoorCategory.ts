@@ -1,5 +1,12 @@
 export interface DoorCategory {
     categoryId: string
+    constructionPossibilities: Array<{
+        description: string
+        items: Array<{
+            imgSrc: string
+            label: string
+        }>
+    }>
     description: string
     doorConfiguratorDefault: {
         handle: string | null
@@ -7,7 +14,8 @@ export interface DoorCategory {
         type: string
     }
     doorTypes: Record<string, { price: number }>
+    excludedDoorPartsFromCanvas: string[]
     gallery: Array<{ imgSrc: string }>
-    hiddenConfiguratorCategories: string[]
+    hiddenConfiguratorSections: string[]
     name: string
 }

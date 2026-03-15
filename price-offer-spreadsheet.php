@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 function generateSpreadSheet(PriceOfferResponse $priceOffer): string
 {
-    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_26012026.xlsx');
+    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_30012026.xlsx');
     addBusinessDataIntoSpreadsheet($spreadsheet, $priceOffer);
     return writeSpreadSheetToOutput($spreadsheet);
 }
@@ -95,19 +95,36 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
 
     /*** Handles and rosettes ***/
     $rowIdx = max($rowIdx + 2, 18);
-    $handle = $priceOffer->handle;
-    if ($handle) {
-        if ($handle->name) {
-            $sheet->setCellValue("A$rowIdx", $handle->name);
+
+    //handle from configurator
+    $handleId = $priceOffer->handle && $priceOffer->handle->id;
+    if ($handleId) {
+        $sheet->setCellValue("A$rowIdx", $priceOffer->handle->name);
+        $sheet->setCellValue("F$rowIdx", $priceOffer->handle->price);
+        $sheet->setCellValue("G$rowIdx", $priceOffer->handle->count);
+        $sheet->setCellValue("H$rowIdx", "=F$rowIdx*G$rowIdx");
+        $rowIdx = $rowIdx + 1;
+    }
+
+    //custom handle
+    $customHandle = $priceOffer->customHandle;
+    if ($customHandle && $customHandle->name) {
+        if ($handleId) {
+            $sheet->insertNewRowBefore($rowIdx);
+        }
+        $sheet->mergeCells('A' . $rowIdx . ':E' . $rowIdx);
+
+        $sheet->setCellValue("A$rowIdx", $customHandle->name);
+
+        if ($customHandle->price) {
+            $sheet->setCellValue("F$rowIdx", $customHandle->price);
         }
 
-        if ($handle->price) {
-            $sheet->setCellValue("F$rowIdx", $handle->price);
+        if ($customHandle->count) {
+            $sheet->setCellValue("G$rowIdx", $customHandle->count);
         }
 
-        if ($handle->count) {
-            $sheet->setCellValue("G$rowIdx", $handle->count);
-        }
+        $sheet->setCellValue("H$rowIdx", "=F$rowIdx*G$rowIdx");
     }
 
     $rowIdx = $rowIdx + 1;

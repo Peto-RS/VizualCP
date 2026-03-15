@@ -43,60 +43,53 @@
         "price": 242
       }
     },
+    "excludedDoorPartsFromCanvas": [],
     "gallery": [],
-    "hiddenConfiguratorCategories": [],
-    "wien": 0
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": []
   },
   {
-    "categoryId": "Renata",
-    "description": "Klasika je nadčasová, v tomto duchu sa nesie kategória interiérových dverí Renata. Pohodlný a prívetivý dizajn vnesie eleganciu do každého interiéru.",
-    "name": "Renata",
+    "categoryId": "Zuzana",
+    "description": "Jednoduchý a zároveň elegantný dizajn Interiérových dverí Zuzana dokáže naplniť očakávania aj tých najnáročnejších zákazníkov.",
+    "name": "Zuzana",
     "doorConfiguratorDefault": {
       "handle": "Nova_nerez_R",
-      "material": "lamino-buk",
-      "type": "r5"
+      "material": "canyon-dark",
+      "type": "z3"
     },
     "doorTypes": {
-      "r1": {
-        "price": 192
+      "z1": {
+        "price": 292
       },
-      "r2": {
-        "price": 192
+      "z2": {
+        "price": 292
       },
-      "r3": {
-        "price": 232
+      "z3": {
+        "price": 292
       },
-      "r4": {
-        "price": 222
+      "z4": {
+        "price": 292
       },
-      "r5": {
-        "price": 235
+      "z5": {
+        "price": 292
       },
-      "r6": {
-        "price": 275
+      "z6": {
+        "price": 292
       },
-      "r7": {
-        "price": 275
+      "z7": {
+        "price": 292
       },
-      "r8": {
-        "price": 259
+      "z8": {
+        "price": 292
       },
-      "r9": {
-        "price": 269
-      },
-      "r10": {
-        "price": 242
-      },
-      "r11": {
-        "price": 232
-      },
-      "r13": {
-        "price": 232
+      "z9": {
+        "price": 292
       }
     },
+    "excludedDoorPartsFromCanvas": [],
     "gallery": [],
-    "hiddenConfiguratorCategories": [],
-    "wien": 0
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": []
   },
   {
     "categoryId": "Vanesa",
@@ -151,9 +144,10 @@
         "price": 192
       }
     },
+    "excludedDoorPartsFromCanvas": [],
     "gallery": [],
-    "hiddenConfiguratorCategories": [],
-    "wien": 0
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": []
   },
   {
     "categoryId": "Kristina",
@@ -202,9 +196,126 @@
         "price": 242
       }
     },
+    "excludedDoorPartsFromCanvas": [],
     "gallery": [],
-    "hiddenConfiguratorCategories": [],
-    "wien": 0
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": []
+  },
+  {
+    "categoryId": "Greta",
+    "description": "",
+    "name": "Gréta",
+    "doorConfiguratorDefault": {
+      "handle": "Qubik_mosadz_brusena_HR",
+      "material": "ORECH",
+      "type": "g9"
+    },
+    "doorTypes": {
+      "g1": {
+        "price": 169
+      },
+      "g2": {
+        "price": 169
+      },
+      "g3": {
+        "price": 169
+      },
+      "g4": {
+        "price": 169
+      },
+      "g5": {
+        "price": 179
+      },
+      "g6": {
+        "price": 219
+      },
+      "g7": {
+        "price": 179
+      },
+      "g8": {
+        "price": 179
+      },
+      "g9": {
+        "price": 169
+      },
+      "g10": {
+        "price": 169
+      },
+      "g11": {
+        "price": 149
+      },
+      "g12": {
+        "price": 169
+      },
+      "g13": {
+        "price": 159
+      },
+      "g14": {
+        "price": 159
+      },
+      "g15": {
+        "price": 149
+      },
+      "g16": {
+        "price": 159
+      }
+    },
+    "excludedDoorPartsFromCanvas": [],
+    "gallery": [],
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": []
+  },
+  {
+    "categoryId": "Renata",
+    "description": "Klasika je nadčasová, v tomto duchu sa nesie kategória interiérových dverí Renata. Pohodlný a prívetivý dizajn vnesie eleganciu do každého interiéru.",
+    "name": "Renata",
+    "doorConfiguratorDefault": {
+      "handle": "Nova_nerez_R",
+      "material": "lamino-buk",
+      "type": "r5"
+    },
+    "doorTypes": {
+      "r1": {
+        "price": 192
+      },
+      "r2": {
+        "price": 192
+      },
+      "r3": {
+        "price": 232
+      },
+      "r4": {
+        "price": 222
+      },
+      "r5": {
+        "price": 235
+      },
+      "r6": {
+        "price": 275
+      },
+      "r7": {
+        "price": 275
+      },
+      "r8": {
+        "price": 259
+      },
+      "r9": {
+        "price": 269
+      },
+      "r10": {
+        "price": 242
+      },
+      "r11": {
+        "price": 232
+      },
+      "r13": {
+        "price": 232
+      }
+    },
+    "excludedDoorPartsFromCanvas": [],
+    "gallery": [],
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": []
   },
   {
     "categoryId": "Petra",
@@ -265,58 +376,81 @@
         "price": 159
       }
     },
+    "excludedDoorPartsFromCanvas": [],
     "gallery": [],
-    "hiddenConfiguratorCategories": [],
-    "wien": 0
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": []
   },
   {
-    "categoryId": "Zuzana",
-    "description": "Jednoduchý a zároveň elegantný dizajn Interiérových dverí Zuzana dokáže naplniť očakávania aj tých najnáročnejších zákazníkov.",
-    "name": "Zuzana",
+    "categoryId": "Barbora",
+    "description": "",
+    "name": "Barbora",
     "doorConfiguratorDefault": {
-      "handle": "Nova_nerez_R",
-      "material": "canyon-dark",
-      "type": "z3"
+      "handle": "Qubik_cierna_matna_HR",
+      "material": "DUB-HALIFAX",
+      "type": "b7"
     },
     "doorTypes": {
-      "z1": {
-        "price": 292
+      "b1": {
+        "price": 169
       },
-      "z2": {
-        "price": 292
+      "b2": {
+        "price": 169
       },
-      "z3": {
-        "price": 292
+      "b3": {
+        "price": 169
       },
-      "z4": {
-        "price": 292
+      "b4": {
+        "price": 169
       },
-      "z5": {
-        "price": 292
+      "b5": {
+        "price": 179
       },
-      "z6": {
-        "price": 292
+      "b6": {
+        "price": 219
       },
-      "z7": {
-        "price": 292
+      "b7": {
+        "price": 179
       },
-      "z8": {
-        "price": 292
+      "b8": {
+        "price": 179
       },
-      "z9": {
-        "price": 292
+      "b9": {
+        "price": 169
+      },
+      "b10": {
+        "price": 169
+      },
+      "b11": {
+        "price": 149
+      },
+      "b12": {
+        "price": 169
+      },
+      "b13": {
+        "price": 159
+      },
+      "b14": {
+        "price": 159
+      },
+      "b15": {
+        "price": 149
+      },
+      "b16": {
+        "price": 159
       }
     },
+    "excludedDoorPartsFromCanvas": [],
     "gallery": [],
-    "hiddenConfiguratorCategories": [],
-    "wien": 0
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": []
   },
   {
     "categoryId": "Wien_1",
     "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
     "name": "Wien 1",
     "doorConfiguratorDefault": {
-      "handle": null,
+      "handle": "Alt_wien",
       "material": "wien-biela",
       "type": "W1_L2_K2_O1"
     },
@@ -358,6 +492,10 @@
         "price": 1009
       }
     },
+    "excludedDoorPartsFromCanvas": [
+      "frame",
+      "handle"
+    ],
     "gallery": [
       {
         "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-1.jpg"
@@ -408,17 +546,66 @@
         "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-16.jpg"
       }
     ],
-    "hiddenConfiguratorCategories": [
-      "handles"
-    ],
-    "wien": 1
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": [
+      {
+        "description": "Pre dvere z kategória Wien sú typické ozdobné typy líšt, kaziet a obložiek. Na výber je z nasledovných modelov:",
+        "items": [
+          {
+            "imgSrc": "/images/wien/L1.jpg",
+            "label": "L1 - Lišta 1"
+          },
+          {
+            "imgSrc": "/images/wien/L2.jpg",
+            "label": "L2 - Lišta 2"
+          },
+          {
+            "imgSrc": "/images/wien/K1.jpg",
+            "label": "K1 - Kazeta 1"
+          },
+          {
+            "imgSrc": "/images/wien/K2.jpg",
+            "label": "K2 - Kazeta 2"
+          },
+          {
+            "imgSrc": "/images/wien/O1.jpg",
+            "label": "O1 - Obložka 1"
+          },
+          {
+            "imgSrc": "/images/wien/O2.jpg",
+            "label": "O2 - Obložka 2"
+          },
+          {
+            "imgSrc": "/images/wien/S.jpg",
+            "label": "S - Sklo"
+          }
+        ]
+      },
+      {
+        "description": "Štandardom k dverám kategórie Wien sú zlaté kľučky ALT WIEN (piškótový tvar, ktorý sa pre tento dizajn dverí používa už stovky rokov). Tiež sú v štandarde zlaté zámky a zlaté pánty.",
+        "items": [
+          {
+            "imgSrc": "/images/wien/klucka.jpg",
+            "label": "Kľučka"
+          },
+          {
+            "imgSrc": "/images/wien/zamok.jpg",
+            "label": "Zámok"
+          },
+          {
+            "imgSrc": "/images/wien/panty.jpg",
+            "label": "Pánty"
+          }
+        ]
+      }
+    ]
   },
   {
     "categoryId": "Wien_2",
     "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
     "name": "Wien 2",
     "doorConfiguratorDefault": {
-      "handle": null,
+      "handle": "Alt_wien",
       "material": "wien-biela",
       "type": "W2_L2_K2_O1"
     },
@@ -472,6 +659,10 @@
         "price": 1019
       }
     },
+    "excludedDoorPartsFromCanvas": [
+      "frame",
+      "handle"
+    ],
     "gallery": [
       {
         "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-1.jpg"
@@ -522,17 +713,66 @@
         "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-16.jpg"
       }
     ],
-    "hiddenConfiguratorCategories": [
-      "handles"
-    ],
-    "wien": 1
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": [
+      {
+        "description": "Pre dvere z kategória Wien sú typické ozdobné typy líšt, kaziet a obložiek. Na výber je z nasledovných modelov:",
+        "items": [
+          {
+            "imgSrc": "/images/wien/L1.jpg",
+            "label": "L1 - Lišta 1"
+          },
+          {
+            "imgSrc": "/images/wien/L2.jpg",
+            "label": "L2 - Lišta 2"
+          },
+          {
+            "imgSrc": "/images/wien/K1.jpg",
+            "label": "K1 - Kazeta 1"
+          },
+          {
+            "imgSrc": "/images/wien/K2.jpg",
+            "label": "K2 - Kazeta 2"
+          },
+          {
+            "imgSrc": "/images/wien/O1.jpg",
+            "label": "O1 - Obložka 1"
+          },
+          {
+            "imgSrc": "/images/wien/O2.jpg",
+            "label": "O2 - Obložka 2"
+          },
+          {
+            "imgSrc": "/images/wien/S.jpg",
+            "label": "S - Sklo"
+          }
+        ]
+      },
+      {
+        "description": "Štandardom k dverám kategórie Wien sú zlaté kľučky ALT WIEN (piškótový tvar, ktorý sa pre tento dizajn dverí používa už stovky rokov). Tiež sú v štandarde zlaté zámky a zlaté pánty.",
+        "items": [
+          {
+            "imgSrc": "/images/wien/klucka.jpg",
+            "label": "Kľučka"
+          },
+          {
+            "imgSrc": "/images/wien/zamok.jpg",
+            "label": "Zámok"
+          },
+          {
+            "imgSrc": "/images/wien/panty.jpg",
+            "label": "Pánty"
+          }
+        ]
+      }
+    ]
   },
   {
     "categoryId": "Wien_3",
     "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
     "name": "Wien 3",
     "doorConfiguratorDefault": {
-      "handle": null,
+      "handle": "Alt_wien",
       "material": "wien-biela",
       "type": "W3_L2_K2_O1"
     },
@@ -586,6 +826,10 @@
         "price": 1119
       }
     },
+    "excludedDoorPartsFromCanvas": [
+      "frame",
+      "handle"
+    ],
     "gallery": [
       {
         "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-1.jpg"
@@ -636,135 +880,58 @@
         "imgSrc": "/images/wien/gallery/stolarstvo-sucansky-dvere-wien-16.jpg"
       }
     ],
-    "hiddenConfiguratorCategories": [
-      "handles"
-    ],
-    "wien": 1
-  },
-  {
-    "categoryId": "Barbora",
-    "description": "",
-    "name": "Barbora",
-    "doorConfiguratorDefault": {
-      "handle": "Nova_nerez_R",
-      "material": "DUB-HALIFAX",
-      "type": "b1"
-    },
-    "doorTypes": {
-      "b1": {
-        "price": 169
+    "hiddenConfiguratorSections": [],
+    "constructionPossibilities": [
+      {
+        "description": "Pre dvere z kategória Wien sú typické ozdobné typy líšt, kaziet a obložiek. Na výber je z nasledovných modelov:",
+        "items": [
+          {
+            "imgSrc": "/images/wien/L1.jpg",
+            "label": "L1 - Lišta 1"
+          },
+          {
+            "imgSrc": "/images/wien/L2.jpg",
+            "label": "L2 - Lišta 2"
+          },
+          {
+            "imgSrc": "/images/wien/K1.jpg",
+            "label": "K1 - Kazeta 1"
+          },
+          {
+            "imgSrc": "/images/wien/K2.jpg",
+            "label": "K2 - Kazeta 2"
+          },
+          {
+            "imgSrc": "/images/wien/O1.jpg",
+            "label": "O1 - Obložka 1"
+          },
+          {
+            "imgSrc": "/images/wien/O2.jpg",
+            "label": "O2 - Obložka 2"
+          },
+          {
+            "imgSrc": "/images/wien/S.jpg",
+            "label": "S - Sklo"
+          }
+        ]
       },
-      "b2": {
-        "price": 169
-      },
-      "b3": {
-        "price": 169
-      },
-      "b4": {
-        "price": 169
-      },
-      "b5": {
-        "price": 179
-      },
-      "b6": {
-        "price": 219
-      },
-      "b7": {
-        "price": 179
-      },
-      "b8": {
-        "price": 179
-      },
-      "b9": {
-        "price": 169
-      },
-      "b10": {
-        "price": 169
-      },
-      "b11": {
-        "price": 149
-      },
-      "b12": {
-        "price": 169
-      },
-      "b13": {
-        "price": 159
-      },
-      "b14": {
-        "price": 159
-      },
-      "b15": {
-        "price": 149
-      },
-      "b16": {
-        "price": 159
+      {
+        "description": "Štandardom k dverám kategórie Wien sú zlaté kľučky ALT WIEN (piškótový tvar, ktorý sa pre tento dizajn dverí používa už stovky rokov). Tiež sú v štandarde zlaté zámky a zlaté pánty.",
+        "items": [
+          {
+            "imgSrc": "/images/wien/klucka.jpg",
+            "label": "Kľučka"
+          },
+          {
+            "imgSrc": "/images/wien/zamok.jpg",
+            "label": "Zámok"
+          },
+          {
+            "imgSrc": "/images/wien/panty.jpg",
+            "label": "Pánty"
+          }
+        ]
       }
-    },
-    "gallery": [],
-    "hiddenConfiguratorCategories": [],
-    "wien": 0
-  },
-  {
-    "categoryId": "Greta",
-    "description": "",
-    "name": "Gréta",
-    "doorConfiguratorDefault": {
-      "handle": "Nova_nerez_R",
-      "material": "ORECH",
-      "type": "g1"
-    },
-    "doorTypes": {
-      "g1": {
-        "price": 169
-      },
-      "g2": {
-        "price": 169
-      },
-      "g3": {
-        "price": 169
-      },
-      "g4": {
-        "price": 169
-      },
-      "g5": {
-        "price": 179
-      },
-      "g6": {
-        "price": 219
-      },
-      "g7": {
-        "price": 179
-      },
-      "g8": {
-        "price": 179
-      },
-      "g9": {
-        "price": 169
-      },
-      "g10": {
-        "price": 169
-      },
-      "g11": {
-        "price": 149
-      },
-      "g12": {
-        "price": 169
-      },
-      "g13": {
-        "price": 159
-      },
-      "g14": {
-        "price": 159
-      },
-      "g15": {
-        "price": 149
-      },
-      "g16": {
-        "price": 159
-      }
-    },
-    "gallery": [],
-    "hiddenConfiguratorCategories": [],
-    "wien": 0
+    ]
   }
 ]

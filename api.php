@@ -7,6 +7,7 @@ include_once("php/api/request-objects/api-configurator-request-objects.php");
 include_once "validation.php";
 
 session_start();
+//session_destroy();
 
 // ---------------------
 // Handle GET requests
@@ -15,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['getApiResponse'])) {
         try {
             if (!isPriceOfferInSessionValid($_SESSION)) {
-                $_SESSION['priceOffer'] = new PriceOffer();
                 error_log("Session price offer is invalid, resetting." . json_encode($_SESSION));
+                $_SESSION['priceOffer'] = new PriceOffer();
             }
 
             /** @var PriceOffer $sessionPriceOffer */
@@ -47,23 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sendJsonResponse(['error' => 'Invalid JSON'], 400);
     }
 
-    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $parsedObject = new PriceOfferApiRequest($requestBody);
+    $priceOffer = PriceOffer::fromRequest($parsedObject->priceOffer);
+    $_SESSION['priceOffer'] = $priceOffer;
 
-    if (preg_match('#/add-door$#', $path)) {
-        $parsedObject = new ConfiguratorAddDoorRequest($requestBody);
-        $priceOffer = $_SESSION['priceOffer'] ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer();
-        $priceOffer->addDoorFromConfigurator($parsedObject);
-        $_SESSION['priceOffer'] = $priceOffer;
-
-        sendJsonResponse($priceOffer, 200);
-    } else {
-        $parsedObject = new PriceOfferApiRequest($requestBody);
-        $priceOffer = PriceOffer::fromRequest($parsedObject->priceOffer);
-        $_SESSION['priceOffer'] = $priceOffer;
-
-        $validations = validate($parsedObject);
-        sendJsonResponse($validations, 200);
-    }
+    $validations = validate($parsedObject);
+    sendJsonResponse($validations, 200);
 }
 
 // ---------------------

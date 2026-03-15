@@ -8,7 +8,7 @@ export async function generateCanvas(
     isMobile: boolean = false
 ): Promise<string | null> {
 
-    if (!selectedRoom || !selectedDoor?.category || !selectedDoor?.material) {
+    if (!selectedRoom || !selectedDoor?.categoryId || !selectedDoor?.material) {
         return Promise.resolve(null);
     }
 
@@ -22,10 +22,12 @@ export async function generateCanvas(
         ] = await Promise.all([
             loadImage(baseUrl + selectedRoom.imgSrc),
             loadImage(`${baseUrl}/images/materials/${selectedDoor.material}.png`),
-            loadImage(`${baseUrl}/images/doors/${selectedDoor.category}/${selectedDoor.type}.png`),
-            loadImage(`${baseUrl}/images/zarubna.png`),
-            selectedDoor.handle
-                ? loadImage(`${baseUrl}/images/handles/${selectedDoor.handle}.png`)
+            loadImage(`${baseUrl}/images/doors/${selectedDoor.categoryId}/${selectedDoor.type}.png`),
+            !selectedDoor.doorCategory.excludedDoorPartsFromCanvas.includes('frame')
+                ? loadImage(`${baseUrl}/images/zarubna.png`)
+                : Promise.resolve(null),
+            (!selectedDoor.doorCategory.excludedDoorPartsFromCanvas.includes('handle') && selectedDoor.handleId)
+                ? loadImage(`${baseUrl}/images/handles/${selectedDoor.handleId}.png`)
                 : Promise.resolve(null)
         ]);
 
@@ -43,7 +45,10 @@ export async function generateCanvas(
         ctx.drawImage(room, 0, 0);
         ctx.drawImage(material, dx, dy, dw, dh);
         ctx.drawImage(door, dx, dy, dw, dh);
-        ctx.drawImage(frame, dx, dy, dw, dh);
+
+        if (frame) {
+            ctx.drawImage(frame, dx, dy, dw, dh);
+        }
 
         if (handle) {
             ctx.drawImage(handle, dx, dy, dw, dh);

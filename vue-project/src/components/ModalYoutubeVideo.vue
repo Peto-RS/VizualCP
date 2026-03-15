@@ -24,6 +24,6 @@ const getYoutubeUrl = computed(() => {
   </div>
 </template>
 
-<style scoped>
+<style>
 
 </style>

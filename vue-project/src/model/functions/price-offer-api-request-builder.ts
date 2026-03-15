@@ -17,20 +17,17 @@ export function prepareRequest(
         return
     }
 
-    const doors: Record<string, DoorReq> = (Object.entries(reactiveForm.doors) as [string, Record<string, any>][]).reduce(
-        (acc, [key, value]) => {
-            acc[key] = {
-                category: apiResponse.priceOffer.doors[key].category!,
-                isDoorFrameEnabled: value.isDoorFrameEnabled,
-                isDtdSelected: value.isDtdSelected,
-                material: apiResponse.priceOffer.doors[key].material!,
-                type: apiResponse.priceOffer.doors[key].type!,
-                width: value.doorWidth
-            };
-            return acc;
-        },
-        {} as Record<string, DoorReq>
-    );
+    const doors: DoorReq[] = reactiveForm.doors.map((door, i) => {
+        const meta = reactiveForm.doorsMeta[i]
+        return {
+            category: meta.category,
+            material: meta.material,
+            type: meta.type,
+            width: door.doorWidth,
+            isDoorFrameEnabled: door.isDoorFrameEnabled,
+            isDtdSelected: door.isDtdSelected
+        }
+    })
 
     const possibleAdditionalCharges: PossibleAdditionalChargeReq[] = reactiveForm.possibleAdditionalCharges.map(r => {
         return {
@@ -87,11 +84,16 @@ export function prepareRequest(
                 phoneNumber: reactiveForm.contact.phoneNumber || ""
             },
             doors: doors,
-            handle: {
-                name: reactiveForm.handle.name || "",
-                price: reactiveForm.handle.price || 0,
-                count: reactiveForm.handle.count || 0
+            customHandle: {
+                name: reactiveForm.customHandle.name || "",
+                price: reactiveForm.customHandle.price || 0,
+                count: reactiveForm.customHandle.count || 0
             },
+            handle: reactiveForm.handle ? {
+                count: reactiveForm.handle.count,
+                id: reactiveForm.handle.id,
+                isCountDirty: reactiveForm.handle.isCountDirty
+            } : null,
             isAssemblyDoorsCountDirty: reactiveForm.isAssemblyDoorsCountDirty || false,
             note: reactiveForm.note || "",
             possibleAdditionalCharges: possibleAdditionalCharges,

@@ -23,6 +23,6 @@ const getImgSrc = computed(() => props.doorState === 'closed' ?
                                :src="getImgSrc"/>
 </template>
 
-<style scoped>
+<style>
 
 </style>

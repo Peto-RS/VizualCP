@@ -145,7 +145,7 @@ class Contact
     }
 }
 
-class Handle
+class CustomHandle
 {
     /** @var int|null $count */
     public $count;
@@ -163,7 +163,7 @@ class Handle
         $this->price = null;
     }
 
-    public static function fromRequest(?HandleRequest $req): Handle
+    public static function fromRequest(?CustomHandleRequest $req): CustomHandle
     {
         $instance = new self();
 
@@ -178,9 +178,9 @@ class Handle
         return $instance;
     }
 
-    public function toResponse(): HandleResponse
+    public function toResponse(): CustomHandleResponse
     {
-        return new HandleResponse(
+        return new CustomHandleResponse(
             $this->calculatePrice(),
             $this->count,
             $this->name,
@@ -191,6 +191,75 @@ class Handle
     function calculatePrice(): float
     {
         return ($this->count ?? 0) * ($this->price ?? 0.0);
+    }
+}
+
+class Handle
+{
+    /** @var int|null $count */
+    public $count;
+
+    /** @var string|null $id */
+    public $id;
+
+    /** @var bool|null $isCountDirty */
+    public $isCountDirty;
+
+    public function __construct()
+    {
+        $this->count = null;
+        $this->id = null;
+        $this->isCountDirty = null;
+    }
+
+    public static function fromRequest(HandleRequest $req): Handle
+    {
+        $instance = new self();
+        $instance->count = $req->count;
+        $instance->isCountDirty = $req->isCountDirty;
+        $instance->id = $req->id;
+
+        return $instance;
+    }
+
+    public static function fromConfiguratorPost(int $count, ?bool $isCountDirty, string $id): Handle
+    {
+        $instance = new self();
+        $instance->count = $count;
+        $instance->id = $id;
+        $instance->isCountDirty = $isCountDirty;
+
+        return $instance;
+    }
+
+    public function toResponse(?array $db, int $doorsCount): HandleResponse
+    {
+        $effectiveCount = $this->getEffectiveCount($doorsCount);
+        $price = array_key_exists("price", $db) ? $db["price"] : null;
+        return new HandleResponse(
+            $this->calculatePrice($effectiveCount),
+            $effectiveCount,
+            $this->id,
+            $this->isCountDirty,
+            array_key_exists("label", $db) ? $db["label"] : null,
+            $price
+        );
+    }
+
+    function calculatePrice(int $effectiveCount): float
+    {
+        $db = HandlesJsonDataManipulation::findByIdOrFalse($this->id);
+        $price = array_key_exists("price", $db) ? $db["price"] : null;
+        return $effectiveCount * ($price ?? 0.0);
+    }
+
+    function getEffectiveCount(int $doorsCount): int
+    {
+        if (!$this->isCountDirty) {
+            return $doorsCount;
+        }
+
+        return $this->count ?? 0;
     }
 }
 
@@ -747,7 +816,9 @@ class PriceOffer
     public $doors;
     /** @var Contact $contact */
     public $contact;
-    /** @var Handle $handle */
+    /** @var CustomHandle $customHandle */
+    public $customHandle;
+    /** @var Handle|null $handle */
     public $handle;
     /** @var bool|null $isAssemblyDoorsCountDirty */
     public $isAssemblyDoorsCountDirty;
@@ -788,7 +859,8 @@ class PriceOffer
         $this->assemblyPriceHandlesRosettesCount = null;
         $this->contact = new Contact();
         $this->doors = array();
-        $this->handle = new Handle();
+        $this->customHandle = new CustomHandle();
+        $this->handle = null;
         $this->isAssemblyDoorsCountDirty = null;
         $this->note = null;
         $this->possibleAdditionalCharges = array();
@@ -810,7 +882,8 @@ class PriceOffer
         $instance->assemblyDoorsCount = $session->assemblyDoorsCount ?? null;
         $instance->contact = $session->contact ?? new Contact();
         $instance->doors = $session->doors ?? array();
-        $instance->handle = $session->handle ?? new Handle();
+        $instance->customHandle = $session->customHandle ?? new CustomHandle();
+        $instance->handle = $session->handle ?? null;
         $instance->isAssemblyDoorsCountDirty = $session->isAssemblyDoorsCountDirty ?? null;
         $instance->note = $session->note ?? null;
         $instance->possibleAdditionalCharges = $session->possibleAdditionalCharges ?? array();
@@ -838,7 +911,8 @@ class PriceOffer
             return Door::fromRequest($value);
         }, $req->doors) : array();
 
-        $instance->handle = Handle::fromRequest($req->handle);
+        $instance->customHandle = CustomHandle::fromRequest($req->customHandle);
+        $instance->handle = $req->handle ? Handle::fromRequest($req->handle) : null;
         $instance->isAssemblyDoorsCountDirty = $req->isAssemblyDoorsCountDirty;
         $instance->note = $req->note;
 
@@ -881,7 +955,7 @@ class PriceOffer
         return $instance;
     }
 
-    public function addDoorFromConfigurator(ConfiguratorAddDoorRequest $request)
+    public function postConfigurator(ConfiguratorPostRequest $request)
     {
         $door = new Door(
             $request->category,
@@ -896,6 +970,12 @@ class PriceOffer
         );
 
         $this->doors[] = $door;
+        $handleCount = $this->handle ? $this->handle->getEffectiveCount($this->getDoorNumber()) : 1;
+        $this->handle = $request->handleId ? Handle::fromConfiguratorPost(
+            $handleCount,
+            $this->handle ? $this->handle->isCountDirty : false,
+            $request->handleId
+        ) : null;
     }
 
     public function toResponse(): PriceOfferResponse
@@ -922,7 +1002,10 @@ class PriceOffer
             array_map(function (Door $door): DoorResponse {
                 return $door->toResponse();
             }, $this->doors),
-            $this->handle ? $this->handle->toResponse() : HandleResponse::empty(),
+            $this->customHandle ? $this->customHandle->toResponse() : CustomHandleResponse::empty(),
+            ($this->handle && HandlesJsonDataManipulation::findByIdOrFalse($this->handle->id)) ?
+                $this->handle->toResponse(HandlesJsonDataManipulation::findByIdOrFalse($this->handle->id), $doorsCount) :
+                null,
             $this->isAssemblyDoorsCountDirty,
             $this->note,
             mapPossibleAdditionalChargesToResponse($this->possibleAdditionalCharges, $doorsCount),
@@ -985,7 +1068,6 @@ class PriceOffer
         return $dist;
     }
 
-    //deprecated after full rewrite
     function getDoorNumber(): float
     {
         $count = 0;
@@ -996,6 +1078,7 @@ class PriceOffer
         }
         return $count;
     }
+
 
     //deprecated after full rewrite
     function getFullPriceNoAdd(): float
@@ -1046,8 +1129,10 @@ class PriceOffer
 
     function calculateHandlesAndRosettesPrice(): float
     {
-        $handlePrice = $this->handle->calculatePrice();
-
+        $customHandlePrice = $this->customHandle->calculatePrice();
+        $handlePrice = $this->handle ?
+            $this->handle->calculatePrice($this->handle->getEffectiveCount($this->getDoorNumber())) :
+            0.0;
         $rosettesPrice = array_sum(array_map(function ($rosette): float {
             return $rosette->calculatePrice(RosettesJsonDataManipulation::findByIdOrFalse($rosette->id));
         }, $this->selectedRosettes));
@@ -1057,7 +1142,8 @@ class PriceOffer
 
         $assemblyPriceHandlesRosettes = $this->calculateAssemblyPriceHandlesRosettes();
 
-        return $handlePrice + $rosettesPrice + $rosettesLineItemsPrice + $assemblyPriceHandlesRosettes;
+        return $customHandlePrice + $handlePrice + $rosettesPrice + $rosettesLineItemsPrice +
+            $assemblyPriceHandlesRosettes;
     }
 
     function calculatePossibleAdditionalChargesPrice(int $doorsCount): float

@@ -43,8 +43,7 @@ onBeforeUnmount(() => {
       <button
           type="button"
           class="btn-close"
-          @click="offcanvas.close()"
-      />
+          @click="offcanvas.close()"/>
     </div>
     <div class="offcanvas-body">
       <keep-alive>
@@ -58,13 +57,13 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style scoped>
+<style>
 * {
   --bs-navbar-height: 57px;
 }
 
 .offcanvas-bottom {
-  height: calc(100% - var(--bs-navbar-height)) !important;
+  height: calc(75%) !important;
 }
 
 .offcanvas-end {

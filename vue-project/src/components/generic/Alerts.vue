@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style scoped>
+<style>
 .alert-stack {
   position: fixed;
   top: 1rem;

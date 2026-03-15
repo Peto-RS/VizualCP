@@ -11,14 +11,13 @@ const keys = new Map<Component, number>()
 function register(el: HTMLElement) {
     element = el
     instance = new Offcanvas(el)
-
-    // el.addEventListener('hidden.bs.offcanvas', () => {
-    //     component.value = null
-    //     props.value = {}
-    // })
 }
 
-function open(comp: Component, componentProps = {}, reset = false) {
+function open(
+    comp: Component,
+    componentProps = {},
+    reset = false
+) {
     if (reset) {
         resetFnc(comp)
     }

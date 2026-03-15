@@ -173,7 +173,7 @@ class SelectedDoorLineItemResponse implements JsonSerializable
     }
 }
 
-class HandleResponse implements JsonSerializable
+class CustomHandleResponse implements JsonSerializable
 {
     /** @var float $calculatedPrice */
     public $calculatedPrice;
@@ -195,8 +195,9 @@ class HandleResponse implements JsonSerializable
         $this->price = $price;
     }
 
-    public static function empty(): HandleResponse {
-        return new HandleResponse(0, null, null, null);
+    public static function empty(): CustomHandleResponse
+    {
+        return new CustomHandleResponse(0, null, null, null);
     }
 
     public function jsonSerialize(): array
@@ -204,6 +205,49 @@ class HandleResponse implements JsonSerializable
         return [
             'calculatedPrice' => $this->calculatedPrice,
             'count' => $this->count,
+            'name' => $this->name,
+            'price' => $this->price
+        ];
+    }
+}
+
+class HandleResponse implements JsonSerializable
+{
+    /** @var float $calculatedPrice */
+    public $calculatedPrice;
+
+    /** @var int|null $count */
+    public $count;
+
+    /** @var string|null $id */
+    public $id;
+
+    /** @var bool|null $isCountDirty */
+    public $isCountDirty;
+
+    /** @var string|null $name */
+    public $name;
+
+    /** @var float|null $price */
+    public $price;
+
+    public function __construct(float $calculatedPrice, ?int $count, ?string $id, ?bool $isCountDirty, ?string $name, ?float $price)
+    {
+        $this->calculatedPrice = $calculatedPrice;
+        $this->count = $count;
+        $this->id = $id;
+        $this->isCountDirty = $isCountDirty;
+        $this->name = $name;
+        $this->price = $price;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'calculatedPrice' => $this->calculatedPrice,
+            'count' => $this->count,
+            'id' => $this->id,
+            'isCountDirty' => $this->isCountDirty,
             'name' => $this->name,
             'price' => $this->price
         ];
@@ -278,7 +322,7 @@ class PossibleAdditionalChargeResponse implements JsonSerializable
     /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct(string $id, float $calculatedPrice, ?float $configuredPrice, ?int $count,
+    public function __construct(string  $id, float $calculatedPrice, ?float $configuredPrice, ?int $count,
                                 ?string $isCountDirty, ?string $header, ?string $hint, ?string $imgSrc, ?string $label,
                                 ?string $youtubeVideoCode, ?string $videoSrc)
     {
@@ -610,7 +654,10 @@ class PriceOfferResponse implements JsonSerializable
     /** @var DoorResponse[] $doors */
     public $doors;
 
-    /** @var HandleResponse $handle */
+    /** @var CustomHandleResponse $customHandle */
+    public $customHandle;
+
+    /** @var HandleResponse|null $handle */
     public $handle;
 
     /** @var boolean|null $isAssemblyDoorsCountDirty */
@@ -660,7 +707,8 @@ class PriceOfferResponse implements JsonSerializable
         ContactResponse                 $contact,
         float                           $deliveryPrice,
         array                           $doors,
-        HandleResponse                  $handle,
+        CustomHandleResponse            $customHandle,
+        ?HandleResponse                 $handle,
         ?bool                           $isAssemblyDoorsCountDirty,
         ?string                         $note,
         array                           $possibleAdditionalCharges,
@@ -685,6 +733,7 @@ class PriceOfferResponse implements JsonSerializable
         $this->contact = $contact;
         $this->deliveryPrice = $deliveryPrice;
         $this->doors = $doors;
+        $this->customHandle = $customHandle;
         $this->handle = $handle;
         $this->isAssemblyDoorsCountDirty = $isAssemblyDoorsCountDirty;
         $this->note = $note;
@@ -713,6 +762,7 @@ class PriceOfferResponse implements JsonSerializable
             'contact' => $this->contact,
             'deliveryPrice' => $this->deliveryPrice,
             'doors' => $this->doors,
+            'customHandle' => $this->customHandle,
             'handle' => $this->handle,
             'isAssemblyDoorsCountDirty' => $this->isAssemblyDoorsCountDirty,
             'note' => $this->note,

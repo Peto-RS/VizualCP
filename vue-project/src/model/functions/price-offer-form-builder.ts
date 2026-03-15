@@ -1,6 +1,6 @@
 import {ApiResponse} from "@/model/api/res/price-offer/ApiResponse.js";
 import {SelectedDoorResponse} from "@/model/api/res/price-offer/SelectedDoorResponse.js";
-import {HandleResponse} from "@/model/api/res/price-offer/HandleResponse.js";
+import {CustomHandleResponse} from "@/model/api/res/price-offer/CustomHandleResponse.js";
 import {AddressResponse} from "@/model/api/res/price-offer/AddressResponse.js";
 import {ContactResponse} from "@/model/api/res/price-offer/ContactResponse.js";
 import {RosetteResponse} from "@/model/api/res/price-offer/RosetteResponse.js";
@@ -9,6 +9,8 @@ import {SpecialSurchargeResponse} from "@/model/api/res/price-offer/SpecialSurch
 import {PossibleAdditionalChargeResponse} from "@/model/api/res/price-offer/PossibleAdditionalChargeResponse.js";
 import {LineItemResponse} from "@/model/api/res/price-offer/LineItemResponse.js";
 import {SelectedDoorLineItemResponse} from "@/model/api/res/price-offer/SelectedDoorLineItemResponse.js";
+import {Handle} from "@/model/api/res/configurator/ConfiguratorResponse.js";
+import {HandleResponse} from "@/model/api/res/price-offer/HandleResponse.js";
 
 interface FormContact {
     email: string
@@ -29,8 +31,10 @@ export interface FormPriceOffer {
     assemblyDoorsCount: number
     assemblyPriceHandlesRosettesCount: number
     contact: FormContact
-    doors: Record<string, FormDoor>,
-    handle: FormHandle,
+    doors: FormDoor[],
+    doorsMeta: DoorMeta[],
+    customHandle: FormCustomHandle,
+    handle: FormHandle | null,
     isAssemblyDoorsCountDirty: boolean,
     note: string,
     possibleAdditionalCharges: FormPossibleAdditionalCharge[],
@@ -50,10 +54,22 @@ export interface FormDoor {
     isDoorFrameEnabled: boolean
 }
 
-export interface FormHandle {
+export interface DoorMeta {
+    category: string
+    type: string
+    material: string
+}
+
+export interface FormCustomHandle {
     count: number
     name: string
     price: number
+}
+
+export interface FormHandle {
+    count: number
+    id: string
+    isCountDirty: boolean | null
 }
 
 export interface FormLineItem {
@@ -99,8 +115,10 @@ export function constructReactiveFormPriceOffer(json: ApiResponse | undefined): 
         assemblyDoorsCount: json?.priceOffer.assemblyDoorsCount || 0,
         assemblyPriceHandlesRosettesCount: json?.priceOffer.assemblyPriceHandlesRosettesCount || 0,
         contact: constructReactiveFormContact(json?.priceOffer.contact),
-        doors: constructReactiveFormDoors(json?.priceOffer.doors || {}),
-        handle: constructReactiveFormHandle(json?.priceOffer.handle),
+        doors: constructReactiveFormDoors(json?.priceOffer.doors || []),
+        doorsMeta: constructDoorsMeta(json?.priceOffer.doors || []),
+        customHandle: constructReactiveFormCustomHandle(json?.priceOffer.customHandle),
+        handle: json?.priceOffer.handle ? constructReactiveFormHandle(json?.priceOffer.handle) : null,
         isAssemblyDoorsCountDirty: json?.priceOffer.isAssemblyDoorsCountDirty || false,
         note: json?.priceOffer.note || "",
         possibleAdditionalCharges: constructReactiveFormPossibleAdditionalCharges(json?.priceOffer.possibleAdditionalCharges || []),
@@ -133,24 +151,39 @@ export function constructReactiveFormAddress(address: AddressResponse | undefine
     }
 }
 
-export function constructReactiveFormDoors(doors: Record<string, SelectedDoorResponse>): Record<string, FormDoor> {
-    const reduceDoors: any = {}
-    for (const [key, value] of Object.entries(doors) as [string, SelectedDoorResponse][]) {
-        reduceDoors[key] = {
-            doorWidth: value.width,
-            isDtdSelected: value.isDtdSelected,
-            isDoorFrameEnabled: value.isDoorFrameEnabled
-        }
-    }
-
-    return reduceDoors
+export function constructReactiveFormDoors(doors: SelectedDoorResponse[]): FormDoor[] {
+    return doors.map((it: SelectedDoorResponse) => {
+        return {
+            doorWidth: it.width,
+            isDtdSelected: it.isDtdSelected,
+            isDoorFrameEnabled: it.isDoorFrameEnabled
+        } as FormDoor
+    })
 }
 
-export function constructReactiveFormHandle(handle: HandleResponse | undefined | null): FormHandle {
+export function constructDoorsMeta(doors: SelectedDoorResponse[]): DoorMeta[] {
+    return doors.map((it: SelectedDoorResponse) => {
+        return {
+            category: it.category,
+            material: it.material,
+            type: it.type
+        } as DoorMeta
+    })
+}
+
+export function constructReactiveFormCustomHandle(handle: CustomHandleResponse | undefined | null): FormCustomHandle {
     return {
         count: handle?.count || 0,
         name: handle?.name || "",
         price: handle?.price || 0
+    }
+}
+
+export function constructReactiveFormHandle(handle: HandleResponse): FormHandle {
+    return {
+        count: handle.count || 0,
+        id: handle.id || "",
+        isCountDirty: handle.isCountDirty
     }
 }
 

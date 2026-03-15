@@ -1,15 +1,15 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import DoorsView from "./views/DoorsView.vue";
+import InteriorDoorsView from "./views/InteriorDoorsView.vue";
 import PriceOfferFinished from "@/views/PriceOfferFinished.vue";
 
 const routes = [
     {
         path: '/',
-        redirect: '/doors'
+        redirect: '/interior-doors'
     },
     {
-        path: '/doors',
-        component: DoorsView
+        path: '/interior-doors',
+        component: InteriorDoorsView
     },
     {
         path: '/price-offer-finished',

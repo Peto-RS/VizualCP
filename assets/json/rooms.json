@@ -1,5 +1,10 @@
 [
   {
+    "imgSrcMiniature": "/assets/img/rooms-miniatures/miestnost-3.jpg",
+    "imgSrc": "/assets/img/rooms/Miestnosti vizualizácia 2026 3.png",
+    "label": "Miestnosť 3"
+  },
+  {
     "imgSrcMiniature": "/assets/img/rooms-miniatures/miestnost-1.jpg",
     "imgSrc": "/assets/img/rooms/Miestnosti vizualizácia 2026 1.png",
     "label": "Miestnosť 1"
@@ -8,11 +13,6 @@
     "imgSrcMiniature": "/assets/img/rooms-miniatures/miestnost-2.jpg",
     "imgSrc": "/assets/img/rooms/Miestnosti vizualizácia 2026 2.png",
     "label": "Miestnosť 2"
-  },
-  {
-    "imgSrcMiniature": "/assets/img/rooms-miniatures/miestnost-3.jpg",
-    "imgSrc": "/assets/img/rooms/Miestnosti vizualizácia 2026 3.png",
-    "label": "Miestnosť 3"
   },
   {
     "imgSrcMiniature": "/assets/img/rooms-miniatures/miestnost-4.jpg",

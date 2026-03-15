@@ -7,7 +7,8 @@ const props = defineProps<{
   doorCategory: string | null,
   doorHandle: string | null | undefined,
   doorMaterial: string | null,
-  doorType: string | null
+  doorType: string | null,
+  excludedDoorPartsFromCanvas: string[]
 }>()
 
 const getBaseUrl = computed(() => props.baseUrl ?? window.location.origin)
@@ -24,7 +25,8 @@ const getBaseUrl = computed(() => props.baseUrl ?? window.location.origin)
         :src="`${getBaseUrl}/images/doors/${doorCategory}/${doorType}.png`"
         alt="door"
         class="door-layer layer-door">
-    <img :src="`${getBaseUrl}/images/zarubna.png`"
+    <img v-if="!excludedDoorPartsFromCanvas.includes('frame')"
+         :src="`${getBaseUrl}/images/zarubna.png`"
          alt="doorFrame"
          class="door-layer layer-frame">
     <img v-if="doorHandle"
@@ -34,7 +36,7 @@ const getBaseUrl = computed(() => props.baseUrl ?? window.location.origin)
   </div>
 </template>
 
-<style scoped>
+<style>
 .container-door-image {
   position: relative;
   width: 100%;

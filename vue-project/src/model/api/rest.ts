@@ -38,7 +38,7 @@ export function submitForm(recaptchaToken: string | undefined): Promise<any> {
 }
 
 export function postAddDoor(req: ConfiguratorAddDoorReq): Promise<any> {
-    return fetch(API_URL + '/add-door', {
+    return fetch(API_CONFIGURATOR_URL, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(req)

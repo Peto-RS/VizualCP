@@ -20,7 +20,7 @@ if ($_SERVER['HTTPS'] != "on"){
     <meta name="description"
           content="Prezrite si našu VIZUALIZÁCIU interiérových dverí, kde nájdete viac ako 100 druhov dverí v 40 rôznych farebných dekoroch, usporiadaných v 8 prehľadných kategóriách."/>
     <link rel="stylesheet"
-          href="<?php echo AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/assets/main.css" ?>">
+          href="<?php echo(AppConfigJsonDataManipulation::getAll()["isProductionVueBuild"] ? AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/assets/main.css" : "http://localhost:5173/src/main.css") ?>">
 
     <?php
     include_once "json-data-manipulation.php";
@@ -38,17 +38,32 @@ if ($_SERVER['HTTPS'] != "on"){
 
 <body>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69678858-3"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
+<?php
+include_once "json-data-manipulation.php";
+$config = AppConfigJsonDataManipulation::getAll();
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
+if (!empty($config['ga4']) && is_array($config['ga4'])) {
+    $firstGa4 = $config['ga4'][0];
+    ?>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo htmlspecialchars($firstGa4); ?>"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    gtag('js', new Date());
-    gtag('config', 'UA-69678858-3');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        <?php
+        foreach ($config['ga4'] as $ga4) {
+            echo "gtag('config', '" . addslashes($ga4) . "');\n";
+        }
+        ?>
+    </script>
+    <?php
+}
+?>
 
 <?php
 include_once "json-data-manipulation.php";

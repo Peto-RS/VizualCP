@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import {useRouter} from 'vue-router'
 import {useI18n} from "vue-i18n";
+import {useAppState} from "@/composables/app-state.js";
+import {onMounted} from "vue";
 
+const {appConfig} = useAppState()
 const router = useRouter()
 const {t} = useI18n()
 
@@ -10,6 +13,15 @@ if (sessionStorage.getItem('offerCompleted') !== 'true') {
 } else {
   sessionStorage.removeItem('offerCompleted')
 }
+
+onMounted(() => {
+  if (window.gtag) {
+    window.gtag('event', 'page_view', {
+      page_title: 'Price offer finished',
+      page_path: '/price-offer-finished'
+    })
+  }
+})
 </script>
 
 <template>
@@ -21,7 +33,7 @@ if (sessionStorage.getItem('offerCompleted') !== 'true') {
       <h3>STOLÁRSTVO - SUČANSKÝ</h3>
     </div>
     <div>
-      <a href="/">
+      <a :href="appConfig?.baseUrl ?? '/'">
         <button class="btn btn-primary">{{ t('returnToHomepage') }}</button>
       </a>
     </div>
@@ -29,5 +41,5 @@ if (sessionStorage.getItem('offerCompleted') !== 'true') {
 
 </template>
 
-<style scoped>
+<style>
 </style>

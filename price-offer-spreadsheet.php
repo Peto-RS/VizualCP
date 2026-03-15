@@ -125,9 +125,9 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
         }
 
         $sheet->setCellValue("H$rowIdx", "=F$rowIdx*G$rowIdx");
+        $rowIdx = $rowIdx + 1;
     }
 
-    $rowIdx = $rowIdx + 1;
     foreach ($priceOffer->rosettes as $rosette) {
         $count = $rosette->count;
         if ($count) {

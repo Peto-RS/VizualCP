@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $parsedObject = new ConfiguratorPostRequest($requestBody);
     $priceOffer = isset($_SESSION['priceOffer']) ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer();
-    $priceOffer->postConfigurator($parsedObject);
+    $priceOffer->fromPostConfigurator($parsedObject);
     $_SESSION['priceOffer'] = $priceOffer;
 
     sendJsonResponse($priceOffer->toResponse(), 200);

@@ -15,6 +15,7 @@ class ApiIntegrationTest extends TestCase
 
         $res = $this->request('POST', $this->configuratorUrl, $sessionId, getArrayFromJsonFile(__DIR__ . "/resources/configurator-request-1.json"));
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
+        print_r($res['body']);
         $this->assertEquals(
             getArrayFromJsonFile(__DIR__ . "/resources/configurator-response-1.json"),
             json_decode($res['body'], true)
@@ -64,6 +65,7 @@ class ApiIntegrationTest extends TestCase
 
         $this->assertStringContainsString('Invalid JSON', $response);
     }
+    */
 
     private function request($method, $url, $sessionId = null, $body = null): array
     {
@@ -95,5 +97,4 @@ class ApiIntegrationTest extends TestCase
             'headers' => $http_response_header ?? []
         ];
     }
-    */
 }

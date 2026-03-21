@@ -249,7 +249,7 @@ class Handle
     function calculatePrice(int $effectiveCount): float
     {
         $db = HandlesJsonDataManipulation::findByIdOrFalse($this->id);
-        $price = array_key_exists("price", $db) ? $db["price"] : null;
+        $price = ($db && array_key_exists("price", $db)) ? $db["price"] : null;
         return $effectiveCount * ($price ?? 0.0);
     }
 
@@ -866,8 +866,6 @@ class PriceOffer
         $this->isAssemblyDoorsCountDirty = null;
         $this->isAssemblyHandlesRosettesCountDirty = null;
         $this->note = null;
-        $this->technicalSurcharges = array();
-        $this->technicalSurchargesLineItems = array();
         $this->selectedDoorsLineItems = array();
         $this->selectedRosettes = array();
         $this->rosettesLineItems = array();
@@ -875,6 +873,14 @@ class PriceOffer
         $this->aestheticAccessoriesLineItems = array();
         $this->specialSurcharges = array();
         $this->specialSurchargesLineItems = array();
+        $this->technicalSurcharges = array_map(function (array $db) {
+            return new TechnicalSurcharge(
+                array_key_exists("id", $db) ? $db["id"] : null,
+                0,
+                null
+            );
+        }, TechnicalSurchargesJsonDataManipulation::getAll());
+        $this->technicalSurchargesLineItems = array();
     }
 
     public static function fromSession(PriceOffer $session): PriceOffer
@@ -960,7 +966,7 @@ class PriceOffer
         return $instance;
     }
 
-    public function postConfigurator(ConfiguratorPostRequest $request)
+    public function fromPostConfigurator(ConfiguratorPostRequest $request)
     {
         $door = new Door(
             $request->category,

@@ -10,8 +10,8 @@
   "assemblyDoorsCount": 1,
   "assemblyHandlesRosettesCount": 1,
   "assemblyPriceHandlesRosettesCalculatedPrice": 5,
-  "calculatedPrice": 449,
-  "calculatedPriceVat": 552.27,
+  "calculatedPrice": 463.2,
+  "calculatedPriceVat": 569.736,
   "contact": {
     "email": null,
     "fullName": null,
@@ -199,7 +199,7 @@
     "delivery": 0,
     "assemblyDoors": 210,
     "aestheticAccessories": 0,
-    "technicalSurcharges": 0,
+    "technicalSurcharges": 14.2,
     "specialSurcharges": 0
   },
   "selectedDoorsLineItems": [],

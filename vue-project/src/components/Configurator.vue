@@ -456,7 +456,7 @@ onMounted(() => {
     <Footer/>
     <div class="d-md-none d-flex justify-content-center">
       <button @click="handleAddDoorButtonClick"
-              class="btn btn-secondary btn-lg text-white btn-add-to-price-offer-main-page text-uppercase d-flex align-items-center justify-content-center"
+              class="btn btn-secondary btn-lg text-white btn-add-to-price-offer text-uppercase d-flex align-items-center justify-content-center"
               type="button">
         <i class="fas fa-plus-circle text-white fs-1 me-2"></i>
         <span class="fs-5">

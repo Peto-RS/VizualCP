@@ -210,6 +210,9 @@ canvas {
 }
 
 @media (max-width: 768px) {
+  canvas {
+    object-position: center center;
+  }
 }
 
 @media (min-width: 768px) {

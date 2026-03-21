@@ -12,7 +12,7 @@
       "rooms": "Výber miestnosti",
       "veneers": "Druhy dýh"
     },
-    "buttonAddToPriceOffer": "Pridať do\n cenovej\n ponuky",
+    "buttonAddToPriceOffer": "Pridať do cenovej ponuky",
     "category": "Kategória",
     "doorFramePrice": "Zárubňa: {price}. Ceny sú bez DPH.",
     "priceFrom": "Cena dverí od",
@@ -25,9 +25,9 @@
     "handles": "Kľučky",
     "delivery": "Dovoz",
     "assemblyDoors": "Montáž",
-    "specialAccessories": "Špeciálne doplnky",
-    "possibleAdditionalCharges": "Možné príplatky",
-    "specialSurcharges": "Špeciálne príplatky",
+    "aestheticAccessories": "Estetické doplnky",
+    "technicalSurcharges": "Technické príplatky",
+    "specialSurcharges": "Príplatkové otvárania dverí (Posuvné kovania / skryté pánty...)",
     "contact": "Kontaktné údaje"
   },
   "assemblyDoors": {
@@ -86,5 +86,11 @@
     "FORM_VALIDATIONS_ERROR": "Vo formulári sa nachádzajú nevalidné polia.",
     "MAIL_SENDING_ERROR": "Nastala chyba pri posielaní emailu."
   },
-  "returnToHomepage": "Vrátiť sa na domovskú stránku"
+  "returnToHomepage": "Vrátiť sa na domovskú stránku",
+  "views": {
+    "priceOfferFinished": {
+      "priceOfferSentToMail": "Cenovú ponuku sme Vám poslali na e-mailovú adresu.",
+      "thanksMessage": "Ďakujeme."
+    }
+  }
 }

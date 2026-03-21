@@ -34,8 +34,9 @@ const emit = defineEmits<{
 }>()
 
 const doorTypesSelectionSection = ref<HTMLElement | null>(null);
-const doorsGallery = ref<HTMLElement | null>(null)
-const glassGallery = ref<HTMLElement | null>(null)
+const galleryRef = ref<HTMLElement | null>(null)
+const doorsGalleryRef = ref<HTMLElement | null>(null)
+const glassGalleryRef = ref<HTMLElement | null>(null)
 const selectedDoor: Ref<SelectedDoor | null> = ref(null)
 
 const doorClasses = "col-3 col-lg-2 gx-1 gy-1";
@@ -161,14 +162,20 @@ onBeforeMount(async () => {
 
 onMounted(() => {
   watch(props.configuratorApiResponse.glasses, () => {
-    if (glassGallery.value) {
-      usePhotoSwipeGallery(glassGallery.value);
+    if (glassGalleryRef.value) {
+      usePhotoSwipeGallery(glassGalleryRef.value);
     }
   }, {immediate: true})
 
-  watch(selectedDoor, () => {
-    if (doorsGallery.value) {
-      usePhotoSwipeGallery(doorsGallery.value);
+  watch(galleryRef, () => {
+    if (galleryRef.value) {
+      usePhotoSwipeGallery(galleryRef.value);
+    }
+  }, {immediate: true})
+
+  watch(doorsGalleryRef, () => {
+    if (doorsGalleryRef.value) {
+      usePhotoSwipeGallery(doorsGalleryRef.value);
     }
   }, {immediate: true})
 })
@@ -315,7 +322,7 @@ onMounted(() => {
         <AccordionItem id="glasses"
                        :is-open-by-default="true"
                        :title="t('configurator.accordionHeaders.glasses')">
-          <div class="row" ref="glassGallery">
+          <div class="row" ref="glassGalleryRef">
             <div v-for="(value, key) in configuratorApiResponse?.glasses"
                  :key="key"
                  :class="`${doorClasses} text-center door-miniature`">
@@ -334,11 +341,11 @@ onMounted(() => {
             </div>
           </div>
         </AccordionItem>
-        <AccordionItem id="gallery"
-                       v-show="selectedDoor?.doorCategory?.gallery && selectedDoor?.doorCategory?.gallery?.length"
+        <AccordionItem id="doorsGallery"
+                       v-if="selectedDoor?.doorCategory?.gallery && selectedDoor?.doorCategory?.gallery?.length"
                        :is-open-by-default="true"
                        :title="t('configurator.accordionHeaders.gallery')">
-          <div class="row" ref="doorsGallery">
+          <div class="row" ref="doorsGalleryRef">
             <div v-for="(value, key) in selectedDoor?.doorCategory?.gallery"
                  :key="key"
                  class="col-sm-6 gx-1 gy-1 text-center">
@@ -357,13 +364,34 @@ onMounted(() => {
         <AccordionItem id="rooms"
                        :is-open-by-default="true"
                        :title="t('configurator.accordionHeaders.rooms')">
-          <div class="row">
+          <div class="row mb-1">
             <div v-for="room in configuratorApiResponse.rooms" class="col-sm-6 gx-1 gy-1">
               <ImageWithLoadingPlaceholder class="img-fluid door-selector-img"
                                            alt="logo"
                                            :src="appConfig?.baseUrl + room.imgSrcMiniature"
                                            @click="emit('room-selected', room)"/>
             </div>
+          </div>
+          <div class="row">
+            <AccordionItem id="gallery"
+                           :is-open-by-default="false"
+                           :title="t('configurator.accordionHeaders.gallery')">
+              <div class="row" ref="galleryRef">
+                <div v-for="(value, key) in configuratorApiResponse.gallery"
+                     :key="key"
+                     :class="`col-${value.col} gx-1 gy-1 text-center`">
+                  <a :href="appConfig?.baseUrl + value.imgSrc"
+                     :data-pswp-width="value.width"
+                     :data-pswp-height="value.height"
+                     rel="noreferrer">
+                    <ImageWithLoadingPlaceholder
+                        :alt="key.toString()"
+                        class="img-fluid ratio-1x1"
+                        :src="appConfig?.baseUrl + value.imgSrc"/>
+                  </a>
+                </div>
+              </div>
+            </AccordionItem>
           </div>
         </AccordionItem>
         <AccordionItem id="currentActions"
@@ -428,9 +456,12 @@ onMounted(() => {
     <Footer/>
     <div class="d-md-none d-flex justify-content-center">
       <button @click="handleAddDoorButtonClick"
-              class="btn btn-secondary btn-lg text-white btn-add-to-price-offer"
+              class="btn btn-secondary btn-lg text-white btn-add-to-price-offer-main-page text-uppercase d-flex align-items-center justify-content-center"
               type="button">
-        {{ t('configurator.buttonAddToPriceOffer') }}
+        <i class="fas fa-plus-circle text-white fs-1 me-2"></i>
+        <span class="fs-5">
+          {{ t('configurator.buttonAddToPriceOffer') }}
+        </span>
       </button>
     </div>
 

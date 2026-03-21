@@ -3,7 +3,7 @@ export interface SectionsCalculatedPriceResponse {
     handlesAndRosettes: number
     delivery: number
     assemblyDoors: number
-    specialAccessories: number
-    possibleAdditionalCharges: number
+    aestheticAccessories: number
+    technicalSurcharges: number
     specialSurcharges: number
 }

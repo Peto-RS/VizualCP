@@ -3,9 +3,9 @@ import {computed, onBeforeUnmount, onMounted, Ref, ref, toRaw, watch, WatchHandl
 import {ApiResponse} from "@/model/api/res/price-offer/ApiResponse.js";
 import {
   constructReactiveFormPriceOffer, DoorMeta,
-  findPossibleAdditionalChargeById,
+  findTechnicalSurchargeById,
   findRosetteById,
-  findSpecialAccessoryById,
+  findAestheticAccessoryById,
   findSpecialSurchargeById, FormDoor,
   FormPriceOffer
 } from "@/model/functions/price-offer-form-builder.js";
@@ -182,9 +182,9 @@ async function handleFormSubmit(e: Event): Promise<void> {
   }
 }
 
-function handleHandleCountChange(e: Event) {
+function handleCustomHandleCountChange(e: Event) {
   const target = e.target as HTMLInputElement;
-  reactiveForm.value.assemblyPriceHandlesRosettesCount = Number(target.value);
+  reactiveForm.value.assemblyHandlesRosettesCount = Number(target.value);
 }
 
 function handleDoorDuplication(index: number) {
@@ -197,6 +197,11 @@ function handleDoorDuplication(index: number) {
   reactiveForm.value.doorsMeta.push(duplicatedMeta)
 
   addAlert(t('configurator.doorAddedToPriceOffer'))
+}
+
+function handleDoorRemoval(index: number) {
+  reactiveForm.value.doors.splice(index, 1)
+  reactiveForm.value.doorsMeta.splice(index, 1)
 }
 </script>
 
@@ -213,6 +218,7 @@ function handleDoorDuplication(index: number) {
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <SelectedDoors @door-duplicated="handleDoorDuplication"
+                               @door-removed="handleDoorRemoval"
                                v-if="apiResponse?.priceOffer?.doors"
                                v-model:selected-doors="reactiveForm.doors"
                                :base-url="appConfig?.baseUrl"
@@ -234,7 +240,7 @@ function handleDoorDuplication(index: number) {
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <div v-if="reactiveForm.handle" class="row mb-4">
-                  <div class="col-3 col-lg-2 text-center">
+                  <div class="col-3 col-xl-2 text-center">
                     <ImageWithLoadingPlaceholder
                         :alt="reactiveForm.handle.id"
                         class="img-fluid w-100 ratio-1x1 border mb-1"
@@ -253,8 +259,8 @@ function handleDoorDuplication(index: number) {
                       {{ t("doors.remove") }}
                     </button>
                   </div>
-                  <div class="col-3 col-lg-6"></div>
-                  <div class="col-3 col-lg-2">
+                  <div class="col-2 col-xl-6"></div>
+                  <div class="col-4 col-xl-2">
                     <div class="input-group">
                       <input type="number"
                              @input="reactiveForm.handle!.isCountDirty = true;"
@@ -265,7 +271,7 @@ function handleDoorDuplication(index: number) {
                       <span class="input-group-text">ks</span>
                     </div>
                   </div>
-                  <div class="col-3 col-lg-2">
+                  <div class="col-3 col-xl-2">
                     <BadgePrice
                         class="price-offer-badge w-100"
                         :price="apiResponse?.priceOffer?.handle?.calculatedPrice ?? 0.0"/>
@@ -328,7 +334,7 @@ function handleDoorDuplication(index: number) {
                     <div class="input-group">
                       <input type="number"
                              v-model.number="reactiveForm.customHandle.count"
-                             v-on:change="handleHandleCountChange($event)"
+                             v-on:change="handleCustomHandleCountChange($event)"
                              :id="'handle-count'"
                              class="form-control"
                              min="0"
@@ -383,8 +389,9 @@ function handleDoorDuplication(index: number) {
                   <div class="col-sm-4 col-xl-2">
                     <div class="input-group">
                       <input type="number"
-                             v-model.number="reactiveForm.assemblyPriceHandlesRosettesCount"
-                             id="assemblyPriceHandlesRosettesCount"
+                             v-model.number="reactiveForm.assemblyHandlesRosettesCount"
+                             @input="reactiveForm.isAssemblyHandlesRosettesCountDirty = true"
+                             id="assemblyHandlesRosettesCount"
                              class="form-control"
                              min="0"
                              step="1">
@@ -504,27 +511,27 @@ function handleDoorDuplication(index: number) {
               </li>
             </ul>
           </AccordionItem>
-          <AccordionItem id="specialAccessories"
+          <AccordionItem id="aestheticAccessories"
                          :is-open-by-default="false"
-                         :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.specialAccessories"
-                         :title="t('accordionHeaders.specialAccessories')">
+                         :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.aestheticAccessories"
+                         :title="t('accordionHeaders.aestheticAccessories')">
             <ul class="list-group list-group-flush">
-              <li v-for="it of reactiveForm.specialAccessories"
+              <li v-for="it of reactiveForm.aestheticAccessories"
                   :key="it.id"
                   class="list-group-item">
                 <div class="row">
                   <div class="col-sm-12 col-xl-6 align-self-center">{{
-                      findSpecialAccessoryById(it.id, apiResponse)?.label
+                      findAestheticAccessoryById(it.id, apiResponse)?.label
                     }}
-                    <span v-if="findSpecialAccessoryById(it.id, apiResponse)?.configuredPrice">{{
-                        formatPrice(findSpecialAccessoryById(it.id, apiResponse)?.configuredPrice)
+                    <span v-if="findAestheticAccessoryById(it.id, apiResponse)?.configuredPrice">{{
+                        formatPrice(findAestheticAccessoryById(it.id, apiResponse)?.configuredPrice)
                       }}/ks </span>
                     <Hint
-                        v-if="findSpecialAccessoryById(it.id, apiResponse)"
-                        :hintObj="findSpecialAccessoryById(it.id, apiResponse) as HintInterface"/>
+                        v-if="findAestheticAccessoryById(it.id, apiResponse)"
+                        :hintObj="findAestheticAccessoryById(it.id, apiResponse) as HintInterface"/>
                   </div>
                   <div class="col-sm-4 col-xl-2"
-                       :class="{ invisible: findSpecialAccessoryById(it.id, apiResponse)?.configuredPrice !== null }">
+                       :class="{ invisible: findAestheticAccessoryById(it.id, apiResponse)?.configuredPrice !== null }">
                     <div class="input-group">
                       <input type="number"
                              v-model.number="it.selectedPrice"
@@ -549,30 +556,30 @@ function handleDoorDuplication(index: number) {
                   <div class="col-sm-4 col-xl-2">
                     <BadgePrice
                         class="price-offer-badge w-100"
-                        :price="findSpecialAccessoryById(it.id, apiResponse)?.calculatedPrice"/>
+                        :price="findAestheticAccessoryById(it.id, apiResponse)?.calculatedPrice"/>
                   </div>
                 </div>
               </li>
               <LineItems
-                  v-model:line-items="reactiveForm.specialAccessoriesLineItems"
-                  :line-items-response="apiResponse?.priceOffer.specialAccessoriesLineItems"
+                  v-model:line-items="reactiveForm.aestheticAccessoriesLineItems"
+                  :line-items-response="apiResponse?.priceOffer.aestheticAccessoriesLineItems"
               />
             </ul>
           </AccordionItem>
-          <AccordionItem id="possibleAdditionalCharges"
+          <AccordionItem id="technicalSurcharges"
                          :is-open-by-default="false"
-                         :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.possibleAdditionalCharges"
-                         :title="t('accordionHeaders.possibleAdditionalCharges')">
+                         :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.technicalSurcharges"
+                         :title="t('accordionHeaders.technicalSurcharges')">
             <ul class="list-group list-group-flush">
-              <li v-for="it of reactiveForm.possibleAdditionalCharges"
+              <li v-for="it of reactiveForm.technicalSurcharges"
                   :key="it.id"
                   class="list-group-item">
                 <div class="row">
                   <div class="col-sm-12 col-xl-8 align-self-center text-align-justify">
-                    {{ findPossibleAdditionalChargeById(it.id, apiResponse)?.label }}
+                    {{ findTechnicalSurchargeById(it.id, apiResponse)?.label }}
                     <Hint
-                        v-if="findPossibleAdditionalChargeById(it.id, apiResponse)"
-                        :hintObj="findPossibleAdditionalChargeById(it.id, apiResponse) as HintInterface"/>
+                        v-if="findTechnicalSurchargeById(it.id, apiResponse)"
+                        :hintObj="findTechnicalSurchargeById(it.id, apiResponse) as HintInterface"/>
                   </div>
                   <div class="col-sm-4 d-xl-none"></div>
                   <div class="col-sm-4 col-xl-2">
@@ -590,13 +597,13 @@ function handleDoorDuplication(index: number) {
                   <div class="col-sm-4 col-xl-2">
                     <BadgePrice
                         class="price-offer-badge w-100"
-                        :price="findPossibleAdditionalChargeById(it.id, apiResponse)?.calculatedPrice"/>
+                        :price="findTechnicalSurchargeById(it.id, apiResponse)?.calculatedPrice"/>
                   </div>
                 </div>
               </li>
               <LineItems
-                  v-model:line-items="reactiveForm.possibleAdditionalChargesLineItems"
-                  :line-items-response="apiResponse?.priceOffer.possibleAdditionalChargesLineItems"
+                  v-model:line-items="reactiveForm.technicalSurchargesLineItems"
+                  :line-items-response="apiResponse?.priceOffer.technicalSurchargesLineItems"
               />
             </ul>
           </AccordionItem>
@@ -765,7 +772,6 @@ function handleDoorDuplication(index: number) {
 
 .price-offer-badge {
   height: $input-height;
-  min-width: 105px;
 }
 
 .text-transform-none {

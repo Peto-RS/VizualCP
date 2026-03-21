@@ -9,7 +9,8 @@ import PopOverBootstrapWrapper from "@/components/generic/PopOverBootstrapWrappe
 import {isMobileDevice} from "@/model/functions/responsivity-utils.js";
 
 const emit = defineEmits<{
-  (e: 'door-duplicated', index: number): void
+  (e: 'door-duplicated', index: number): void,
+  (e: 'door-removed', index: number): void
 }>()
 
 const selectedDoors = defineModel<FormDoor[]>('selectedDoors', {
@@ -29,13 +30,11 @@ function getDoorCategoryByCategoryId(categoryId: string | null): DoorCategory | 
 }
 
 const handleDoorRemove = (index: number) => {
-  selectedDoors.value.splice(index, 1)
+  emit('door-removed', index)
 }
 
 const handleDoorDuplicate = (index: number) => {
-  if (!isMobileDevice()) {
-    emit('door-duplicated', index)
-  }
+  emit('door-duplicated', index)
 }
 
 const popOverContent = () => {

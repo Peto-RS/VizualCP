@@ -33,16 +33,16 @@ class DoorsJsonDataManipulation
     }
 }
 
-class PossibleAdditionalChargesJsonDataManipulation
+class TechnicalSurchargesJsonDataManipulation
 {
     public static function getAll(): array
     {
-        return getArrayFromJsonFile("./assets/json/possibleAdditionalCharges.json");
+        return getArrayFromJsonFile("./assets/json/technicalSurcharges.json");
     }
 
     public static function findByIdOrFalse(?string $id)
     {
-        $list = PossibleAdditionalChargesJsonDataManipulation::getAll();
+        $list = TechnicalSurchargesJsonDataManipulation::getAll();
         $item = array_filter($list, function ($r) use ($id) {
             return $r["id"] == $id;
         });
@@ -67,16 +67,16 @@ class RosettesJsonDataManipulation
     }
 }
 
-class SpecialAccessoriesJsonDataManipulation
+class AestheticAccessoriesJsonDataManipulation
 {
     public static function getAll(): array
     {
-        return getArrayFromJsonFile("./assets/json/specialAccessories.json");
+        return getArrayFromJsonFile("./assets/json/aestheticAccessories.json");
     }
 
     public static function findByIdOrFalse(?string $id)
     {
-        $list = SpecialAccessoriesJsonDataManipulation::getAll();
+        $list = AestheticAccessoriesJsonDataManipulation::getAll();
         $item = array_filter($list, function ($r) use ($id) {
             return $r["id"] == $id;
         });
@@ -117,6 +117,14 @@ class DoorCategoriesJsonDataManipulation
     public static function getAll(): array
     {
         return getArrayFromJsonFile("./assets/json/doorCategories.json");
+    }
+}
+
+class GalleryJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/gallery.json");
     }
 }
 

@@ -107,7 +107,7 @@ class LineItemRequest
     }
 }
 
-class PossibleAdditionalChargeRequest
+class TechnicalSurchargeRequest
 {
     /** @var string|null $id */
     public $id;
@@ -141,7 +141,7 @@ class RosetteRequest
     }
 }
 
-class SpecialAccessoryRequest
+class AestheticAccessoryRequest
 {
     /** @var string|null $id */
     public $id;
@@ -248,8 +248,8 @@ class PriceOfferRequest
     /** @var int|null $assemblyDoorsCount */
     public $assemblyDoorsCount;
 
-    /** @var int|null $assemblyPriceHandlesRosettesCount */
-    public $assemblyPriceHandlesRosettesCount;
+    /** @var int|null $assemblyHandlesRosettesCount */
+    public $assemblyHandlesRosettesCount;
 
     /** @var ContactRequest|null $contact */
     public $contact;
@@ -263,17 +263,19 @@ class PriceOfferRequest
     /** @var HandleRequest|null $handle */
     public $handle;
 
-    /** @var boolean|null $isAssemblyDoorsCountDirty */
+    /** @var bool|null $isAssemblyDoorsCountDirty */
     public $isAssemblyDoorsCountDirty;
+    /** @var bool|null $isAssemblyHandlesRosettesCountDirty */
+    public $isAssemblyHandlesRosettesCountDirty;
 
     /** @var string|null $note */
     public $note;
 
-    /** @var PossibleAdditionalChargeRequest[]|null $possibleAdditionalCharges */
-    public $possibleAdditionalCharges = array();
+    /** @var TechnicalSurchargeRequest[]|null $technicalSurcharges */
+    public $technicalSurcharges = array();
 
-    /** @var LineItemRequest[]|null $possibleAdditionalChargesLineItems */
-    public $possibleAdditionalChargesLineItems = array();
+    /** @var LineItemRequest[]|null $technicalSurchargesLineItems */
+    public $technicalSurchargesLineItems = array();
 
     /** @var RosetteRequest[]|null $rosettes */
     public $rosettes = array();
@@ -284,11 +286,11 @@ class PriceOfferRequest
     /** @var SelectedDoorLineItemRequest[]|null $selectedDoorsLineItems */
     public $selectedDoorsLineItems = array();
 
-    /** @var SpecialAccessoryRequest[]|null $specialAccessories */
-    public $specialAccessories = array();
+    /** @var AestheticAccessoryRequest[]|null $aestheticAccessories */
+    public $aestheticAccessories = array();
 
-    /** @var LineItemRequest[]|null $specialAccessoriesLineItems */
-    public $specialAccessoriesLineItems = array();
+    /** @var LineItemRequest[]|null $aestheticAccessoriesLineItems */
+    public $aestheticAccessoriesLineItems = array();
 
     /** @var SpecialSurchargeRequest[]|null $specialSurcharges */
     public $specialSurcharges = array();
@@ -300,7 +302,7 @@ class PriceOfferRequest
     {
         $this->address = $json['address'] ? new AddressRequest($json['address']) : null;
         $this->assemblyDoorsCount = $json['assemblyDoorsCount'] ?? null;
-        $this->assemblyPriceHandlesRosettesCount = $json['assemblyPriceHandlesRosettesCount'] ?? null;
+        $this->assemblyHandlesRosettesCount = $json['assemblyHandlesRosettesCount'] ?? null;
         $this->contact = $json['contact'] ? new ContactRequest($json['contact']) : null;
         $this->doors = is_array($json['doors']) ? array_map(function ($doorData) {
             return new DoorRequest($doorData);
@@ -308,13 +310,14 @@ class PriceOfferRequest
         $this->customHandle = $json['customHandle'] ? new CustomHandleRequest($json['customHandle']) : null;
         $this->handle = $json['handle'] ? new HandleRequest($json['handle']) : null;
         $this->isAssemblyDoorsCountDirty = $json['isAssemblyDoorsCountDirty'] ?? null;
+        $this->isAssemblyHandlesRosettesCountDirty = $json['isAssemblyHandlesRosettesCountDirty'] ?? null;
         $this->note = $json['note'] ?? null;
-        $this->possibleAdditionalCharges = is_array($json['possibleAdditionalCharges']) ? array_map(function ($p) {
-            return new PossibleAdditionalChargeRequest($p);
-        }, $json['possibleAdditionalCharges']) : null;
-        $this->possibleAdditionalChargesLineItems = is_array($json['possibleAdditionalChargesLineItems']) ? array_map(function ($p) {
+        $this->technicalSurcharges = is_array($json['technicalSurcharges']) ? array_map(function ($p) {
+            return new TechnicalSurchargeRequest($p);
+        }, $json['technicalSurcharges']) : null;
+        $this->technicalSurchargesLineItems = is_array($json['technicalSurchargesLineItems']) ? array_map(function ($p) {
             return new LineItemRequest($p);
-        }, $json['possibleAdditionalChargesLineItems']) : null;
+        }, $json['technicalSurchargesLineItems']) : null;
         $this->rosettes = is_array($json['rosettes']) ? array_map(function ($rosetteData) {
             return new RosetteRequest($rosetteData);
         }, $json['rosettes']) : null;
@@ -324,12 +327,12 @@ class PriceOfferRequest
         $this->selectedDoorsLineItems = is_array($json['selectedDoorsLineItems']) ? array_map(function ($it) {
             return new SelectedDoorLineItemRequest($it);
         }, $json['selectedDoorsLineItems']) : null;
-        $this->specialAccessories = is_array($json['specialAccessories']) ? array_map(function ($specialAccessoryData) {
-            return new SpecialAccessoryRequest($specialAccessoryData);
-        }, $json['specialAccessories']) : null;
-        $this->specialAccessoriesLineItems = is_array($json['specialAccessoriesLineItems']) ? array_map(function ($it) {
+        $this->aestheticAccessories = is_array($json['aestheticAccessories']) ? array_map(function ($aestheticAccessoryData) {
+            return new AestheticAccessoryRequest($aestheticAccessoryData);
+        }, $json['aestheticAccessories']) : null;
+        $this->aestheticAccessoriesLineItems = is_array($json['aestheticAccessoriesLineItems']) ? array_map(function ($it) {
             return new LineItemRequest($it);
-        }, $json['specialAccessoriesLineItems']) : null;
+        }, $json['aestheticAccessoriesLineItems']) : null;
         $this->specialSurcharges = is_array($json['specialSurcharges']) ? array_map(function ($specialSurchargeData) {
             return new SpecialSurchargeRequest($specialSurchargeData);
         }, $json['specialSurcharges']) : null;

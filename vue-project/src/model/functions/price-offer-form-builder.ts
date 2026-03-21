@@ -4,12 +4,11 @@ import {CustomHandleResponse} from "@/model/api/res/price-offer/CustomHandleResp
 import {AddressResponse} from "@/model/api/res/price-offer/AddressResponse.js";
 import {ContactResponse} from "@/model/api/res/price-offer/ContactResponse.js";
 import {RosetteResponse} from "@/model/api/res/price-offer/RosetteResponse.js";
-import {SpecialAccessoriesResponse} from "@/model/api/res/price-offer/SpecialAccessoriesResponse.js";
+import {AestheticAccessoriesResponse} from "@/model/api/res/price-offer/AestheticAccessoriesResponse.js";
 import {SpecialSurchargeResponse} from "@/model/api/res/price-offer/SpecialSurchargeResponse.js";
-import {PossibleAdditionalChargeResponse} from "@/model/api/res/price-offer/PossibleAdditionalChargeResponse.js";
+import {TechnicalSurchargeResponse} from "@/model/api/res/price-offer/TechnicalSurchargeResponse.js";
 import {LineItemResponse} from "@/model/api/res/price-offer/LineItemResponse.js";
 import {SelectedDoorLineItemResponse} from "@/model/api/res/price-offer/SelectedDoorLineItemResponse.js";
-import {Handle} from "@/model/api/res/configurator/ConfiguratorResponse.js";
 import {HandleResponse} from "@/model/api/res/price-offer/HandleResponse.js";
 
 interface FormContact {
@@ -29,21 +28,22 @@ export interface FormAddress {
 export interface FormPriceOffer {
     address: FormAddress
     assemblyDoorsCount: number
-    assemblyPriceHandlesRosettesCount: number
+    assemblyHandlesRosettesCount: number
     contact: FormContact
     doors: FormDoor[],
     doorsMeta: DoorMeta[],
     customHandle: FormCustomHandle,
     handle: FormHandle | null,
     isAssemblyDoorsCountDirty: boolean,
+    isAssemblyHandlesRosettesCountDirty: boolean,
     note: string,
-    possibleAdditionalCharges: FormPossibleAdditionalCharge[],
-    possibleAdditionalChargesLineItems: FormLineItem[],
+    technicalSurcharges: FormTechnicalSurcharge[],
+    technicalSurchargesLineItems: FormLineItem[],
     rosettes: FormRosette[],
     rosettesLineItems: FormLineItem[],
     selectedDoorsLineItems: FormSelectedDoorLineItem[],
-    specialAccessories: FormSpecialAccessory[],
-    specialAccessoriesLineItems: FormLineItem[],
+    aestheticAccessories: FormAestheticAccessory[],
+    aestheticAccessoriesLineItems: FormLineItem[],
     specialSurcharges: FormSpecialSurcharge[],
     specialSurchargesLineItems: FormLineItem[]
 }
@@ -90,7 +90,7 @@ export interface FormSelectedDoorLineItem {
     width: string
 }
 
-export interface FormSpecialAccessory {
+export interface FormAestheticAccessory {
     id: string
     count: number
     selectedPrice: number
@@ -103,7 +103,7 @@ export interface FormSpecialSurcharge {
     isAssemblySelectedDirty: boolean
 }
 
-export interface FormPossibleAdditionalCharge {
+export interface FormTechnicalSurcharge {
     id: string
     count: number
     isCountDirty: boolean
@@ -113,21 +113,22 @@ export function constructReactiveFormPriceOffer(json: ApiResponse | undefined): 
     return {
         address: constructReactiveFormAddress(json?.priceOffer.address),
         assemblyDoorsCount: json?.priceOffer.assemblyDoorsCount || 0,
-        assemblyPriceHandlesRosettesCount: json?.priceOffer.assemblyPriceHandlesRosettesCount || 0,
+        assemblyHandlesRosettesCount: json?.priceOffer.assemblyHandlesRosettesCount || 0,
         contact: constructReactiveFormContact(json?.priceOffer.contact),
         doors: constructReactiveFormDoors(json?.priceOffer.doors || []),
         doorsMeta: constructDoorsMeta(json?.priceOffer.doors || []),
         customHandle: constructReactiveFormCustomHandle(json?.priceOffer.customHandle),
         handle: json?.priceOffer.handle ? constructReactiveFormHandle(json?.priceOffer.handle) : null,
         isAssemblyDoorsCountDirty: json?.priceOffer.isAssemblyDoorsCountDirty || false,
+        isAssemblyHandlesRosettesCountDirty: json?.priceOffer.isAssemblyHandlesRosettesCountDirty || false,
         note: json?.priceOffer.note || "",
-        possibleAdditionalCharges: constructReactiveFormPossibleAdditionalCharges(json?.priceOffer.possibleAdditionalCharges || []),
-        possibleAdditionalChargesLineItems: json?.priceOffer.possibleAdditionalChargesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
+        technicalSurcharges: constructReactiveFormTechnicalSurcharges(json?.priceOffer.technicalSurcharges || []),
+        technicalSurchargesLineItems: json?.priceOffer.technicalSurchargesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
         rosettes: constructReactiveFormRosettes(json?.priceOffer.rosettes || []),
         rosettesLineItems: json?.priceOffer.rosettesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
         selectedDoorsLineItems: constructReactiveSelectedDoorsLineItems(json?.priceOffer?.selectedDoorsLineItems ?? []),
-        specialAccessories: constructReactiveSpecialAccessories(json?.priceOffer.specialAccessories || []),
-        specialAccessoriesLineItems: json?.priceOffer.specialAccessoriesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
+        aestheticAccessories: constructReactiveAestheticAccessories(json?.priceOffer.aestheticAccessories || []),
+        aestheticAccessoriesLineItems: json?.priceOffer.aestheticAccessoriesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
         specialSurcharges: constructReactiveSpecialSurcharges(json?.priceOffer.specialSurcharges || []),
         specialSurchargesLineItems: json?.priceOffer.specialSurchargesLineItems.map(it => constructReactiveFormLineItem(it)) || []
     }
@@ -195,7 +196,7 @@ export function constructReactiveFormLineItem(handle: LineItemResponse): FormLin
     }
 }
 
-export function constructReactiveFormPossibleAdditionalCharges(charges: PossibleAdditionalChargeResponse[]): FormPossibleAdditionalCharge[] {
+export function constructReactiveFormTechnicalSurcharges(charges: TechnicalSurchargeResponse[]): FormTechnicalSurcharge[] {
     return charges.map(it => {
         return {
             id: it.id,
@@ -214,12 +215,12 @@ export function constructReactiveFormRosettes(rosettes: RosetteResponse[]): Form
     })
 }
 
-export function constructReactiveSpecialAccessories(specialAccessories: SpecialAccessoriesResponse[]): FormSpecialAccessory[] {
-    return specialAccessories.map(specialAccessory => {
+export function constructReactiveAestheticAccessories(aestheticAccessories: AestheticAccessoriesResponse[]): FormAestheticAccessory[] {
+    return aestheticAccessories.map(aestheticAccessory => {
         return {
-            id: specialAccessory.id,
-            count: specialAccessory.count ?? 0,
-            selectedPrice: specialAccessory.selectedPrice ?? 0.0
+            id: aestheticAccessory.id,
+            count: aestheticAccessory.count ?? 0,
+            selectedPrice: aestheticAccessory.selectedPrice ?? 0.0
         }
     })
 }
@@ -262,16 +263,16 @@ const rosetteMetaById = computed(() =>
 )
 */
 
-export function findPossibleAdditionalChargeById(id: string, apiResponse: ApiResponse | undefined): PossibleAdditionalChargeResponse | undefined {
-    return apiResponse?.priceOffer.possibleAdditionalCharges.find(it => it.id === id)
+export function findTechnicalSurchargeById(id: string, apiResponse: ApiResponse | undefined): TechnicalSurchargeResponse | undefined {
+    return apiResponse?.priceOffer.technicalSurcharges.find(it => it.id === id)
 }
 
 export function findRosetteById(id: string, apiResponse: ApiResponse | undefined): RosetteResponse | undefined {
     return apiResponse?.priceOffer.rosettes.find(it => it.id === id)
 }
 
-export function findSpecialAccessoryById(id: string, apiResponse: ApiResponse | undefined): SpecialAccessoriesResponse | undefined {
-    return apiResponse?.priceOffer.specialAccessories.find(it => it.id === id)
+export function findAestheticAccessoryById(id: string, apiResponse: ApiResponse | undefined): AestheticAccessoriesResponse | undefined {
+    return apiResponse?.priceOffer.aestheticAccessories.find(it => it.id === id)
 }
 
 export function findSpecialSurchargeById(id: string, apiResponse: ApiResponse | undefined): SpecialSurchargeResponse | undefined {

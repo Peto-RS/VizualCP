@@ -28,8 +28,8 @@ onMounted(() => {
   <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center">
     <div class="text-center">
       <span class="fa fa-check text-success" style="font-size: 5em"></span>
-      <h3>Ďakujeme.</h3>
-      <h3>Cenovú ponuku sme Vám poslali na e-mailovú adresu.</h3>
+      <h3>{{ t('views.priceOfferFinished.priceOfferSentToMail') }}</h3>
+      <h3>{{ t('views.priceOfferFinished.thanksMessage') }}</h3>
       <h3>STOLÁRSTVO - SUČANSKÝ</h3>
     </div>
     <div>

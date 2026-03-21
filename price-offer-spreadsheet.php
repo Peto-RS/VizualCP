@@ -139,9 +139,9 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
 
     $rowCountToInsert = insertLineItems($priceOffer->rosettesLineItems, $sheet, $rowIdx);
     $rowIdx = $rowIdx + 1 + $rowCountToInsert;
-    $assemblyPriceHandlesRosettesCount = $priceOffer->assemblyPriceHandlesRosettesCount;
-    if ($assemblyPriceHandlesRosettesCount) {
-        $sheet->setCellValue('G' . $rowIdx, $assemblyPriceHandlesRosettesCount);
+    $assemblyHandlesRosettesCount = $priceOffer->assemblyHandlesRosettesCount;
+    if ($assemblyHandlesRosettesCount) {
+        $sheet->setCellValue('G' . $rowIdx, $assemblyHandlesRosettesCount);
     }
 
     /*** Delivery ***/
@@ -190,7 +190,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
 
     /*** Special accessories ***/
     $rowIdx = $rowIdx + 3;
-    foreach ($priceOffer->specialAccessories as $item) {
+    foreach ($priceOffer->aestheticAccessories as $item) {
         $selectedPrice = $item->selectedPrice;
         if ($selectedPrice) {
             $sheet->setCellValue("F" . $rowIdx, $selectedPrice);
@@ -204,12 +204,12 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
         $rowIdx = $rowIdx + 1;
     }
 
-    $rowCountToInsert = insertLineItems($priceOffer->specialAccessoriesLineItems, $sheet, $rowIdx);
+    $rowCountToInsert = insertLineItems($priceOffer->aestheticAccessoriesLineItems, $sheet, $rowIdx);
     $rowIdx = $rowIdx + $rowCountToInsert;
 
     /*** Possible additional charges ***/
     $rowIdx = $rowIdx + 3;
-    foreach ($priceOffer->possibleAdditionalCharges as $item) {
+    foreach ($priceOffer->technicalSurcharges as $item) {
         $count = $item->count;
         if ($count) {
             $sheet->setCellValue("G" . $rowIdx, $count);
@@ -219,7 +219,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
         $rowIdx = $rowIdx + 1;
     }
 
-    $rowCountToInsert = insertLineItems($priceOffer->possibleAdditionalChargesLineItems, $sheet, $rowIdx);
+    $rowCountToInsert = insertLineItems($priceOffer->technicalSurchargesLineItems, $sheet, $rowIdx);
     $rowIdx = $rowIdx + $rowCountToInsert;
 
     /*** Special surcharges ***/

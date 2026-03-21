@@ -17,6 +17,12 @@ export interface Material {
 
 export interface ConfiguratorResponse {
     doorCategories: DoorCategory[]
+    gallery: Array<{
+        col: number
+        height: number
+        imgSrc: string
+        width: number
+    }>
     glasses: Record<string, {
         label: string
     }>

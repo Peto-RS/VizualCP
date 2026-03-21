@@ -287,7 +287,7 @@ class LineItemResponse implements JsonSerializable
     }
 }
 
-class PossibleAdditionalChargeResponse implements JsonSerializable
+class TechnicalSurchargeResponse implements JsonSerializable
 {
     /** @var string $id */
     public $id;
@@ -436,24 +436,24 @@ class SectionsCalculatedPriceResponse implements JsonSerializable
     /** @var float $assemblyDoors */
     public $assemblyDoors;
 
-    /** @var float $specialAccessories */
-    public $specialAccessories;
+    /** @var float $aestheticAccessories */
+    public $aestheticAccessories;
 
-    /** @var float $possibleAdditionalCharges */
-    public $possibleAdditionalCharges;
+    /** @var float $technicalSurcharges */
+    public $technicalSurcharges;
 
     /** @var float $specialSurcharges */
     public $specialSurcharges;
 
     public function __construct(float $doors, float $handlesAndRosettes, float $delivery, float $assemblyDoors,
-                                float $specialAccessories, float $possibleAdditionalCharges, float $specialSurcharges)
+                                float $aestheticAccessories, float $technicalSurcharges, float $specialSurcharges)
     {
         $this->doors = $doors;
         $this->handlesAndRosettes = $handlesAndRosettes;
         $this->delivery = $delivery;
         $this->assemblyDoors = $assemblyDoors;
-        $this->specialAccessories = $specialAccessories;
-        $this->possibleAdditionalCharges = $possibleAdditionalCharges;
+        $this->aestheticAccessories = $aestheticAccessories;
+        $this->technicalSurcharges = $technicalSurcharges;
         $this->specialSurcharges = $specialSurcharges;
     }
 
@@ -464,14 +464,14 @@ class SectionsCalculatedPriceResponse implements JsonSerializable
             'handlesAndRosettes' => $this->handlesAndRosettes,
             'delivery' => $this->delivery,
             'assemblyDoors' => $this->assemblyDoors,
-            'specialAccessories' => $this->specialAccessories,
-            'possibleAdditionalCharges' => $this->possibleAdditionalCharges,
+            'aestheticAccessories' => $this->aestheticAccessories,
+            'technicalSurcharges' => $this->technicalSurcharges,
             'specialSurcharges' => $this->specialSurcharges
         ];
     }
 }
 
-class SpecialAccessoryResponse implements JsonSerializable
+class AestheticAccessoryResponse implements JsonSerializable
 {
     /** @var string $id */
     public $id;
@@ -633,8 +633,8 @@ class PriceOfferResponse implements JsonSerializable
     /** @var int|null $assemblyDoorsCount */
     public $assemblyDoorsCount;
 
-    /** @var int|null $assemblyPriceHandlesRosettesCount */
-    public $assemblyPriceHandlesRosettesCount;
+    /** @var int|null $assemblyHandlesRosettesCount */
+    public $assemblyHandlesRosettesCount;
 
     /** @var float $assemblyPriceHandlesRosettesCalculatedPrice */
     public $assemblyPriceHandlesRosettesCalculatedPrice;
@@ -660,17 +660,19 @@ class PriceOfferResponse implements JsonSerializable
     /** @var HandleResponse|null $handle */
     public $handle;
 
-    /** @var boolean|null $isAssemblyDoorsCountDirty */
+    /** @var bool|null $isAssemblyDoorsCountDirty */
     public $isAssemblyDoorsCountDirty;
+    /** @var bool|null $isAssemblyHandlesRosettesCountDirty */
+    public $isAssemblyHandlesRosettesCountDirty;
 
     /** @var string|null $note */
     public $note;
 
-    /** @var PossibleAdditionalChargeResponse[] $possibleAdditionalCharges */
-    public $possibleAdditionalCharges;
+    /** @var TechnicalSurchargeResponse[] $technicalSurcharges */
+    public $technicalSurcharges;
 
-    /** @var LineItemResponse[] $possibleAdditionalChargesLineItems */
-    public $possibleAdditionalChargesLineItems;
+    /** @var LineItemResponse[] $technicalSurchargesLineItems */
+    public $technicalSurchargesLineItems;
 
     /** @var RosetteResponse[] $rosettes */
     public $rosettes;
@@ -684,11 +686,11 @@ class PriceOfferResponse implements JsonSerializable
     /** @var SelectedDoorLineItemResponse[] $selectedDoorsLineItems */
     public $selectedDoorsLineItems;
 
-    /** @var SpecialAccessoryResponse[] $specialAccessories */
-    public $specialAccessories;
+    /** @var AestheticAccessoryResponse[] $aestheticAccessories */
+    public $aestheticAccessories;
 
-    /** @var LineItemResponse[] $specialAccessoriesLineItems */
-    public $specialAccessoriesLineItems;
+    /** @var LineItemResponse[] $aestheticAccessoriesLineItems */
+    public $aestheticAccessoriesLineItems;
 
     /** @var SpecialSurchargeResponse[] $specialSurcharges */
     public $specialSurcharges;
@@ -700,7 +702,7 @@ class PriceOfferResponse implements JsonSerializable
         AddressResponse                 $address,
         float                           $assemblyDoorsCalculatedPrice,
         ?int                            $assemblyDoorsCount,
-        ?int                            $assemblyPriceHandlesRosettesCount,
+        ?int                            $assemblyHandlesRosettesCount,
         float                           $assemblyPriceHandlesRosettesCalculatedPrice,
         float                           $calculatedPrice,
         float                           $calculatedPriceVat,
@@ -710,15 +712,16 @@ class PriceOfferResponse implements JsonSerializable
         CustomHandleResponse            $customHandle,
         ?HandleResponse                 $handle,
         ?bool                           $isAssemblyDoorsCountDirty,
+        ?bool                           $isAssemblyHandlesRosettesCountDirty,
         ?string                         $note,
-        array                           $possibleAdditionalCharges,
-        array                           $possibleAdditionalChargesLineItems,
+        array                           $technicalSurcharges,
+        array                           $technicalSurchargesLineItems,
         array                           $rosettes,
         array                           $rosettesLineItems,
         SectionsCalculatedPriceResponse $sectionsCalculatedPrice,
         array                           $selectedDoorsLineItems,
-        array                           $specialAccessories,
-        array                           $specialAccessoriesLineItems,
+        array                           $aestheticAccessories,
+        array                           $aestheticAccessoriesLineItems,
         array                           $specialSurcharges,
         array                           $specialSurchargesLineItems
     )
@@ -726,7 +729,7 @@ class PriceOfferResponse implements JsonSerializable
         $this->address = $address;
         $this->assemblyDoorsCalculatedPrice = $assemblyDoorsCalculatedPrice;
         $this->assemblyDoorsCount = $assemblyDoorsCount;
-        $this->assemblyPriceHandlesRosettesCount = $assemblyPriceHandlesRosettesCount;
+        $this->assemblyHandlesRosettesCount = $assemblyHandlesRosettesCount;
         $this->assemblyPriceHandlesRosettesCalculatedPrice = $assemblyPriceHandlesRosettesCalculatedPrice;
         $this->calculatedPrice = $calculatedPrice;
         $this->calculatedPriceVat = $calculatedPriceVat;
@@ -736,15 +739,16 @@ class PriceOfferResponse implements JsonSerializable
         $this->customHandle = $customHandle;
         $this->handle = $handle;
         $this->isAssemblyDoorsCountDirty = $isAssemblyDoorsCountDirty;
+        $this->isAssemblyHandlesRosettesCountDirty = $isAssemblyHandlesRosettesCountDirty;
         $this->note = $note;
-        $this->possibleAdditionalCharges = $possibleAdditionalCharges;
-        $this->possibleAdditionalChargesLineItems = $possibleAdditionalChargesLineItems;
+        $this->technicalSurcharges = $technicalSurcharges;
+        $this->technicalSurchargesLineItems = $technicalSurchargesLineItems;
         $this->rosettes = $rosettes;
         $this->rosettesLineItems = $rosettesLineItems;
         $this->sectionsCalculatedPrice = $sectionsCalculatedPrice;
         $this->selectedDoorsLineItems = $selectedDoorsLineItems;
-        $this->specialAccessories = $specialAccessories;
-        $this->specialAccessoriesLineItems = $specialAccessoriesLineItems;
+        $this->aestheticAccessories = $aestheticAccessories;
+        $this->aestheticAccessoriesLineItems = $aestheticAccessoriesLineItems;
         $this->specialSurcharges = $specialSurcharges;
         $this->specialSurchargesLineItems = $specialSurchargesLineItems;
     }
@@ -755,7 +759,7 @@ class PriceOfferResponse implements JsonSerializable
             'address' => $this->address,
             'assemblyDoorsCalculatedPrice' => $this->assemblyDoorsCalculatedPrice,
             'assemblyDoorsCount' => $this->assemblyDoorsCount,
-            'assemblyPriceHandlesRosettesCount' => $this->assemblyPriceHandlesRosettesCount,
+            'assemblyHandlesRosettesCount' => $this->assemblyHandlesRosettesCount,
             'assemblyPriceHandlesRosettesCalculatedPrice' => $this->assemblyPriceHandlesRosettesCalculatedPrice,
             'calculatedPrice' => $this->calculatedPrice,
             'calculatedPriceVat' => $this->calculatedPriceVat,
@@ -765,15 +769,16 @@ class PriceOfferResponse implements JsonSerializable
             'customHandle' => $this->customHandle,
             'handle' => $this->handle,
             'isAssemblyDoorsCountDirty' => $this->isAssemblyDoorsCountDirty,
+            'isAssemblyHandlesRosettesCountDirty' => $this->isAssemblyHandlesRosettesCountDirty,
             'note' => $this->note,
-            'possibleAdditionalCharges' => $this->possibleAdditionalCharges,
-            'possibleAdditionalChargesLineItems' => $this->possibleAdditionalChargesLineItems,
+            'technicalSurcharges' => $this->technicalSurcharges,
+            'technicalSurchargesLineItems' => $this->technicalSurchargesLineItems,
             'rosettes' => $this->rosettes,
             'rosettesLineItems' => $this->rosettesLineItems,
             'sectionsCalculatedPrice' => $this->sectionsCalculatedPrice,
             'selectedDoorsLineItems' => $this->selectedDoorsLineItems,
-            'specialAccessories' => $this->specialAccessories,
-            'specialAccessoriesLineItems' => $this->specialAccessoriesLineItems,
+            'aestheticAccessories' => $this->aestheticAccessories,
+            'aestheticAccessoriesLineItems' => $this->aestheticAccessoriesLineItems,
             'specialSurcharges' => $this->specialSurcharges,
             'specialSurchargesLineItems' => $this->specialSurchargesLineItems
         ];

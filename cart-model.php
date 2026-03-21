@@ -263,7 +263,7 @@ class Handle
     }
 }
 
-class PossibleAdditionalCharge
+class TechnicalSurcharge
 {
     public static $SILICONE_ID = "possible-additional-charges-silicone-wall-frame";
     public static $SILICONE_PRICE_MULTIPLIER = 0.7;
@@ -284,7 +284,7 @@ class PossibleAdditionalCharge
         $this->isCountDirty = $isCountDirty;
     }
 
-    public static function fromRequest(PossibleAdditionalChargeRequest $req): PossibleAdditionalCharge
+    public static function fromRequest(TechnicalSurchargeRequest $req): TechnicalSurcharge
     {
         return new self(
             $req->id,
@@ -293,27 +293,27 @@ class PossibleAdditionalCharge
         );
     }
 
-    public function toResponse(?array $possibleAdditionalChargeDb, int $doorsCount): PossibleAdditionalChargeResponse
+    public function toResponse(?array $technicalSurchargeDb, int $doorsCount): TechnicalSurchargeResponse
     {
-        $effectiveCount = $this->getEffectiveCount($possibleAdditionalChargeDb, $doorsCount);
-        return new PossibleAdditionalChargeResponse(
+        $effectiveCount = $this->getEffectiveCount($technicalSurchargeDb, $doorsCount);
+        return new TechnicalSurchargeResponse(
             $this->id,
-            $this->calculatePrice($possibleAdditionalChargeDb, $effectiveCount),
-            array_key_exists("price", $possibleAdditionalChargeDb) ? $possibleAdditionalChargeDb["price"] : null,
+            $this->calculatePrice($technicalSurchargeDb, $effectiveCount),
+            array_key_exists("price", $technicalSurchargeDb) ? $technicalSurchargeDb["price"] : null,
             $effectiveCount,
             $this->isCountDirty,
-            array_key_exists("header", $possibleAdditionalChargeDb) ? $possibleAdditionalChargeDb["header"] : null,
-            array_key_exists("hint", $possibleAdditionalChargeDb) ? $possibleAdditionalChargeDb["hint"] : null,
-            array_key_exists("imgSrc", $possibleAdditionalChargeDb) ? $possibleAdditionalChargeDb["imgSrc"] : null,
-            array_key_exists("label", $possibleAdditionalChargeDb) ? $possibleAdditionalChargeDb["label"] : null,
-            array_key_exists("youtubeVideoCode", $possibleAdditionalChargeDb) ? $possibleAdditionalChargeDb["youtubeVideoCode"] : null,
-            array_key_exists("videoSrc", $possibleAdditionalChargeDb) ? $possibleAdditionalChargeDb["videoSrc"] : null
+            array_key_exists("header", $technicalSurchargeDb) ? $technicalSurchargeDb["header"] : null,
+            array_key_exists("hint", $technicalSurchargeDb) ? $technicalSurchargeDb["hint"] : null,
+            array_key_exists("imgSrc", $technicalSurchargeDb) ? $technicalSurchargeDb["imgSrc"] : null,
+            array_key_exists("label", $technicalSurchargeDb) ? $technicalSurchargeDb["label"] : null,
+            array_key_exists("youtubeVideoCode", $technicalSurchargeDb) ? $technicalSurchargeDb["youtubeVideoCode"] : null,
+            array_key_exists("videoSrc", $technicalSurchargeDb) ? $technicalSurchargeDb["videoSrc"] : null
         );
     }
 
-    function getEffectiveCount(?array $possibleAdditionalChargeDb, int $doorsCount): int
+    function getEffectiveCount(?array $technicalSurchargeDb, int $doorsCount): int
     {
-        $setCountBasedOnDoorsCount = is_array($possibleAdditionalChargeDb) && $possibleAdditionalChargeDb["setCountBasedOnDoorsCount"];
+        $setCountBasedOnDoorsCount = is_array($technicalSurchargeDb) && $technicalSurchargeDb["setCountBasedOnDoorsCount"];
         if (!$this->isCountDirty && $setCountBasedOnDoorsCount) {
             return $doorsCount;
         }
@@ -323,7 +323,7 @@ class PossibleAdditionalCharge
 
     function calculatePrice(?array $itemJson, int $effectiveCount): float
     {
-        $coefficient = $this->id == PossibleAdditionalCharge::$SILICONE_ID ? PossibleAdditionalCharge::$SILICONE_PRICE_MULTIPLIER : 1.0;
+        $coefficient = $this->id == TechnicalSurcharge::$SILICONE_ID ? TechnicalSurcharge::$SILICONE_PRICE_MULTIPLIER : 1.0;
         $rawPrice = array_key_exists("price", $itemJson) ? $itemJson["price"] : 0.0;
         return $effectiveCount * $rawPrice * $coefficient;
     }
@@ -417,7 +417,7 @@ class LineItem
     }
 }
 
-class SpecialAccessory
+class AestheticAccessory
 {
     /** @var string|null $id */
     public $id;
@@ -435,7 +435,7 @@ class SpecialAccessory
         $this->selectedPrice = $selectedPrice;
     }
 
-    public static function fromRequest(SpecialAccessoryRequest $req): SpecialAccessory
+    public static function fromRequest(AestheticAccessoryRequest $req): AestheticAccessory
     {
         return new self(
             $req->id,
@@ -444,26 +444,26 @@ class SpecialAccessory
         );
     }
 
-    public function toResponse(array $specialAccessoryDb): SpecialAccessoryResponse
+    public function toResponse(array $aestheticAccessoryDb): AestheticAccessoryResponse
     {
-        return new SpecialAccessoryResponse(
+        return new AestheticAccessoryResponse(
             $this->id,
-            $this->calculatePrice($specialAccessoryDb),
-            array_key_exists("price", $specialAccessoryDb) ? $specialAccessoryDb["price"] : null,
+            $this->calculatePrice($aestheticAccessoryDb),
+            array_key_exists("price", $aestheticAccessoryDb) ? $aestheticAccessoryDb["price"] : null,
             $this->count,
-            array_key_exists("header", $specialAccessoryDb) ? $specialAccessoryDb["header"] : null,
-            array_key_exists("hint", $specialAccessoryDb) ? $specialAccessoryDb["hint"] : null,
-            array_key_exists("imgSrc", $specialAccessoryDb) ? $specialAccessoryDb["imgSrc"] : null,
-            array_key_exists("label", $specialAccessoryDb) ? $specialAccessoryDb["label"] : null,
+            array_key_exists("header", $aestheticAccessoryDb) ? $aestheticAccessoryDb["header"] : null,
+            array_key_exists("hint", $aestheticAccessoryDb) ? $aestheticAccessoryDb["hint"] : null,
+            array_key_exists("imgSrc", $aestheticAccessoryDb) ? $aestheticAccessoryDb["imgSrc"] : null,
+            array_key_exists("label", $aestheticAccessoryDb) ? $aestheticAccessoryDb["label"] : null,
             $this->selectedPrice,
-            array_key_exists("youtubeVideoCode", $specialAccessoryDb) ? $specialAccessoryDb["youtubeVideoCode"] : null,
-            array_key_exists("videoSrc", $specialAccessoryDb) ? $specialAccessoryDb["videoSrc"] : null
+            array_key_exists("youtubeVideoCode", $aestheticAccessoryDb) ? $aestheticAccessoryDb["youtubeVideoCode"] : null,
+            array_key_exists("videoSrc", $aestheticAccessoryDb) ? $aestheticAccessoryDb["videoSrc"] : null
         );
     }
 
-    function calculatePrice(array $specialAccessoryDb): float
+    function calculatePrice(array $aestheticAccessoryDb): float
     {
-        $priceDb = array_key_exists("price", $specialAccessoryDb) ? $specialAccessoryDb["price"] : null;
+        $priceDb = array_key_exists("price", $aestheticAccessoryDb) ? $aestheticAccessoryDb["price"] : null;
         $price = $priceDb ?? $this->selectedPrice ?? 0.0;
         return ($this->count ?? 0) * $price;
     }
@@ -808,8 +808,8 @@ class PriceOffer
 
     /** @var Address $address */
     public $address;
-    /** @var int|null $assemblyPriceHandlesRosettesCount */
-    public $assemblyPriceHandlesRosettesCount;
+    /** @var int|null $assemblyHandlesRosettesCount */
+    public $assemblyHandlesRosettesCount;
     /** @var int|null $assemblyDoorsCount */
     public $assemblyDoorsCount;
     /** @var Door[] $doors */
@@ -822,22 +822,24 @@ class PriceOffer
     public $handle;
     /** @var bool|null $isAssemblyDoorsCountDirty */
     public $isAssemblyDoorsCountDirty;
+    /** @var bool|null $isAssemblyHandlesRosettesCountDirty */
+    public $isAssemblyHandlesRosettesCountDirty;
     /** @var string|null $note */
     public $note;
-    /** @var PossibleAdditionalCharge[] $possibleAdditionalCharges */
-    public $possibleAdditionalCharges;
-    /** @var LineItem[] $possibleAdditionalChargesLineItems */
-    public $possibleAdditionalChargesLineItems;
+    /** @var TechnicalSurcharge[] $technicalSurcharges */
+    public $technicalSurcharges;
+    /** @var LineItem[] $technicalSurchargesLineItems */
+    public $technicalSurchargesLineItems;
     /** @var SelectedDoorLineItem[] $selectedDoorsLineItems */
     public $selectedDoorsLineItems;
     /** @var Rosette[] $selectedRosettes */
     public $selectedRosettes;
     /** @var LineItem[] $rosettesLineItems */
     public $rosettesLineItems;
-    /** @var SpecialAccessory[] $specialAccessories */
-    public $specialAccessories;
-    /** @var LineItem[] $specialAccessoriesLineItems */
-    public $specialAccessoriesLineItems;
+    /** @var AestheticAccessory[] $aestheticAccessories */
+    public $aestheticAccessories;
+    /** @var LineItem[] $aestheticAccessoriesLineItems */
+    public $aestheticAccessoriesLineItems;
     /** @var SpecialSurcharge[] $specialSurcharges */
     public $specialSurcharges;
     /** @var LineItem[] $specialSurchargesLineItems */
@@ -856,20 +858,21 @@ class PriceOffer
     {
         $this->address = new Address();
         $this->assemblyDoorsCount = null;
-        $this->assemblyPriceHandlesRosettesCount = null;
+        $this->assemblyHandlesRosettesCount = null;
         $this->contact = new Contact();
         $this->doors = array();
         $this->customHandle = new CustomHandle();
         $this->handle = null;
         $this->isAssemblyDoorsCountDirty = null;
+        $this->isAssemblyHandlesRosettesCountDirty = null;
         $this->note = null;
-        $this->possibleAdditionalCharges = array();
-        $this->possibleAdditionalChargesLineItems = array();
+        $this->technicalSurcharges = array();
+        $this->technicalSurchargesLineItems = array();
         $this->selectedDoorsLineItems = array();
         $this->selectedRosettes = array();
         $this->rosettesLineItems = array();
-        $this->specialAccessories = array();
-        $this->specialAccessoriesLineItems = array();
+        $this->aestheticAccessories = array();
+        $this->aestheticAccessoriesLineItems = array();
         $this->specialSurcharges = array();
         $this->specialSurchargesLineItems = array();
     }
@@ -878,21 +881,22 @@ class PriceOffer
     {
         $instance = new self();
         $instance->address = $session->address ?? new Address();
-        $instance->assemblyPriceHandlesRosettesCount = $session->assemblyPriceHandlesRosettesCount ?? null;
+        $instance->assemblyHandlesRosettesCount = $session->assemblyHandlesRosettesCount ?? null;
         $instance->assemblyDoorsCount = $session->assemblyDoorsCount ?? null;
         $instance->contact = $session->contact ?? new Contact();
         $instance->doors = $session->doors ?? array();
         $instance->customHandle = $session->customHandle ?? new CustomHandle();
         $instance->handle = $session->handle ?? null;
         $instance->isAssemblyDoorsCountDirty = $session->isAssemblyDoorsCountDirty ?? null;
+        $instance->isAssemblyHandlesRosettesCountDirty = $session->isAssemblyHandlesRosettesCountDirty ?? null;
         $instance->note = $session->note ?? null;
-        $instance->possibleAdditionalCharges = $session->possibleAdditionalCharges ?? array();
-        $instance->possibleAdditionalChargesLineItems = $session->possibleAdditionalChargesLineItems ?? array();
+        $instance->technicalSurcharges = $session->technicalSurcharges ?? array();
+        $instance->technicalSurchargesLineItems = $session->technicalSurchargesLineItems ?? array();
         $instance->selectedDoorsLineItems = $session->selectedDoorsLineItems ?? array();
         $instance->selectedRosettes = $session->selectedRosettes ?? array();
         $instance->rosettesLineItems = $session->rosettesLineItems ?? array();
-        $instance->specialAccessories = $session->specialAccessories ?? array();
-        $instance->specialAccessoriesLineItems = $session->specialAccessoriesLineItems ?? array();
+        $instance->aestheticAccessories = $session->aestheticAccessories ?? array();
+        $instance->aestheticAccessoriesLineItems = $session->aestheticAccessoriesLineItems ?? array();
         $instance->specialSurcharges = $session->specialSurcharges ?? array();
         $instance->specialSurchargesLineItems = $session->specialSurchargesLineItems ?? array();
 
@@ -904,7 +908,7 @@ class PriceOffer
         $instance = new self();
         $instance->address = Address::fromRequest($req->address);
         $instance->assemblyDoorsCount = $req->assemblyDoorsCount;
-        $instance->assemblyPriceHandlesRosettesCount = $req->assemblyPriceHandlesRosettesCount;
+        $instance->assemblyHandlesRosettesCount = $req->assemblyHandlesRosettesCount;
         $instance->contact = Contact::fromRequest($req->contact);
 
         $instance->doors = is_array($req->doors) ? array_map(function (DoorRequest $value): Door {
@@ -914,15 +918,16 @@ class PriceOffer
         $instance->customHandle = CustomHandle::fromRequest($req->customHandle);
         $instance->handle = $req->handle ? Handle::fromRequest($req->handle) : null;
         $instance->isAssemblyDoorsCountDirty = $req->isAssemblyDoorsCountDirty;
+        $instance->isAssemblyHandlesRosettesCountDirty = $req->isAssemblyHandlesRosettesCountDirty;
         $instance->note = $req->note;
 
-        $instance->possibleAdditionalCharges = is_array($req->possibleAdditionalCharges) ? array_map(function (PossibleAdditionalChargeRequest $value): PossibleAdditionalCharge {
-            return PossibleAdditionalCharge::fromRequest($value);
-        }, $req->possibleAdditionalCharges) : array();
+        $instance->technicalSurcharges = is_array($req->technicalSurcharges) ? array_map(function (TechnicalSurchargeRequest $value): TechnicalSurcharge {
+            return TechnicalSurcharge::fromRequest($value);
+        }, $req->technicalSurcharges) : array();
 
-        $instance->possibleAdditionalChargesLineItems = is_array($req->possibleAdditionalChargesLineItems) ? array_map(function (LineItemRequest $value): LineItem {
+        $instance->technicalSurchargesLineItems = is_array($req->technicalSurchargesLineItems) ? array_map(function (LineItemRequest $value): LineItem {
             return LineItem::fromRequest($value);
-        }, $req->possibleAdditionalChargesLineItems) : array();
+        }, $req->technicalSurchargesLineItems) : array();
 
         $instance->selectedRosettes = is_array($req->rosettes) ? array_map(function (RosetteRequest $value): Rosette {
             return Rosette::fromRequest($value);
@@ -936,13 +941,13 @@ class PriceOffer
             return SelectedDoorLineItem::fromRequest($value);
         }, $req->selectedDoorsLineItems) : array();
 
-        $instance->specialAccessories = is_array($req->specialAccessories) ? array_map(function (SpecialAccessoryRequest $value): SpecialAccessory {
-            return SpecialAccessory::fromRequest($value);
-        }, $req->specialAccessories) : array();
+        $instance->aestheticAccessories = is_array($req->aestheticAccessories) ? array_map(function (AestheticAccessoryRequest $value): AestheticAccessory {
+            return AestheticAccessory::fromRequest($value);
+        }, $req->aestheticAccessories) : array();
 
-        $instance->specialAccessoriesLineItems = is_array($req->specialAccessoriesLineItems) ? array_map(function (LineItemRequest $value): LineItem {
+        $instance->aestheticAccessoriesLineItems = is_array($req->aestheticAccessoriesLineItems) ? array_map(function (LineItemRequest $value): LineItem {
             return LineItem::fromRequest($value);
-        }, $req->specialAccessoriesLineItems) : array();
+        }, $req->aestheticAccessoriesLineItems) : array();
 
         $instance->specialSurcharges = is_array($req->specialSurcharges) ? array_map(function (SpecialSurchargeRequest $value): SpecialSurcharge {
             return SpecialSurcharge::fromRequest($value);
@@ -964,7 +969,7 @@ class PriceOffer
             null,
             1,
             null,
-            null,
+            true,
             null,
             null
         );
@@ -982,19 +987,20 @@ class PriceOffer
     {
         $doorsCount = $this->getDoorNumber();
         $assemblyDoorsEffectiveCount = $this->getEffectiveCountIsAssemblyDoorsCount($doorsCount);
+        $assemblyHandlesRosettesEffectiveCount = $this->getEffectiveCountIsAssemblyHandlesRosettesCount($doorsCount);
         $assemblyDoorsCalculatedPrice = $this->calculateDoorsAssemblyCosts($assemblyDoorsEffectiveCount) ?? 0.0;
-        $possibleAdditionalChargesCalculatedPrice = $this->calculatePossibleAdditionalChargesPrice($doorsCount);
+        $technicalSurchargesCalculatedPrice = $this->calculateTechnicalSurchargesPrice($doorsCount);
         $price = $this->calculatePrice(
             $assemblyDoorsCalculatedPrice,
-            $possibleAdditionalChargesCalculatedPrice
+            $technicalSurchargesCalculatedPrice
         );
 
         return new PriceOfferResponse(
             $this->address ? $this->address->toResponse() : AddressResponse::empty(),
             $assemblyDoorsCalculatedPrice,
             $assemblyDoorsEffectiveCount,
-            $this->assemblyPriceHandlesRosettesCount,
-            $this->calculateAssemblyPriceHandlesRosettes(),
+            $assemblyHandlesRosettesEffectiveCount,
+            $this->calculateAssemblyPriceHandlesRosettes($assemblyHandlesRosettesEffectiveCount),
             $price,
             $this->calculatePriceVat($price),
             $this->contact ? $this->contact->toResponse() : ContactResponse::empty(),
@@ -1007,11 +1013,12 @@ class PriceOffer
                 $this->handle->toResponse(HandlesJsonDataManipulation::findByIdOrFalse($this->handle->id), $doorsCount) :
                 null,
             $this->isAssemblyDoorsCountDirty,
+            $this->isAssemblyHandlesRosettesCountDirty,
             $this->note,
-            mapPossibleAdditionalChargesToResponse($this->possibleAdditionalCharges, $doorsCount),
+            mapTechnicalSurchargesToResponse($this->technicalSurcharges, $doorsCount),
             array_map(function (LineItem $it): LineItemResponse {
                 return $it->toResponse();
-            }, $this->possibleAdditionalChargesLineItems),
+            }, $this->technicalSurchargesLineItems),
             mapRosettesToResponse($this->selectedRosettes),
             array_map(function (LineItem $it): LineItemResponse {
                 return $it->toResponse();
@@ -1021,17 +1028,17 @@ class PriceOffer
                 $this->calculateHandlesAndRosettesPrice(),//handlesAndRosettes
                 $this->calculateDeliveryCosts(),//delivery
                 $assemblyDoorsCalculatedPrice,//assemblyDoors
-                $this->calculateSpecialAccessoriesPrice(),//specialAccessories
-                $possibleAdditionalChargesCalculatedPrice,//possibleAdditionalCharges
+                $this->calculateAestheticAccessoriesPrice(),//aestheticAccessories
+                $technicalSurchargesCalculatedPrice,//technicalSurcharges
                 $this->calculateSpecialSurchargesPrice()//specialSurcharges
             ),
             array_map(function (SelectedDoorLineItem $it): SelectedDoorLineItemResponse {
                 return $it->toResponse();
             }, $this->selectedDoorsLineItems),
-            mapSpecialAccessoriesToResponse($this->specialAccessories),
+            mapAestheticAccessoriesToResponse($this->aestheticAccessories),
             array_map(function (LineItem $it): LineItemResponse {
                 return $it->toResponse();
-            }, $this->specialAccessoriesLineItems),
+            }, $this->aestheticAccessoriesLineItems),
             mapSpecialSurchargesToResponse($this->specialSurcharges),
             array_map(function (LineItem $it): LineItemResponse {
                 return $it->toResponse();
@@ -1046,6 +1053,15 @@ class PriceOffer
         }
 
         return $this->assemblyDoorsCount ?? 0;
+    }
+
+    function getEffectiveCountIsAssemblyHandlesRosettesCount(?int $doorsCount): int
+    {
+        if (!$this->isAssemblyHandlesRosettesCountDirty) {
+            return $doorsCount;
+        }
+
+        return $this->assemblyHandlesRosettesCount ?? 0;
     }
 
     //deprecated after full rewrite
@@ -1140,53 +1156,55 @@ class PriceOffer
             return $it->calculatePrice();
         }, $this->rosettesLineItems));
 
-        $assemblyPriceHandlesRosettes = $this->calculateAssemblyPriceHandlesRosettes();
+        $doorsCount = $this->getDoorNumber();
+        $assemblyHandlesRosettesEffectiveCount = $this->getEffectiveCountIsAssemblyHandlesRosettesCount($doorsCount);
+        $assemblyPriceHandlesRosettes = $this->calculateAssemblyPriceHandlesRosettes($assemblyHandlesRosettesEffectiveCount);
 
         return $customHandlePrice + $handlePrice + $rosettesPrice + $rosettesLineItemsPrice +
             $assemblyPriceHandlesRosettes;
     }
 
-    function calculatePossibleAdditionalChargesPrice(int $doorsCount): float
+    function calculateTechnicalSurchargesPrice(int $doorsCount): float
     {
         $chargesTotal = array_sum(array_map(
-            function (PossibleAdditionalCharge $charge) use ($doorsCount): float {
-                $possibleAdditionalChargeDb = PossibleAdditionalChargesJsonDataManipulation::findByIdOrFalse($charge->id);
-                $effectiveCount = $charge->getEffectiveCount($possibleAdditionalChargeDb, $doorsCount);
+            function (TechnicalSurcharge $charge) use ($doorsCount): float {
+                $technicalSurchargeDb = TechnicalSurchargesJsonDataManipulation::findByIdOrFalse($charge->id);
+                $effectiveCount = $charge->getEffectiveCount($technicalSurchargeDb, $doorsCount);
                 return $charge->calculatePrice(
-                    $possibleAdditionalChargeDb,
+                    $technicalSurchargeDb,
                     $effectiveCount
                 );
-            }, $this->possibleAdditionalCharges ?? array()
+            }, $this->technicalSurcharges ?? array()
         ));
 
         $lineItemsTotal = array_sum(array_map(
             function ($item): float {
                 return $item->calculatePrice();
-            }, $this->possibleAdditionalChargesLineItems ?? array()
+            }, $this->technicalSurchargesLineItems ?? array()
         ));
 
         return $chargesTotal + $lineItemsTotal;
     }
 
-    function calculateSpecialAccessoriesPrice(): float
+    function calculateAestheticAccessoriesPrice(): float
     {
-        $specialAccessoriesTotal = array_sum(array_map(
-            function ($specialAccessory): float {
-                return $specialAccessory->calculatePrice(
-                    SpecialAccessoriesJsonDataManipulation::findByIdOrFalse($specialAccessory->id)
+        $aestheticAccessoriesTotal = array_sum(array_map(
+            function ($aestheticAccessory): float {
+                return $aestheticAccessory->calculatePrice(
+                    AestheticAccessoriesJsonDataManipulation::findByIdOrFalse($aestheticAccessory->id)
                 );
             },
-            $this->specialAccessories
+            $this->aestheticAccessories
         ));
 
         $lineItemsTotal = array_sum(array_map(
             function ($item): float {
                 return $item->calculatePrice();
             },
-            $this->specialAccessoriesLineItems
+            $this->aestheticAccessoriesLineItems
         ));
 
-        return $specialAccessoriesTotal + $lineItemsTotal;
+        return $aestheticAccessoriesTotal + $lineItemsTotal;
     }
 
     function calculateSpecialSurchargesPrice(): float
@@ -1212,15 +1230,15 @@ class PriceOffer
 
     function calculatePrice(
         float $assemblyDoorsCalculatedPrice,
-        float $possibleAdditionalChargesCalculatedPrice
+        float $technicalSurchargesCalculatedPrice
     ): float
     {
         return $this->calculateDoorsPrice() +
             $this->calculateHandlesAndRosettesPrice() +
             $assemblyDoorsCalculatedPrice +
             $this->calculateDeliveryCosts() +
-            $this->calculateSpecialAccessoriesPrice() +
-            $possibleAdditionalChargesCalculatedPrice +
+            $this->calculateAestheticAccessoriesPrice() +
+            $technicalSurchargesCalculatedPrice +
             $this->calculateSpecialSurchargesPrice();
     }
 
@@ -1229,9 +1247,9 @@ class PriceOffer
         return $priceNoVat * PriceOffer::VAT;
     }
 
-    function calculateAssemblyPriceHandlesRosettes()
+    function calculateAssemblyPriceHandlesRosettes(int $effectiveCount): float
     {
-        return ($this->assemblyPriceHandlesRosettesCount ?? 0) * PriceOffer::ASSEMBLY_PRICE_HANDLES_ROSETTES;
+        return $effectiveCount * PriceOffer::ASSEMBLY_PRICE_HANDLES_ROSETTES;
     }
 
     //deprecated after full rewrite
@@ -1720,20 +1738,20 @@ function getCategoryFromDoorType(?string $typ): string
     }
 }
 
-function mapPossibleAdditionalChargesToResponse(array $possibleAdditionalCharges, int $doorsCount): array
+function mapTechnicalSurchargesToResponse(array $technicalSurcharges, int $doorsCount): array
 {
-    return array_map(function ($itemJson) use ($doorsCount, $possibleAdditionalCharges): PossibleAdditionalChargeResponse {
+    return array_map(function ($itemJson) use ($doorsCount, $technicalSurcharges): TechnicalSurchargeResponse {
         $id = $itemJson["id"];
-        $possibleAdditionalCharge = array_filter($possibleAdditionalCharges, function ($r) use ($id) {
+        $technicalSurcharge = array_filter($technicalSurcharges, function ($r) use ($id) {
             return $r->id === $id;
         });
 
-        /** @var PossibleAdditionalCharge|false $possibleAdditionalCharge */
-        $possibleAdditionalCharge = reset($possibleAdditionalCharge);
-        return $possibleAdditionalCharge
-            ? $possibleAdditionalCharge->toResponse($itemJson, $doorsCount)
-            : (new PossibleAdditionalCharge($id, null, null))->toResponse($itemJson, $doorsCount);
-    }, PossibleAdditionalChargesJsonDataManipulation::getAll());
+        /** @var TechnicalSurcharge|false $technicalSurcharge */
+        $technicalSurcharge = reset($technicalSurcharge);
+        return $technicalSurcharge
+            ? $technicalSurcharge->toResponse($itemJson, $doorsCount)
+            : (new TechnicalSurcharge($id, null, null))->toResponse($itemJson, $doorsCount);
+    }, TechnicalSurchargesJsonDataManipulation::getAll());
 }
 
 function mapRosettesToResponse(array $selectedRosettes): array
@@ -1752,20 +1770,20 @@ function mapRosettesToResponse(array $selectedRosettes): array
     }, RosettesJsonDataManipulation::getAll());
 }
 
-function mapSpecialAccessoriesToResponse(array $selectedSpecialAccessories): array
+function mapAestheticAccessoriesToResponse(array $aestheticAccessories): array
 {
-    return array_map(function ($specialAccessoryDb) use ($selectedSpecialAccessories): SpecialAccessoryResponse {
-        $id = $specialAccessoryDb["id"];
+    return array_map(function ($aestheticAccessoryDb) use ($aestheticAccessories): AestheticAccessoryResponse {
+        $id = $aestheticAccessoryDb["id"];
 
-        $specialAccessory = array_filter($selectedSpecialAccessories, function ($r) use ($id) {
+        $aestheticAccessory = array_filter($aestheticAccessories, function ($r) use ($id) {
             return $r->id === $id;
         });
-        /** @var SpecialAccessory|false $specialAccessory */
-        $specialAccessory = reset($specialAccessory);
-        return $specialAccessory
-            ? $specialAccessory->toResponse($specialAccessoryDb)
-            : (new SpecialAccessory($id, 0, 0))->toResponse($specialAccessoryDb);
-    }, SpecialAccessoriesJsonDataManipulation::getAll());
+        /** @var AestheticAccessory|false $aestheticAccessory */
+        $aestheticAccessory = reset($aestheticAccessory);
+        return $aestheticAccessory
+            ? $aestheticAccessory->toResponse($aestheticAccessoryDb)
+            : (new AestheticAccessory($id, 0, 0))->toResponse($aestheticAccessoryDb);
+    }, AestheticAccessoriesJsonDataManipulation::getAll());
 }
 
 function mapSpecialSurchargesToResponse(array $selectedSpecialSurcharges): array

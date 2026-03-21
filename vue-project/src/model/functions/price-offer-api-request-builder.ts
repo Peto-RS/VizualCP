@@ -3,8 +3,8 @@ import {ApiResponse} from "@/model/api/res/price-offer/ApiResponse.js";
 import {ApiRequest} from "@/model/api/req/price-offer/ApiRequest.js";
 import {DoorReq} from "@/model/api/req/price-offer/DoorReq.js";
 import {RosetteReq} from "@/model/api/req/price-offer/RosetteReq.js";
-import {SpecialAccessoriesReq} from "@/model/api/req/price-offer/SpecialAccessoriesReq.js";
-import {PossibleAdditionalChargeReq} from "@/model/api/req/price-offer/PossibleAdditionalChargeReq.js";
+import {AestheticAccessoriesReq} from "@/model/api/req/price-offer/AestheticAccessoriesReq.js";
+import {TechnicalSurchargeReq} from "@/model/api/req/price-offer/TechnicalSurchargeReq.js";
 import {SpecialSurchargeReq} from "@/model/api/req/price-offer/SpecialSurchargeReq.js";
 import {LineItemReq} from "@/model/api/req/price-offer/LineItemReq.js";
 import {SelectedDoorLineItemRequest} from "@/model/api/req/price-offer/SelectedDoorLineItemRequest.js";
@@ -29,14 +29,14 @@ export function prepareRequest(
         }
     })
 
-    const possibleAdditionalCharges: PossibleAdditionalChargeReq[] = reactiveForm.possibleAdditionalCharges.map(r => {
+    const technicalSurcharges: TechnicalSurchargeReq[] = reactiveForm.technicalSurcharges.map(r => {
         return {
             id: r.id,
             count: r.count || 0,
             isCountDirty: r.isCountDirty
         }
     })
-    const possibleAdditionalChargesLineItems: LineItemReq[] = reactiveForm.possibleAdditionalChargesLineItems.map(it => mapLineItem(it));
+    const technicalSurchargesLineItems: LineItemReq[] = reactiveForm.technicalSurchargesLineItems.map(it => mapLineItem(it));
 
     const rosettes: RosetteReq[] = reactiveForm.rosettes.map(it => {
         return {
@@ -48,14 +48,14 @@ export function prepareRequest(
     const rosettesLineItems: LineItemReq[] = reactiveForm.rosettesLineItems.map(it => mapLineItem(it));
 
     const selectedDoorsLineItems: SelectedDoorLineItemRequest[] = reactiveForm.selectedDoorsLineItems.map(it => mapSelectedDoorLineItem(it));
-    const specialAccessories: SpecialAccessoriesReq[] = reactiveForm.specialAccessories.map(it => {
+    const aestheticAccessories: AestheticAccessoriesReq[] = reactiveForm.aestheticAccessories.map(it => {
         return {
             id: it.id,
             count: it.count || 0,
             selectedPrice: it.selectedPrice || 0
         }
     })
-    const specialAccessoriesLineItems: LineItemReq[] = reactiveForm.specialAccessoriesLineItems.map(it => mapLineItem(it));
+    const aestheticAccessoriesLineItems: LineItemReq[] = reactiveForm.aestheticAccessoriesLineItems.map(it => mapLineItem(it));
 
     const specialSurcharges: SpecialSurchargeReq[] = reactiveForm.specialSurcharges.map(it => {
         return {
@@ -77,7 +77,7 @@ export function prepareRequest(
                 zipCode: reactiveForm.address.zipCode || ""
             },
             assemblyDoorsCount: reactiveForm.assemblyDoorsCount || 0,
-            assemblyPriceHandlesRosettesCount: reactiveForm.assemblyPriceHandlesRosettesCount || 0,
+            assemblyHandlesRosettesCount: reactiveForm.assemblyHandlesRosettesCount || 0,
             contact: {
                 email: reactiveForm.contact.email || "",
                 fullName: reactiveForm.contact.fullName || "",
@@ -95,14 +95,15 @@ export function prepareRequest(
                 isCountDirty: reactiveForm.handle.isCountDirty
             } : null,
             isAssemblyDoorsCountDirty: reactiveForm.isAssemblyDoorsCountDirty || false,
+            isAssemblyHandlesRosettesCountDirty: reactiveForm.isAssemblyHandlesRosettesCountDirty || false,
             note: reactiveForm.note || "",
-            possibleAdditionalCharges: possibleAdditionalCharges,
-            possibleAdditionalChargesLineItems: possibleAdditionalChargesLineItems,
+            technicalSurcharges: technicalSurcharges,
+            technicalSurchargesLineItems: technicalSurchargesLineItems,
             rosettes: rosettes,
             rosettesLineItems: rosettesLineItems,
             selectedDoorsLineItems: selectedDoorsLineItems,
-            specialAccessories: specialAccessories,
-            specialAccessoriesLineItems: specialAccessoriesLineItems,
+            aestheticAccessories: aestheticAccessories,
+            aestheticAccessoriesLineItems: aestheticAccessoriesLineItems,
             specialSurcharges: specialSurcharges,
             specialSurchargesLineItems: specialSurchargesLineItems
         }

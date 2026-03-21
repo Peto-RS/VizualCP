@@ -9,13 +9,14 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $doorCategories = DoorCategoriesJsonDataManipulation::getAll();
+    $gallery = GalleryJsonDataManipulation::getAll();
     $glasses = GlassesJsonDataManipulation::getAll();
     $handles = HandlesJsonDataManipulation::getAll();
     $materials = MaterialsJsonDataManipulation::getAll();
     $rooms = RoomsJsonDataManipulation::getAll();
 
     sendJsonResponse(
-        new ConfiguratorResponse($doorCategories, $glasses, $handles, $materials, $rooms),
+        new ConfiguratorResponse($doorCategories, $gallery, $glasses, $handles, $materials, $rooms),
         200
     );
 }
@@ -29,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $parsedObject = new ConfiguratorPostRequest($requestBody);
-    $priceOffer = $_SESSION['priceOffer'] ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer();
+    $priceOffer = isset($_SESSION['priceOffer']) ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer();
     $priceOffer->postConfigurator($parsedObject);
     $_SESSION['priceOffer'] = $priceOffer;
 
-    sendJsonResponse($priceOffer, 200);
+    sendJsonResponse($priceOffer->toResponse(), 200);
 }
 
 sendJsonResponse(['error' => 'Unsupported request method'], 405);

@@ -28,6 +28,7 @@ const {offCanvasActiveView} = useAppState()
 const {displayLoadingBar, hideLoadingBar} = useLoadingBar()
 const {locale, t} = useI18n()
 
+const buttonAddToPriceOfferIsVisible = ref<Boolean>(false)
 const buttonAddToPriceOfferRef = ref<HTMLButtonElement | null>(null)
 const buttonAddToPriceOfferStyle = ref<CSSProperties>({
   position: 'absolute',
@@ -131,11 +132,11 @@ async function handleAddDoorButtonClick(): Promise<any> {
 }
 
 async function updateButtonPosition() {
-  if (!canvasRef.value || !buttonAddToPriceOfferRef.value) return;
-
+  if (!canvasRef.value) return;
+  buttonAddToPriceOfferIsVisible.value = true
   await nextTick(); // ensure DOM is rendered
 
-  const rect = buttonAddToPriceOfferRef.value.getBoundingClientRect();
+  const rect = buttonAddToPriceOfferRef?.value?.getBoundingClientRect();
 
   const pos = getButtonPosition(
       doorsX,
@@ -143,7 +144,7 @@ async function updateButtonPosition() {
       doorsWidth,
       doorsHeight,
       canvasRef.value,
-      rect.width
+      rect?.width ?? 0
   );
 
   buttonAddToPriceOfferStyle.value = {
@@ -207,7 +208,8 @@ onUnmounted(() => {
         </button>
       </div>
       <div class="d-none d-md-block">
-        <button ref="buttonAddToPriceOfferRef"
+        <button v-if="buttonAddToPriceOfferIsVisible"
+                ref="buttonAddToPriceOfferRef"
                 @click="handleAddDoorButtonClick"
                 class="btn btn-secondary btn-lg text-white text-uppercase d-flex align-items-center justify-content-center"
                 :style="buttonAddToPriceOfferStyle"

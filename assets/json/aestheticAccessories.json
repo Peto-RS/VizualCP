@@ -1,0 +1,110 @@
+[
+  {
+    "id": "aesthetic-accessories-colored-hinge-caps",
+    "header": "Farebné krytky na pánty",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-colored-hinge-caps.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Farebné krytky na pánty",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-colored-hinge-caps.label",
+    "price": 12,
+    "youtubeVideoCode": "0a69EWjLY8k",
+    "videoSrc": null
+  },
+  {
+    "id": "aesthetic-accessories-colorful-magnetic-locks",
+    "header": "Farebné magnetické zámky",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-colorful-magnetic-locks.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Farebné magnetické zámky",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-colorful-magnetic-locks.label",
+    "price": 15,
+    "youtubeVideoCode": null,
+    "videoSrc": null
+  },
+  {
+    "id": "aesthetic-accessories-sliding-door-shells",
+    "header": "Mušle na posuvné dvere",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-sliding-door-shells.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Mušle na posuvné dvere",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-sliding-door-shells.label",
+    "price": 15,
+    "youtubeVideoCode": "Jwk5FfpJkVY",
+    "videoSrc": null
+  },
+  {
+    "id": "aesthetic-accessories-colorful-hidden-hardware",
+    "header": "Farebné skryté kovanie",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-colorful-hidden-hardware.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Farebné skryté kovanie",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-colorful-hidden-hardware.label",
+    "price": null,
+    "youtubeVideoCode": null,
+    "videoSrc": null
+  },
+  {
+    "id": "aesthetic-accessories-thimble",
+    "header": "Náprstník na posuvné dvere",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-thimble.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Náprstník na posuvné dvere",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-thimble.label",
+    "price": 10,
+    "youtubeVideoCode": "rK6QKjPdsZk",
+    "videoSrc": null
+  },
+  {
+    "id": "aesthetic-accessories-spraying-surcharge",
+    "header": "Príplatok za striekanie",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-spraying-surcharge.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Príplatok za striekanie",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-spraying-surcharge.label",
+    "price": null,
+    "youtubeVideoCode": null,
+    "videoSrc": null
+  },
+  {
+    "id": "aesthetic-accessories-veneer-surcharge",
+    "header": "Príplatok za dyhu",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-veneer-surcharge.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Príplatok za dyhu",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-veneer-surcharge.label",
+    "price": null,
+    "youtubeVideoCode": null,
+    "videoSrc": null
+  },
+  {
+    "id": "aesthetic-accessories-glass-surcharge",
+    "header": "Príplatok za sklo",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-glass-surcharge.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Príplatok za sklo",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-glass-surcharge.label",
+    "price": null,
+    "youtubeVideoCode": null,
+    "videoSrc": null
+  },
+  {
+    "id": "aesthetic-accessories-door-ventilation-grilles",
+    "header": "Vetracie mriežky do dverí",
+    "headerKey": "db.aestheticAccessories.aesthetic-accessories-door-ventilation-grilles.header",
+    "hint": null,
+    "imgSrc": null,
+    "label": "Vetracie mriežky do dverí",
+    "labelKey": "db.aestheticAccessories.aesthetic-accessories-door-ventilation-grilles.label",
+    "price": 40,
+    "youtubeVideoCode": "Sey6Af2JtsI",
+    "videoSrc": null
+  }
+]

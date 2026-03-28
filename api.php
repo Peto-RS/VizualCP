@@ -1,11 +1,13 @@
 <?php
 include_once "api-common.php";
 include_once "cart-model.php";
-include_once "cart-model-api-request-objects.php";
-include_once "cart-model-api-response-objects.php";
+include_once("php/api/request-objects/api-price-offer-request-objects.php");
+include_once("php/api/response-objects/api-price-offer-response-objects.php");
+include_once("php/api/request-objects/api-configurator-request-objects.php");
 include_once "validation.php";
 
 session_start();
+//session_destroy();
 
 // ---------------------
 // Handle GET requests
@@ -14,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['getApiResponse'])) {
         try {
             if (!isPriceOfferInSessionValid($_SESSION)) {
-                $_SESSION['priceOffer'] = new PriceOffer();
                 error_log("Session price offer is invalid, resetting." . json_encode($_SESSION));
+                $_SESSION['priceOffer'] = new PriceOffer();
             }
 
             /** @var PriceOffer $sessionPriceOffer */
@@ -46,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sendJsonResponse(['error' => 'Invalid JSON'], 400);
     }
 
-    $parsedObject = new ApiRequest($requestBody);
+    $parsedObject = new PriceOfferApiRequest($requestBody);
     $priceOffer = PriceOffer::fromRequest($parsedObject->priceOffer);
     $_SESSION['priceOffer'] = $priceOffer;
 

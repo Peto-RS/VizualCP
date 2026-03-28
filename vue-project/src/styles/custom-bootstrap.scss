@@ -4,19 +4,81 @@ $font-size-base: 1rem;
 
 $primary: #dcb946;
 $secondary: darkred;
-$h1-font-size: $font-size-base * 1.9;  // 2.5rem
-$h2-font-size: $font-size-base * 1.3;  // 2rem
-$h3-font-size: $font-size-base * 1.2;  // 1.75rem
+$secondary-light: rgba($secondary, 0.9);
+$h1-font-size: $font-size-base * 1.9; // 2.5rem
+$h2-font-size: $font-size-base * 1.3; // 2rem
+$h3-font-size: $font-size-base * 1.2; // 1.75rem
 $headings-color: #555;
-$h4-font-size: $font-size-base * 1.1;  // 1.5rem
-$h5-font-size: $font-size-base;  // 1.25rem
-$h6-font-size: $font-size-base;   // 1rem
+$h4-font-size: $font-size-base * 1.1; // 1.5rem
+$h5-font-size: $font-size-base; // 1.25rem
+$h6-font-size: $font-size-base; // 1rem
 $grid-gutter-width: 0.5rem;
+
+$nav-underline-link-active-color: $primary;
+$offcanvas-border-width: 0;
+$offcanvas-horizontal-width: 50vw;
 
 // 3️⃣ Bootstrap variables + mixins
 @import "bootstrap/scss/variables";
 
-$accordion-button-active-bg: rgba($primary, 0.6);
+[data-bs-theme="configurator"] {
+  .accordion {
+    --bs-accordion-active-bg: var(--bs-primary);
+  }
+
+  .accordion-item:nth-child(odd) .accordion-button.collapsed {
+    background-color: #fff;
+  }
+
+  .accordion-item:nth-child(even) .accordion-button.collapsed {
+    background-color: var(--bs-primary-bg-subtle);
+  }
+}
+
+[data-bs-theme="price-offer"] {
+  --bs-primary: darkred;
+  --bs-primary-rgb: 139, 0, 0;
+
+  --bs-focus-ring-color: var(--bs-primary);
+
+  --bs-primary-bg-subtle: color-mix(in srgb, var(--bs-primary) 15%, white);
+  --bs-primary-border-subtle: color-mix(in srgb, var(--bs-primary) 35%, white);
+  --bs-primary-text-emphasis: color-mix(in srgb, var(--bs-primary) 60%, black);
+
+  .accordion {
+    --bs-accordion-active-bg: rgb(204, 0, 0);
+    --bs-accordion-active-color: white;
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 .25rem rgba(var(--bs-primary-rgb), .25);
+    --bs-accordion-focus-border-color: var(--bs-primary);
+  }
+
+  .accordion-item:nth-child(odd) .accordion-button.collapsed {
+    background-color: #fff;
+  }
+
+  .accordion-item:nth-child(even) .accordion-button.collapsed {
+    background-color: var(--bs-primary-bg-subtle);
+  }
+
+  a {
+    color: var(--bs-primary);
+  }
+
+  .btn {
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-active-bg: var(--bs-primary);
+    --bs-btn-active-color: white;
+    --bs-btn-color: var(--bs-primary);
+    --bs-btn-hover-bg: var(--bs-primary);
+  }
+
+  .list-group {
+    --bs-list-group-active-bg: var(--bs-primary);
+    --bs-list-group-active-border-color: var(--bs-primary);
+  }
+}
+
+//$accordion-button-active-bg: rgba($primary, 0.6);
 
 @import "bootstrap/scss/mixins";
 

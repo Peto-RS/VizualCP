@@ -1,0 +1,23 @@
+{
+  "dominos": {
+    "label": "Dominos"
+  },
+  "hrasok": {
+    "label": "Hrášok"
+  },
+  "chin": {
+    "label": "Chinchilla"
+  },
+  "kora": {
+    "label": "DK bledá"
+  },
+  "korabronz": {
+    "label": "DK tmavá"
+  },
+  "krizet": {
+    "label": "Krizet"
+  },
+  "lacomat": {
+    "label": "Lacomat"
+  }
+}

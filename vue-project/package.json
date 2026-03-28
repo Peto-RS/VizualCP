@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
+    "photoswipe": "^5.4.4",
     "vue": "^3.5.22",
     "vue-i18n": "^11.2.2",
     "vue-router": "^4.6.4"

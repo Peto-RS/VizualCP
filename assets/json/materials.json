@@ -1,0 +1,258 @@
+{
+  "laminates": {
+    "lamino-biela": {
+      "label": "Biela",
+      "labelKey": "db.materials.laminates.lamino-biela.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "wien-biela": {
+      "label": "Striekaná biela",
+      "labelKey": "db.materials.laminates.wien-biela.label",
+      "availableForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-seda": {
+      "label": "Šedá",
+      "labelKey": "db.materials.laminates.lamino-seda.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-pinia-korzika": {
+      "label": "Pinia korzika",
+      "labelKey": "db.materials.laminates.lamino-pinia-korzika.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-buk": {
+      "label": "Buk",
+      "labelKey": "db.materials.laminates.lamino-buk.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-chamonix": {
+      "label": "Chamonix",
+      "labelKey": "db.materials.laminates.lamino-chamonix.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "jasen-piesocny": {
+      "label": "Jaseň piesočný",
+      "labelKey": "db.materials.laminates.jasen-piesocny.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "creme": {
+      "label": "Krém",
+      "labelKey": "db.materials.laminates.creme.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-javor": {
+      "label": "Javor",
+      "labelKey": "db.materials.laminates.lamino-javor.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-javor-kralovsky": {
+      "label": "Javor kráľovský",
+      "labelKey": "db.materials.laminates.lamino-javor-kralovsky.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "lamino-jelsa": {
+      "label": "Jelša",
+      "labelKey": "db.materials.laminates.lamino-jelsa.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "dub-halifax": {
+      "label": "Dub halifax",
+      "labelKey": "db.materials.laminates.dub-halifax.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "dub-halifax-tabakovy": {
+      "label": "Dub halifax tabakový",
+      "labelKey": "db.materials.laminates.dub-halifax-tabakovy.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "dub-bardolino": {
+      "label": "Dub bardolino",
+      "labelKey": "db.materials.laminates.dub-bardolino.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "dub-hamilton": {
+      "label": "Dub hamilton",
+      "labelKey": "db.materials.laminates.dub-hamilton.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "dub-kronberg": {
+      "label": "Dub krongerg",
+      "labelKey": "db.materials.laminates.dub-kronberg.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "dub-wotan": {
+      "label": "Dub wotan",
+      "labelKey": "db.materials.laminates.dub-wotan.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "canyon-dark": {
+      "label": "Canyon tmavý",
+      "labelKey": "db.materials.laminates.canyon-dark.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "canyon-light": {
+      "label": "Canyon bledý",
+      "labelKey": "db.materials.laminates.canyon-light.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "gardena": {
+      "label": "Gardena",
+      "labelKey": "db.materials.laminates.gardena.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "orech": {
+      "label": "Orech",
+      "labelKey": "db.materials.laminates.orech.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "antracit": {
+      "label": "Antracit",
+      "labelKey": "db.materials.laminates.antracit.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    }
+  },
+  "veneers": {
+    "buk": {
+      "label": "Buk",
+      "labelKey": "db.materials.veneers.buk.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "dub": {
+      "label": "Dub",
+      "labelKey": "db.materials.veneers.dub.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "javor": {
+      "label": "Javor",
+      "labelKey": "db.materials.veneers.javor.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "macore": {
+      "label": "Macore",
+      "labelKey": "db.materials.veneers.macore.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "mahagon": {
+      "label": "Mahagon",
+      "labelKey": "db.materials.veneers.mahagon.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    },
+    "smrek": {
+      "label": "Smrek",
+      "labelKey": "db.materials.veneers.smrek.label",
+      "hiddenForDoorCategory": [
+        "Wien_1",
+        "Wien_2",
+        "Wien_3"
+      ]
+    }
+  }
+}

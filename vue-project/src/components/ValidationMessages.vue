@@ -14,7 +14,3 @@ const {t} = useI18n();
     {{ t('validations.' + v.key) }}
   </div>
 </template>
-
-<style scoped>
-
-</style>

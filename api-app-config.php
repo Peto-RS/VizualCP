@@ -1,5 +1,6 @@
 <?php
 include_once "api-common.php";
+include_once("php/api/response-objects/api-app-config-response-objects.php");
 include_once "cart-model.php";
 include_once "validation.php";
 session_start();

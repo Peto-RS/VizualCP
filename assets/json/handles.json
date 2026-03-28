@@ -1,0 +1,222 @@
+{
+  "Nova_nerez_R": {
+    "label": "Nova nerez R",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Nova_nerez_R.jpg",
+    "price": 15
+  },
+  "Nova_nerez_HR": {
+    "label": "Nova nerez HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Nova_nerez_HR.jpg",
+    "price": 19
+  },
+  "Proxima_nerez_R": {
+    "label": "Proxima nerez R",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Proxima_nerez_R.jpg",
+    "price": 15
+  },
+  "Proxima_nerez_HR": {
+    "label": "Proxima nerez HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Proxima_nerez_HR.jpg",
+    "price": 19
+  },
+  "Neptun_nerez_R": {
+    "label": "Neptun nerez R",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Neptun_nerez_R.jpg",
+    "price": 15
+  },
+  "Roma_nerez_R": {
+    "label": "Roma nerez R",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Roma_nerez_R.jpg",
+    "price": 19
+  },
+  "Roma_nerez_HR": {
+    "label": "Roma nerez HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Roma_nerez_HR.jpg",
+    "price": 28
+  },
+  "Rio_grafit_HR": {
+    "label": "Rio grafit HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Rio_grafit_HR.jpg",
+    "price": 28
+  },
+  "Rio_nikel_satenovy_HR": {
+    "label": "Rio nikel saténový HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Rio_nikel_satenovy_HR.jpg",
+    "price": 28
+  },
+  "Rio_patina_HR": {
+    "label": "Rio patina HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Rio_patina_HR.jpg",
+    "price": 28
+  },
+  "Quanta_Fit_mosadz_brusena_HR": {
+    "label": "Quanta Fit mosadz brúsená HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Quanta_Fit_mosadz_brusena_HR.jpg",
+    "price": 28
+  },
+  "Beta_nikel_satenovy_HR": {
+    "label": "Beta nikel saténový HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Beta_nikel_satenovy_HR.jpg",
+    "price": 28
+  },
+  "Euforia_grafit_HR": {
+    "label": "Eufória grafit HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Euforia_grafit_HR.jpg",
+    "price": 28
+  },
+  "Euforia_patina_HR": {
+    "label": "Eufória patina HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Euforia_patina_HR.jpg",
+    "price": 28
+  },
+  "Topaz_nerez_HR": {
+    "label": "Topaz nerez HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Topaz_nerez_HR.jpg",
+    "price": 19
+  },
+  "Foks_cierna_matna_HR": {
+    "label": "Foks čierna matná HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Foks_cierna_matna_HR.jpg",
+    "price": 28
+  },
+  "Qubik_mosadz_brusena_HR": {
+    "label": "Qubik mosadz brúsená HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Qubik_mosadz_brusena_HR.jpg",
+    "price": 28
+  },
+  "Qubik_nikel_satenovy_HR": {
+    "label": "Qubik nikel saténový HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Qubik_nikel_satenovy_HR.jpg",
+    "price": 28
+  },
+  "Qubik_chrom_leskly_HR": {
+    "label": "Qubik chróm lesklý HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Qubik_chrom_leskly_HR.jpg",
+    "price": 28
+  },
+  "Qubik_biela_matna_HR": {
+    "label": "Qubik biela matná HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Qubik_biela_matna_HR.jpg",
+    "price": 28
+  },
+  "Qubik_cierna_matna_HR": {
+    "label": "Qubik čierna matná HR",
+    "hiddenForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Qubik_cierna_matna_HR.jpg",
+    "price": 28
+  },
+  "Alt_wien": {
+    "label": "ALT WIEN Štít",
+    "availableForDoorCategory": [
+      "Wien_1",
+      "Wien_2",
+      "Wien_3"
+    ],
+    "imgSrc": "/images/handles/min/Alt_wien.jpg",
+    "price": 38
+  }
+}

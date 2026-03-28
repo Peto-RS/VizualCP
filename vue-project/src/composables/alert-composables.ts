@@ -9,7 +9,7 @@ interface Alert {
 }
 
 const MAX_VISIBLE = 2
-const ALERT_TIMEOUT = 10000
+const ALERT_TIMEOUT = 4000
 
 let idCounter = 0
 

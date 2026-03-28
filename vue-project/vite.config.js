@@ -25,7 +25,13 @@ export default defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: `@import "@/styles/custom-bootstrap.scss";`
+                additionalData: `@import "@/styles/custom-bootstrap.scss";`,
+                silenceDeprecations: [
+                    'import',
+                    'mixed-decls',
+                    'color-functions',
+                    'global-builtin',
+                ]
             }
         }
     }

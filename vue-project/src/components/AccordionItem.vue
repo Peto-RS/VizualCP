@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import BadgePrice from "./BadgePrice.vue";
-import {useI18n} from "vue-i18n";
 
 defineProps<{
   id: string,
   isOpenByDefault: boolean,
-  sectionPrice?: number
+  sectionPrice?: number,
+  title: string
 }>()
-
-const {t} = useI18n();
 </script>
 
 <template>
@@ -18,12 +16,12 @@ const {t} = useI18n();
       <button
           type="button"
           :class="{'collapsed': !isOpenByDefault}"
-          class="accordion-button d-flex"
+          class="accordion-button d-flex text-uppercase fw-bold"
           data-bs-toggle="collapse"
           :data-bs-target="`#accordion-collapse-${id}`"
           aria-expanded="true"
           :aria-controls="`accordion-collapse-${id}`">
-        <span class="flex-grow-1">{{ t('accordionHeaders.' + id) }}</span>
+        <span class="flex-grow-1">{{ title }}</span>
         <BadgePrice class="accordion-badge"
                     v-if="sectionPrice !== undefined"
                     :price="sectionPrice"/>
@@ -35,14 +33,14 @@ const {t} = useI18n();
         class="accordion-collapse collapse"
         :id="`accordion-collapse-${id}`"
         :aria-labelledby="`accordion-header-${id}`">
-      <div class="accordion-body p-0">
+      <div class="accordion-body p-2">
         <slot></slot>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/mixins";
@@ -53,11 +51,6 @@ const {t} = useI18n();
   order: 1;
   flex: 0 0 105px;
   min-width: 105px;
-}
-
-.accordion button {
-  text-transform: uppercase;
-  font-weight: bold;
 }
 
 .accordion button:hover {

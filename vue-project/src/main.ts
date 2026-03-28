@@ -1,21 +1,16 @@
 import {createApp} from 'vue'
-import App from './App.vue'
-
 import 'bootstrap';
-import {createI18n} from "vue-i18n";
-import sk from './locales/sk.json'
 import {router} from "./router.js";
+import Home from "./views/Home.vue";
+import {
+    getDefaultLocale,
+    i18n,
+    setLocale,
+    SupportedLocale
+} from "@/model/functions/translation-utils.js";
 
+/*
 let vueAppInstance: ReturnType<typeof createApp> | null = null
-const i18n = createI18n({
-        legacy: false,
-        locale: 'sk',
-        fallbackLocale: 'sk',
-        messages: {
-            sk: sk
-        }
-    }
-)
 
 window.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById('openclose_btn_text_area_priceOffer');
@@ -32,7 +27,18 @@ window.addEventListener("DOMContentLoaded", () => {
         vueAppInstance = app;
         app
             .use(i18n)
-            .use(router)
+            .use(routerPriceOffer)
             .mount('#vueApp');
     });
 });
+ */
+
+const locale: SupportedLocale = getDefaultLocale()
+await setLocale(locale)
+
+//single-page application
+const app = createApp(Home);
+app
+    .use(i18n)
+    .use(router)
+    .mount('#vueAppFull');

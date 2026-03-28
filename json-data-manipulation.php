@@ -26,23 +26,18 @@ class DoorsJsonDataManipulation
         global $doors_path;
         return getArrayFromJsonFile($doors_path . "/" . $category . "/price.json");
     }
-
-    public static function getMaterialTranslation(string $translationKey)
-    {
-        return getArrayFromJsonFile("images/materials/conf.json")["Druhy laminátov"][$translationKey];
-    }
 }
 
-class PossibleAdditionalChargesJsonDataManipulation
+class TechnicalSurchargesJsonDataManipulation
 {
     public static function getAll(): array
     {
-        return getArrayFromJsonFile("./assets/json/possibleAdditionalCharges.json");
+        return getArrayFromJsonFile("./assets/json/technicalSurcharges.json");
     }
 
     public static function findByIdOrFalse(?string $id)
     {
-        $list = PossibleAdditionalChargesJsonDataManipulation::getAll();
+        $list = TechnicalSurchargesJsonDataManipulation::getAll();
         $item = array_filter($list, function ($r) use ($id) {
             return $r["id"] == $id;
         });
@@ -67,16 +62,16 @@ class RosettesJsonDataManipulation
     }
 }
 
-class SpecialAccessoriesJsonDataManipulation
+class AestheticAccessoriesJsonDataManipulation
 {
     public static function getAll(): array
     {
-        return getArrayFromJsonFile("./assets/json/specialAccessories.json");
+        return getArrayFromJsonFile("./assets/json/aestheticAccessories.json");
     }
 
     public static function findByIdOrFalse(?string $id)
     {
-        $list = SpecialAccessoriesJsonDataManipulation::getAll();
+        $list = AestheticAccessoriesJsonDataManipulation::getAll();
         $item = array_filter($list, function ($r) use ($id) {
             return $r["id"] == $id;
         });
@@ -111,4 +106,78 @@ class AppConfigJsonDataManipulation
     }
 }
 
+class ParametersJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/parameters.json");
+    }
+}
+
+//Configurator
+class DoorCategoriesJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/doorCategories.json");
+    }
+}
+
+class GalleryJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/gallery.json");
+    }
+}
+
+class GlassesJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/glasses.json");
+    }
+}
+
+class HandlesJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/handles.json");
+    }
+
+    public static function findByIdOrFalse(?string $id)
+    {
+        $obj = HandlesJsonDataManipulation::getAll();
+        return $obj[$id] ?? false;
+    }
+}
+
+class MaterialsJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/materials.json");
+    }
+
+    public static function getTranslation(string $id)
+    {
+        $json = getArrayFromJsonFile("assets/json/materials.json");
+        if (array_key_exists($id, $json["laminates"])) {
+            return $json["laminates"][$id]["label"];
+        } else if (array_key_exists($id, $json["veneers"])) {
+            return $json["veneers"][$id]["label"];
+        } else {
+            return $id;
+        }
+    }
+}
+
+class RoomsJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/rooms.json");
+    }
+}
 ?>

@@ -21,8 +21,8 @@ function generateSpreadSheet(PriceOfferResponse $priceOffer): string
 function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResponse $priceOffer): void
 {
     $sheetNameCalculations = 'cena_dvere';
-    $priceFrame = FEE_FRAME;
-    $priceFrameOffer = Door::FEE_FRAME_OFFER;
+    $priceFrame = ParametersJsonDataManipulation::getAll()["framePrice"];
+    $priceFrameOffer = ParametersJsonDataManipulation::getAll()["framePriceOffer"];
     $trueValue = 'Áno';
     $falseValue = 'Nie';
 
@@ -72,7 +72,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     foreach ($doors as $door) {
         $sheet->setCellValue("A$rowIdx", Width::getWidthString($door->width) ?: 60);
         $sheet->setCellValue("B$rowIdx", $door->type);
-        $sheet->setCellValue("C$rowIdx", $door->material ? DoorsJsonDataManipulation::getMaterialTranslation($door->material) : "");
+        $sheet->setCellValue("C$rowIdx", $door->material ? MaterialsJsonDataManipulation::getTranslation($door->material) : "");
         $sheet->setCellValue("E$rowIdx", "=IFERROR(VLOOKUP(B$rowIdx, $sheetNameCalculations!A:B, 2, FALSE), 0)+IF(A$rowIdx<=69, 0,IF(A$rowIdx<=79, 3,IF(A$rowIdx<=89, 6, 9)))");
         $sheet->setCellValue("F$rowIdx", $door->isDoorFrameEnabled ? $trueValue : $falseValue);
         $sheet->setCellValue("G$rowIdx", 1);
@@ -95,22 +95,39 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
 
     /*** Handles and rosettes ***/
     $rowIdx = max($rowIdx + 2, 18);
-    $handle = $priceOffer->handle;
-    if ($handle) {
-        if ($handle->name) {
-            $sheet->setCellValue("A$rowIdx", $handle->name);
-        }
 
-        if ($handle->price) {
-            $sheet->setCellValue("F$rowIdx", $handle->price);
-        }
-
-        if ($handle->count) {
-            $sheet->setCellValue("G$rowIdx", $handle->count);
-        }
+    //handle from configurator
+    $handleId = $priceOffer->handle && $priceOffer->handle->id;
+    if ($handleId) {
+        $sheet->setCellValue("A$rowIdx", $priceOffer->handle->name);
+        $sheet->setCellValue("F$rowIdx", $priceOffer->handle->price);
+        $sheet->setCellValue("G$rowIdx", $priceOffer->handle->count);
+        $sheet->setCellValue("H$rowIdx", "=F$rowIdx*G$rowIdx");
+        $rowIdx = $rowIdx + 1;
     }
 
-    $rowIdx = $rowIdx + 1;
+    //custom handle
+    $customHandle = $priceOffer->customHandle;
+    if ($customHandle && $customHandle->name) {
+        if ($handleId) {
+            $sheet->insertNewRowBefore($rowIdx);
+        }
+        $sheet->mergeCells('A' . $rowIdx . ':E' . $rowIdx);
+
+        $sheet->setCellValue("A$rowIdx", $customHandle->name);
+
+        if ($customHandle->price) {
+            $sheet->setCellValue("F$rowIdx", $customHandle->price);
+        }
+
+        if ($customHandle->count) {
+            $sheet->setCellValue("G$rowIdx", $customHandle->count);
+        }
+
+        $sheet->setCellValue("H$rowIdx", "=F$rowIdx*G$rowIdx");
+        $rowIdx = $rowIdx + 1;
+    }
+
     foreach ($priceOffer->rosettes as $rosette) {
         $count = $rosette->count;
         if ($count) {
@@ -122,9 +139,9 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
 
     $rowCountToInsert = insertLineItems($priceOffer->rosettesLineItems, $sheet, $rowIdx);
     $rowIdx = $rowIdx + 1 + $rowCountToInsert;
-    $assemblyPriceHandlesRosettesCount = $priceOffer->assemblyPriceHandlesRosettesCount;
-    if ($assemblyPriceHandlesRosettesCount) {
-        $sheet->setCellValue('G' . $rowIdx, $assemblyPriceHandlesRosettesCount);
+    $assemblyHandlesRosettesCount = $priceOffer->assemblyHandlesRosettesCount;
+    if ($assemblyHandlesRosettesCount) {
+        $sheet->setCellValue('G' . $rowIdx, $assemblyHandlesRosettesCount);
     }
 
     /*** Delivery ***/
@@ -173,7 +190,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
 
     /*** Special accessories ***/
     $rowIdx = $rowIdx + 3;
-    foreach ($priceOffer->specialAccessories as $item) {
+    foreach ($priceOffer->aestheticAccessories as $item) {
         $selectedPrice = $item->selectedPrice;
         if ($selectedPrice) {
             $sheet->setCellValue("F" . $rowIdx, $selectedPrice);
@@ -187,12 +204,12 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
         $rowIdx = $rowIdx + 1;
     }
 
-    $rowCountToInsert = insertLineItems($priceOffer->specialAccessoriesLineItems, $sheet, $rowIdx);
+    $rowCountToInsert = insertLineItems($priceOffer->aestheticAccessoriesLineItems, $sheet, $rowIdx);
     $rowIdx = $rowIdx + $rowCountToInsert;
 
     /*** Possible additional charges ***/
     $rowIdx = $rowIdx + 3;
-    foreach ($priceOffer->possibleAdditionalCharges as $item) {
+    foreach ($priceOffer->technicalSurcharges as $item) {
         $count = $item->count;
         if ($count) {
             $sheet->setCellValue("G" . $rowIdx, $count);
@@ -202,7 +219,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
         $rowIdx = $rowIdx + 1;
     }
 
-    $rowCountToInsert = insertLineItems($priceOffer->possibleAdditionalChargesLineItems, $sheet, $rowIdx);
+    $rowCountToInsert = insertLineItems($priceOffer->technicalSurchargesLineItems, $sheet, $rowIdx);
     $rowIdx = $rowIdx + $rowCountToInsert;
 
     /*** Special surcharges ***/

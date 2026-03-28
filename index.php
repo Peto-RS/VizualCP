@@ -24,12 +24,6 @@ if ($_SERVER['HTTPS'] != "on"){
 
     <?php
     include_once "json-data-manipulation.php";
-
-    if (!AppConfigJsonDataManipulation::getAll()["isSinglePageApp"]) {
-        include_once "constants.php";
-        include "_import.php";
-        include_once "functions.php";
-    }
     ?>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -67,15 +61,6 @@ if (!empty($config['ga4']) && is_array($config['ga4'])) {
 
 <?php
 include_once "json-data-manipulation.php";
-
-if (!AppConfigJsonDataManipulation::getAll()["isSinglePageApp"]) {
-    include "mobile_alert.php";
-    include "header.php";
-    include "content.php";
-    include "cart.php";
-    include "cart-new.php";
-    //include "footer.php";
-}
 ?>
 <script type="module"
         src="<?php echo(AppConfigJsonDataManipulation::getAll()["isProductionVueBuild"] ? AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/app.js" : "http://localhost:5173/src/main.ts") ?>"></script>

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import {ref, onMounted, onBeforeUnmount, watch} from 'vue'
-import {Modal} from 'bootstrap'
-// import PopOverContent from './PopOverContent.vue'
 import {HintInterface} from "../model/interface/HintInterface.js";
 import {modal} from "@/composables/modal.js";
 import ModalYoutubeVideo from "@/components/ModalYoutubeVideo.vue";
@@ -12,12 +10,7 @@ const props = defineProps<{
   hintObj: HintInterface
 }>()
 
-// const modalEl = ref<HTMLElement | null>(null)
-// const videoEl = ref<HTMLVideoElement | null>(null)
 const galleryContainer = ref<HTMLElement | null>(null)
-
-// const showIframe = ref<Boolean>(false)
-
 const {appConfig} = useAppState()
 
 function openModal() {

@@ -26,11 +26,6 @@ class DoorsJsonDataManipulation
         global $doors_path;
         return getArrayFromJsonFile($doors_path . "/" . $category . "/price.json");
     }
-
-    public static function getMaterialTranslation(string $translationKey)
-    {
-        return getArrayFromJsonFile("images/materials/conf.json")["Druhy laminátov"][$translationKey];
-    }
 }
 
 class TechnicalSurchargesJsonDataManipulation
@@ -111,6 +106,14 @@ class AppConfigJsonDataManipulation
     }
 }
 
+class ParametersJsonDataManipulation
+{
+    public static function getAll(): array
+    {
+        return getArrayFromJsonFile("./assets/json/parameters.json");
+    }
+}
+
 //Configurator
 class DoorCategoriesJsonDataManipulation
 {
@@ -155,6 +158,18 @@ class MaterialsJsonDataManipulation
     public static function getAll(): array
     {
         return getArrayFromJsonFile("./assets/json/materials.json");
+    }
+
+    public static function getTranslation(string $id)
+    {
+        $json = getArrayFromJsonFile("assets/json/materials.json");
+        if (array_key_exists($id, $json["laminates"])) {
+            return $json["laminates"][$id]["label"];
+        } else if (array_key_exists($id, $json["veneers"])) {
+            return $json["veneers"][$id]["label"];
+        } else {
+            return $id;
+        }
     }
 }
 

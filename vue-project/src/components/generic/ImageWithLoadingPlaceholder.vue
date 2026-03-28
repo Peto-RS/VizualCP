@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, Ref, ref, useAttrs} from "vue";
+import {onMounted, Ref, ref, useAttrs, watch} from "vue";
 
 const attrs = useAttrs()
 
@@ -37,7 +37,6 @@ onMounted(() => {
 
   <!--  Image-->
   <img v-if="src"
-       v-show="imgLoaded"
        :src="src"
        :alt="alt"
        :class="{ 'opacity-0': !imgLoaded }"

@@ -6,9 +6,12 @@ export interface AestheticAccessoriesResponse extends HintInterface {
     configuredPrice: number | null
     count: number | null
     header: string | null
+    headerKey: string
     hint: string | null
+    hintKey: string | null
     imgSrc: string | null
     label: string | null
+    labelKey: string | null
     selectedPrice: number | null
     youtubeVideoCode: string | null
     videoSrc: string | null

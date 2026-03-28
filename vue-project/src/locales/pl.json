@@ -1,0 +1,441 @@
+{
+  "configurator": {
+    "accordionHeaders": {
+      "constructionPossibilities": "Możliwości wykonania konstrukcji",
+      "currentActions": "Aktualne promocje",
+      "doorCategory": "Kategorie drzwi wewnętrznych",
+      "doorType": "Typy drzwi wewnętrznych w kategorii: {doorType}",
+      "gallery": "Galeria zdjęć",
+      "glasses": "Rodzaje szkła",
+      "handles": "Warianty klamek",
+      "laminate": "Rodzaje laminatów",
+      "rooms": "Wybór pomieszczenia",
+      "veneers": "Rodzaje oklein"
+    },
+    "buttonAddToPriceOffer": "Dodaj do oferty cenowej",
+    "category": "Kategoria",
+    "doorFramePrice": "Ościeżnica: {price}. Ceny netto (bez VAT).",
+    "priceFrom": "Cena drzwi od",
+    "illustrationOnlyImage": "Zdjęcie drzwi jest tylko poglądowe!",
+    "selectHandles": "warianty klamek - wszystkie klamki znajdziesz na",
+    "doorAddedToPriceOffer": "Drzwi zostały dodane do oferty cenowej.",
+    "campaign": {
+      "doors": {
+        "title": "Wewnętrzne <b>drzwi z ościeżnicą</b> od <b>219,- €",
+        "body": "Oferujemy drzwi wewnętrzne i ościeżnice we wszystkich rodzajach laminatów w promocyjnej cenie 219€. Cena dotyczy również drzwi, które osobiście wymierzymy przed produkcją."
+      },
+      "freeMeasurement": {
+        "title": "<b>Pomiar</b> otworów budowlanych <b>za darmo</b>",
+        "body": "Martwią Cię nietypowe wymiary otworów? Dla nas to żaden problem. Każdy otwór osobiście wymierzymy i wyprodukujemy drzwi tak, aby pasowały jak najdokładniej. Drzwi na wymiar są u nas BEZ DOPŁATY."
+      },
+      "assembly": {
+        "title": "<b>Montaż</b> drzwi wew&shy;nętrz&shy;nych i ościeżnicy <b>35€</b>",
+        "body": "Oferujemy montaż zestawu drzwi wewnętrznych z ościeżnicą w obniżonej cenie od 35€/szt. Ta promocyjna cena obowiązuje przy montażu sześciu i więcej sztuk drzwi i ościeżnic."
+      }
+    }
+  },
+  "priceOffer": {
+    "priceWoVat": "Cena całkowita netto",
+    "priceWithVat": "Cena całkowita brutto"
+  },
+  "accordionHeaders": {
+    "doors": "Drzwi wewnętrzne",
+    "handles": "Klamki",
+    "delivery": "Dostawa",
+    "assemblyDoors": "Montaż",
+    "aestheticAccessories": "Dodatki estetyczne",
+    "technicalSurcharges": "Dopłaty techniczne",
+    "specialSurcharges": "Dopłaty do systemów otwierania (Systemy przesuwne / ukryte zawiasy...)",
+    "contact": "Dane kontaktowe"
+  },
+  "assemblyDoors": {
+    "note": "Promocyjny montaż drzwi z ościeżnicą 35 € / sztuka. Promocja obowiązuje przy liczbie 6 i więcej sztuk. Minimalna kwota dla dwóch montażystów wynosi 210 €."
+  },
+  "components": {
+    "hint": {
+      "modal": {
+        "close": "Zamknij"
+      }
+    },
+    "lineItems": {
+      "add": "Dodaj",
+      "namePlaceholder": "Wpisz nazwę"
+    },
+    "Navbar": {
+      "configurator": "Wizualizacja",
+      "priceOffer": "Oferta cenowa"
+    }
+  },
+  "contact": {
+    "email": "Email",
+    "fullName": "Imię i nazwisko",
+    "note": "Notatka",
+    "phoneNumber": "Numer telefonu"
+  },
+  "delivery": {
+    "address": "Adres dostawy (opcjonalnie)",
+    "city": "Miejscowość",
+    "district": "Wybierz miasto powiatowe",
+    "note": "Cena transportu wynosi 0,5 € za km. Transport liczony jest od produkcji w miejscowości Čachtice.",
+    "street": "Ulica",
+    "streetNumber": "Numer domu",
+    "zipCode": "Kod pocztowy"
+  },
+  "doors": {
+    "doorWidth": "Szerokość",
+    "duplicate": "Kliknij, aby powielić.",
+    "isDoorFrameEnabled": "Ościeżnica",
+    "name": "Nazwa",
+    "notSelected": "Nie wybrano żadnych drzwi.",
+    "remove": "Usuń"
+  },
+  "handles": {
+    "assemblyHandlesRosettes": "Montaż klamek i rozet",
+    "namePlaceholder": "Wpisz nazwę klamki"
+  },
+  "handlesAdditionalText": " Wszystkie klamki znajdziesz na",
+  "submitButton": "Wyślij ofertę na email",
+  "validations": {
+    "invalidEmailFormat": "Nieprawidłowy format email.",
+    "required": "To pole jest wymagane."
+  },
+  "alerts": {
+    "FORM_SAVE_ERROR": "Wystąpił błąd podczas zapisywania formularza. W przypadku utrzymujących się problemów skontaktuj się z administratorem.",
+    "FORM_VALIDATIONS_ERROR": "W formularzu znajdują się nieprawidłowe pola.",
+    "MAIL_SENDING_ERROR": "Wystąpił błąd podczas wysyłania e-maila."
+  },
+  "returnToHomepage": "Powrót do strony głównej",
+  "views": {
+    "priceOfferFinished": {
+      "priceOfferSentToMail": "Ofertę cenową wysłaliśmy na Twój adres e-mail.",
+      "thanksMessage": "Dziękujemy."
+    }
+  },
+  "db": {
+    "aestheticAccessories": {
+      "aesthetic-accessories-colored-hinge-caps": {
+        "header": "Kolorowe nasadki na zawiasy",
+        "label": "Kolorowe nasadki na zawiasy"
+      },
+      "aesthetic-accessories-colorful-magnetic-locks": {
+        "header": "Kolorowe zamki magnetyczne",
+        "label": "Kolorowe zamki magnetyczne"
+      },
+      "aesthetic-accessories-sliding-door-shells": {
+        "header": "Uchwyty muszlowe do drzwi przesuwnych",
+        "label": "Uchwyty muszlowe do drzwi przesuwnych"
+      },
+      "aesthetic-accessories-colorful-hidden-hardware": {
+        "header": "Kolorowe okucia ukryte",
+        "label": "Kolorowe okucia ukryte"
+      },
+      "aesthetic-accessories-thimble": {
+        "header": "Naparstek do drzwi przesuwnych",
+        "label": "Naparstek do drzwi przesuwnych"
+      },
+      "aesthetic-accessories-spraying-surcharge": {
+        "header": "Dopłata za lakierowanie",
+        "label": "Dopłata za lakierowanie"
+      },
+      "aesthetic-accessories-veneer-surcharge": {
+        "header": "Dopłata za okleinę naturalną",
+        "label": "Dopłata za okleinę naturalną"
+      },
+      "aesthetic-accessories-glass-surcharge": {
+        "header": "Dopłata za szkło",
+        "label": "Dopłata za szkło"
+      },
+      "aesthetic-accessories-door-ventilation-grilles": {
+        "header": "Kratki wentylacyjne do drzwi",
+        "label": "Kratki wentylacyjne do drzwi"
+      }
+    },
+    "doorCategories": {
+      "barbora": {
+        "description": "",
+        "name": "Barbora"
+      },
+      "best-selling": {
+        "description": "W kategorii bestsellerów wybraliśmy dla Państwa listę drzwi wewnętrznych, które nasi klienci zamawiają najczęściej i które jednocześnie reprezentują najkorzystniejszy stosunek jakości do ceny.",
+        "name": "Bestsellery"
+      },
+      "greta": {
+        "description": "",
+        "name": "Gréta"
+      },
+      "kristina": {
+        "description": "Nadaj swojemu stylowi perspektywę. Bycie „in” i trendy to główny cel tej kategorii. Drzwi wewnętrzne Kristina będą błyszczeć w każdym wnętrzu.",
+        "name": "Kristína"
+      },
+      "petra": {
+        "description": "Regularne kształty i delikatne linie dopełniają estetyczne wrażenie kategorii drzwi wewnętrznych Petra. Aluminiowe dodatki ożywią wszystkie nowoczesne wnętrza.",
+        "name": "Petra"
+      },
+      "renata": {
+        "description": "Klasyka jest ponadczasowa, w tym duchu utrzymana jest kategoria drzwi wewnętrznych Renata. Wygodny i przytulny design wniesie elegancję do każdego wnętrza.",
+        "name": "Renata"
+      },
+      "vanesa": {
+        "description": "Puść wodze fantazji. Pobaw się wymiarami i dostosuj styl drzwi do swoich wyobrażeń. Drzwi Vanesa to połączenie nowoczesnego designu i rozsądnej ceny.",
+        "name": "Vanesa"
+      },
+      "wien_1": {
+        "description": "Kategoria drzwi WIEN składa się z ponadczasowych modeli. Drzwi Wien produkujemy w tradycyjnym białym wykończeniu lakierowanym, które jest bardziej pracochłonne i oczywiście droższe, ale w secesyjnych i klasycznych wnętrzach wygląda wspaniale.",
+        "name": "Wien 1"
+      },
+      "wien_2": {
+        "description": "Kategoria drzwi WIEN składa się z ponadczasowych modeli. Drzwi Wien produkujemy w tradycyjnym białym wykończeniu lakierowanym, które jest bardziej pracochłonne i oczywiście droższe, ale w secesyjnych i klasycznych wnętrzach wygląda wspaniale.",
+        "name": "Wien 2"
+      },
+      "wien_3": {
+        "description": "Kategoria drzwi WIEN składa się z ponadczasowych modeli. Drzwi Wien produkujemy w tradycyjnym białym wykończeniu lakierowanym, które jest bardziej pracochłonne i oczywiście droższe, ale w secesyjnych i klasycznych wnętrzach wygląda wspaniale.",
+        "name": "Wien 3"
+      },
+      "zuzana": {
+        "description": "Prosty, a zarazem elegancki design drzwi wewnętrznych Zuzana jest w stanie spełnić oczekiwania nawet najbardziej wymagających klientów.",
+        "name": "Zuzana"
+      }
+    },
+    "materials": {
+      "laminates": {
+        "antracit": {
+          "label": "Antracyt"
+        },
+        "canyon-dark": {
+          "label": "Canyon ciemny"
+        },
+        "canyon-light": {
+          "label": "Canyon jasny"
+        },
+        "creme": {
+          "label": "Kremowy"
+        },
+        "dub-bardolino": {
+          "label": "Dąb bardolino"
+        },
+        "dub-hamilton": {
+          "label": "Dąb hamilton"
+        },
+        "dub-halifax": {
+          "label": "Dąb halifax"
+        },
+        "dub-halifax-tabakovy": {
+          "label": "Dąb halifax tabakowy"
+        },
+        "dub-kronberg": {
+          "label": "Dąb kronberg"
+        },
+        "dub-wotan": {
+          "label": "Dąb wotan"
+        },
+        "gardena": {
+          "label": "Gardena"
+        },
+        "jasen-piesocny": {
+          "label": "Jesion piaskowy"
+        },
+        "lamino-biela": {
+          "label": "Biały"
+        },
+        "lamino-buk": {
+          "label": "Buk"
+        },
+        "lamino-chamonix": {
+          "label": "Chamonix"
+        },
+        "lamino-javor": {
+          "label": "Klon"
+        },
+        "lamino-javor-kralovsky": {
+          "label": "Klon królewski"
+        },
+        "lamino-jelsa": {
+          "label": "Olcha"
+        },
+        "lamino-pinia-korzika": {
+          "label": "Pinia korsyka"
+        },
+        "lamino-seda": {
+          "label": "Szary"
+        },
+        "orech": {
+          "label": "Orzech"
+        },
+        "wien-biela": {
+          "label": "Biały lakierowany"
+        }
+      },
+      "veneers": {
+        "buk": {
+          "label": "Buk"
+        },
+        "dub": {
+          "label": "Dąb"
+        },
+        "javor": {
+          "label": "Klon"
+        },
+        "macore": {
+          "label": "Macore"
+        },
+        "mahagon": {
+          "label": "Mahoń"
+        },
+        "smrek": {
+          "label": "Świerk"
+        }
+      }
+    },
+    "rosettes": {
+      "bb": {
+        "header": "Rozeta - Zamek pokojowy standardowy BB",
+        "label": "Rozeta - Zamek pokojowy standardowy BB"
+      },
+      "fab": {
+        "header": "Rozeta - Zamek na wkładkę patentową",
+        "hint": "Wkładkę klient dostarcza we własnym zakresie.",
+        "label": "Rozeta - Zamek na wkładkę patentową"
+      },
+      "wc": {
+        "header": "Rozeta - Zamek łazienkowy WC",
+        "label": "Rozeta - Zamek łazienkowy WC"
+      }
+    },
+    "specialSurcharges": {
+      "special-surcharges-double-door-frame": {
+        "header": "Ościeżnica do drzwi dwuskrzydłowych",
+        "label": "Cena ościeżnicy do drzwi dwuskrzydłowych (wybierz 2 skrzydła i zaznacz tę ościeżnicę) 103 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-sliding-doors-fittings-curtain-rod": {
+        "header": "Drzwi przesuwne - system z karniszem",
+        "label": "Drzwi przesuwne - system z karniszem 150 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-minima": {
+        "header": "Drzwi przesuwne - system Minima",
+        "label": "Drzwi przesuwne - system Minima 250€.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-sliding-doors-hardware-built-in-housing": {
+        "header": "Drzwi przesuwne - okucie do kasety wewnątrzściennej",
+        "label": "Drzwi przesuwne - okucie do kasety 0 €. Ościeżnica do kasety 150 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-hidden-hinges": {
+        "header": "Dopłata za ukryte zawiasy",
+        "label": "Dopłata za ukryte zawiasy drzwi 130 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-reversible-doors": {
+        "header": "Dopłata za drzwi rewersyjne",
+        "label": "Dopłata za drzwi rewersyjne 265 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-double-leaf-non-rebated-door-with-frame": {
+        "header": "Drzwi dwuskrzydłowe bezprzylgowe z ościeżnicą",
+        "label": "Drzwi dwuskrzydłowe bezprzylgowe z ościeżnicą 285 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-double-leaf-sliding-door-curtain": {
+        "header": "Dopłata za drzwi przesuwne dwuskrzydłowe z karniszem",
+        "label": "Dopłata za drzwi przesuwne dwuskrzydłowe z karniszem 250 €.",
+        "labelAssembly": "Montaż + 50 €."
+      },
+      "special-surcharges-double-leaf-sliding-door-minima": {
+        "header": "Dopłata za drzwi przesuwne dwuskrzydłowe Minima",
+        "label": "Dopłata za drzwi przesuwne dwuskrzydłowe Minima 350 €.",
+        "labelAssembly": "Montaż + 50 €."
+      },
+      "special-surcharges-frame-for-double-leaf-doors-in-case": {
+        "header": "Ościeżnica do drzwi dwuskrzydłowych do kasety",
+        "label": "Dopłata za drzwi przesuwne dwuskrzydłowe do kasety 0 €. Ościeżnica do drzwi dwuskrzydłowych do kasety 180 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-barn-1": {
+        "header": "System przesuwny - Barn 1 czarny",
+        "label": "System przesuwny - Barn 1 czarny 150 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-minima-black": {
+        "header": "System przesuwny - Minima czarny",
+        "label": "System przesuwny - Minima czarny 290 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-door-to-case-with-frame": {
+        "header": "Drzwi do kasety z ościeżnicą",
+        "label": "Drzwi do kasety z ościeżnicą 57 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-door-to-case-without-frame": {
+        "header": "Drzwi do kasety bez ościeżnicy",
+        "label": "Drzwi do kasety bez ościeżnicy 0 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-double-leaf-door-to-case": {
+        "header": "Drzwi dwuskrzydłowe do kasety",
+        "label": "Drzwi dwuskrzydłowe do kasety 87 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-folding-interior-doors": {
+        "header": "Drzwi łamane wewnętrzne",
+        "label": "Drzwi łamane wewnętrzne 220 €.",
+        "labelAssembly": "Montaż + 50 €."
+      },
+      "special-surcharges-sliding-hardware-invisible": {
+        "header": "System przesuwny - niewidoczny",
+        "label": "System przesuwny - niewidoczny 490 €.",
+        "labelAssembly": "Montaż + 50 €."
+      },
+      "special-surcharges-barn-4": {
+        "header": "System przesuwny - Barn 4 czarny",
+        "label": "System przesuwny - Barn 4 czarny 210 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-barn-3": {
+        "header": "System przesuwny - Barn 3 czarny",
+        "label": "System przesuwny - Barn 3 czarny 190 €.",
+        "labelAssembly": "Montaż + 25 €."
+      },
+      "special-surcharges-barn-2": {
+        "header": "System przesuwny - Barn 2 czarny",
+        "label": "System przesuwny - Barn 2 czarny 180 €.",
+        "labelAssembly": "Montaż + 25 €."
+      }
+    },
+    "technicalSurcharges": {
+      "technical-surcharges-hollow-particle-board-filling": {
+        "header": "Wypełnienie z płyty wiórowej otworowej",
+        "label": "Wypełnienie z płyty wiórowej otworowej: Drzwi mogą być wypełnione plastrem miodu lub płytą wiórową otworową za dopłatą 30 €. Plaster miodu to warstwa papieru, płyta otworowa wykonana jest z wiórów drzewnych. Zalecamy płytę otworową do drzwi V1, ale może być stosowana we wszystkich drzwiach z kategorii Vanesa i Petra. Płyta otworowa jest cięższa, mocniejsza i lepiej izoluje."
+      },
+      "technical-surcharges-silicone-frame": {
+        "header": "Uszczelka silikonowa do ościeżnicy",
+        "label": "Uszczelka silikonowa do ościeżnicy 10 €/sztuka: W ościeżnicy frezujemy rowek, w który wsuwamy uszczelkę silikonową. Zaletą jest to, że drzwi zamykają się ciszej, a po zamknięciu uszczelka tłumi dźwięki z sąsiedniego pokoju."
+      },
+      "technical-surcharges-silicone-wall-frame": {
+        "header": "Wypełnienie nierówności między ścianą a ościeżnicą",
+        "label": "Wypełnienie nierówności między ścianą a ościeżnicą 6 €/sztuka: Przy montażu ościeżnicy na krzywych ścianach może powstać szczelina. Możemy ją wypełnić silikonem akrylowym. Ze względu na elastyczność silikonu można wypełniać tylko szczeliny do 0,5 cm. Łazienki i WC nie są silikonowane od wewnątrz. Nie silikonuje się również, gdy drzwi są w rogu."
+      },
+      "technical-surcharges-carrying": {
+        "header": "Wnoszenie na 3. i wyższe piętra bez windy",
+        "label": "Wnoszenie na 3. i wyższe piętra bez windy: Za wnoszenie na 3. i wyższe piętra bez windy naliczana jest dopłata za wniesienie drzwi, ościeżnic, materiałów i narzędzi w wysokości 100 €."
+      },
+      "technical-surcharges-thicker-walls": {
+        "header": "Dopłata za grubsze ściany",
+        "label": "Dopłata za ściany grubsze niż 20 cm 12 €/każde 10 cm: Jeśli ściany są grubsze niż 20 cm, naliczana jest dopłata za dodatkowy materiał w wysokości 12 € za każde dodatkowe 10 cm."
+      },
+      "technical-surcharges-higher-doors": {
+        "header": "Dopłata za wyższe drzwi",
+        "label": "Dopłata za drzwi wyższe niż 207 cm 20 €/sztuka: Drzwi o wysokości od 207 cm do 240 cm objęte są dopłatą 20 €/sztuka za droższy materiał. Nie wszystkie materiały można dostarczyć w wysokości powyżej 207 cm."
+      },
+      "technical-surcharges-original-steel-door-frames-cladding": {
+        "header": "Obudowa istniejących ościeżnic stalowych",
+        "label": "Obudowa istniejących ościeżnic stalowych 25 €/sztuka: W przypadku obudowy istniejących ościeżnic stalowych naliczana jest dopłata 25 €. Należy jednak wziąć pod uwagę, że otwór budowlany zwęzi się o ok. 3,5 cm z każdej strony. Oznacza to ok. 3,5 cm z góry i ok. 7 cm na szerokości."
+      },
+      "technical-surcharges-tiles-cutting": {
+        "header": "Dopłata za podcinanie opasek",
+        "label": "Dopłata za podcinanie opasek 15 €/sztuka: Opaski są podcinane podczas montażu, jeśli otwory budowlane są niewłaściwie przygotowane. Na przykład, gdy różnica poziomów między pokojami przekracza 5 mm, gdy na ścianach brakuje miejsca na ościeżnicę i trzeba ją dociąć, lub gdy płytki w łazience/WC sięgają niżej niż wysokość drzwi i trzeba wyfrezować rowek w opasce."
+      }
+    }
+  }
+}

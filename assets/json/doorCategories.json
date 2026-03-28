@@ -1,8 +1,10 @@
 [
   {
-    "categoryId": "Najpredavanejsie",
+    "categoryId": "best-selling",
     "description": "Do kategórie najpredávanejšie sme pre Vás vybrali zoznam interiérových dverí, ktoré si naši zákazníci najčastejšie objednávajú a zároveň predstavujú najpriaznivejší pomer medzi kvalitou a cenou.",
+    "descriptionKey": "db.doorCategories.best-selling.description",
     "name": "Najpredávanejšie",
+    "nameKey": "db.doorCategories.best-selling.name",
     "doorConfiguratorDefault": {
       "handle": "Nova_nerez_R",
       "material": "lamino-jelsa",
@@ -49,9 +51,25 @@
     "constructionPossibilities": []
   },
   {
-    "categoryId": "Zuzana",
+    "categoryId": "zuzana",
     "description": "Jednoduchý a zároveň elegantný dizajn Interiérových dverí Zuzana dokáže naplniť očakávania aj tých najnáročnejších zákazníkov.",
+    "descriptionKey": "db.doorCategories.zuzana.description",
     "name": "Zuzana",
+    "nameKey": "db.doorCategories.zuzana.name",
+    "nameTranslate": {
+      "bg": "",
+      "cs": "",
+      "de": "",
+      "en": "",
+      "es": "",
+      "fr": "",
+      "hu": "",
+      "it": "",
+      "pl": "",
+      "ro": "",
+      "sk": "Zuzana",
+      "sr": ""
+    },
     "doorConfiguratorDefault": {
       "handle": "Nova_nerez_R",
       "material": "canyon-dark",
@@ -92,9 +110,11 @@
     "constructionPossibilities": []
   },
   {
-    "categoryId": "Vanesa",
+    "categoryId": "vanesa",
     "description": "Upustite uzdu svojej fantázií. Pohrajte sa s rozmermi a upravte si štýl dverí podľa predstáv. Dvere Vanesa sú kombináciou moderného dizajnu a rozumnej ceny.",
+    "descriptionKey": "db.doorCategories.vanesa.description",
     "name": "Vanesa",
+    "nameKey": "db.doorCategories.vanesa.name",
     "doorConfiguratorDefault": {
       "handle": "Nova_nerez_R",
       "material": "lamino-jelsa",
@@ -150,9 +170,11 @@
     "constructionPossibilities": []
   },
   {
-    "categoryId": "Kristina",
+    "categoryId": "kristina",
     "description": "Dajte svoj štýl do perspektívy. Byť „in“ a trendy je hlavným cieľom tejto kategórie. Interiérové dvere Kristína budú žiariť v každom interiéri.",
+    "descriptionKey": "db.doorCategories.kristina.description",
     "name": "Kristína",
+    "nameKey": "db.doorCategories.kristina.name",
     "doorConfiguratorDefault": {
       "handle": "Nova_nerez_R",
       "material": "lamino-chamonix",
@@ -202,9 +224,11 @@
     "constructionPossibilities": []
   },
   {
-    "categoryId": "Greta",
+    "categoryId": "greta",
     "description": "",
+    "descriptionKey": "db.doorCategories.greta.description",
     "name": "Gréta",
+    "nameKey": "db.doorCategories.greta.name",
     "doorConfiguratorDefault": {
       "handle": "Qubik_mosadz_brusena_HR",
       "material": "ORECH",
@@ -266,9 +290,11 @@
     "constructionPossibilities": []
   },
   {
-    "categoryId": "Renata",
+    "categoryId": "renata",
     "description": "Klasika je nadčasová, v tomto duchu sa nesie kategória interiérových dverí Renata. Pohodlný a prívetivý dizajn vnesie eleganciu do každého interiéru.",
+    "descriptionKey": "db.doorCategories.renata.description",
     "name": "Renata",
+    "nameKey": "db.doorCategories.renata.name",
     "doorConfiguratorDefault": {
       "handle": "Nova_nerez_R",
       "material": "lamino-buk",
@@ -320,7 +346,9 @@
   {
     "categoryId": "Petra",
     "description": "Pravidelné tvary a jemné línie dotvárajú estetický dojem kategórie interiérových dverí Petra. Hliníkové doplnky oživia všetky moderné interiéry.",
+    "descriptionKey": "db.doorCategories.petra.description",
     "name": "Petra",
+    "nameKey": "db.doorCategories.petra.name",
     "doorConfiguratorDefault": {
       "handle": "Nova_nerez_R",
       "material": "lamino-javor-kralovsky",
@@ -382,9 +410,11 @@
     "constructionPossibilities": []
   },
   {
-    "categoryId": "Barbora",
+    "categoryId": "barbora",
     "description": "",
+    "descriptionKey": "db.doorCategories.barbora.description",
     "name": "Barbora",
+    "nameKey": "db.doorCategories.barbora.name",
     "doorConfiguratorDefault": {
       "handle": "Qubik_cierna_matna_HR",
       "material": "DUB-HALIFAX",
@@ -446,9 +476,11 @@
     "constructionPossibilities": []
   },
   {
-    "categoryId": "Wien_1",
+    "categoryId": "wien_1",
     "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
+    "descriptionKey": "db.doorCategories.wien_1.description",
     "name": "Wien 1",
+    "nameKey": "db.doorCategories.wien_1.name",
     "doorConfiguratorDefault": {
       "handle": "Alt_wien",
       "material": "wien-biela",
@@ -601,9 +633,11 @@
     ]
   },
   {
-    "categoryId": "Wien_2",
+    "categoryId": "wien_2",
     "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
+    "descriptionKey": "db.doorCategories.wien_2.description",
     "name": "Wien 2",
+    "nameKey": "db.doorCategories.wien_2.name",
     "doorConfiguratorDefault": {
       "handle": "Alt_wien",
       "material": "wien-biela",
@@ -768,9 +802,11 @@
     ]
   },
   {
-    "categoryId": "Wien_3",
+    "categoryId": "wien_3",
     "description": "Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.",
+    "descriptionKey": "db.doorCategories.wien_3.description",
     "name": "Wien 3",
+    "nameKey": "db.doorCategories.wien_3.name",
     "doorConfiguratorDefault": {
       "handle": "Alt_wien",
       "material": "wien-biela",

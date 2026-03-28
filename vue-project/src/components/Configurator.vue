@@ -18,6 +18,9 @@ import {formatPrice} from "@/model/functions/formatters.js";
 import BadgePrice from "@/components/BadgePrice.vue";
 import Footer from "@/components/Footer.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
+import {offcanvas} from "@/composables/offcanvas.js";
+import NavTabs from "@/components/NavTabs.vue";
+import {safeT} from "@/model/functions/translation-utils.js";
 
 const {addAlert} = useAlerts()
 const {appConfig} = useAppState()
@@ -30,7 +33,9 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'door-selected', door: SelectedDoor): void,
-  (e: 'room-selected', room: Room): void
+  (e: 'room-selected', room: Room): void,
+  (e: 'configurator-clicked'): void,
+  (e: 'price-offer-clicked'): void
 }>()
 
 const doorTypesSelectionSection = ref<HTMLElement | null>(null);
@@ -182,289 +187,298 @@ onMounted(() => {
 </script>
 
 <template>
-  <div data-bs-theme="configurator">
-    <div class="row" v-if="configuratorApiResponse">
-      <div class="accordion mb-2">
-        <AccordionItem id="doorCategory"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.doorCategory')">
-          <div class="row">
-            <div v-for="doorCategory in configuratorApiResponse.doorCategories"
-                 :class="`${doorClasses} text-center door-miniature`">
-              <DoorMiniature :base-url="appConfig?.baseUrl"
-                             :door-category="doorCategory.categoryId"
-                             :door-state="computeDoorCategoryState(doorCategory.categoryId)"
-                             :door-type="doorCategory.doorConfiguratorDefault.type"
-                             @click="handleDoorCategoryChangeWithScrollIntoView(doorCategory)"/>
-              <div class="door-category-word-break text-uppercase">{{ doorCategory.name }}</div>
+  <div class="offcanvas-header pb-0 pt-1">
+    <NavTabs @handle-configurator-click="emit('configurator-clicked')"
+             @handle-price-offer-click="emit('price-offer-clicked')"/>
+    <button
+        type="button"
+        class="btn-close"
+        @click="offcanvas.close()"/>
+  </div>
+  <div class="offcanvas-body">
+    <div data-bs-theme="configurator">
+      <div class="row" v-if="configuratorApiResponse">
+        <div class="accordion mb-2">
+          <AccordionItem id="doorCategory"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.doorCategory')">
+            <div class="row">
+              <div v-for="doorCategory in configuratorApiResponse.doorCategories"
+                   :class="`${doorClasses} text-center door-miniature`">
+                <DoorMiniature :base-url="appConfig?.baseUrl"
+                               :door-category="doorCategory.categoryId"
+                               :door-state="computeDoorCategoryState(doorCategory.categoryId)"
+                               :door-type="doorCategory.doorConfiguratorDefault.type"
+                               @click="handleDoorCategoryChangeWithScrollIntoView(doorCategory)"/>
+                <div class="door-category-word-break text-uppercase">{{ safeT(doorCategory.nameKey) }}</div>
+              </div>
             </div>
-          </div>
-        </AccordionItem>
-        <AccordionItem id="doorType"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.doorType', {doorType: selectedDoor?.doorCategory?.name})">
-          <div ref="doorTypesSelectionSection">{{ selectedDoor?.doorCategory?.description }}</div>
-          <div class="row"
-               v-if="selectedDoor?.doorCategory">
-            <div v-for="(value, doorType) in selectedDoor?.doorCategory.doorTypes"
-                 :key="doorType"
-                 :class="`${doorClasses} text-center door-miniature`">
-              <DoorMiniature :base-url="appConfig?.baseUrl"
-                             :door-category="selectedDoor?.doorCategory.categoryId"
-                             :door-state="doorTypeState(doorType)"
-                             :door-type="doorType"
-                             @click="handleDoorTypeChange(doorType)"
-                             class="mb-1"/>
-              <BadgePrice
-                  class="w-100"
-                  :price="value.price"/>
-              <div class="door-category-word-break text-uppercase">{{ doorType }}</div>
+          </AccordionItem>
+          <AccordionItem id="doorType"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.doorType', {doorType: safeT(selectedDoor?.doorCategory?.nameKey)})">
+          <div ref="doorTypesSelectionSection">{{ safeT(selectedDoor?.doorCategory?.descriptionKey) }}</div>
+            <div class="row"
+                 v-if="selectedDoor?.doorCategory">
+              <div v-for="(value, doorType) in selectedDoor?.doorCategory.doorTypes"
+                   :key="doorType"
+                   :class="`${doorClasses} text-center door-miniature`">
+                <DoorMiniature :base-url="appConfig?.baseUrl"
+                               :door-category="selectedDoor?.doorCategory.categoryId"
+                               :door-state="doorTypeState(doorType)"
+                               :door-type="doorType"
+                               @click="handleDoorTypeChange(doorType)"
+                               class="mb-1"/>
+                <BadgePrice
+                    class="w-100"
+                    :price="value.price"/>
+                <div class="door-category-word-break text-uppercase">{{ doorType }}</div>
+              </div>
             </div>
-          </div>
-          <div>{{ t('configurator.doorFramePrice', {price: formatPrice(99)}) }}</div>
-        </AccordionItem>
-        <AccordionItem id="laminates"
-                       v-if="Object.keys(availableMaterialsForDoorCategories(configuratorApiResponse?.materials.laminates)).length"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.laminate')">
-          <div class="row">
-            <div
-                v-for="(value, key) in availableMaterialsForDoorCategories(configuratorApiResponse?.materials.laminates)"
-                :key="key"
-                :class="`${doorClasses} text-center door-miniature`">
-              <ImageWithLoadingPlaceholder
-                  :alt="key"
-                  class="img-fluid w-100 ratio-1x1 border"
-                  :class="{
+            <div>{{ t('configurator.doorFramePrice', {price: formatPrice(99)}) }}</div>
+          </AccordionItem>
+          <AccordionItem id="laminates"
+                         v-if="Object.keys(availableMaterialsForDoorCategories(configuratorApiResponse?.materials.laminates)).length"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.laminate')">
+            <div class="row">
+              <div
+                  v-for="(value, key) in availableMaterialsForDoorCategories(configuratorApiResponse?.materials.laminates)"
+                  :key="key"
+                  :class="`${doorClasses} text-center door-miniature`">
+                <ImageWithLoadingPlaceholder
+                    :alt="key"
+                    class="img-fluid w-100 ratio-1x1 border"
+                    :class="{
                 'border-primary': selectedDoor?.material === key,
                 'border-5': selectedDoor?.material === key
               }"
-                  @click="handleMaterialChange(key)"
-                  :src="appConfig?.baseUrl + '/images/materials/min/' + key + '.jpg'"
-              />
-              <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
+                    @click="handleMaterialChange(key)"
+                    :src="appConfig?.baseUrl + '/images/materials/min/' + key + '.jpg'"
+                />
+                <span class="door-category-word-break text-uppercase">{{ safeT(value.labelKey) }}</span>
+              </div>
             </div>
-          </div>
-        </AccordionItem>
-        <AccordionItem id="veneers"
-                       v-if="Object.keys(availableMaterialsForDoorCategories(configuratorApiResponse?.materials.veneers)).length"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.veneers')">
-          <div class="row">
-            <div v-for="(value, key) in availableMaterialsForDoorCategories(configuratorApiResponse?.materials.veneers)"
-                 :key="key"
-                 :class="`${doorClasses} text-center door-miniature`">
-              <ImageWithLoadingPlaceholder
-                  :alt="key"
-                  class="img-fluid w-100 ratio-1x1 border"
-                  :class="{
+          </AccordionItem>
+          <AccordionItem id="veneers"
+                         v-if="Object.keys(availableMaterialsForDoorCategories(configuratorApiResponse?.materials.veneers)).length"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.veneers')">
+            <div class="row">
+              <div
+                  v-for="(value, key) in availableMaterialsForDoorCategories(configuratorApiResponse?.materials.veneers)"
+                  :key="key"
+                  :class="`${doorClasses} text-center door-miniature`">
+                <ImageWithLoadingPlaceholder
+                    :alt="key"
+                    class="img-fluid w-100 ratio-1x1 border"
+                    :class="{
                 'border-primary': selectedDoor?.material === key,
                 'border-5': selectedDoor?.material === key
               }"
-                  @click="handleMaterialChange(key)"
-                  :src="appConfig?.baseUrl + '/images/materials/min/' + key + '.jpg'"
-              />
-              <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
+                    @click="handleMaterialChange(key)"
+                    :src="appConfig?.baseUrl + '/images/materials/min/' + key + '.jpg'"
+                />
+                <span class="door-category-word-break text-uppercase">{{ safeT(value.labelKey) }}</span>
+              </div>
             </div>
-          </div>
-        </AccordionItem>
-        <AccordionItem id="handles"
-                       v-if="!selectedDoor?.doorCategory?.hiddenConfiguratorSections.includes('handles')"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.handles')">
-          <h4 class="text-uppercase">{{ t('configurator.selectHandles') }}
-            <a href="https://www.mp-kovania.sk" target="_blank">mp-kovania.sk</a>
-          </h4>
-          <div class="row">
-            <div v-for="(value, key) in availableHandlesForDoorCategories(configuratorApiResponse?.handles)"
-                 :key="key"
-                 :class="`${doorClasses} text-center door-miniature`">
-              <ImageWithLoadingPlaceholder
-                  :alt="key"
-                  class="img-fluid w-100 ratio-1x1 border mb-1"
-                  :class="{
+          </AccordionItem>
+          <AccordionItem id="handles"
+                         v-if="!selectedDoor?.doorCategory?.hiddenConfiguratorSections.includes('handles')"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.handles')">
+            <h4 class="text-uppercase">{{ t('configurator.selectHandles') }}
+              <a href="https://www.mp-kovania.sk" target="_blank">mp-kovania.sk</a>
+            </h4>
+            <div class="row">
+              <div v-for="(value, key) in availableHandlesForDoorCategories(configuratorApiResponse?.handles)"
+                   :key="key"
+                   :class="`${doorClasses} text-center door-miniature`">
+                <ImageWithLoadingPlaceholder
+                    :alt="key"
+                    class="img-fluid w-100 ratio-1x1 border mb-1"
+                    :class="{
                 'border-primary': selectedDoor?.handleId === key,
                 'border-5': selectedDoor?.handleId === key
               }"
-                  @click="handleHandleChange(key)"
-                  :src="appConfig?.baseUrl + value.imgSrc"
-              />
-              <BadgePrice
-                  class="w-100"
-                  :price="value.price"/>
-              <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
-            </div>
-          </div>
-        </AccordionItem>
-        <AccordionItem id="constructionPossibilities"
-                       v-if="selectedDoor?.doorCategory?.constructionPossibilities?.length ?? false"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.constructionPossibilities')">
-          <div class="row">
-            <div v-for="(constructionPossibility, index) in selectedDoor?.doorCategory?.constructionPossibilities"
-                 :key="index">
-              <span>{{ constructionPossibility.description }}</span>
-              <div class="row">
-                <div v-for="(item, itemIdx) in constructionPossibility.items"
-                     :key="itemIdx"
-                     :class="`${doorClasses} text-center`">
-                  <ImageWithLoadingPlaceholder
-                      :alt="itemIdx.toString()"
-                      class="img-fluid w-100 ratio-1x1"
-                      :src="appConfig?.baseUrl + item.imgSrc"
-                  />
-                  <span class="door-category-word-break text-uppercase">{{ item.label }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AccordionItem>
-        <AccordionItem id="glasses"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.glasses')">
-          <div class="row" ref="glassGalleryRef">
-            <div v-for="(value, key) in configuratorApiResponse?.glasses"
-                 :key="key"
-                 :class="`${doorClasses} text-center door-miniature`">
-              <a
-                  :href="appConfig?.baseUrl + '/images/glasses/' + key + '.jpg'"
-                  data-pswp-width="500"
-                  data-pswp-height="500"
-                  rel="noreferrer">
-                <ImageWithLoadingPlaceholder
-                    :alt="key"
-                    class="img-fluid w-100 ratio-1x1"
-                    :src="appConfig?.baseUrl + '/images/glasses/min/' + key + '.jpg'"
+                    @click="handleHandleChange(key)"
+                    :src="appConfig?.baseUrl + value.imgSrc"
                 />
-              </a>
-              <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
+                <BadgePrice
+                    class="w-100"
+                    :price="value.price"/>
+                <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
+              </div>
             </div>
-          </div>
-        </AccordionItem>
-        <AccordionItem id="doorsGallery"
-                       v-if="selectedDoor?.doorCategory?.gallery && selectedDoor?.doorCategory?.gallery?.length"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.gallery')">
-          <div class="row" ref="doorsGalleryRef">
-            <div v-for="(value, key) in selectedDoor?.doorCategory?.gallery"
-                 :key="key"
-                 class="col-sm-6 gx-1 gy-1 text-center">
-              <a :href="appConfig?.baseUrl + value.imgSrc"
-                 data-pswp-width="1838"
-                 data-pswp-height="1365"
-                 rel="noreferrer">
-                <ImageWithLoadingPlaceholder
-                    :alt="key.toString()"
-                    class="img-fluid ratio-1x1"
-                    :src="appConfig?.baseUrl + value.imgSrc"/>
-              </a>
-            </div>
-          </div>
-        </AccordionItem>
-        <AccordionItem id="rooms"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.rooms')">
-          <div class="row mb-1">
-            <div v-for="room in configuratorApiResponse.rooms" class="col-sm-6 gx-1 gy-1">
-              <ImageWithLoadingPlaceholder class="img-fluid door-selector-img"
-                                           alt="logo"
-                                           :src="appConfig?.baseUrl + room.imgSrcMiniature"
-                                           @click="emit('room-selected', room)"/>
-            </div>
-          </div>
-          <div class="row">
-            <AccordionItem id="gallery"
-                           :is-open-by-default="false"
-                           :title="t('configurator.accordionHeaders.gallery')">
-              <div class="row" ref="galleryRef">
-                <div v-for="(value, key) in configuratorApiResponse.gallery"
-                     :key="key"
-                     :class="`col-${value.col} gx-1 gy-1 text-center`">
-                  <a :href="appConfig?.baseUrl + value.imgSrc"
-                     :data-pswp-width="value.width"
-                     :data-pswp-height="value.height"
-                     rel="noreferrer">
+          </AccordionItem>
+          <AccordionItem id="constructionPossibilities"
+                         v-if="selectedDoor?.doorCategory?.constructionPossibilities?.length ?? false"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.constructionPossibilities')">
+            <div class="row">
+              <div v-for="(constructionPossibility, index) in selectedDoor?.doorCategory?.constructionPossibilities"
+                   :key="index">
+                <span>{{ constructionPossibility.description }}</span>
+                <div class="row">
+                  <div v-for="(item, itemIdx) in constructionPossibility.items"
+                       :key="itemIdx"
+                       :class="`${doorClasses} text-center`">
                     <ImageWithLoadingPlaceholder
-                        :alt="key.toString()"
-                        class="img-fluid ratio-1x1"
-                        :src="appConfig?.baseUrl + value.imgSrc"/>
-                  </a>
-                </div>
-              </div>
-            </AccordionItem>
-          </div>
-        </AccordionItem>
-        <AccordionItem id="currentActions"
-                       :is-open-by-default="true"
-                       :title="t('configurator.accordionHeaders.currentActions')">
-          <div class="row mt-3">
-            <div class="col-12 col-lg-4">
-              <ImageWithLoadingPlaceholder
-                  alt="interierove-dvere-cena.jpg"
-                  class="img-fluid w-100 ratio-1x1"
-                  :src="appConfig?.baseUrl + '/images/interierove-dvere-cena.jpg'"/>
-              <div class="p-3">
-                <div class="text-uppercase text-center mb-3">Interiérové <b>dvere so zárubňou</b> od <b>219,- €</b>
-                </div>
-                <div class="text-align-justify small">Interiérové dvere a zárubne Vám vo všetkých druhoch laminátov
-                  ponúkame
-                  za
-                  akciovú cenu 219€. Cena platí aj pre dvere, ktoré prídeme pred výrobou osobne zamerať.
+                        :alt="itemIdx.toString()"
+                        class="img-fluid w-100 ratio-1x1"
+                        :src="appConfig?.baseUrl + item.imgSrc"
+                    />
+                    <span class="door-category-word-break text-uppercase">{{ item.label }}</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-lg-4">
-              <ImageWithLoadingPlaceholder
-                  alt="zameranie-zadarmo.jpg"
-                  class="img-fluid w-100 ratio-1x1"
-                  :src="appConfig?.baseUrl + '/images/zameranie-zadarmo.jpg'"
-              />
-              <div class="p-3">
-                <div class="text-uppercase text-center mb-3"><b>Zameranie</b> stavebných otvorov <b>zadarmo</b></div>
-                <div class="text-align-justify small">Trápia Vás atypické miery otvorov? Pre nás nie sú žiadnym
-                  problémom.
-                  Každý
-                  otvor
-                  osobne zameriame a dvere vyrobíme tak, aby čo najpresnejšie zapasovali. Dvere na mieru sú u nás BEZ
-                  PRÍPLATKU.
+          </AccordionItem>
+          <AccordionItem id="glasses"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.glasses')">
+            <div class="row" ref="glassGalleryRef">
+              <div v-for="(value, key) in configuratorApiResponse?.glasses"
+                   :key="key"
+                   :class="`${doorClasses} text-center door-miniature`">
+                <a
+                    :href="appConfig?.baseUrl + '/images/glasses/' + key + '.jpg'"
+                    data-pswp-width="500"
+                    data-pswp-height="500"
+                    rel="noreferrer">
+                  <ImageWithLoadingPlaceholder
+                      :alt="key"
+                      class="img-fluid w-100 ratio-1x1"
+                      :src="appConfig?.baseUrl + '/images/glasses/min/' + key + '.jpg'"
+                  />
+                </a>
+                <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
+              </div>
+            </div>
+          </AccordionItem>
+          <AccordionItem id="doorsGallery"
+                         v-if="selectedDoor?.doorCategory?.gallery && selectedDoor?.doorCategory?.gallery?.length"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.gallery')">
+            <div class="row" ref="doorsGalleryRef">
+              <div v-for="(value, key) in selectedDoor?.doorCategory?.gallery"
+                   :key="key"
+                   class="col-sm-6 gx-1 gy-1 text-center">
+                <a :href="appConfig?.baseUrl + value.imgSrc"
+                   data-pswp-width="1838"
+                   data-pswp-height="1365"
+                   rel="noreferrer">
+                  <ImageWithLoadingPlaceholder
+                      :alt="key.toString()"
+                      class="img-fluid ratio-1x1"
+                      :src="appConfig?.baseUrl + value.imgSrc"/>
+                </a>
+              </div>
+            </div>
+          </AccordionItem>
+          <AccordionItem id="rooms"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.rooms')">
+            <div class="row mb-1">
+              <div v-for="room in configuratorApiResponse.rooms" class="col-sm-6 gx-1 gy-1">
+                <ImageWithLoadingPlaceholder class="img-fluid door-selector-img"
+                                             alt="logo"
+                                             :src="appConfig?.baseUrl + room.imgSrcMiniature"
+                                             @click="emit('room-selected', room)"/>
+              </div>
+            </div>
+            <div class="row">
+              <AccordionItem id="gallery"
+                             :is-open-by-default="false"
+                             :title="t('configurator.accordionHeaders.gallery')">
+                <div class="row" ref="galleryRef">
+                  <div v-for="(value, key) in configuratorApiResponse.gallery"
+                       :key="key"
+                       :class="`col-${value.col} gx-1 gy-1 text-center`">
+                    <a :href="appConfig?.baseUrl + value.imgSrc"
+                       :data-pswp-width="value.width"
+                       :data-pswp-height="value.height"
+                       rel="noreferrer">
+                      <ImageWithLoadingPlaceholder
+                          :alt="key.toString()"
+                          class="img-fluid ratio-1x1"
+                          :src="appConfig?.baseUrl + value.imgSrc"
+                          loading="lazy"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </AccordionItem>
+            </div>
+          </AccordionItem>
+          <AccordionItem id="currentActions"
+                         :is-open-by-default="true"
+                         :title="t('configurator.accordionHeaders.currentActions')">
+            <div class="row">
+              <div class="col-12 col-lg-4">
+                <ImageWithLoadingPlaceholder
+                    alt="interierove-dvere-cena.jpg"
+                    class="img-fluid w-100 ratio-1x1"
+                    :src="appConfig?.baseUrl + '/images/interierove-dvere-cena.jpg'"/>
+                <div class="p-1">
+                  <div class="text-uppercase text-center mb-3" v-html="t('configurator.campaign.doors.title')"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <ImageWithLoadingPlaceholder
+                    alt="zameranie-zadarmo.jpg"
+                    class="img-fluid w-100 ratio-1x1"
+                    :src="appConfig?.baseUrl + '/images/zameranie-zadarmo.jpg'"
+                />
+                <div class="p-1">
+                  <div class="text-uppercase text-center mb-3"
+                       v-html="t('configurator.campaign.freeMeasurement.title')"/>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <ImageWithLoadingPlaceholder
+                    alt="montaz-dveri.jpg"
+                    class="img-fluid w-100 ratio-1x1"
+                    :src="appConfig?.baseUrl + '/images/montaz-dveri.jpg'"
+                />
+                <div class="p-1">
+                  <div class="text-uppercase text-center mb-3" v-html="t('configurator.campaign.assembly.title')"/>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-lg-4">
-              <ImageWithLoadingPlaceholder
-                  alt="montaz-dveri.jpg"
-                  class="img-fluid w-100 ratio-1x1"
-                  :src="appConfig?.baseUrl + '/images/montaz-dveri.jpg'"
-              />
-              <div class="p-3">
-                <div class="text-uppercase text-center mb-3"><b>Montáž</b> inte&shy;rié&shy;ro&shy;vých dverí a zárubne
-                  <b>35,-
-                    €</b>
+            <div class="row">
+              <div class="col-12 col-lg-4">
+                <div class="p-1">
+                  <div class="text-align-justify small">{{ t('configurator.campaign.doors.body') }}</div>
                 </div>
-                <div class="text-align-justify small">Montáž kompletu interiérové dvere so zárubňou Vám ponúkame za
-                  zvýhodnenú
-                  cenu
-                  od
-                  35€/ks. Táto akciová cena platí pri montáži šiestich a viac kusov dverí a zárubní.
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="p-1">
+                  <div class="text-align-justify small">{{ t('configurator.campaign.freeMeasurement.body') }}</div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="p-1">
+                  <div class="text-align-justify small">{{ t('configurator.campaign.assembly.body') }}</div>
                 </div>
               </div>
             </div>
-          </div>
-        </AccordionItem>
+          </AccordionItem>
+        </div>
       </div>
-    </div>
-    <Footer/>
-    <div class="d-md-none d-flex justify-content-center">
-      <button @click="handleAddDoorButtonClick"
-              class="btn btn-secondary btn-lg text-white btn-add-to-price-offer text-uppercase d-flex align-items-center justify-content-center"
-              type="button">
-        <i class="fas fa-plus-circle text-white fs-1 me-2"></i>
-        <span class="fs-5">
+      <Footer/>
+      <div class="d-md-none d-flex justify-content-center">
+        <button @click="handleAddDoorButtonClick"
+                class="btn btn-secondary btn-lg text-white btn-add-to-price-offer text-uppercase d-flex align-items-center justify-content-center"
+                type="button">
+          <i class="fas fa-plus-circle text-white fs-1 me-2"></i>
+          <span class="fs-5">
           {{ t('configurator.buttonAddToPriceOffer') }}
         </span>
-      </button>
-    </div>
+        </button>
+      </div>
 
+    </div>
   </div>
 </template>
 

@@ -7,8 +7,6 @@ include_once('php/api/request-objects/api-price-offer-request-objects.php');
 include_once('php/api/response-objects/api-price-offer-response-objects.php');
 include_once('json-data-manipulation.php');
 
-const FEE_FRAME = 99;
-
 abstract class Width
 {
     const W60 = "W60";
@@ -265,7 +263,7 @@ class Handle
 
 class TechnicalSurcharge
 {
-    public static $SILICONE_ID = "possible-additional-charges-silicone-wall-frame";
+    public static $SILICONE_ID = "technical-surcharges-silicone-wall-frame";
     public static $SILICONE_PRICE_MULTIPLIER = 0.7;
 
     /** @var string|null $id */
@@ -303,9 +301,12 @@ class TechnicalSurcharge
             $effectiveCount,
             $this->isCountDirty,
             array_key_exists("header", $technicalSurchargeDb) ? $technicalSurchargeDb["header"] : null,
+            array_key_exists("headerKey", $technicalSurchargeDb) ? $technicalSurchargeDb["headerKey"] : null,
             array_key_exists("hint", $technicalSurchargeDb) ? $technicalSurchargeDb["hint"] : null,
+            array_key_exists("hintKey", $technicalSurchargeDb) ? $technicalSurchargeDb["hintKey"] : null,
             array_key_exists("imgSrc", $technicalSurchargeDb) ? $technicalSurchargeDb["imgSrc"] : null,
             array_key_exists("label", $technicalSurchargeDb) ? $technicalSurchargeDb["label"] : null,
+            array_key_exists("labelKey", $technicalSurchargeDb) ? $technicalSurchargeDb["labelKey"] : null,
             array_key_exists("youtubeVideoCode", $technicalSurchargeDb) ? $technicalSurchargeDb["youtubeVideoCode"] : null,
             array_key_exists("videoSrc", $technicalSurchargeDb) ? $technicalSurchargeDb["videoSrc"] : null
         );
@@ -358,9 +359,12 @@ class Rosette
             $this->calculatePrice($rosetteDb),
             $this->count,
             array_key_exists("header", $rosetteDb) ? $rosetteDb["header"] : null,
+            array_key_exists("headerKey", $rosetteDb) ? $rosetteDb["headerKey"] : null,
             array_key_exists("hint", $rosetteDb) ? $rosetteDb["hint"] : null,
+            array_key_exists("hintKey", $rosetteDb) ? $rosetteDb["hintKey"] : null,
             array_key_exists("imgSrc", $rosetteDb) ? $rosetteDb["imgSrc"] : null,
             array_key_exists("label", $rosetteDb) ? $rosetteDb["label"] : null,
+            array_key_exists("labelKey", $rosetteDb) ? $rosetteDb["labelKey"] : null,
             array_key_exists("price", $rosetteDb) ? $rosetteDb["price"] : null,
             array_key_exists("youtubeVideoCode", $rosetteDb) ? $rosetteDb["youtubeVideoCode"] : null,
             array_key_exists("videoSrc", $rosetteDb) ? $rosetteDb["videoSrc"] : null
@@ -452,9 +456,12 @@ class AestheticAccessory
             array_key_exists("price", $aestheticAccessoryDb) ? $aestheticAccessoryDb["price"] : null,
             $this->count,
             array_key_exists("header", $aestheticAccessoryDb) ? $aestheticAccessoryDb["header"] : null,
+            array_key_exists("headerKey", $aestheticAccessoryDb) ? $aestheticAccessoryDb["headerKey"] : null,
             array_key_exists("hint", $aestheticAccessoryDb) ? $aestheticAccessoryDb["hint"] : null,
+            array_key_exists("hintKey", $aestheticAccessoryDb) ? $aestheticAccessoryDb["hintKey"] : null,
             array_key_exists("imgSrc", $aestheticAccessoryDb) ? $aestheticAccessoryDb["imgSrc"] : null,
             array_key_exists("label", $aestheticAccessoryDb) ? $aestheticAccessoryDb["label"] : null,
+            array_key_exists("labelKey", $aestheticAccessoryDb) ? $aestheticAccessoryDb["labelKey"] : null,
             $this->selectedPrice,
             array_key_exists("youtubeVideoCode", $aestheticAccessoryDb) ? $aestheticAccessoryDb["youtubeVideoCode"] : null,
             array_key_exists("videoSrc", $aestheticAccessoryDb) ? $aestheticAccessoryDb["videoSrc"] : null
@@ -509,12 +516,16 @@ class SpecialSurcharge
             array_key_exists("price", $specialSurchargeDb) ? $specialSurchargeDb["price"] : null,
             $this->count,
             array_key_exists("header", $specialSurchargeDb) ? $specialSurchargeDb["header"] : null,
+            array_key_exists("headerKey", $specialSurchargeDb) ? $specialSurchargeDb["headerKey"] : null,
             array_key_exists("hint", $specialSurchargeDb) ? $specialSurchargeDb["hint"] : null,
+            array_key_exists("hintKey", $specialSurchargeDb) ? $specialSurchargeDb["hintKey"] : null,
             array_key_exists("imgSrc", $specialSurchargeDb) ? $specialSurchargeDb["imgSrc"] : null,
             SpecialSurcharge::getEffectiveIsAssemblySelected($this->count, $this->isAssemblySelected, $this->isAssemblySelectedDirty),
             $this->isAssemblySelectedDirty,
             array_key_exists("label", $specialSurchargeDb) ? $specialSurchargeDb["label"] : null,
+            array_key_exists("labelKey", $specialSurchargeDb) ? $specialSurchargeDb["labelKey"] : null,
             array_key_exists("labelAssembly", $specialSurchargeDb) ? $specialSurchargeDb["labelAssembly"] : null,
+            array_key_exists("labelAssemblyKey", $specialSurchargeDb) ? $specialSurchargeDb["labelAssemblyKey"] : null,
             array_key_exists("youtubeVideoCode", $specialSurchargeDb) ? $specialSurchargeDb["youtubeVideoCode"] : null,
             array_key_exists("videoSrc", $specialSurchargeDb) ? $specialSurchargeDb["videoSrc"] : null
         );
@@ -542,9 +553,6 @@ class SpecialSurcharge
 
 class Door
 {
-    const FEE_DTD = 30;
-    const FEE_FRAME_OFFER = 80;
-
     /** @var string|null $category */
     public $category;
 
@@ -652,17 +660,17 @@ class Door
         $rawPrice = $this->getRawPrice($this->type);
 
         if ($this->frame) {
-            $rawPrice = $rawPrice + ($this->type == "v1" ? Door::FEE_FRAME_OFFER : FEE_FRAME);//extra fee for frame
+            $rawPrice = $rawPrice + ($this->type == "v1" ? ParametersJsonDataManipulation::getAll()["framePriceOffer"] : ParametersJsonDataManipulation::getAll()["framePrice"]);//extra fee for frame
         }
 
         $rawPrice = $rawPrice + Width::getFee($this->width);//extra fee for width
-        $rawPrice = $rawPrice + ($this->isDtdSelected ? Door::FEE_DTD : 0);//extra fee for DTD
+        $rawPrice = $rawPrice + ($this->isDtdSelected ? ParametersJsonDataManipulation::getAll()["dtdSurcharge"] : 0);//extra fee for DTD
         return ($this->count ?? 0) * $rawPrice;
     }
 
     function isDtdAvailable(): bool
     {
-        return $this->type == "v1" || in_array($this->category, array("Petra", "Vanesa"));
+        return $this->type == "v1" || in_array($this->category, array("petra", "vanesa"));
     }
 
     function getWidthString(): string
@@ -790,7 +798,7 @@ class SelectedDoorLineItem
     {
         $effectivePrice = $this->price ?? 0.0;
         if ($this->isDoorFrameEnabled) {
-            $effectivePrice = $effectivePrice + FEE_FRAME;//extra fee for frame
+            $effectivePrice = $effectivePrice + ParametersJsonDataManipulation::getAll()["framePrice"];//extra fee for frame
         }
 
         //extra fee for width
@@ -800,12 +808,6 @@ class SelectedDoorLineItem
 
 class PriceOffer
 {
-    const ASSEMBLY_DOORS_COST = 35;
-    const ASSEMBLY_DOORS_COST_MIN = 210;
-    const ASSEMBLY_PRICE_HANDLES_ROSETTES = 5;
-    const DELIVERY_PRICE_PER_KM = 0.5;
-    const VAT = 1.23;
-
     /** @var Address $address */
     public $address;
     /** @var int|null $assemblyHandlesRosettesCount */
@@ -1118,8 +1120,8 @@ class PriceOffer
     {
         if ($assemblyDoorsCount != null && $assemblyDoorsCount > 0) {
             return max(
-                $assemblyDoorsCount * PriceOffer::ASSEMBLY_DOORS_COST,
-                PriceOffer::ASSEMBLY_DOORS_COST_MIN
+                $assemblyDoorsCount * ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"],
+                ParametersJsonDataManipulation::getAll()["assemblyDoorsCostMin"]
             );
         }
 
@@ -1130,7 +1132,7 @@ class PriceOffer
     {
         if ($this->address) {
             $config = DistrictsJsonDataManipulation::findByIdOrFalse($this->address->district);
-            return $config ? (2 * $config["distance"] * PriceOffer::DELIVERY_PRICE_PER_KM) : 0.0;
+            return $config ? (2 * $config["distance"] * ParametersJsonDataManipulation::getAll()["deliveryPricePerKm"]) : 0.0;
         }
 
         return 0.0;
@@ -1250,12 +1252,12 @@ class PriceOffer
 
     function calculatePriceVat(float $priceNoVat): float
     {
-        return $priceNoVat * PriceOffer::VAT;
+        return $priceNoVat * ParametersJsonDataManipulation::getAll()["vat"];
     }
 
     function calculateAssemblyPriceHandlesRosettes(int $effectiveCount): float
     {
-        return $effectiveCount * PriceOffer::ASSEMBLY_PRICE_HANDLES_ROSETTES;
+        return $effectiveCount * ParametersJsonDataManipulation::getAll()["assemblyPriceHandlesRosettes"];
     }
 
     //deprecated after full rewrite

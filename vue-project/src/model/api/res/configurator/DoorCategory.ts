@@ -8,6 +8,7 @@ export interface DoorCategory {
         }>
     }>
     description: string
+    descriptionKey: string
     doorConfiguratorDefault: {
         handle: string | null
         material: string
@@ -18,4 +19,5 @@ export interface DoorCategory {
     gallery: Array<{ imgSrc: string }>
     hiddenConfiguratorSections: string[]
     name: string
+    nameKey: string
 }

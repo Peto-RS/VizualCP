@@ -13,6 +13,7 @@ export interface Material {
     availableForDoorCategory?: string[]
     hiddenForDoorCategory?: string[]
     label: string
+    labelKey: string
 }
 
 export interface ConfiguratorResponse {

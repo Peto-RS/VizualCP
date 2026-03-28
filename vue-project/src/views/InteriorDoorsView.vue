@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {onBeforeMount, onMounted, onUnmounted, ref} from "vue";
+import {CSSProperties, nextTick, onBeforeMount, onMounted, onUnmounted, ref, watch} from "vue";
 import {Room} from "@/model/api/res/configurator/Room.js";
 import {useAppState} from "../composables/app-state.js";
 import {SelectedDoor} from "@/model/interface/configurator/SelectedDoor.js";
@@ -15,28 +15,29 @@ import {
   getButtonPosition
 } from "@/model/functions/generate-canvas.js";
 import {ConfiguratorResponse} from "@/model/api/res/configurator/ConfiguratorResponse.js";
-import {getConfigurator, postAddDoor} from "@/model/api/rest.js";
+import {getAppConfig, getConfigurator, postAddDoor} from "@/model/api/rest.js";
 import Navbar from "@/components/Navbar.vue";
 import PriceOffer from "@/components/PriceOffer.vue";
 import {useLoadingBar} from "@/composables/loading-bar-composables.js";
 import {isMobileDevice} from "@/model/functions/responsivity-utils.js";
-import {DoorCategory} from "@/model/api/res/configurator/DoorCategory.js";
 import {useI18n} from "vue-i18n";
 import {useAlerts} from "@/composables/alert-composables.js";
 
 const {addAlert} = useAlerts()
-const {appConfig, offCanvasActiveView} = useAppState()
+const {offCanvasActiveView} = useAppState()
 const {displayLoadingBar, hideLoadingBar} = useLoadingBar()
-const {t} = useI18n()
+const {locale, t} = useI18n()
+
+const buttonAddToPriceOfferRef = ref<HTMLButtonElement | null>(null)
+const buttonAddToPriceOfferStyle = ref<CSSProperties>({
+  position: 'absolute',
+  left: '0px',
+  top: '0px'
+})
 
 const selectedDoor = ref<SelectedDoor | null>(null)
-const selectedDoorCategory = ref<DoorCategory | null>(null)
 const selectedRoom = ref<Room | null>(null)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
-const buttonPosition = ref<{
-  x: number;
-  y: number
-} | null>(null);
 
 async function handleDoorChange(door: SelectedDoor) {
   selectedDoor.value = door
@@ -54,8 +55,8 @@ async function handleRoomChange(room: Room | null) {
 
 async function renderCanvas(): Promise<void> {
   if (canvasRef.value && selectedRoom.value && selectedDoor.value) {
-    await generateCanvas(canvasRef.value, appConfig.value?.baseUrl!, selectedRoom.value, selectedDoor.value, isMobileDevice())
-    buttonPosition.value = getButtonPosition(doorsX, doorsY, doorsWidth, doorsHeight, canvasRef.value)
+    await generateCanvas(canvasRef.value, (await getAppConfig()).baseUrl!, selectedRoom.value, selectedDoor.value, isMobileDevice())
+    await updateButtonPosition()
   }
 }
 
@@ -77,13 +78,17 @@ async function openConfiguratorOffCanvas() {
   offcanvas.open(Configurator, {
         configuratorApiResponse: await getConfiguratorResponse(),
         initialSelectedDoor: selectedDoor.value,
-        initialSelectedDoorCategory: selectedDoorCategory.value,
         onDoorSelected: handleDoorChange,
-        onRoomSelected: handleRoomChange
+        onRoomSelected: handleRoomChange,
+        onPriceOfferClicked: () => openPriceOfferOffCanvas(),
+        onConfiguratorClicked: () => openConfiguratorOffCanvas()
       },
       false,
       () => {
         offCanvasActiveView.value = null
+      },
+      {
+        height: '55%'
       }
   )
 }
@@ -91,12 +96,18 @@ async function openConfiguratorOffCanvas() {
 async function openPriceOfferOffCanvas() {
   offCanvasActiveView.value = 'priceOffer'
   offcanvas.open(PriceOffer, {
-        configuratorApiResponse: await getConfiguratorResponse()
+        configuratorApiResponse: await getConfiguratorResponse(),
+        onPriceOfferClicked: () => openPriceOfferOffCanvas(),
+        onConfiguratorClicked: () => openConfiguratorOffCanvas()
       },
       true,
       () => {
         offCanvasActiveView.value = null
-      })
+      },
+      {
+        height: '100%'
+      },
+  )
 }
 
 async function handleAddDoorButtonClick(): Promise<any> {
@@ -119,6 +130,29 @@ async function handleAddDoorButtonClick(): Promise<any> {
   }
 }
 
+async function updateButtonPosition() {
+  if (!canvasRef.value || !buttonAddToPriceOfferRef.value) return;
+
+  await nextTick(); // ensure DOM is rendered
+
+  const rect = buttonAddToPriceOfferRef.value.getBoundingClientRect();
+
+  const pos = getButtonPosition(
+      doorsX,
+      doorsY,
+      doorsWidth,
+      doorsHeight,
+      canvasRef.value,
+      rect.width
+  );
+
+  buttonAddToPriceOfferStyle.value = {
+    position: 'absolute',
+    left: `${pos.x}px`,
+    top: `${pos.y}px`
+  };
+}
+
 onBeforeMount(async () => {
   let configuratorApiResponse = await getConfiguratorResponse();
   if (configuratorApiResponse.rooms.length)
@@ -135,7 +169,12 @@ onBeforeMount(async () => {
     }
   }
 
-  await renderCanvas()
+  watch(locale, async () => {
+    await nextTick();
+    await updateButtonPosition();
+  });
+
+  await renderCanvas();
 })
 
 onMounted(async () => {
@@ -160,7 +199,7 @@ onUnmounted(() => {
       <canvas class="z-0" ref="canvasRef"></canvas>
       <div class="d-flex justify-content-center align-content-center d-md-none">
         <button @click="handleAddDoorButtonClick"
-                class="btn btn-secondary btn-lg text-white text-uppercase d-flex align-items-center justify-content-center position-absolute"
+                class="btn btn-secondary btn-lg text-white text-uppercase d-flex align-items-center justify-content-center position-fixed"
                 style="bottom: 80px;"
                 type="button">
           <i class="fas fa-plus-circle text-white fs-1 me-2"></i>
@@ -168,13 +207,10 @@ onUnmounted(() => {
         </button>
       </div>
       <div class="d-none d-md-block">
-        <button @click="handleAddDoorButtonClick"
+        <button ref="buttonAddToPriceOfferRef"
+                @click="handleAddDoorButtonClick"
                 class="btn btn-secondary btn-lg text-white text-uppercase d-flex align-items-center justify-content-center"
-                :style="{
-    position: 'absolute',
-    left: buttonPosition?.x + 'px',
-    top: buttonPosition?.y + 'px'
-  }"
+                :style="buttonAddToPriceOfferStyle"
                 type="button">
           <i class="fas fa-plus-circle text-white fs-1 me-2"></i>
           <span class="fs-5">

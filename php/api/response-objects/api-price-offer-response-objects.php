@@ -304,8 +304,14 @@ class TechnicalSurchargeResponse implements JsonSerializable
     /** @var string|null $header */
     public $header;
 
+    /** @var string|null $headerKey */
+    public $headerKey;
+
     /** @var string|null $hint */
     public $hint;
+
+    /** @var string|null $hintKey */
+    public $hintKey;
 
     /** @var string|null $imgSrc */
     public $imgSrc;
@@ -316,25 +322,44 @@ class TechnicalSurchargeResponse implements JsonSerializable
     /** @var string|null $label */
     public $label;
 
+    /** @var string|null $labelKey */
+    public $labelKey;
+
     /** @var string|null $youtubeVideoCode */
     public $youtubeVideoCode;
 
     /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct(string  $id, float $calculatedPrice, ?float $configuredPrice, ?int $count,
-                                ?string $isCountDirty, ?string $header, ?string $hint, ?string $imgSrc, ?string $label,
-                                ?string $youtubeVideoCode, ?string $videoSrc)
+    public function __construct(
+        string  $id,
+        float $calculatedPrice,
+        ?float $configuredPrice,
+        ?int $count,
+        ?string $isCountDirty,
+        ?string $header,
+        ?string $headerKey,
+        ?string $hint,
+        ?string $hintKey,
+        ?string $imgSrc,
+        ?string $label,
+        ?string $labelKey,
+        ?string $youtubeVideoCode,
+        ?string $videoSrc
+    )
     {
         $this->id = $id;
         $this->calculatedPrice = $calculatedPrice;
         $this->configuredPrice = $configuredPrice;
         $this->count = $count;
         $this->header = $header;
+        $this->headerKey = $headerKey;
         $this->hint = $hint;
+        $this->hintKey = $hintKey;
         $this->imgSrc = $imgSrc;
         $this->isCountDirty = $isCountDirty;
         $this->label = $label;
+        $this->labelKey = $labelKey;
         $this->youtubeVideoCode = $youtubeVideoCode;
         $this->videoSrc = $videoSrc;
     }
@@ -347,10 +372,13 @@ class TechnicalSurchargeResponse implements JsonSerializable
             'configuredPrice' => $this->configuredPrice,
             'count' => $this->count,
             'header' => $this->header,
+            'headerKey' => $this->headerKey,
             'hint' => $this->hint,
+            'hintKey' => $this->hintKey,
             'imgSrc' => $this->imgSrc,
             'isCountDirty' => $this->isCountDirty,
             'label' => $this->label,
+            'labelKey' => $this->labelKey,
             'youtubeVideoCode' => $this->youtubeVideoCode,
             'videoSrc' => $this->videoSrc
         ];
@@ -371,14 +399,23 @@ class RosetteResponse implements JsonSerializable
     /** @var string|null $header */
     public $header;
 
+    /** @var string|null $headerKey */
+    public $headerKey;
+
     /** @var string|null $hint */
     public $hint;
+
+    /** @var string|null $hintKey */
+    public $hintKey;
 
     /** @var string|null $imgSrc */
     public $imgSrc;
 
     /** @var string|null $label */
     public $label;
+
+    /** @var string|null $labelKey */
+    public $labelKey;
 
     /** @var float|null $price */
     public $price;
@@ -389,17 +426,32 @@ class RosetteResponse implements JsonSerializable
     /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct(string  $id, float $calculatedPrice, ?int $count, ?string $header, ?string $hint,
-                                ?string $imgSrc, ?string $label, ?float $price, ?string $youtubeVideoCode,
-                                ?string $videoSrc)
+    public function __construct(
+        string  $id,
+        float $calculatedPrice,
+        ?int $count,
+        ?string $header,
+        ?string $headerKey,
+        ?string $hint,
+        ?string $hintKey,
+        ?string $imgSrc,
+        ?string $label,
+        ?string $labelKey,
+        ?float $price,
+        ?string $youtubeVideoCode,
+        ?string $videoSrc
+    )
     {
         $this->id = $id;
         $this->calculatedPrice = $calculatedPrice;
         $this->count = $count;
         $this->header = $header;
+        $this->headerKey = $headerKey;
         $this->hint = $hint;
+        $this->hintKey = $hintKey;
         $this->imgSrc = $imgSrc;
         $this->label = $label;
+        $this->labelKey = $labelKey;
         $this->price = $price;
         $this->youtubeVideoCode = $youtubeVideoCode;
         $this->videoSrc = $videoSrc;
@@ -412,9 +464,12 @@ class RosetteResponse implements JsonSerializable
             'calculatedPrice' => $this->calculatedPrice,
             'count' => $this->count,
             'header' => $this->header,
+            'headerKey' => $this->headerKey,
             'hint' => $this->hint,
+            'hintKey' => $this->hintKey,
             'imgSrc' => $this->imgSrc,
             'label' => $this->label,
+            'labelKey' => $this->labelKey,
             'price' => $this->price,
             'youtubeVideoCode' => $this->youtubeVideoCode,
             'videoSrc' => $this->videoSrc
@@ -488,14 +543,23 @@ class AestheticAccessoryResponse implements JsonSerializable
     /** @var string|null $header */
     public $header;
 
+    /** @var string|null $headerKey */
+    public $headerKey;
+
     /** @var string|null $hint */
     public $hint;
+
+    /** @var string|null $hintKey */
+    public $hintKey;
 
     /** @var string|null $imgSrc */
     public $imgSrc;
 
     /** @var string|null $label */
     public $label;
+
+    /** @var string|null $labelKey */
+    public $labelKey;
 
     /** @var float|null $selectedPrice */
     public $selectedPrice;
@@ -506,18 +570,34 @@ class AestheticAccessoryResponse implements JsonSerializable
     /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct(string  $id, float $calculatedPrice, ?float $configuredPrice, ?int $count, ?string $header,
-                                ?string $hint, ?string $imgSrc, ?string $label, ?float $selectedPrice,
-                                ?string $youtubeVideoCode, ?string $videoSrc)
+    public function __construct(
+        string  $id,
+        float   $calculatedPrice,
+        ?float  $configuredPrice,
+        ?int    $count,
+        ?string $header,
+        ?string $headerKey,
+        ?string $hint,
+        ?string $hintKey,
+        ?string $imgSrc,
+        ?string $label,
+        ?string $labelKey,
+        ?float  $selectedPrice,
+        ?string $youtubeVideoCode,
+        ?string $videoSrc
+    )
     {
         $this->id = $id;
         $this->calculatedPrice = $calculatedPrice;
         $this->configuredPrice = $configuredPrice;
         $this->count = $count;
         $this->header = $header;
+        $this->headerKey = $headerKey;
         $this->hint = $hint;
+        $this->hintKey = $hintKey;
         $this->imgSrc = $imgSrc;
         $this->label = $label;
+        $this->labelKey = $labelKey;
         $this->selectedPrice = $selectedPrice;
         $this->youtubeVideoCode = $youtubeVideoCode;
         $this->videoSrc = $videoSrc;
@@ -531,9 +611,12 @@ class AestheticAccessoryResponse implements JsonSerializable
             'configuredPrice' => $this->configuredPrice,
             'count' => $this->count,
             'header' => $this->header,
+            'headerKey' => $this->headerKey,
             'hint' => $this->hint,
+            'hintKey' => $this->hintKey,
             'imgSrc' => $this->imgSrc,
             'label' => $this->label,
+            'labelKey' => $this->labelKey,
             'selectedPrice' => $this->selectedPrice,
             'youtubeVideoCode' => $this->youtubeVideoCode,
             'videoSrc' => $this->videoSrc
@@ -558,8 +641,14 @@ class SpecialSurchargeResponse implements JsonSerializable
     /** @var string|null $header */
     public $header;
 
+    /** @var string|null $headerKey */
+    public $headerKey;
+
     /** @var string|null $hint */
     public $hint;
+
+    /** @var string|null $hintKey */
+    public $hintKey;
 
     /** @var string|null $imgSrc */
     public $imgSrc;
@@ -573,8 +662,14 @@ class SpecialSurchargeResponse implements JsonSerializable
     /** @var string|null $label */
     public $label;
 
+    /** @var string|null $labelKey */
+    public $labelKey;
+
     /** @var string|null $labelAssembly */
     public $labelAssembly;
+
+    /** @var string|null $labelAssemblyKey */
+    public $labelAssemblyKey;
 
     /** @var string|null $youtubeVideoCode */
     public $youtubeVideoCode;
@@ -582,22 +677,41 @@ class SpecialSurchargeResponse implements JsonSerializable
     /** @var string|null $videoSrc */
     public $videoSrc;
 
-    public function __construct(string  $id, float $calculatedPrice, ?float $configuredPrice, ?int $count, ?string $header,
-                                ?string $hint, ?string $imgSrc, ?bool $isAssemblySelected,
-                                ?bool   $isAssemblySelectedDirty, ?string $label, ?string $labelAssembly,
-                                ?string $youtubeVideoCode, ?string $videoSrc)
+    public function __construct(
+        string  $id,
+        float   $calculatedPrice,
+        ?float  $configuredPrice,
+        ?int    $count,
+        ?string $header,
+        ?string $headerKey,
+        ?string $hint,
+        ?string $hintKey,
+        ?string $imgSrc,
+        ?bool   $isAssemblySelected,
+        ?bool   $isAssemblySelectedDirty,
+        ?string $label,
+        ?string $labelKey,
+        ?string $labelAssembly,
+        ?string $labelAssemblyKey,
+        ?string $youtubeVideoCode,
+        ?string $videoSrc
+    )
     {
         $this->id = $id;
         $this->calculatedPrice = $calculatedPrice;
         $this->configuredPrice = $configuredPrice;
         $this->count = $count;
         $this->header = $header;
+        $this->headerKey = $headerKey;
         $this->hint = $hint;
+        $this->hintKey = $hintKey;
         $this->imgSrc = $imgSrc;
         $this->isAssemblySelected = $isAssemblySelected;
         $this->isAssemblySelectedDirty = $isAssemblySelectedDirty;
         $this->label = $label;
+        $this->labelKey = $labelKey;
         $this->labelAssembly = $labelAssembly;
+        $this->labelAssemblyKey = $labelAssemblyKey;
         $this->youtubeVideoCode = $youtubeVideoCode;
         $this->videoSrc = $videoSrc;
     }
@@ -610,12 +724,16 @@ class SpecialSurchargeResponse implements JsonSerializable
             'configuredPrice' => $this->configuredPrice,
             'count' => $this->count,
             'header' => $this->header,
+            'headerKey' => $this->headerKey,
             'hint' => $this->hint,
+            'hintKey' => $this->hintKey,
             'imgSrc' => $this->imgSrc,
             'isAssemblySelected' => $this->isAssemblySelected,
             'isAssemblySelectedDirty' => $this->isAssemblySelectedDirty,
             'label' => $this->label,
+            'labelKey' => $this->labelKey,
             'labelAssembly' => $this->labelAssembly,
+            'labelAssemblyKey' => $this->labelAssemblyKey,
             'youtubeVideoCode' => $this->youtubeVideoCode,
             'videoSrc' => $this->videoSrc
         ];

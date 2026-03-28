@@ -1,0 +1,10 @@
+{
+  "assemblyDoorsCost": 35,
+  "assemblyDoorsCostMin": 210,
+  "assemblyPriceHandlesRosettes": 5,
+  "deliveryPricePerKm": 0.5,
+  "dtdSurcharge": 30,
+  "framePrice": 99,
+  "framePriceOffer": 80,
+  "vat": 1.23
+}

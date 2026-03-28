@@ -97,20 +97,31 @@ export function getButtonPosition(
     dw: number,
     dh: number,
     canvas: HTMLCanvasElement,
+    buttonWidth: number, // 👈 NEW: pass actual button width
     backgroundImgWidth: number = 1982,
     backgroundImgHeight: number = 1031
 ): { x: number; y: number } {
     // scale like object-fit: cover
-    const scale = Math.max(canvas.clientWidth / backgroundImgWidth, canvas.clientHeight / backgroundImgHeight);
+    const scale = Math.max(
+        canvas.clientWidth / backgroundImgWidth,
+        canvas.clientHeight / backgroundImgHeight
+    );
 
     const scaledHeight = backgroundImgHeight * scale;
-    const offsetY = (canvas.clientHeight - scaledHeight) / 2; // top cropping
+    const offsetY = (canvas.clientHeight - scaledHeight) / 2;
 
-    const spaceLeftOfDoorsOffset = 40;
-    const x = dx * scale - spaceLeftOfDoorsOffset;//left edge of the door
+    // ✅ CENTER of door instead of left edge
+    const doorCenterX = dx * scale + (dw * scale) / 2;
+
+    // ✅ center button horizontally
+    const x = doorCenterX - buttonWidth / 2;
 
     const spaceBelowDoorsOffset = 20;
-    const y = dy * scale + dh * scale + spaceBelowDoorsOffset + offsetY; // bottom + offset + cropping
+    const y =
+        dy * scale +
+        dh * scale +
+        spaceBelowDoorsOffset +
+        offsetY;
 
     return {x, y};
 }

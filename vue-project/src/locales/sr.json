@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Montaža",
     "priceWoVat": "Ukupna cena bez PDV-a",
     "priceWithVat": "Ukupna cena sa PDV-om"
   },

@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Installation",
     "priceWoVat": "Total price excluding VAT",
     "priceWithVat": "Total price including VAT"
   },

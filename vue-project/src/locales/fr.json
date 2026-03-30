@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Montage",
     "priceWoVat": "Prix total HT",
     "priceWithVat": "Prix total TTC"
   },

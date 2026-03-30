@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Szerelés",
     "priceWoVat": "Összesen áfa nélkül",
     "priceWithVat": "Összesen áfával"
   },

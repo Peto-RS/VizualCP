@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Montage",
     "priceWoVat": "Gesamtpreis zzgl. MwSt.",
     "priceWithVat": "Gesamtpreis inkl. MwSt."
   },

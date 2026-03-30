@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Montáž",
     "priceWoVat": "Cena celkem bez DPH",
     "priceWithVat": "Cena celkem s DPH"
   },

@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Montaż",
     "priceWoVat": "Cena całkowita netto",
     "priceWithVat": "Cena całkowita brutto"
   },

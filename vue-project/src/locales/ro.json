@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Montaj",
     "priceWoVat": "Preț total fără TVA",
     "priceWithVat": "Preț total cu TVA"
   },

@@ -35,6 +35,7 @@
     }
   },
   "priceOffer": {
+    "assembly": "Монтаж",
     "priceWoVat": "Обща цена без ДДС",
     "priceWithVat": "Обща цена с ДДС"
   },

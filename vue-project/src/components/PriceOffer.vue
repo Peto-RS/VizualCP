@@ -673,7 +673,7 @@ function handleDoorRemoval(index: number) {
                                :disabled="it.count === 0"
                                @input="it.isAssemblySelectedDirty = true"
                                v-model="it.isAssemblySelected"/>
-                        <label class="form-check-label" for="checkDefault">Montáž</label>
+                        <label class="form-check-label" for="checkDefault">{{ t('priceOffer.assembly') }}</label>
                       </div>
                     </div>
                     <div class="d-sm-none col-xl-2"></div>

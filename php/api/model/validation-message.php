@@ -1,13 +1,13 @@
 <?php
 
-include_once('php/api/request-objects/api-price-offer-request-objects.php');
+require_once __DIR__ . '/../request-objects/api-price-offer-request-objects.php';
 
 class ValidationMessage implements JsonSerializable
 {
     public $key;
     public $args = array();
 
-    public function __construct($key, $args)
+    public function __construct(string $key, array $args)
     {
         $this->key = $key;
         $this->args = $args;
@@ -22,6 +22,9 @@ class ValidationMessage implements JsonSerializable
     }
 }
 
+/**
+ * @return ValidationMessage[]
+ */
 function validate(PriceOfferApiRequest $apiRequest): array
 {
     return array_merge(
@@ -29,6 +32,9 @@ function validate(PriceOfferApiRequest $apiRequest): array
     );
 }
 
+/**
+ * @return ValidationMessage[]
+ */
 function validateContactEmail(ContactRequest $contact): array
 {
     if (!$contact->email) {

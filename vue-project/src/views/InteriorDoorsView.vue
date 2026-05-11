@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {CSSProperties, nextTick, onBeforeMount, onMounted, onUnmounted, ref, watch} from "vue";
+import {CSSProperties, nextTick, onMounted, onUnmounted, ref, watch} from "vue";
 import {Room} from "@/model/api/res/configurator/Room.js";
 import {useAppState} from "../composables/app-state.js";
 import {SelectedDoor} from "@/model/interface/configurator/SelectedDoor.js";
@@ -15,18 +15,20 @@ import {
   getButtonPosition
 } from "@/model/functions/generate-canvas.js";
 import {ConfiguratorResponse} from "@/model/api/res/configurator/ConfiguratorResponse.js";
-import {getAppConfig, getConfigurator, postAddDoor} from "@/model/api/rest.js";
+import {getConfigurator, postAddDoor} from "@/model/api/rest.js";
 import Navbar from "@/components/Navbar.vue";
 import PriceOffer from "@/components/PriceOffer.vue";
 import {useLoadingBar} from "@/composables/loading-bar-composables.js";
 import {isMobileDevice} from "@/model/functions/responsivity-utils.js";
 import {useI18n} from "vue-i18n";
 import {useAlerts} from "@/composables/alert-composables.js";
+import {devFunction} from "@/model/functions/dev.js";
 
 const {addAlert} = useAlerts()
 const {offCanvasActiveView} = useAppState()
 const {displayLoadingBar, hideLoadingBar} = useLoadingBar()
 const {locale, t} = useI18n()
+const {appConfig, currency} = useAppState()
 
 const buttonAddToPriceOfferIsVisible = ref<Boolean>(false)
 const buttonAddToPriceOfferRef = ref<HTMLButtonElement | null>(null)
@@ -56,7 +58,7 @@ async function handleRoomChange(room: Room | null) {
 
 async function renderCanvas(): Promise<void> {
   if (canvasRef.value && selectedRoom.value && selectedDoor.value) {
-    await generateCanvas(canvasRef.value, (await getAppConfig()).baseUrl!, selectedRoom.value, selectedDoor.value, isMobileDevice())
+    await generateCanvas(canvasRef.value, appConfig.value!.baseUrl!, selectedRoom.value, selectedDoor.value, isMobileDevice())
     await updateButtonPosition()
   }
 }
@@ -66,7 +68,7 @@ const handleResize = async () => {
 };
 
 async function getConfiguratorResponse(): Promise<ConfiguratorResponse> {
-  const response = await getConfigurator()
+  const response = await getConfigurator(currency.value!)
   if (response.ok) {
     return (await response.json()) as ConfiguratorResponse;
   } else {
@@ -77,7 +79,6 @@ async function getConfiguratorResponse(): Promise<ConfiguratorResponse> {
 async function openConfiguratorOffCanvas() {
   offCanvasActiveView.value = 'configurator'
   offcanvas.open(Configurator, {
-        configuratorApiResponse: await getConfiguratorResponse(),
         initialSelectedDoor: selectedDoor.value,
         onDoorSelected: handleDoorChange,
         onRoomSelected: handleRoomChange,
@@ -154,7 +155,11 @@ async function updateButtonPosition() {
   };
 }
 
-onBeforeMount(async () => {
+function handleDevButton() {
+  devFunction();
+}
+
+onMounted(async () => {
   let configuratorApiResponse = await getConfiguratorResponse();
   if (configuratorApiResponse.rooms.length)
     selectedRoom.value = configuratorApiResponse.rooms[0];
@@ -176,9 +181,7 @@ onBeforeMount(async () => {
   });
 
   await renderCanvas();
-})
 
-onMounted(async () => {
   window.addEventListener("resize", handleResize);
 
   if (!isMobileDevice()) {
@@ -221,6 +224,12 @@ onUnmounted(() => {
         </button>
       </div>
     </div>
+    <button @click="handleDevButton"
+            style="bottom: 20px"
+            class="btn btn-secondary btn-lg"
+            type="button">
+      <span class="fs-5">TEST</span>
+    </button>
   </div>
 </template>
 

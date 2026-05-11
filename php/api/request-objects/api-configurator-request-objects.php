@@ -22,5 +22,3 @@ class ConfiguratorPostRequest
         $this->type = $json['type'] ?? null;
     }
 }
-
-?>

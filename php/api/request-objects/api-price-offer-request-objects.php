@@ -1,8 +1,5 @@
 <?php
 
-include_once('constants.php');
-include_once('functions.php');
-
 //Requests
 class AddressRequest
 {
@@ -254,6 +251,9 @@ class PriceOfferRequest
     /** @var ContactRequest|null $contact */
     public $contact;
 
+    /** @var Currency|null $currency */
+    public $currency;
+
     /** @var DoorRequest[]|null $doors */
     public $doors;
 
@@ -304,6 +304,7 @@ class PriceOfferRequest
         $this->assemblyDoorsCount = $json['assemblyDoorsCount'] ?? null;
         $this->assemblyHandlesRosettesCount = $json['assemblyHandlesRosettesCount'] ?? null;
         $this->contact = $json['contact'] ? new ContactRequest($json['contact']) : null;
+        $this->currency = $json['currency'] ?? null;
         $this->doors = is_array($json['doors']) ? array_map(function ($doorData) {
             return new DoorRequest($doorData);
         }, $json['doors']) : null;
@@ -352,5 +353,3 @@ class PriceOfferApiRequest
         $this->priceOffer = $json['priceOffer'] ? new PriceOfferRequest($json['priceOffer']) : null;
     }
 }
-
-?>

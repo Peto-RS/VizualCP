@@ -8,10 +8,13 @@ import {TechnicalSurchargeReq} from "@/model/api/req/price-offer/TechnicalSurcha
 import {SpecialSurchargeReq} from "@/model/api/req/price-offer/SpecialSurchargeReq.js";
 import {LineItemReq} from "@/model/api/req/price-offer/LineItemReq.js";
 import {SelectedDoorLineItemRequest} from "@/model/api/req/price-offer/SelectedDoorLineItemRequest.js";
+import {CurrencyEnum} from "@/model/enums/CurrencyEnum.js";
+import CurrencySelector from "@/components/CurrencySelector.vue";
 
 export function prepareRequest(
     reactiveForm: FormPriceOffer,
-    apiResponse: ApiResponse | undefined
+    apiResponse: ApiResponse | undefined,
+    currency: string | null
 ): ApiRequest | undefined {
     if (!apiResponse) {
         return
@@ -83,6 +86,7 @@ export function prepareRequest(
                 fullName: reactiveForm.contact.fullName || "",
                 phoneNumber: reactiveForm.contact.phoneNumber || ""
             },
+            currency: currency ?? CurrencyEnum.EUR,
             doors: doors,
             customHandle: {
                 name: reactiveForm.customHandle.name || "",

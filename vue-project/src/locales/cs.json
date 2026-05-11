@@ -21,16 +21,16 @@
     "doorAddedToPriceOffer": "Dveře byly přidány do cenové nabídky.",
     "campaign": {
       "doors": {
-        "title": "Interiérové <b>dveře se zárubní</b> od <b>219,- €",
-        "body": "Interiérové dveře a zárubně Vám ve všech druzích laminátů nabízíme za akční cenu 219€. Cena platí i pro dveře, které přijedeme před výrobou osobně zaměřit."
+        "title": "Interiérové <b>dveře se zárubní</b> od <b>{interiorDoorsPriceFrom}",
+        "body": "Interiérové dveře a zárubně Vám ve všech druzích laminátů nabízíme za akční cenu {interiorDoorsPriceFrom}. Cena platí i pro dveře, které přijedeme před výrobou osobně zaměřit."
       },
       "freeMeasurement": {
         "title": "<b>Zaměření</b> stavebních otvorů <b>zdarma</b>",
         "body": "Trápí Vás atypické míry otvorů? Pro nás nejsou žádným problémem. Každý otvor osobně zaměříme a dveře vyrobíme tak, aby co nejpřesněji zapasovaly. Dveře na míru jsou u nás BEZ PŘÍPLATKU."
       },
       "assembly": {
-        "title": "<b>Montáž</b> inte&shy;rié&shy;ro&shy;vých dveří a zárubně <b>35€</b>",
-        "body": "Montáž kompletu interiérové dveře se zárubní Vám nabízíme za zvýhodněnou cenu od 35€/ks. Tato akční cena platí při montáži šesti a více kusů dveří a zárubní."
+        "title": "<b>Montáž</b> inte&shy;rié&shy;ro&shy;vých dveří a zárubně <b>{assemblyDoorsCost}</b>",
+        "body": "Montáž kompletu interiérové dveře se zárubní Vám nabízíme za zvýhodněnou cenu od {assemblyDoorsCost}/ks. Tato akční cena platí při montáži šesti a více kusů dveří a zárubní."
       }
     }
   },
@@ -50,7 +50,7 @@
     "contact": "Kontaktní údaje"
   },
   "assemblyDoors": {
-    "note": "Akční montáž dveří se zárubní 35 € / kus. Akce platí při počtu 6 a více kusů. Minimální částka na dva montážníky je 210 €."
+    "note": "Akční montáž dveří se zárubní {assemblyDoorsCost} / kus. Akce platí při počtu 6 a více kusů. Minimální částka na dva montážníky je {assemblyDoorsCostMin}."
   },
   "components": {
     "hint": {
@@ -150,6 +150,9 @@
         "header": "Větrací mřížky do dveří",
         "label": "Větrací mřížky do dveří"
       }
+    },
+    "campaigns": {
+      "doors": "Aktuální sezónní extra sleva 15 % na všechny dveře a zárubně."
     },
     "doorCategories": {
       "barbora": {
@@ -305,137 +308,137 @@
     "specialSurcharges": {
       "special-surcharges-double-door-frame": {
         "header": "Zárubeň na dvoukřídlé dveře",
-        "label": "Cena zárubně na dvoukřídlé dveře (vyberte 2 ks křídel dveří a zaklikněte tuto zárubeň.) 103 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Cena zárubně na dvoukřídlé dveře (vyberte 2 ks křídel dveří a zaklikněte tuto zárubeň.) {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-sliding-doors-fittings-curtain-rod": {
         "header": "Posuvné dveře - kování Garniža",
-        "label": "Posuvné dveře - kování Garniža 150 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Posuvné dveře - kování Garniža {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-minima": {
         "header": "Posuvné dveře - kování Minima",
-        "label": "Posuvné dveře - kování Minima 250€.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Posuvné dveře - kování Minima {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-sliding-doors-hardware-built-in-housing": {
         "header": "Posuvné dveře - kování do stavebního pouzdra",
-        "label": "Posuvné dveře - kování do stavebního pouzdra 0 €. Zárubeň na stavební pouzdro 150 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Posuvné dveře - kování do stavebního pouzdra 0 €. Zárubeň na stavební pouzdro {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-hidden-hinges": {
         "header": "Příplatek za skryté panty",
-        "label": "Příplatek za skryté panty dveře 130 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Příplatek za skryté panty dveře {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-reversible-doors": {
         "header": "Příplatek za reverzní dveře",
-        "label": "Příplatek za reverzní dveře 265 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Příplatek za reverzní dveře {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-double-leaf-non-rebated-door-with-frame": {
         "header": "Dvoukřídlé bezfalcové dveře se zárubní",
-        "label": "Dvoukřídlé bezfalcové dveře se zárubní 285 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Dvoukřídlé bezfalcové dveře se zárubní {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-curtain": {
         "header": "Příplatek za dvoukřídlé posuvné dveře garniža",
-        "label": "Příplatek za dvoukřídlé posuvné dveře garniža 250 €.",
-        "labelAssembly": "Montaż + 50 €."
+        "label": "Příplatek za dvoukřídlé posuvné dveře garniža {price}.",
+        "labelAssembly": "Montaż + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-minima": {
         "header": "Příplatek za dvoukřídlé posuvné dveře Minima",
-        "label": "Příplatek za dvoukřídlé posuvné dveře Minima 350 €.",
-        "labelAssembly": "Montáž + 50 €."
+        "label": "Příplatek za dvoukřídlé posuvné dveře Minima {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-frame-for-double-leaf-doors-in-case": {
         "header": "Zárubeň na dvoukřídlé dveře do pouzdra",
-        "label": "Příplatek za dvoukřídlé posuvné dveře do pouzdra 0 €. Zárubeň na dvoukřídlé dveře do pouzdra 180 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Příplatek za dvoukřídlé posuvné dveře do pouzdra 0 €. Zárubeň na dvoukřídlé dveře do pouzdra {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-barn-1": {
         "header": "Posuvné kování - Barn 1 černé",
-        "label": "Posuvné kování - Barn 1 černé 150 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Posuvné kování - Barn 1 černé {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-minima-black": {
         "header": "Posuvné kování - Minima černé",
-        "label": "Posuvné kování - Minima černé 290 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Posuvné kování - Minima černé {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-door-to-case-with-frame": {
         "header": "Dveře do pouzdra se zárubní",
-        "label": "Dveře do pouzdra se zárubní 57 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Dveře do pouzdra se zárubní {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-door-to-case-without-frame": {
         "header": "Dveře do pouzdra bez zárubně",
-        "label": "Dveře do pouzdra bez zárubně 0 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Dveře do pouzdra bez zárubně {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-double-leaf-door-to-case": {
         "header": "Dvoukřídlé dveře do pouzdra",
-        "label": "Dvoukřídlé dveře do pouzdra 87 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Dvoukřídlé dveře do pouzdra {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-folding-interior-doors": {
         "header": "Zalamovací interiérové dveře",
-        "label": "Zalamovací interiérové dveře 220 €.",
-        "labelAssembly": "Montáž + 50 €."
+        "label": "Zalamovací interiérové dveře {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-sliding-hardware-invisible": {
         "header": "Posuvné kování - neviditelné",
-        "label": "Posuvné kování - neviditelné 490 €.",
-        "labelAssembly": "Montáž + 50 €."
+        "label": "Posuvné kování - neviditelné {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-barn-4": {
         "header": "Posuvné kování - Barn 4 černé",
-        "label": "Posuvné kování - Barn 4 černé 210 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Posuvné kování - Barn 4 černé {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-barn-3": {
         "header": "Posuvné kování - Barn 3 černé",
-        "label": "Posuvné kování - Barn 3 černé 190 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Posuvné kování - Barn 3 černé {price}.",
+        "labelAssembly": "Montáž + {price}."
       },
       "special-surcharges-barn-2": {
         "header": "Posuvné kování - Barn 2 černé",
-        "label": "Posuvné kování - Barn 2 černé 180 €.",
-        "labelAssembly": "Montáž + 25 €."
+        "label": "Posuvné kování - Barn 2 černé {price}.",
+        "labelAssembly": "Montáž + {price}."
       }
     },
     "technicalSurcharges": {
       "technical-surcharges-hollow-particle-board-filling": {
         "header": "Výplň dutinková dřevotříska",
-        "label": "Výplň dutinková dřevotříska: Dveře mohou být vyplněny papírovou voštinou nebo dutinkovou dřevotřískou za příplatek 30 €. Voština je papírová vrstva, dutinková dřevotříska je z dřevěné štěpky. Dutinkovou dřevotřísku doporučujeme do dveří V1, ale mohou jít do všech dveří z kategorie Vanesa a Petra. Dutinková dřevotříska je těžší, pevnější a izolovanější."
+        "label": "Výplň dutinková dřevotříska: Dveře mohou být vyplněny papírovou voštinou nebo dutinkovou dřevotřískou za příplatek {price}. Voština je papírová vrstva, dutinková dřevotříska je z dřevěné štěpky. Dutinkovou dřevotřísku doporučujeme do dveří V1, ale mohou jít do všech dveří z kategorie Vanesa a Petra. Dutinková dřevotříska je těžší, pevnější a izolovanější."
       },
       "technical-surcharges-silicone-frame": {
         "header": "Silikonové těsnění do zárubně",
-        "label": "Silikonové těsnění do zárubně 10 €/kus: Do zárubně vyfrézujeme drážku a do ní se vsune silikonové těsnění. To má výhodu, že při zavírání jsou dveře tišší a když jsou zavřené, tak silikonové těsnění eliminuje zvuk ze sousední místnosti."
+        "label": "Silikonové těsnění do zárubně {price}/kus: Do zárubně vyfrézujeme drážku a do ní se vsune silikonové těsnění. To má výhodu, že při zavírání jsou dveře tišší a když jsou zavřené, tak silikonové těsnění eliminuje zvuk ze sousední místnosti."
       },
       "technical-surcharges-silicone-wall-frame": {
         "header": "Vytmelení nerovností mezi stěnou a zárubní",
-        "label": "Vytmelení nerovností mezi stěnou a zárubní 6 €/kus: Při osazení zárubně může při křivých stěnách vzniknout mezera mezi stěnou a zárubní. Tuto mezeru víme vyplnit akrylovým silikonem. Vzhledem k elasticitě silikonu se dají vyplnit pouze mezery do 0,5 cm. Koupelna a WC se zevnitř nesilikonují. Také se nesilikonuje, když jsou dveře v rohu."
+        "label": "Vytmelení nerovností mezi stěnou a zárubní {price}/kus: Při osazení zárubně může při křivých stěnách vzniknout mezera mezi stěnou a zárubní. Tuto mezeru víme vyplnit akrylovým silikonem. Vzhledem k elasticitě silikonu se dají vyplnit pouze mezery do 0,5 cm. Koupelna a WC se zevnitř nesilikonují. Také se nesilikonuje, když jsou dveře v rohu."
       },
       "technical-surcharges-carrying": {
         "header": "Vynášení na 3. a vyšší patro bez výtahu",
-        "label": "Vynášení na 3. a vyšší patro bez výtahu: Za vynášení na 3. a vyšší patro bez výtahu se účtuje příplatek za vynesení dveří, zárubní, materiálu a nářadí 100 €."
+        "label": "Vynášení na 3. a vyšší patro bez výtahu: Za vynášení na 3. a vyšší patro bez výtahu se účtuje příplatek za vynesení dveří, zárubní, materiálu a nářadí {price}."
       },
       "technical-surcharges-thicker-walls": {
         "header": "Příplatek za tlustší stěny",
-        "label": "Příplatek za stěny tlustší než 20 cm 12 €/extra 10 cm: Pokud jsou stěny tlustší než 20 cm, tak se účtuje příplatek za extra materiál 12 € za každých extra 10 cm."
+        "label": "Příplatek za stěny tlustší než 20 cm {price}/extra 10 cm: Pokud jsou stěny tlustší než 20 cm, tak se účtuje příplatek za extra materiál {price} za každých extra 10 cm."
       },
       "technical-surcharges-higher-doors": {
         "header": "Příplatek za vyšší dveře",
-        "label": "Příplatek za dveře vyšší než 207 cm 20 €/kus: Dveře s výškou 207 cm až 240 cm jsou s příplatkem 20 €/kus za dražší materiál. Ne všechny materiály lze dodat ve výšce nad 207 cm."
+        "label": "Příplatek za dveře vyšší než 207 cm {price}/kus: Dveře s výškou 207 cm až 240 cm jsou s příplatkem {price}/kus za dražší materiál. Ne všechny materiály lze dodat ve výšce nad 207 cm."
       },
       "technical-surcharges-original-steel-door-frames-cladding": {
         "header": "Obklad původních ocelových zárubní",
-        "label": "Obklad původních ocelových zárubní 25 €/kus: Pokud se jedná o obklad původních ocelových zárubní, tak se účtuje příplatek 25€. Je třeba ale brát v úvahu, že při obkladech původních zárubní se stavební otvor zúží o cca 3,5 cm z každé strany. To znamená cca 3,5 cm shora a cca 7 cm ze šířky."
+        "label": "Obklad původních ocelových zárubní {price}/kus: Pokud se jedná o obklad původních ocelových zárubní, tak se účtuje příplatek {price}. Je třeba ale brát v úvahu, že při obkladech původních zárubní se stavební otvor zúží o cca 3,5 cm z každé strany. To znamená cca 3,5 cm shora a cca 7 cm ze šířky."
       },
       "technical-surcharges-tiles-cutting": {
         "header": "Příplatek za zařezávání obložek",
-        "label": "Příplatek za zařezávání obložek 15 €/kus: Obložky se při montáži zařezávají, pokud jsou nesprávně řešené stavební otvory. Například pokud jsou schody mezi místnostmi více než 5 mm, dále pokud nejsou úchyty na stěnách na zárubeň a musí se z obložky seřezávat, nebo pokud je obklad v koupelně / WC do výšky méně než je výška dveří a je třeba z obložky odfrézovat drážku."
+        "label": "Příplatek za zařezávání obložek {price}/kus: Obložky se při montáži zařezávají, pokud jsou nesprávně řešené stavební otvory. Například pokud jsou schody mezi místnostmi více než 5 mm, dále pokud nejsou úchyty na stěnách na zárubeň a musí se z obložky seřezávat, nebo pokud je obklad v koupelně / WC do výšky méně než je výška dveří a je třeba z obložky odfrézovat drážku."
       }
     }
   }

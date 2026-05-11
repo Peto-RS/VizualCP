@@ -1,48 +1,18 @@
 <?php
 
-include_once('constants.php');
-include_once('functions.php');
-include_once('php/api/response-objects/api-configurator-response-objects.php');
-include_once('php/api/request-objects/api-price-offer-request-objects.php');
-include_once('php/api/response-objects/api-price-offer-response-objects.php');
-include_once('json-data-manipulation.php');
+require_once __DIR__ . '/../campaign-facade.php';
+require_once __DIR__ . '/../json-data-manipulation-facade.php';
+require_once __DIR__ . '/../request-objects/api-price-offer-request-objects.php';
+require_once __DIR__ . '/../response-objects/api-configurator-response-objects.php';
+require_once __DIR__ . '/../response-objects/api-price-offer-response-objects.php';
+require_once __DIR__ . '/../../enums/CampaignTypeEnum.php';
+require_once __DIR__ . '/../../enums/CurrencyEnum.php';
+require_once __DIR__ . '/../../enums/DoorsWidthEnum.php';
+require_once __DIR__ . '/../../../functions.php';
 
-abstract class Width
+interface Product
 {
-    const W60 = "W60";
-    const W70 = "W70";
-    const W80 = "W80";
-    const W90 = "W90";
-
-    public static function getWidthString($width): string
-    {
-        switch ($width) {
-            case Width::W60:
-                return "60";
-            case Width::W70:
-                return "70";
-            case Width::W80:
-                return "80";
-            case Width::W90:
-                return "90";
-            default:
-                return "";
-        }
-    }
-
-    public static function getFee($width): int
-    {
-        switch ($width) {
-            case Width::W70:
-                return 3;
-            case Width::W80:
-                return 6;
-            case Width::W90:
-                return 9;
-            default:
-                return 0;
-        }
-    }
+    public function getBasePriceFromDb(?array $dbRecord): ?float;
 }
 
 class Address
@@ -97,6 +67,34 @@ class Address
             $this->streetNumber,
             $this->zipCode
         );
+    }
+}
+
+class Campaign
+{
+    /** @var string $id */
+    public $id;
+
+    /** @var float|null $percentageDiscount */
+    public $percentageDiscount;
+
+    /** @var string $translationKey */
+    public $translationKey;
+
+    /** @var string $type */
+    public $type;
+
+    public function __construct(
+        string $id,
+        float  $percentageDiscount,
+        string $translationKey,
+        string $type
+    )
+    {
+        $this->id = $id;
+        $this->percentageDiscount = $percentageDiscount;
+        $this->translationKey = $translationKey;
+        $this->type = $type;
     }
 }
 
@@ -192,7 +190,7 @@ class CustomHandle
     }
 }
 
-class Handle
+class Handle implements Product
 {
     /** @var int|null $count */
     public $count;
@@ -230,25 +228,28 @@ class Handle
         return $instance;
     }
 
-    public function toResponse(?array $db, int $doorsCount): HandleResponse
+    public function toResponse(?array $db, int $doorsCount, ?string $currencyId): HandleResponse
     {
         $effectiveCount = $this->getEffectiveCount($doorsCount);
-        $price = array_key_exists("price", $db) ? $db["price"] : null;
+        $basePriceDb = $this->getBasePriceFromDb($db) ?? 0.0;
+        $currencyPrice = currencyTransformation($currencyId, $basePriceDb, null);
+
         return new HandleResponse(
-            $this->calculatePrice($effectiveCount),
+            $this->calculatePrice($effectiveCount, $currencyId),
             $effectiveCount,
             $this->id,
             $this->isCountDirty,
             array_key_exists("label", $db) ? $db["label"] : null,
-            $price
+            $currencyPrice
         );
     }
 
-    function calculatePrice(int $effectiveCount): float
+    function calculatePrice(int $effectiveCount, ?string $currencyId): float
     {
-        $db = HandlesJsonDataManipulation::findByIdOrFalse($this->id);
-        $price = ($db && array_key_exists("price", $db)) ? $db["price"] : null;
-        return $effectiveCount * ($price ?? 0.0);
+        $db = HandlesJsonDataManipulation::findByIdOrNull($this->id);
+        $basePrice = $this->getBasePriceFromDb($db) ?? 0.0;
+        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+        return $effectiveCount * $currencyPrice;
     }
 
     function getEffectiveCount(int $doorsCount): int
@@ -259,9 +260,21 @@ class Handle
 
         return $this->count ?? 0;
     }
+
+    //Product
+    public function getBasePriceFromDb(?array $dbRecord): ?float
+    {
+        $price = $dbRecord['price'] ?? null;
+
+        if (!is_numeric($price)) {
+            return null;
+        }
+
+        return (float)$price;
+    }
 }
 
-class TechnicalSurcharge
+class TechnicalSurcharge implements Product
 {
     public static $SILICONE_ID = "technical-surcharges-silicone-wall-frame";
     public static $SILICONE_PRICE_MULTIPLIER = 0.7;
@@ -291,13 +304,16 @@ class TechnicalSurcharge
         );
     }
 
-    public function toResponse(?array $technicalSurchargeDb, int $doorsCount): TechnicalSurchargeResponse
+    public function toResponse(?array $technicalSurchargeDb, int $doorsCount, ?string $currencyId): TechnicalSurchargeResponse
     {
+        $basePrice = $this->getBasePriceFromDb($technicalSurchargeDb) ?? 0.0;
+        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+
         $effectiveCount = $this->getEffectiveCount($technicalSurchargeDb, $doorsCount);
         return new TechnicalSurchargeResponse(
             $this->id,
-            $this->calculatePrice($technicalSurchargeDb, $effectiveCount),
-            array_key_exists("price", $technicalSurchargeDb) ? $technicalSurchargeDb["price"] : null,
+            $this->calculatePrice($technicalSurchargeDb, $effectiveCount, $currencyId),
+            $currencyPrice,
             $effectiveCount,
             $this->isCountDirty,
             array_key_exists("header", $technicalSurchargeDb) ? $technicalSurchargeDb["header"] : null,
@@ -322,15 +338,28 @@ class TechnicalSurcharge
         return $this->count ?? 0;
     }
 
-    function calculatePrice(?array $itemJson, int $effectiveCount): float
+    function calculatePrice(?array $itemJson, int $effectiveCount, ?string $currencyId): float
     {
+        $basePrice = $this->getBasePriceFromDb($itemJson) ?? 0.0;
+        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+
         $coefficient = $this->id == TechnicalSurcharge::$SILICONE_ID ? TechnicalSurcharge::$SILICONE_PRICE_MULTIPLIER : 1.0;
-        $rawPrice = array_key_exists("price", $itemJson) ? $itemJson["price"] : 0.0;
-        return $effectiveCount * $rawPrice * $coefficient;
+        return $effectiveCount * $currencyPrice * $coefficient;
+    }
+
+    public function getBasePriceFromDb(?array $dbRecord): ?float
+    {
+        $price = $dbRecord['price'] ?? null;
+
+        if (!is_numeric($price)) {
+            return null;
+        }
+
+        return (float)$price;
     }
 }
 
-class Rosette
+class Rosette implements Product
 {
     /** @var string|null $id */
     public $id;
@@ -352,11 +381,14 @@ class Rosette
         );
     }
 
-    public function toResponse(array $rosetteDb): RosetteResponse
+    public function toResponse(array $rosetteDb, ?string $currencyId): RosetteResponse
     {
+        $basePrice = $this->getBasePriceFromDb($rosetteDb) ?? 0.0;
+        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+
         return new RosetteResponse(
             $this->id,
-            $this->calculatePrice($rosetteDb),
+            $this->calculatePrice($rosetteDb, $currencyId),
             $this->count,
             array_key_exists("header", $rosetteDb) ? $rosetteDb["header"] : null,
             array_key_exists("headerKey", $rosetteDb) ? $rosetteDb["headerKey"] : null,
@@ -365,16 +397,28 @@ class Rosette
             array_key_exists("imgSrc", $rosetteDb) ? $rosetteDb["imgSrc"] : null,
             array_key_exists("label", $rosetteDb) ? $rosetteDb["label"] : null,
             array_key_exists("labelKey", $rosetteDb) ? $rosetteDb["labelKey"] : null,
-            array_key_exists("price", $rosetteDb) ? $rosetteDb["price"] : null,
+            $currencyPrice,
             array_key_exists("youtubeVideoCode", $rosetteDb) ? $rosetteDb["youtubeVideoCode"] : null,
             array_key_exists("videoSrc", $rosetteDb) ? $rosetteDb["videoSrc"] : null
         );
     }
 
-    function calculatePrice(?array $rosetteDb): float
+    function calculatePrice(?array $rosetteDb, ?string $currencyId): float
     {
-        $rawPrice = array_key_exists("price", $rosetteDb) ? $rosetteDb["price"] : 0.0;
-        return ($this->count ?? 0) * $rawPrice;
+        $basePrice = $this->getBasePriceFromDb($rosetteDb) ?? 0.0;
+        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+        return ($this->count ?? 0) * $currencyPrice;
+    }
+
+    public function getBasePriceFromDb(?array $dbRecord): ?float
+    {
+        $price = $dbRecord['price'] ?? null;
+
+        if (!is_numeric($price)) {
+            return null;
+        }
+
+        return (float)$price;
     }
 }
 
@@ -421,7 +465,7 @@ class LineItem
     }
 }
 
-class AestheticAccessory
+class AestheticAccessory implements Product
 {
     /** @var string|null $id */
     public $id;
@@ -448,12 +492,15 @@ class AestheticAccessory
         );
     }
 
-    public function toResponse(array $aestheticAccessoryDb): AestheticAccessoryResponse
+    public function toResponse(array $aestheticAccessoryDb, ?string $currencyId): AestheticAccessoryResponse
     {
+        $basePriceDb = $this->getBasePriceFromDb($aestheticAccessoryDb);
+        $currencyPrice = $basePriceDb ? currencyTransformation($currencyId, $basePriceDb, null) : null;
+
         return new AestheticAccessoryResponse(
             $this->id,
-            $this->calculatePrice($aestheticAccessoryDb),
-            array_key_exists("price", $aestheticAccessoryDb) ? $aestheticAccessoryDb["price"] : null,
+            $this->calculatePrice($aestheticAccessoryDb, $currencyId),
+            $currencyPrice,
             $this->count,
             array_key_exists("header", $aestheticAccessoryDb) ? $aestheticAccessoryDb["header"] : null,
             array_key_exists("headerKey", $aestheticAccessoryDb) ? $aestheticAccessoryDb["headerKey"] : null,
@@ -468,15 +515,31 @@ class AestheticAccessory
         );
     }
 
-    function calculatePrice(array $aestheticAccessoryDb): float
+    //some items can have custom price from input
+    function calculatePrice(array $aestheticAccessoryDb, ?string $currencyId): float
     {
-        $priceDb = array_key_exists("price", $aestheticAccessoryDb) ? $aestheticAccessoryDb["price"] : null;
-        $price = $priceDb ?? $this->selectedPrice ?? 0.0;
-        return ($this->count ?? 0) * $price;
+        $basePriceDb = $this->getBasePriceFromDb($aestheticAccessoryDb);
+
+        if ($basePriceDb != null) {
+            return ($this->count ?? 0) * currencyTransformation($currencyId, $basePriceDb, null);
+        }
+
+        return ($this->count ?? 0) * ($this->selectedPrice ?? 0.0);
+    }
+
+    public function getBasePriceFromDb(?array $dbRecord): ?float
+    {
+        $price = $dbRecord['price'] ?? null;
+
+        if (!is_numeric($price)) {
+            return null;
+        }
+
+        return (float)$price;
     }
 }
 
-class SpecialSurcharge
+class SpecialSurcharge implements Product
 {
     /** @var string|null $id */
     public $id;
@@ -508,12 +571,16 @@ class SpecialSurcharge
         );
     }
 
-    public function toResponse(?array $specialSurchargeDb): SpecialSurchargeResponse
+    public function toResponse(?array $specialSurchargeDb, ?string $currencyId): SpecialSurchargeResponse
     {
+        $basePriceDb = $this->getBasePriceFromDb($specialSurchargeDb) ?? 0.0;
+        $currencyPrice = currencyTransformation($currencyId, $basePriceDb, null);
+
         return new SpecialSurchargeResponse(
             $this->id,
-            $this->calculatePrice($specialSurchargeDb),
-            array_key_exists("price", $specialSurchargeDb) ? $specialSurchargeDb["price"] : null,
+            array_key_exists("assemblyCosts", $specialSurchargeDb) ? currencyTransformation($currencyId, $specialSurchargeDb["assemblyCosts"], null) : null,
+            $this->calculatePrice($specialSurchargeDb, $currencyId),
+            $currencyPrice,
             $this->count,
             array_key_exists("header", $specialSurchargeDb) ? $specialSurchargeDb["header"] : null,
             array_key_exists("headerKey", $specialSurchargeDb) ? $specialSurchargeDb["headerKey"] : null,
@@ -531,12 +598,12 @@ class SpecialSurcharge
         );
     }
 
-    function calculatePrice(array $specialSurchargeDb): float
+    function calculatePrice(array $specialSurchargeDb, ?string $currencyId): float
     {
-        $assemblyCosts = array_key_exists("assemblyCosts", $specialSurchargeDb) ? $specialSurchargeDb["assemblyCosts"] : 0.0;
+        $assemblyCosts = $specialSurchargeDb["assemblyCosts"] ?? 0.0;
         $assemblyPrice = $this->isAssemblySelected ? $assemblyCosts : 0.0;
-        $price = array_key_exists("price", $specialSurchargeDb) ? $specialSurchargeDb["price"] : 0.0;
-        return ($this->count ?? 0) * ($price + $assemblyPrice);
+        $price = $this->getBasePriceFromDb($specialSurchargeDb) ?? 0.0;
+        return ($this->count ?? 0) * currencyTransformation($currencyId, $price + $assemblyPrice, null);
     }
 
     static function getEffectiveIsAssemblySelected(?int $count, ?bool $isAssemblySelected, ?bool $isAssemblySelectedDirty): bool
@@ -549,9 +616,20 @@ class SpecialSurcharge
             ? $isAssemblySelected
             : true;
     }
+
+    public function getBasePriceFromDb(?array $dbRecord): ?float
+    {
+        $price = $dbRecord['price'] ?? null;
+
+        if (!is_numeric($price)) {
+            return null;
+        }
+
+        return (float)$price;
+    }
 }
 
-class Door
+class Door implements Product
 {
     /** @var string|null $category */
     public $category;
@@ -593,7 +671,7 @@ class Door
         $this->width = $w ?? "";
         $this->count = $cn;
         $this->info = $nfo;
-        $this->price = $this->getRawPrice($t);
+        $this->price = $this->getBasePriceFromDb(null);
         $this->frame = $frame;
         $this->assembly = $assembly;
     }
@@ -613,10 +691,10 @@ class Door
         );
     }
 
-    public function toResponse(): DoorResponse
+    public function toResponse(?string $currency): DoorResponse
     {
         return new DoorResponse(
-            $this->calculatePrice(),
+            $this->calculatePrice($currency),
             $this->category,
             $this->frame,
             $this->isDtdAvailable(),
@@ -627,45 +705,17 @@ class Door
         );
     }
 
-    //deprecated after full rewrite
-    function isWidthSelectedText(string $mWidth): string
+    function calculatePrice(string $currencyId): float
     {
-        if ($this->width == $mWidth) {
-            return "selected";
-        }
-
-        return "";
-    }
-
-    //deprecated after full rewrite
-    function getFullPrice()
-    {
-        global $cena_zarubne, $cena_zarubne_akcia, $cena_montaze;
-        $frame = 0;
-        $assembly = 0;
-        if ($this->frame) {
-            $frame = $cena_zarubne;
-            if (strcasecmp($this->type, "v1") == 0) {
-                $frame = $cena_zarubne_akcia;
-            }
-        }
-        if ($this->assembly) {
-            $assembly = $cena_montaze;
-        }
-        return $this->count * ($this->price + $frame + $assembly);
-    }
-
-    function calculatePrice(): float
-    {
-        $rawPrice = $this->getRawPrice($this->type);
+        $price = $this->getBasePriceFromDb(null);
 
         if ($this->frame) {
-            $rawPrice = $rawPrice + ($this->type == "v1" ? ParametersJsonDataManipulation::getAll()["framePriceOffer"] : ParametersJsonDataManipulation::getAll()["framePrice"]);//extra fee for frame
+            $price = $price + ($this->type == "v1" ? ParametersJsonDataManipulation::getAll()["framePriceOffer"] : ParametersJsonDataManipulation::getAll()["framePrice"]);//extra fee for frame
         }
 
-        $rawPrice = $rawPrice + Width::getFee($this->width);//extra fee for width
-        $rawPrice = $rawPrice + ($this->isDtdSelected ? ParametersJsonDataManipulation::getAll()["dtdSurcharge"] : 0);//extra fee for DTD
-        return ($this->count ?? 0) * $rawPrice;
+        $price = $price + DoorsWidthEnum::getFee($this->width);//extra fee for width
+        $price = $price + ($this->isDtdSelected ? ParametersJsonDataManipulation::getAll()["dtdSurcharge"] : 0);//extra fee for DTD
+        return ($this->count ?? 0) * currencyTransformation($currencyId, $price, null);
     }
 
     function isDtdAvailable(): bool
@@ -673,81 +723,20 @@ class Door
         return $this->type == "v1" || in_array($this->category, array("petra", "vanesa"));
     }
 
-    function getWidthString(): string
+    public function getBasePriceFromDb(?array $dbRecord): ?float
     {
-        return Width::getWidthString($this->width);
-    }
-
-    function getRawPrice(?string $type)
-    {
-        $price = 0;
-
         try {
             $prices = DoorsJsonDataManipulation::getAllByCategory($this->category);
+            $price = $prices[$this->type] ?? null;
 
-            if (array_key_exists($type, $prices)) {
-                $price = $prices[$type];
+            if (!is_numeric($price)) {
+                return null;
             }
+
+            return (float)$price;
         } catch (Exception $e) {
+            return null;
         }
-
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function changeValueOf($fc, $value): void
-    {
-        switch ($fc) {
-            case "changeWidth":
-                $this->width = $value;
-                break;
-            case "changeCount":
-                $this->count = $value;
-                break;
-            case "changeInfo":
-                $this->info = $value;
-                break;
-            case "changeFrame":
-                $this->frame = (bool)$value;
-                break;
-            case "changeAssemble":
-                $this->assembly = (bool)$value;
-                break;
-        }
-    }
-
-    //deprecated after full rewrite
-    function getHTMLdoor($idx)
-    {
-        global $material_path, $doors_path, $povrchova_uprava, $typ_dveri, $currency;
-
-        ob_start();
-        include 'cart-item.php';
-        $data = ob_get_contents();
-        ob_end_clean();
-
-        return $data;
-    }
-
-    //deprecated after full rewrite
-    function getHTMLdoorRes($idx): array
-    {
-        $html = "";
-        try {
-            $html = $this->getHTMLdoor($idx);
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba zobrazenia. Prosím refreshujte stránku použitím tlačidla F5.",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return array(
-            'sucess' => true,
-            'message' => "OK",
-            'result' => $html
-        );
     }
 }
 
@@ -783,7 +772,7 @@ class SelectedDoorLineItem
         );
     }
 
-    public function toResponse(): SelectedDoorLineItemResponse
+    public function toResponse(?string $currency): SelectedDoorLineItemResponse
     {
         return new SelectedDoorLineItemResponse(
             $this->calculatePrice(),
@@ -802,7 +791,7 @@ class SelectedDoorLineItem
         }
 
         //extra fee for width
-        return $effectivePrice + Width::getFee($this->width);
+        return $effectivePrice + DoorsWidthEnum::getFee($this->width);
     }
 }
 
@@ -818,6 +807,8 @@ class PriceOffer
     public $doors;
     /** @var Contact $contact */
     public $contact;
+    /** @var string|null $currency */
+    public $currency;
     /** @var CustomHandle $customHandle */
     public $customHandle;
     /** @var Handle|null $handle */
@@ -846,15 +837,6 @@ class PriceOffer
     public $specialSurcharges;
     /** @var LineItem[] $specialSurchargesLineItems */
     public $specialSurchargesLineItems;
-    public $assembly;   // deprecated after full rewrite
-    public $seal;       // deprecated after full rewrite
-    public $putty;      // deprecated after full rewrite
-    public $ironFrame;  // deprecated after full rewrite
-    public $floor3;     // deprecated after full rewrite
-    public $thickerFrame; // deprecated after full rewrite
-    public $higherFrame; // deprecated after full rewrite
-    public $distance; // deprecated after full rewrite
-    public $doorLiners; // deprecated after full rewrite
 
     function __construct()
     {
@@ -862,6 +844,7 @@ class PriceOffer
         $this->assemblyDoorsCount = null;
         $this->assemblyHandlesRosettesCount = null;
         $this->contact = new Contact();
+        $this->currency = CurrencyEnum::EUR;
         $this->doors = array();
         $this->customHandle = new CustomHandle();
         $this->handle = null;
@@ -892,6 +875,7 @@ class PriceOffer
         $instance->assemblyHandlesRosettesCount = $session->assemblyHandlesRosettesCount ?? null;
         $instance->assemblyDoorsCount = $session->assemblyDoorsCount ?? null;
         $instance->contact = $session->contact ?? new Contact();
+        $instance->currency = $session->currency ?? CurrencyEnum::EUR;
         $instance->doors = $session->doors ?? array();
         $instance->customHandle = $session->customHandle ?? new CustomHandle();
         $instance->handle = $session->handle ?? null;
@@ -918,6 +902,7 @@ class PriceOffer
         $instance->assemblyDoorsCount = $req->assemblyDoorsCount;
         $instance->assemblyHandlesRosettesCount = $req->assemblyHandlesRosettesCount;
         $instance->contact = Contact::fromRequest($req->contact);
+        $instance->currency = $req->currency ?? CurrencyEnum::EUR;
 
         $instance->doors = is_array($req->doors) ? array_map(function (DoorRequest $value): Door {
             return Door::fromRequest($value);
@@ -983,7 +968,7 @@ class PriceOffer
         );
 
         $this->doors[] = $door;
-        $handleCount = $this->handle ? $this->handle->getEffectiveCount($this->getDoorNumber()) : 1;
+        $handleCount = $this->handle ? $this->handle->getEffectiveCount($this->getDoorsCount()) : 1;
         $this->handle = $request->handleId ? Handle::fromConfiguratorPost(
             $handleCount,
             $this->handle ? $this->handle->isCountDirty : false,
@@ -993,61 +978,81 @@ class PriceOffer
 
     public function toResponse(): PriceOfferResponse
     {
-        $doorsCount = $this->getDoorNumber();
+        $doorsCount = $this->getDoorsCount();
         $assemblyDoorsEffectiveCount = $this->getEffectiveCountIsAssemblyDoorsCount($doorsCount);
         $assemblyHandlesRosettesEffectiveCount = $this->getEffectiveCountIsAssemblyHandlesRosettesCount($doorsCount);
-        $assemblyDoorsCalculatedPrice = $this->calculateDoorsAssemblyCosts($assemblyDoorsEffectiveCount) ?? 0.0;
+
+        $assemblyDoorsCalculatedPrice = $this->calculateDoorsAssemblyCosts($assemblyDoorsEffectiveCount);
+        $calculatedAestheticAccessoriesPrice = $this->calculateAestheticAccessoriesPrice();
+        $calculatedDeliveryCosts = $this->calculateDeliveryCosts();
+
+        $doorsCampaigns = getActiveCampaignsOfType(CampaignTypeEnum::DOORS, new DateTime());
+        $calculatedDoorsPrice = $this->calculateDoorsPrice($doorsCampaigns);
+        $calculatedDoorsPriceNoCampaign = $this->calculateDoorsPrice(array());
+
+        $calculatedHandlesAndRosettesPrice = $this->calculateHandlesAndRosettesPrice();
+        $calculatedSpecialSurchargesPrice = $this->calculateSpecialSurchargesPrice();
         $technicalSurchargesCalculatedPrice = $this->calculateTechnicalSurchargesPrice($doorsCount);
         $price = $this->calculatePrice(
             $assemblyDoorsCalculatedPrice,
+            $calculatedAestheticAccessoriesPrice,
+            $calculatedDeliveryCosts,
+            $calculatedDoorsPrice,
+            $calculatedHandlesAndRosettesPrice,
+            $calculatedSpecialSurchargesPrice,
             $technicalSurchargesCalculatedPrice
         );
 
         return new PriceOfferResponse(
             $this->address ? $this->address->toResponse() : AddressResponse::empty(),
             $assemblyDoorsCalculatedPrice,
+            currencyTransformation($this->currency, ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"] ?? 0.0, null),
+            currencyTransformation($this->currency, ParametersJsonDataManipulation::getAll()["assemblyDoorsCostMin"] ?? 0.0, null),
             $assemblyDoorsEffectiveCount,
             $assemblyHandlesRosettesEffectiveCount,
             $this->calculateAssemblyPriceHandlesRosettes($assemblyHandlesRosettesEffectiveCount),
             $price,
             $this->calculatePriceVat($price),
+            getCalculatedCampaignDetails($calculatedDoorsPrice, $doorsCampaigns),
             $this->contact ? $this->contact->toResponse() : ContactResponse::empty(),
-            $this->calculateDeliveryCosts(),
+            $this->currency,
+            $calculatedDeliveryCosts,
+            currencyTransformation($this->currency, ParametersJsonDataManipulation::getAll()["deliveryPricePerKm"], null),
             array_map(function (Door $door): DoorResponse {
-                return $door->toResponse();
+                return $door->toResponse($this->currency);
             }, $this->doors),
             $this->customHandle ? $this->customHandle->toResponse() : CustomHandleResponse::empty(),
-            ($this->handle && HandlesJsonDataManipulation::findByIdOrFalse($this->handle->id)) ?
-                $this->handle->toResponse(HandlesJsonDataManipulation::findByIdOrFalse($this->handle->id), $doorsCount) :
+            ($this->handle && HandlesJsonDataManipulation::findByIdOrNull($this->handle->id)) ?
+                $this->handle->toResponse(HandlesJsonDataManipulation::findByIdOrNull($this->handle->id), $doorsCount, $this->currency) :
                 null,
             $this->isAssemblyDoorsCountDirty,
             $this->isAssemblyHandlesRosettesCountDirty,
             $this->note,
-            mapTechnicalSurchargesToResponse($this->technicalSurcharges, $doorsCount),
+            mapTechnicalSurchargesToResponse($this->technicalSurcharges, $doorsCount, $this->currency),
             array_map(function (LineItem $it): LineItemResponse {
                 return $it->toResponse();
             }, $this->technicalSurchargesLineItems),
-            mapRosettesToResponse($this->selectedRosettes),
+            mapRosettesToResponse($this->selectedRosettes, $this->currency),
             array_map(function (LineItem $it): LineItemResponse {
                 return $it->toResponse();
             }, $this->rosettesLineItems),
-            new SectionsCalculatedPriceResponse(
-                $this->calculateDoorsPrice(),//doors
-                $this->calculateHandlesAndRosettesPrice(),//handlesAndRosettes
-                $this->calculateDeliveryCosts(),//delivery
+            new CalculatedPriceResponse(
+                $calculatedDoorsPriceNoCampaign,//doors
+                $calculatedHandlesAndRosettesPrice,//handlesAndRosettes
+                $calculatedDeliveryCosts,//delivery
                 $assemblyDoorsCalculatedPrice,//assemblyDoors
-                $this->calculateAestheticAccessoriesPrice(),//aestheticAccessories
+                $calculatedAestheticAccessoriesPrice,//aestheticAccessories
                 $technicalSurchargesCalculatedPrice,//technicalSurcharges
-                $this->calculateSpecialSurchargesPrice()//specialSurcharges
+                $calculatedSpecialSurchargesPrice//specialSurcharges
             ),
             array_map(function (SelectedDoorLineItem $it): SelectedDoorLineItemResponse {
-                return $it->toResponse();
+                return $it->toResponse($this->currency);
             }, $this->selectedDoorsLineItems),
-            mapAestheticAccessoriesToResponse($this->aestheticAccessories),
+            mapAestheticAccessoriesToResponse($this->aestheticAccessories, $this->currency),
             array_map(function (LineItem $it): LineItemResponse {
                 return $it->toResponse();
             }, $this->aestheticAccessoriesLineItems),
-            mapSpecialSurchargesToResponse($this->specialSurcharges),
+            mapSpecialSurchargesToResponse($this->specialSurcharges, $this->currency),
             array_map(function (LineItem $it): LineItemResponse {
                 return $it->toResponse();
             }, $this->specialSurchargesLineItems),
@@ -1072,27 +1077,7 @@ class PriceOffer
         return $this->assemblyHandlesRosettesCount ?? 0;
     }
 
-    //deprecated after full rewrite
-    function getDistance(): float
-    {
-        $dist = 0;
-        if ($this->distance != null && $this->distance > 0) {
-            $dist = $this->distance;
-        }
-        return $dist;
-    }
-
-    //deprecated after full rewrite
-    function getDoorLiners(): float
-    {
-        $dist = 0;
-        if ($this->doorLiners != null && $this->doorLiners > 0) {
-            $dist = $this->doorLiners;
-        }
-        return $dist;
-    }
-
-    function getDoorNumber(): float
+    function getDoorsCount(): float
     {
         $count = 0;
         if (!empty($this->doors)) {
@@ -1103,26 +1088,14 @@ class PriceOffer
         return $count;
     }
 
-
-    //deprecated after full rewrite
-    function getFullPriceNoAdd(): float
-    {
-        $price = 0;
-        if (!empty($this->doors)) {
-            foreach ($this->doors as $door) {
-                $price += $door->getFullPrice();
-            }
-        }
-        return $price;
-    }
-
     function calculateDoorsAssemblyCosts(?int $assemblyDoorsCount): float
     {
         if ($assemblyDoorsCount != null && $assemblyDoorsCount > 0) {
-            return max(
+            $result = max(
                 $assemblyDoorsCount * ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"],
                 ParametersJsonDataManipulation::getAll()["assemblyDoorsCostMin"]
             );
+            return currencyTransformation($this->currency, $result, null);
         }
 
         return 0.0;
@@ -1131,40 +1104,48 @@ class PriceOffer
     function calculateDeliveryCosts(): float
     {
         if ($this->address) {
-            $config = DistrictsJsonDataManipulation::findByIdOrFalse($this->address->district);
-            return $config ? (2 * $config["distance"] * ParametersJsonDataManipulation::getAll()["deliveryPricePerKm"]) : 0.0;
+            $config = DistrictsJsonDataManipulation::findByIdOrNull($this->address->district);
+            return $config ?
+                currencyTransformation(
+                    $this->currency,
+                    2 * $config["distance"] * ParametersJsonDataManipulation::getAll()["deliveryPricePerKm"], null
+                ) : 0.0;
         }
 
         return 0.0;
     }
 
-    function calculateDoorsPrice(): float
+    /**
+     * @param Campaign[] $campaigns
+     * @return float
+     */
+    function calculateDoorsPrice(array $campaigns): float
     {
         $doorsPrice = array_sum(array_map(function ($door): float {
-            return $door->calculatePrice();
+            return $door->calculatePrice($this->currency);
         }, $this->doors ?? array()));
 
         $selectedDoorsLineItemsPrice = array_sum(array_map(function ($it): float {
             return $it->calculatePrice();
         }, $this->selectedDoorsLineItems ?? array()));
 
-        return $doorsPrice + $selectedDoorsLineItemsPrice;
+        return getCampaignPrice($doorsPrice + $selectedDoorsLineItemsPrice, $campaigns);
     }
 
     function calculateHandlesAndRosettesPrice(): float
     {
         $customHandlePrice = $this->customHandle->calculatePrice();
         $handlePrice = $this->handle ?
-            $this->handle->calculatePrice($this->handle->getEffectiveCount($this->getDoorNumber())) :
+            $this->handle->calculatePrice($this->handle->getEffectiveCount($this->getDoorsCount()), $this->currency) :
             0.0;
         $rosettesPrice = array_sum(array_map(function ($rosette): float {
-            return $rosette->calculatePrice(RosettesJsonDataManipulation::findByIdOrFalse($rosette->id));
+            return $rosette->calculatePrice(RosettesJsonDataManipulation::findByIdOrNull($rosette->id), $this->currency);
         }, $this->selectedRosettes));
         $rosettesLineItemsPrice = array_sum(array_map(function ($it): float {
             return $it->calculatePrice();
         }, $this->rosettesLineItems));
 
-        $doorsCount = $this->getDoorNumber();
+        $doorsCount = $this->getDoorsCount();
         $assemblyHandlesRosettesEffectiveCount = $this->getEffectiveCountIsAssemblyHandlesRosettesCount($doorsCount);
         $assemblyPriceHandlesRosettes = $this->calculateAssemblyPriceHandlesRosettes($assemblyHandlesRosettesEffectiveCount);
 
@@ -1176,11 +1157,12 @@ class PriceOffer
     {
         $chargesTotal = array_sum(array_map(
             function (TechnicalSurcharge $charge) use ($doorsCount): float {
-                $technicalSurchargeDb = TechnicalSurchargesJsonDataManipulation::findByIdOrFalse($charge->id);
+                $technicalSurchargeDb = TechnicalSurchargesJsonDataManipulation::findByIdOrNull($charge->id);
                 $effectiveCount = $charge->getEffectiveCount($technicalSurchargeDb, $doorsCount);
                 return $charge->calculatePrice(
                     $technicalSurchargeDb,
-                    $effectiveCount
+                    $effectiveCount,
+                    $this->currency
                 );
             }, $this->technicalSurcharges ?? array()
         ));
@@ -1199,7 +1181,8 @@ class PriceOffer
         $aestheticAccessoriesTotal = array_sum(array_map(
             function ($aestheticAccessory): float {
                 return $aestheticAccessory->calculatePrice(
-                    AestheticAccessoriesJsonDataManipulation::findByIdOrFalse($aestheticAccessory->id)
+                    AestheticAccessoriesJsonDataManipulation::findByIdOrNull($aestheticAccessory->id),
+                    $this->currency
                 );
             },
             $this->aestheticAccessories
@@ -1220,7 +1203,8 @@ class PriceOffer
         $specialSurchargesTotal = array_sum(array_map(
             function ($specialSurcharge): float {
                 return $specialSurcharge->calculatePrice(
-                    SpecialSurchargesJsonDataManipulation::findByIdOrFalse($specialSurcharge->id)
+                    SpecialSurchargesJsonDataManipulation::findByIdOrNull($specialSurcharge->id),
+                    $this->currency
                 );
             },
             $this->specialSurcharges
@@ -1238,16 +1222,21 @@ class PriceOffer
 
     function calculatePrice(
         float $assemblyDoorsCalculatedPrice,
+        float $calculatedAestheticAccessoriesPrice,
+        float $calculatedDeliveryCosts,
+        float $calculatedDoorsPrice,
+        float $calculatedHandlesAndRosettesPrice,
+        float $calculatedSpecialSurchargesPrice,
         float $technicalSurchargesCalculatedPrice
     ): float
     {
-        return $this->calculateDoorsPrice() +
-            $this->calculateHandlesAndRosettesPrice() +
+        return $calculatedDoorsPrice +
+            $calculatedHandlesAndRosettesPrice +
             $assemblyDoorsCalculatedPrice +
-            $this->calculateDeliveryCosts() +
-            $this->calculateAestheticAccessoriesPrice() +
+            $calculatedDeliveryCosts +
+            $calculatedAestheticAccessoriesPrice +
             $technicalSurchargesCalculatedPrice +
-            $this->calculateSpecialSurchargesPrice();
+            $calculatedSpecialSurchargesPrice;
     }
 
     function calculatePriceVat(float $priceNoVat): float
@@ -1257,498 +1246,17 @@ class PriceOffer
 
     function calculateAssemblyPriceHandlesRosettes(int $effectiveCount): float
     {
-        return $effectiveCount * ParametersJsonDataManipulation::getAll()["assemblyPriceHandlesRosettes"];
-    }
-
-    //deprecated after full rewrite
-    function getAssemblyPrice(): float
-    {
-        global $cena_montaze;
-        $price = 0;
-        if ($this->assembly) {
-            $price += $this->getDoorNumber() * $cena_montaze;
-        }
-        //return $price; zrusene
-        return 0;
-    }
-
-    //deprecated after full rewrite
-    function getSealPrice()
-    {
-        global $cena_tesnenia;
-        $price = 0;
-        if ($this->seal) {
-            $price += $this->getDoorNumber() * $cena_tesnenia;
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getPuttyPrice()
-    {
-        global $cena_tmelenia;
-        $price = 0;
-        if ($this->putty) {
-            $price += $this->getDoorNumber() * $cena_tmelenia;
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getIronPrice()
-    {
-        global $cena_obkladu_zarubne;
-        $price = 0;
-        if ($this->ironFrame) {
-            $price += $this->getDoorNumber() * $cena_obkladu_zarubne;
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getFloor3Price()
-    {
-        global $cena_vynasania;
-        $price = 0;
-        if ($this->floor3) {
-            $price += $this->getDoorNumber() * $cena_vynasania;
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getThickerFramePrice()
-    {
-        global $cena_priplatok_hrubsia_zaruben;
-        $price = 0;
-        if ($this->thickerFrame != null && $this->thickerFrame > 0) {
-            $price += $this->thickerFrame * $cena_priplatok_hrubsia_zaruben;
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getHigherFramePrice()
-    {
-        global $cena_priplatok_vyssia_zaruben;
-        $price = 0;
-        if ($this->higherFrame != null && $this->higherFrame > 0) {
-            $price += $this->higherFrame * $cena_priplatok_vyssia_zaruben;
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getDistancePrice()
-    {
-        global $cena_km;
-        $price = 0;
-        if ($this->distance != null && $this->distance > 0) {
-            $price += $this->distance * $cena_km;
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getLinerPrice()
-    { // oblozky
-        global $cena_zarubne;
-        $price = 0;
-        if ($this->doorLiners != null && $this->doorLiners > 0) {
-            $price += $this->doorLiners * $cena_zarubne;
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getFullPrice()
-    {
-        global $cena_montaze, $cena_tesnenia;
-
-        $price = 0;
-        if (!empty($this->doors)) {
-            foreach ($this->doors as $door) {
-                $price += $door->getFullPrice();
-            }
-            $price += $this->getAssemblyPrice();
-            $price += $this->getSealPrice();
-            $price += $this->getPuttyPrice();
-            $price += $this->getIronPrice();
-            $price += $this->getFloor3Price();
-            $price += $this->getThickerFramePrice();
-            $price += $this->getHigherFramePrice();
-            $price += $this->getDistancePrice();
-            $price += $this->getLinerPrice();
-        }
-        return $price;
-    }
-
-    //deprecated after full rewrite
-    function getPriceOf($id): float
-    {
-        if (array_key_exists($id, $this->doors)) {
-            $door = $this->doors[$id];
-            return $door->getFullPrice();
-        } else {
-            throw new Exception("Bad ID.");
-        }
-    }
-
-    //deprecated after full rewrite
-    function addDoor($door)
-    {
-        $idx = 1;
-        try {
-            if (empty($this->doors)) {
-                $this->doors = [$idx => $door];
-            } else {
-                $idx = max(array_keys($this->doors)) + 1;
-                $this->doors[$idx] = $door;
-            }
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri ukladaní. Dvere neboli uložené. Prosím refreshujte stránku použitím tlačidla F5.",
-                'result' => $e->getMessage()
+        return $effectiveCount * currencyTransformation(
+                $this->currency,
+                ParametersJsonDataManipulation::getAll()["assemblyPriceHandlesRosettes"],
+                null
             );
-        }
-
-        return end($this->doors)->getHTMLdoorRes($idx);
-    }
-
-    //deprecated after full rewrite
-    function removeDoorAtPosition($key): array
-    {
-        try {
-            unset($this->doors[$key]);
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri mazaní položky",
-                'result' => $e->getMessage()
-            );
-        }
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function cloneDoorAtPosition($key)
-    {
-        try {
-            $door = $this->doors[$key];
-            $cloneDoor = clone $door;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri kopírovaní",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return $this->addDoor($cloneDoor);
-    }
-
-    //deprecated after full rewrite
-    function changeValueOf($fc, $id, $value): array
-    {
-        try {
-            $door = $this->doors[$id];
-            $door->changeValueOf($fc, $value);
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setAssemblyRes($value): array
-    {
-        try {
-            $this->assembly = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setSealRes($value): array
-    {
-        try {
-            $this->seal = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setPuttyRes($value): array
-    {
-        try {
-            $this->putty = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setIronFrameRes($value): array
-    {
-        try {
-            $this->ironFrame = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setFloor3Res($value): array
-    {
-        try {
-            $this->floor3 = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setThickerFrameRes($value): array
-    {
-        try {
-            $this->thickerFrame = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setHigherFrameRes($value): array
-    {
-        try {
-            $this->higherFrame = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setDistanceRes($value): array
-    {
-        try {
-            $this->distance = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function setDoorLinersRes($value): array
-    {
-        try {
-            $this->doorLiners = $value;
-        } catch (Exception $e) {
-            return array(
-                'sucess' => false,
-                'message' => "Chyba pri úprave hodnôt",
-                'result' => $e->getMessage()
-            );
-        }
-
-        return sucessResult();
-    }
-
-    //deprecated after full rewrite
-    function doPostFunction($POST)
-    {
-        switch ($POST['function']) {
-            case "remove":
-                if (isset($POST['position'])) {
-                    return $this->removeDoorAtPosition($POST['position']);
-                }
-                break;
-            case "clone":
-                if (isset($POST['position'])) {
-                    return $this->cloneDoorAtPosition($POST['position']);
-                }
-                break;
-            case "changeWidth":
-            case "changeCount":
-            case "changeInfo":
-            case "changeFrame":
-            case "changeAssemble":
-                if (isset($POST['position']) && isset($POST['newValue'])) {
-                    return $this->changeValueOf($POST['function'], $POST['position'], $POST['newValue']);
-                }
-                break;
-            case "setAssembly":
-                if (isset($POST['newValue'])) {
-                    return $this->setAssemblyRes($POST['newValue']);
-                }
-                break;
-            case "setSeal":
-                if (isset($POST['newValue'])) {
-                    return $this->setSealRes($POST['newValue']);
-                }
-                break;
-            case "setPutty":
-                if (isset($POST['newValue'])) {
-                    return $this->setPuttyRes($POST['newValue']);
-                }
-                break;
-            case "setIronFrame":
-                if (isset($POST['newValue'])) {
-                    return $this->setIronFrameRes($POST['newValue']);
-                }
-                break;
-            case "setFloor3":
-                if (isset($POST['newValue'])) {
-                    return $this->setFloor3Res($POST['newValue']);
-                }
-                break;
-            case "setThickerFrame":
-                if (isset($POST['newValue'])) {
-                    return $this->setThickerFrameRes($POST['newValue']);
-                }
-                break;
-            case "setHigherFrame":
-                if (isset($POST['newValue'])) {
-                    return $this->setHigherFrameRes($POST['newValue']);
-                }
-                break;
-            case "setDistance":
-                if (isset($POST['newValue'])) {
-                    return $this->setDistanceRes($POST['newValue']);
-                }
-                break;
-            case "setDoorLiners":
-                if (isset($POST['newValue'])) {
-                    return $this->setDoorLinersRes($POST['newValue']);
-                }
-                break;
-        }
-        //ak nic nevolalo
-        return array(
-            'sucess' => false,
-            'message' => "Chyba volania",
-            'result' => "Error. Unknown function or out of index."
-        );
     }
 }
 
-//deprecated after full rewrite
-function sucessResult(): array
+function mapTechnicalSurchargesToResponse(array $technicalSurcharges, int $doorsCount, ?string $currency): array
 {
-    return array(
-        'sucess' => true,
-        'message' => "OK",
-        'result' => "OK"
-    );
-}
-
-//deprecated after full rewrite
-function fixObject(&$object)
-{
-    if (!is_object($object) && gettype($object) == 'object')
-        return ($object = unserialize(serialize($object)));
-    return $object;
-}
-
-//deprecated after full rewrite
-function getCategoryFromDoorType(?string $typ): string
-{
-    if ($typ === null || $typ === '') {
-        return "";
-    }
-
-    $typ = strtoupper($typ);
-
-    // 1️⃣ Wien detection (W1, W2, W3 anywhere in the ID)
-    if (preg_match('/W([123])/', $typ, $matches)) {
-        return 'Wien_' . $matches[1];
-    }
-
-    // 2️⃣ Fallback: first-letter category mapping
-    switch ($typ[0]) {
-        case "A":
-            return "Alica";
-        case "K":
-            return "Kristina";
-        case "O":
-            return "Ornela";
-        case "P":
-            return "Petra";
-        case "S":
-            return "Simona";
-        case "V":
-            return "Vanesa";
-        case "Z":
-            return "Zuzana";
-        case "R":
-            return "Renata";
-        case "B":
-            return "Barbora";
-        case "G":
-            return "Greta";
-        default:
-            return "";
-    }
-}
-
-function mapTechnicalSurchargesToResponse(array $technicalSurcharges, int $doorsCount): array
-{
-    return array_map(function ($itemJson) use ($doorsCount, $technicalSurcharges): TechnicalSurchargeResponse {
+    return array_map(function ($itemJson) use ($currency, $doorsCount, $technicalSurcharges): TechnicalSurchargeResponse {
         $id = $itemJson["id"];
         $technicalSurcharge = array_filter($technicalSurcharges, function ($r) use ($id) {
             return $r->id === $id;
@@ -1757,14 +1265,14 @@ function mapTechnicalSurchargesToResponse(array $technicalSurcharges, int $doors
         /** @var TechnicalSurcharge|false $technicalSurcharge */
         $technicalSurcharge = reset($technicalSurcharge);
         return $technicalSurcharge
-            ? $technicalSurcharge->toResponse($itemJson, $doorsCount)
-            : (new TechnicalSurcharge($id, null, null))->toResponse($itemJson, $doorsCount);
+            ? $technicalSurcharge->toResponse($itemJson, $doorsCount, $currency)
+            : (new TechnicalSurcharge($id, null, null))->toResponse($itemJson, $doorsCount, $currency);
     }, TechnicalSurchargesJsonDataManipulation::getAll());
 }
 
-function mapRosettesToResponse(array $selectedRosettes): array
+function mapRosettesToResponse(array $selectedRosettes, ?string $currency): array
 {
-    return array_map(function ($rosetteDb) use ($selectedRosettes): RosetteResponse {
+    return array_map(function ($rosetteDb) use ($currency, $selectedRosettes): RosetteResponse {
         $id = $rosetteDb["id"];
 
         $selectedRosette = array_filter($selectedRosettes, function ($r) use ($id) {
@@ -1773,14 +1281,14 @@ function mapRosettesToResponse(array $selectedRosettes): array
         /** @var Rosette|false $selectedRosette */
         $selectedRosette = reset($selectedRosette);
         return $selectedRosette
-            ? $selectedRosette->toResponse($rosetteDb)
-            : (new Rosette($id, null))->toResponse($rosetteDb);
+            ? $selectedRosette->toResponse($rosetteDb, $currency)
+            : (new Rosette($id, null))->toResponse($rosetteDb, $currency);
     }, RosettesJsonDataManipulation::getAll());
 }
 
-function mapAestheticAccessoriesToResponse(array $aestheticAccessories): array
+function mapAestheticAccessoriesToResponse(array $aestheticAccessories, ?string $currencyId): array
 {
-    return array_map(function ($aestheticAccessoryDb) use ($aestheticAccessories): AestheticAccessoryResponse {
+    return array_map(function ($aestheticAccessoryDb) use ($aestheticAccessories, $currencyId): AestheticAccessoryResponse {
         $id = $aestheticAccessoryDb["id"];
 
         $aestheticAccessory = array_filter($aestheticAccessories, function ($r) use ($id) {
@@ -1789,14 +1297,14 @@ function mapAestheticAccessoriesToResponse(array $aestheticAccessories): array
         /** @var AestheticAccessory|false $aestheticAccessory */
         $aestheticAccessory = reset($aestheticAccessory);
         return $aestheticAccessory
-            ? $aestheticAccessory->toResponse($aestheticAccessoryDb)
-            : (new AestheticAccessory($id, 0, 0))->toResponse($aestheticAccessoryDb);
+            ? $aestheticAccessory->toResponse($aestheticAccessoryDb, $currencyId)
+            : (new AestheticAccessory($id, 0, 0))->toResponse($aestheticAccessoryDb, $currencyId);
     }, AestheticAccessoriesJsonDataManipulation::getAll());
 }
 
-function mapSpecialSurchargesToResponse(array $selectedSpecialSurcharges): array
+function mapSpecialSurchargesToResponse(array $selectedSpecialSurcharges, ?string $currencyId): array
 {
-    return array_map(function ($specialSurchargeDb) use ($selectedSpecialSurcharges): SpecialSurchargeResponse {
+    return array_map(function ($specialSurchargeDb) use ($currencyId, $selectedSpecialSurcharges): SpecialSurchargeResponse {
         $id = $specialSurchargeDb["id"];
 
         $specialSurcharge = array_filter($selectedSpecialSurcharges, function ($r) use ($id) {
@@ -1805,9 +1313,21 @@ function mapSpecialSurchargesToResponse(array $selectedSpecialSurcharges): array
         /** @var SpecialSurcharge|false $specialSurcharge */
         $specialSurcharge = reset($specialSurcharge);
         return $specialSurcharge
-            ? $specialSurcharge->toResponse($specialSurchargeDb)
-            : (new SpecialSurcharge($id, 0, false, false))->toResponse($specialSurchargeDb);
+            ? $specialSurcharge->toResponse($specialSurchargeDb, $currencyId)
+            : (new SpecialSurcharge($id, 0, false, false))->toResponse($specialSurchargeDb, $currencyId);
     }, SpecialSurchargesJsonDataManipulation::getAll());
 }
 
-?>
+function currencyTransformation(
+    ?string $currencyId,
+    float   $price,
+    ?array  $priceCurrencyOverride
+): float
+{
+    if ($priceCurrencyOverride && array_key_exists($currencyId, $priceCurrencyOverride)) {
+        return (float)$priceCurrencyOverride[$currencyId];
+    }
+
+    $currencyRate = CurrencyRatesJsonDataManipulation::findByCurrencyOrNull($currencyId);
+    return $currencyRate ? ($price * $currencyRate) : $price;
+}

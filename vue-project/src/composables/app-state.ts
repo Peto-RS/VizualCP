@@ -4,11 +4,13 @@ import {AppConfigResponse} from "@/model/api/res/price-offer/AppConfigResponse.j
 type OffCanvasViews = "configurator" | "priceOffer";
 
 const appConfig: Ref<AppConfigResponse | null> = ref(null)
+const currency: Ref<string | null> = ref(null)
 const offCanvasActiveView: Ref<OffCanvasViews | null> = ref(null)
 
 export function useAppState() {
     return {
-        appConfig,
+        appConfig,//properties from the backend
+        currency,
         offCanvasActiveView
     }
 }

@@ -32,11 +32,12 @@ import ImageWithLoadingPlaceholder from "@/components/generic/ImageWithLoadingPl
 import {offcanvas} from "@/composables/offcanvas.js";
 import NavTabs from "@/components/NavTabs.vue";
 import {safeT} from "@/model/functions/translation-utils.js";
+import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
 
 const router = useRouter()
 const {t} = useI18n();
 const {addAlert} = useAlerts()
-const {appConfig} = useAppState()
+const {appConfig, currency} = useAppState()
 
 const emit = defineEmits<{
   (e: 'configurator-clicked'): void,
@@ -56,12 +57,14 @@ const reCaptchaToken: Ref<string | undefined> = ref()
 let formWatchHandle: WatchHandle | undefined = undefined
 
 const submitButtonDisabled = computed(() => {
-  const isReCaptchaEnabled = appConfig.value?.reCaptchaEnabled ?? false;
+  const isReCaptchaEnabled = appConfig.value!.reCaptchaEnabled ?? false;
   const reCaptchaCond = isReCaptchaEnabled ? !reCaptchaToken : false;
   const validationsCond = Object.keys(formValidations.value).length > 0;
 
   return reCaptchaCond || validationsCond;
 })
+
+const currencySign = computed(() => CURRENCY_SIGN[currency.value!])
 
 function getFieldValidations(id: string): ValidationMessage[] {
   return formValidations.value[id] ?? []
@@ -93,7 +96,7 @@ function handleHandleClick(handleId: string): void {
 }
 
 async function handleFormSaveAndReRender(form: FormPriceOffer): Promise<void> {
-  const req = prepareRequest(form, apiResponse.value)
+  const req = prepareRequest(form, apiResponse.value, currency.value)
 
   if (req) {
     const response = await updateForm(req);
@@ -118,9 +121,9 @@ async function fetchDataAndReRenderForm(): Promise<void> {
 }
 
 function renderReCaptcha(): void {
-  if (window.grecaptcha && appConfig.value?.reCaptchaSiteKey) {
+  if (window.grecaptcha && appConfig.value!.reCaptchaSiteKey) {
     window.grecaptcha.render('recaptcha', {
-      sitekey: appConfig.value?.reCaptchaSiteKey,
+      sitekey: appConfig.value!.reCaptchaSiteKey,
       callback: (token: string) => {
         reCaptchaToken.value = token;
       },
@@ -147,27 +150,6 @@ const debouncedHandleFormSave = debounce((newForm: FormPriceOffer) => {
   }
 }, 250);
 
-onMounted(async () => {
-  if (appConfig.value?.reCaptchaEnabled) {
-    renderReCaptcha();
-  }
-
-  await fetchDataAndReRenderForm()
-
-  formWatchHandle = watch(reactiveForm, (newForm) => {
-    console.log('vueForm.value');
-    console.log(reactiveForm.value);
-    console.log('newVal');
-    console.log(JSON.stringify(newForm));
-
-    debouncedHandleFormSave(newForm);
-  }, {deep: true});
-})
-
-onBeforeUnmount(async () => {
-  formWatchHandle?.()
-})
-
 async function handleFormSubmit(e: Event): Promise<void> {
   e.preventDefault();
   await handleFormSaveAndReRender(reactiveForm.value);
@@ -180,7 +162,7 @@ async function handleFormSubmit(e: Event): Promise<void> {
     if (response.ok) {
       await handleFormSaveAndReRender(constructReactiveFormPriceOffer(undefined));
       sessionStorage.setItem('offerCompleted', 'true')
-      await router.push('/price-offer-finished')
+      await router.push({ name: 'PriceOfferFinished' })
     } else {
       addAlert(t("alerts.MAIL_SENDING_ERROR"));
     }
@@ -210,6 +192,55 @@ function handleDoorRemoval(index: number) {
   reactiveForm.value.doors.splice(index, 1)
   reactiveForm.value.doorsMeta.splice(index, 1)
 }
+
+function getTechnicalSurchargeLabel(id: string): string {
+  const technicalSurchargeMeta = reactiveForm.value.technicalSurchargesMeta[id];
+
+  return technicalSurchargeMeta?.labelKey ?
+      t(technicalSurchargeMeta.labelKey, {price: formatPrice(technicalSurchargeMeta?.configuredPrice, currencySign.value)})
+      : ''
+}
+
+function getSpecialSurchargeAssemblyLabel(id: string): string {
+  const specialSurchargesMeta = reactiveForm.value.specialSurchargesMeta[id];
+
+  return specialSurchargesMeta?.labelAssemblyKey ?
+      t(specialSurchargesMeta.labelAssemblyKey, {price: formatPrice(specialSurchargesMeta?.assemblyCosts, currencySign.value)})
+      : ''
+}
+
+function getSpecialSurchargeLabel(id: string): string {
+  const specialSurchargesMeta = reactiveForm.value.specialSurchargesMeta[id];
+
+  return specialSurchargesMeta?.labelKey ?
+      t(specialSurchargesMeta.labelKey, {price: formatPrice(specialSurchargesMeta?.configuredPrice, currencySign.value)})
+      : ''
+}
+
+onMounted(async () => {
+  if (appConfig.value!.reCaptchaEnabled) {
+    renderReCaptcha();
+  }
+
+  await fetchDataAndReRenderForm()
+
+  formWatchHandle = watch(reactiveForm, (newForm) => {
+    console.log('vueForm.value');
+    console.log(reactiveForm.value);
+    console.log('newVal');
+    console.log(JSON.stringify(newForm));
+
+    debouncedHandleFormSave(newForm);
+  }, {deep: true});
+
+  watch(currency, () => {
+    handleFormSaveAndReRender(reactiveForm.value);
+  });
+})
+
+onBeforeUnmount(async () => {
+  formWatchHandle?.()
+})
 </script>
 
 <template>
@@ -237,10 +268,11 @@ function handleDoorRemoval(index: number) {
                                  @door-removed="handleDoorRemoval"
                                  v-if="apiResponse?.priceOffer?.doors"
                                  v-model:selected-doors="reactiveForm.doors"
-                                 :base-url="appConfig?.baseUrl"
+                                 :base-url="appConfig!.baseUrl"
                                  :door-categories="props.configuratorApiResponse.doorCategories"
                                  :selected-doors-response="apiResponse?.priceOffer?.doors"/>
                   <SelectedDoorsLineItems v-model:line-items="reactiveForm.selectedDoorsLineItems"
+                                          :currency="currencySign"
                                           :selected-doors-line-items-response="apiResponse?.priceOffer?.selectedDoorsLineItems"/>
                   <div class="row"
                        v-if="!Object.keys(reactiveForm.doors).length && !reactiveForm.selectedDoorsLineItems.length">
@@ -260,7 +292,7 @@ function handleDoorRemoval(index: number) {
                       <ImageWithLoadingPlaceholder
                           :alt="reactiveForm.handle.id"
                           class="img-fluid w-100 ratio-1x1 border mb-1"
-                          :src="appConfig?.baseUrl + findHandleByHandleId(reactiveForm.handle.id)?.imgSrc!"
+                          :src="appConfig!.baseUrl + findHandleByHandleId(reactiveForm.handle.id)?.imgSrc!"
                       />
                       <BadgePrice
                           class="w-100"
@@ -309,7 +341,7 @@ function handleDoorRemoval(index: number) {
                             'border-5': key === reactiveForm.handle?.id
                           }"
                               @click="handleHandleClick(key)"
-                              :src="appConfig?.baseUrl + value.imgSrc"
+                              :src="appConfig!.baseUrl + value.imgSrc"
                           />
                           <BadgePrice
                               class="w-100"
@@ -343,7 +375,7 @@ function handleDoorRemoval(index: number) {
                                :id="'handle-price'"
                                class="form-control"
                                min="0"/>
-                        <span class="input-group-text">€</span>
+                        <span class="input-group-text">{{ currencySign }}</span>
                       </div>
                     </div>
                     <div class="col-sm-4 col-xl-2">
@@ -365,12 +397,14 @@ function handleDoorRemoval(index: number) {
                     </div>
                   </div>
                 </li>
-                <template v-for="r of reactiveForm.rosettes" :key="r.id">
+                <template v-for="r in reactiveForm.rosettes" :key="r.id">
                   <li class="list-group-item">
                     <div class="row">
                       <div class="col-sm-12 col-xl-8 align-self-center">
                         {{ safeT(findRosetteById(r.id, apiResponse)?.labelKey) }}
-                        <span>{{ formatPrice(findRosetteById(r.id, apiResponse)?.price) }}/ks </span>
+                        <span>{{
+                            formatPrice(findRosetteById(r.id, apiResponse)?.price, currencySign)
+                          }}/ks </span>
                         <Hint
                             v-if="findRosetteById(r.id, apiResponse)"
                             :hintObj="findRosetteById(r.id, apiResponse) as HintInterface"/>
@@ -397,6 +431,7 @@ function handleDoorRemoval(index: number) {
                 </template>
                 <LineItems
                     v-model:line-items="reactiveForm.rosettesLineItems"
+                    :currency="currencySign"
                     :line-items-response="apiResponse?.priceOffer.rosettesLineItems"
                 />
                 <li class="list-group-item">
@@ -448,7 +483,10 @@ function handleDoorRemoval(index: number) {
                     </div>
                   </div>
                   <div class="row mb-2">
-                    <div class="col-sm-12 col-xl-12">{{ t("delivery.note") }}</div>
+                    <div class="col-sm-12 col-xl-12">{{
+                        t("delivery.note", {price: formatPrice(apiResponse?.priceOffer?.deliveryPricePerKm, currencySign)})
+                      }}
+                    </div>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -505,7 +543,13 @@ function handleDoorRemoval(index: number) {
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <div class="row">
-                    <div class="col-sm-12 col-xl-8 text-align-justify">{{ t("assemblyDoors.note") }}</div>
+                    <div class="col-sm-12 col-xl-8 text-align-justify">{{
+                        t('assemblyDoors.note', {
+                          assemblyDoorsCost: formatPrice(apiResponse?.priceOffer?.assemblyDoorsCost, currencySign) || '',
+                          assemblyDoorsCostMin: formatPrice(apiResponse?.priceOffer?.assemblyDoorsCostMin, currencySign) || ''
+                        })
+                      }}
+                    </div>
                     <div class="col-sm-4 d-xl-none"></div>
                     <div class="col-sm-4 col-xl-2">
                       <div class="input-group">
@@ -533,7 +577,7 @@ function handleDoorRemoval(index: number) {
                            :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.aestheticAccessories"
                            :title="t('accordionHeaders.aestheticAccessories')">
               <ul class="list-group list-group-flush">
-                <li v-for="it of reactiveForm.aestheticAccessories"
+                <li v-for="it in reactiveForm.aestheticAccessories"
                     :key="it.id"
                     class="list-group-item">
                   <div class="row">
@@ -541,7 +585,7 @@ function handleDoorRemoval(index: number) {
                         safeT(findAestheticAccessoryById(it.id, apiResponse)?.labelKey)
                       }}
                       <span v-if="findAestheticAccessoryById(it.id, apiResponse)?.configuredPrice">{{
-                          formatPrice(findAestheticAccessoryById(it.id, apiResponse)?.configuredPrice)
+                          formatPrice(findAestheticAccessoryById(it.id, apiResponse)?.configuredPrice, currencySign)
                         }}/ks </span>
                       <Hint
                           v-if="findAestheticAccessoryById(it.id, apiResponse)"
@@ -556,7 +600,7 @@ function handleDoorRemoval(index: number) {
                                class="form-control"
                                min="0"
                                step="1"/>
-                        <span class="input-group-text">€</span>
+                        <span class="input-group-text">{{ currencySign }}</span>
                       </div>
                     </div>
                     <div class="col-sm-4 col-xl-2">
@@ -579,6 +623,7 @@ function handleDoorRemoval(index: number) {
                 </li>
                 <LineItems
                     v-model:line-items="reactiveForm.aestheticAccessoriesLineItems"
+                    :currency="currencySign"
                     :line-items-response="apiResponse?.priceOffer.aestheticAccessoriesLineItems"
                 />
               </ul>
@@ -588,12 +633,12 @@ function handleDoorRemoval(index: number) {
                            :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.technicalSurcharges"
                            :title="t('accordionHeaders.technicalSurcharges')">
               <ul class="list-group list-group-flush">
-                <li v-for="it of reactiveForm.technicalSurcharges"
+                <li v-for="it in reactiveForm.technicalSurcharges"
                     :key="it.id"
                     class="list-group-item">
                   <div class="row">
                     <div class="col-sm-12 col-xl-8 align-self-center text-align-justify">
-                      {{ safeT(findTechnicalSurchargeById(it.id, apiResponse)?.labelKey) }}
+                      {{ getTechnicalSurchargeLabel(it.id) }}
                       <Hint
                           v-if="findTechnicalSurchargeById(it.id, apiResponse)"
                           :hintObj="findTechnicalSurchargeById(it.id, apiResponse) as HintInterface"/>
@@ -620,6 +665,7 @@ function handleDoorRemoval(index: number) {
                 </li>
                 <LineItems
                     v-model:line-items="reactiveForm.technicalSurchargesLineItems"
+                    :currency="currencySign"
                     :line-items-response="apiResponse?.priceOffer.technicalSurchargesLineItems"
                 />
               </ul>
@@ -629,13 +675,12 @@ function handleDoorRemoval(index: number) {
                            :section-price="apiResponse?.priceOffer?.sectionsCalculatedPrice?.specialSurcharges"
                            :title="t('accordionHeaders.specialSurcharges')">
               <ul class="list-group list-group-flush">
-                <li v-for="it of reactiveForm.specialSurcharges"
+                <li v-for="it in reactiveForm.specialSurcharges"
                     :key="it.id"
                     class="list-group-item">
                   <div class="row">
-                    <div class="col-sm-12 col-xl-8 align-self-center">{{
-                        safeT(findSpecialSurchargeById(it.id, apiResponse)?.labelKey)
-                      }}
+                    <div class="col-sm-12 col-xl-8 align-self-center">
+                      {{ getSpecialSurchargeLabel(it.id) }}
                       <Hint v-if="findSpecialSurchargeById(it.id, apiResponse)"
                             :hintObj="findSpecialSurchargeById(it.id, apiResponse) as HintInterface"/>
                     </div>
@@ -662,10 +707,7 @@ function handleDoorRemoval(index: number) {
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-8 col-xl-8 align-self-center">{{
-                        safeT(findSpecialSurchargeById(it.id, apiResponse)?.labelAssemblyKey)
-                      }}
-                    </div>
+                    <div class="col-sm-8 col-xl-8 align-self-center">{{ getSpecialSurchargeAssemblyLabel(it.id) }}</div>
                     <div class="col-sm-4 col-xl-2">
                       <div class="form-check">
                         <input class="form-check-input"
@@ -681,6 +723,7 @@ function handleDoorRemoval(index: number) {
                 </li>
                 <LineItems
                     v-model:line-items="reactiveForm.specialSurchargesLineItems"
+                    :currency="currencySign"
                     :line-items-response="apiResponse?.priceOffer.specialSurchargesLineItems"
                 />
               </ul>
@@ -741,6 +784,22 @@ function handleDoorRemoval(index: number) {
             </AccordionItem>
           </div>
           <div v-if="apiResponse" class="price-sticky py-1 px-3 rounded mb-2">
+            <template
+                      v-for="campaignDetail in apiResponse.priceOffer.campaignDetails"
+                      :key="campaignDetail.id">
+              <div data-bs-theme="configurator"
+                   class="row mb-2"
+                   style="background-color: var(--bs-primary-bg-subtle)">
+                <div class="col-sm-8 col-xl-10 align-content-center text-uppercase">
+                  {{ t(campaignDetail.translationKey) }}
+                </div>
+                <div class="col-sm-4 col-xl-2">
+                  <BadgePrice
+                      class="price-offer-badge w-100"
+                      :price="-campaignDetail.discountAmount"/>
+                </div>
+              </div>
+            </template>
             <div class="row mb-2">
               <div class="col-sm-8 col-xl-10 align-content-center text-uppercase">
                 {{ t('priceOffer.priceWoVat') }}

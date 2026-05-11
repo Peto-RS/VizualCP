@@ -49,8 +49,8 @@ defineProps<{
   height: $input-height;
   margin-left: 1em;
   order: 1;
-  flex: 0 0 105px;
-  min-width: 105px;
+  flex: 0 0 130px;
+  min-width: 130px;
 }
 
 .accordion button:hover {

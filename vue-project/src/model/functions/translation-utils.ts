@@ -1,18 +1,18 @@
 import {createI18n, useI18n} from "vue-i18n";
+import {router} from "@/router.js";
+import {NavigationFailure} from "vue-router";
 
-export type SupportedLocale =
-    | 'bg'
-    | 'cs'
-    | 'de'
-    | 'en'
-    | 'es'
-    | 'fr'
-    | 'hu'
-    | 'it'
-    | 'pl'
-    | 'ro'
-    | 'sk'
-    | 'sr'
+export const supportedLocales = [
+    'bg','cs','de','en','es','fr','hu','it','pl','ro','sk','sr'
+] as const
+
+export type SupportedLocale = typeof supportedLocales[number]
+
+export const defaultLocale = 'sk' as const
+
+export function isSupportedLocale(locale: string): locale is SupportedLocale {
+    return supportedLocales.includes(locale as SupportedLocale)
+}
 
 const loadedLanguages = new Set()
 
@@ -23,10 +23,6 @@ export const i18n = createI18n({
         fallbackLocale: 'sk'
     }
 )
-
-export function getDefaultLocale(): SupportedLocale {
-    return (localStorage.getItem('locale') as SupportedLocale) || 'sk'
-}
 
 export async function loadLocaleMessages(locale: SupportedLocale) {
     if (!loadedLanguages.has(locale)) {
@@ -39,8 +35,22 @@ export async function loadLocaleMessages(locale: SupportedLocale) {
 export async function setLocale(locale: SupportedLocale) {
     await loadLocaleMessages(locale)
     i18n.global.locale.value = locale
-    localStorage.setItem('locale', locale)
 }
+
+export async function switchLanguage(lang: SupportedLocale): Promise<void | NavigationFailure | undefined> {
+    const route = router.currentRoute.value
+
+    return await router.push({
+        name: route.name!,
+        params: {
+            ...route.params,
+            lang
+        },
+        query: route.query,
+        hash: route.hash
+    })
+}
+
 
 export function safeT(key?: string | null, fallback: string = '') {
     if (!key) return fallback

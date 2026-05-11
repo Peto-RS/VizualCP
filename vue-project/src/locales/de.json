@@ -21,16 +21,16 @@
     "doorAddedToPriceOffer": "Die Tür wurde zum Preisangebot hinzugefügt.",
     "campaign": {
       "doors": {
-        "title": "Innen<b>türen mit Zarge</b> ab <b>219,- €",
-        "body": "Innentüren und Zargen bieten wir Ihnen in allen Laminatarten zum Aktionspreis von 219 € an. Der Preis gilt auch für Türen, die wir vor der Produktion persönlich ausmessen."
+        "title": "Innen<b>türen mit Zarge</b> ab <b>{interiorDoorsPriceFrom}",
+        "body": "Innentüren und Zargen bieten wir Ihnen in allen Laminatarten zum Aktionspreis von {interiorDoorsPriceFrom} an. Der Preis gilt auch für Türen, die wir vor der Produktion persönlich ausmessen."
       },
       "freeMeasurement": {
         "title": "<b>Ausmessen</b> der Bauöffnungen <b>kostenlos</b>",
         "body": "Sorgen Sie sich um atypische Öffnungsmaße? Für uns kein Problem. Wir messen jede Öffnung persönlich aus und fertigen die Türen so an, dass sie so genau wie möglich passen. Maßgefertigte Türen sind bei uns OHNE AUFPREIS."
       },
       "assembly": {
-        "title": "<b>Montage</b> von Innen&shy;türen und Zargen <b>35€</b>",
-        "body": "Wir bieten Ihnen die Montage des Komplettsets Innentür mit Zarge zum Vorzugspreis ab 35 €/Stk. an. Dieser Aktionspreis gilt bei der Montage von sechs und mehr Türen und Zargen."
+        "title": "<b>Montage</b> von Innen&shy;türen und Zargen <b>{assemblyDoorsCost}</b>",
+        "body": "Wir bieten Ihnen die Montage des Komplettsets Innentür mit Zarge zum Vorzugspreis ab {assemblyDoorsCost}/Stk. an. Dieser Aktionspreis gilt bei der Montage von sechs und mehr Türen und Zargen."
       }
     }
   },
@@ -50,7 +50,7 @@
     "contact": "Kontaktdaten"
   },
   "assemblyDoors": {
-    "note": "Aktionsmontage von Türen mit Zarge 35 € / Stück. Die Aktion gilt ab einer Anzahl von 6 Stück. Der Mindestbetrag für zwei Monteure beträgt 210 €."
+    "note": "Aktionsmontage von Türen mit Zarge {assemblyDoorsCost} / Stück. Die Aktion gilt ab einer Anzahl von 6 Stück. Der Mindestbetrag für zwei Monteure beträgt {assemblyDoorsCostMin}."
   },
   "components": {
     "hint": {
@@ -150,6 +150,9 @@
         "header": "Lüftungsgitter für Türen",
         "label": "Lüftungsgitter für Türen"
       }
+    },
+    "campaigns": {
+      "doors": "Aktuelle saisonale Zusatzrabatt von 15 % auf alle Türen und Zargen."
     },
     "doorCategories": {
       "barbora": {
@@ -305,137 +308,137 @@
     "specialSurcharges": {
       "special-surcharges-double-door-frame": {
         "header": "Zarge für zweiflügelige Türen",
-        "label": "Preis der Zarge für zweiflügelige Türen (wählen Sie 2 Türflügel und klicken Sie auf diese Zarge) 103 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Preis der Zarge für zweiflügelige Türen (wählen Sie 2 Türflügel und klicken Sie auf diese Zarge) {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-sliding-doors-fittings-curtain-rod": {
         "header": "Schiebetüren - Beschlag Gardine",
-        "label": "Schiebetüren - Beschlag Gardine 150 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Schiebetüren - Beschlag Gardine {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-minima": {
         "header": "Schiebetüren - Beschlag Minima",
-        "label": "Schiebetüren - Beschlag Minima 250 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Schiebetüren - Beschlag Minima {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-sliding-doors-hardware-built-in-housing": {
         "header": "Schiebetüren - Beschlag für Einbaukasten",
-        "label": "Schiebetüren - Beschlag für Einbaukasten 0 €. Zarge für Einbaukasten 150 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Schiebetüren - Beschlag für Einbaukasten 0 €. Zarge für Einbaukasten {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-hidden-hinges": {
         "header": "Aufpreis für verdeckte Scharniere",
-        "label": "Aufpreis für verdeckte Scharniere pro Tür 130 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Aufpreis für verdeckte Scharniere pro Tür {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-reversible-doors": {
         "header": "Aufpreis für reversible Türen",
-        "label": "Aufpreis für reversible Türen 265 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Aufpreis für reversible Türen {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-double-leaf-non-rebated-door-with-frame": {
         "header": "Zweiflügelige stumpf Einschlagende Türen mit Zarge",
-        "label": "Zweiflügelige stumpf Einschlagende Türen mit Zarge 285 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Zweiflügelige stumpf Einschlagende Türen mit Zarge {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-curtain": {
         "header": "Aufpreis für zweiflügelige Schiebetüren Gardine",
-        "label": "Aufpreis für zweiflügelige Schiebetüren Gardine 250 €.",
-        "labelAssembly": "Montage + 50 €."
+        "label": "Aufpreis für zweiflügelige Schiebetüren Gardine {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-minima": {
         "header": "Aufpreis für zweiflügelige Schiebetüren Minima",
-        "label": "Aufpreis für zweiflügelige Schiebetüren Minima 350 €.",
-        "labelAssembly": "Montage + 50 €."
+        "label": "Aufpreis für zweiflügelige Schiebetüren Minima {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-frame-for-double-leaf-doors-in-case": {
         "header": "Zarge für zweiflügelige Türen im Einbaukasten",
-        "label": "Aufpreis für zweiflügelige Schiebetüren im Kasten 0 €. Zarge für zweiflügelige Türen im Kasten 180 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Aufpreis für zweiflügelige Schiebetüren im Kasten 0 €. Zarge für zweiflügelige Türen im Kasten {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-barn-1": {
         "header": "Schiebebeschlag - Barn 1 schwarz",
-        "label": "Schiebebeschlag - Barn 1 schwarz 150 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Schiebebeschlag - Barn 1 schwarz {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-minima-black": {
         "header": "Schiebebeschlag - Minima schwarz",
-        "label": "Schiebebeschlag - Minima schwarz 290 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Schiebebeschlag - Minima schwarz {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-door-to-case-with-frame": {
         "header": "Türen im Einbaukasten mit Zarge",
-        "label": "Türen im Einbaukasten mit Zarge 57 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Türen im Einbaukasten mit Zarge {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-door-to-case-without-frame": {
         "header": "Türen im Einbaukasten ohne Zarge",
-        "label": "Türen im Einbaukasten ohne Zarge 0 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Türen im Einbaukasten ohne Zarge {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-double-leaf-door-to-case": {
         "header": "Zweiflügelige Türen im Einbaukasten",
-        "label": "Zweiflügelige Türen im Einbaukasten 87 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Zweiflügelige Türen im Einbaukasten {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-folding-interior-doors": {
         "header": "Falttüren für den Innenbereich",
-        "label": "Falttüren für den Innenbereich 220 €.",
-        "labelAssembly": "Montage + 50 €."
+        "label": "Falttüren für den Innenbereich {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-sliding-hardware-invisible": {
         "header": "Schiebebeschlag - unsichtbar",
-        "label": "Schiebebeschlag - unsichtbar 490 €.",
-        "labelAssembly": "Montage + 50 €."
+        "label": "Schiebebeschlag - unsichtbar {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-barn-4": {
         "header": "Schiebebeschlag - Barn 4 schwarz",
-        "label": "Schiebebeschlag - Barn 4 schwarz 210 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Schiebebeschlag - Barn 4 schwarz {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-barn-3": {
         "header": "Schiebebeschlag - Barn 3 schwarz",
-        "label": "Schiebebeschlag - Barn 3 schwarz 190 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Schiebebeschlag - Barn 3 schwarz {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-barn-2": {
         "header": "Schiebebeschlag - Barn 2 schwarz",
-        "label": "Schiebebeschlag - Barn 2 schwarz 180 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Schiebebeschlag - Barn 2 schwarz {price}.",
+        "labelAssembly": "Montage + {price}."
       }
     },
     "technicalSurcharges": {
       "technical-surcharges-hollow-particle-board-filling": {
         "header": "Füllung Röhrenspanplatte",
-        "label": "Füllung Röhrenspanplatte: Türen können gegen einen Aufpreis von 30 € mit Papierwabe oder Röhrenspanplatte gefüllt werden. Wabe ist eine Papierschicht, Röhrenspanplatte besteht aus Holzspänen. Wir empfehlen Röhrenspanplatte für V1-Türen, sie kann jedoch in alle Türen der Kategorien Vanesa und Petra eingebaut werden. Die Röhrenspanplatte ist schwerer, stabiler und isoliert besser."
+        "label": "Füllung Röhrenspanplatte: Türen können gegen einen Aufpreis von {price} mit Papierwabe oder Röhrenspanplatte gefüllt werden. Wabe ist eine Papierschicht, Röhrenspanplatte besteht aus Holzspänen. Wir empfehlen Röhrenspanplatte für V1-Türen, sie kann jedoch in alle Türen der Kategorien Vanesa und Petra eingebaut werden. Die Röhrenspanplatte ist schwerer, stabiler und isoliert besser."
       },
       "technical-surcharges-silicone-frame": {
         "header": "Silikondichtung für die Zarge",
-        "label": "Silikondichtung für die Zarge 10 €/Stück: In die Zarge wird eine Nut gefräst, in die eine Silikondichtung eingesetzt wird. Dies hat den Vorteil, dass die Tür beim Schließen leiser ist und die Silikondichtung im geschlossenen Zustand Geräusche aus dem Nachbarraum eliminiert."
+        "label": "Silikondichtung für die Zarge {price}/Stück: In die Zarge wird eine Nut gefräst, in die eine Silikondichtung eingesetzt wird. Dies hat den Vorteil, dass die Tür beim Schließen leiser ist und die Silikondichtung im geschlossenen Zustand Geräusche aus dem Nachbarraum eliminiert."
       },
       "technical-surcharges-silicone-wall-frame": {
         "header": "Ausfugen von Unebenheiten zwischen Wand und Zarge",
-        "label": "Ausfugen von Unebenheiten zwischen Wand und Zarge 6 €/Stück: Bei der Montage der Zarge kann an krummen Wänden eine Lücke zwischen Wand und Zarge entstehen. Diese Lücke können wir mit Acrylsilikon füllen. Aufgrund der Elastizität von Silikon können nur Lücken bis zu 0,5 cm ausgeglichen werden. Badezimmer und WC werden von innen nicht mit Silikon verfugt. Auch nicht, wenn die Tür in einer Ecke steht."
+        "label": "Ausfugen von Unebenheiten zwischen Wand und Zarge {price}/Stück: Bei der Montage der Zarge kann an krummen Wänden eine Lücke zwischen Wand und Zarge entstehen. Diese Lücke können wir mit Acrylsilikon füllen. Aufgrund der Elastizität von Silikon können nur Lücken bis zu 0,5 cm ausgeglichen werden. Badezimmer und WC werden von innen nicht mit Silikon verfugt. Auch nicht, wenn die Tür in einer Ecke steht."
       },
       "technical-surcharges-carrying": {
         "header": "Hochtragen in den 3. und höhere Stockwerke ohne Aufzug",
-        "label": "Hochtragen in den 3. und höhere Stockwerke ohne Aufzug: Für das Hochtragen in den 3. und höhere Stockwerke ohne Aufzug wird ein Aufpreis für das Tragen von Türen, Zargen, Material und Werkzeug in Höhe von 100 € berechnet."
+        "label": "Hochtragen in den 3. und höhere Stockwerke ohne Aufzug: Für das Hochtragen in den 3. und höhere Stockwerke ohne Aufzug wird ein Aufpreis für das Tragen von Türen, Zargen, Material und Werkzeug in Höhe von {price} berechnet."
       },
       "technical-surcharges-thicker-walls": {
         "header": "Aufpreis für dickere Wände",
-        "label": "Aufpreis für Wände dicker als 20 cm 12 €/extra 10 cm: Wenn die Wände dicker als 20 cm sind, wird ein Aufpreis für zusätzliches Material von 12 € für alle weiteren 10 cm berechnet."
+        "label": "Aufpreis für Wände dicker als 20 cm {price}/extra 10 cm: Wenn die Wände dicker als 20 cm sind, wird ein Aufpreis für zusätzliches Material von {price} für alle weiteren 10 cm berechnet."
       },
       "technical-surcharges-higher-doors": {
         "header": "Aufpreis für höhere Türen",
-        "label": "Aufpreis für Türen höher als 207 cm 20 €/Stück: Türen mit einer Höhe von 207 cm bis 240 cm werden mit einem Aufpreis von 20 €/Stück für teureres Material berechnet. Nicht alle Materialien können in einer Höhe von über 207 cm geliefert werden."
+        "label": "Aufpreis für Türen höher als 207 cm {price}/Stück: Türen mit einer Höhe von 207 cm bis 240 cm werden mit einem Aufpreis von {price}/Stück für teureres Material berechnet. Nicht alle Materialien können in einer Höhe von über 207 cm geliefert werden."
       },
       "technical-surcharges-original-steel-door-frames-cladding": {
         "header": "Verkleidung originaler Stahlzargen",
-        "label": "Verkleidung originaler Stahlzargen 25 €/Stück: Bei der Verkleidung originaler Stahlzargen wird ein Aufpreis von 25 € berechnet. Es ist jedoch zu berücksichtigen, dass sich bei der Verkleidung originaler Zargen die Bauöffnung um ca. 3,5 cm auf jeder Seite verengt. Das bedeutet ca. 3,5 cm von oben und ca. 7 cm in der Breite."
+        "label": "Verkleidung originaler Stahlzargen {price}/Stück: Bei der Verkleidung originaler Stahlzargen wird ein Aufpreis von {price} berechnet. Es ist jedoch zu berücksichtigen, dass sich bei der Verkleidung originaler Zargen die Bauöffnung um ca. 3,5 cm auf jeder Seite verengt. Das bedeutet ca. 3,5 cm von oben und ca. 7 cm in der Breite."
       },
       "technical-surcharges-tiles-cutting": {
         "header": "Aufpreis für das Zuschneiden der Zierbekleidungen",
-        "label": "Aufpreis für das Zuschneiden der Zierbekleidungen 15 €/Stück: Die Zierbekleidungen werden bei der Montage zugeschnitten, wenn die Bauöffnungen falsch gelöst sind. Zum Beispiel, wenn die Stufen zwischen den Räumen mehr als 5 mm betragen, wenn keine Halterungen an den Wänden für die Zarge vorhanden sind und von der Bekleidung abgeschnitten werden muss, oder wenn die Fliesen im Bad / WC niedriger als die Türhöhe sind und eine Nut aus der Bekleidung gefräst werden muss."
+        "label": "Aufpreis für das Zuschneiden der Zierbekleidungen {price}/Stück: Die Zierbekleidungen werden bei der Montage zugeschnitten, wenn die Bauöffnungen falsch gelöst sind. Zum Beispiel, wenn die Stufen zwischen den Räumen mehr als 5 mm betragen, wenn keine Halterungen an den Wänden für die Zarge vorhanden sind und von der Bekleidung abgeschnitten werden muss, oder wenn die Fliesen im Bad / WC niedriger als die Türhöhe sind und eine Nut aus der Bekleidung gefräst werden muss."
       }
     }
   }

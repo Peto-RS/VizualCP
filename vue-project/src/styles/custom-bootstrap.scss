@@ -22,6 +22,9 @@ $offcanvas-horizontal-width: 50vw;
 @import "bootstrap/scss/variables";
 
 [data-bs-theme="configurator"] {
+  --bs-primary: #dcb946;
+  --bs-primary-bg-subtle: color-mix(in srgb, var(--bs-primary) 15%, white);
+
   .accordion {
     --bs-accordion-active-bg: var(--bs-primary);
   }

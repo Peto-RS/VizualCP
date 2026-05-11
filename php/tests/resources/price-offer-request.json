@@ -1,0 +1,360 @@
+{
+  "priceOffer": {
+    "address": {
+      "city": "City",
+      "district": "banska-bystrica",
+      "street": "Street",
+      "streetNumber": "1",
+      "zipCode": "97901"
+    },
+    "assemblyDoorsCount": 3,
+    "assemblyHandlesRosettesCount": 3,
+    "contact": {
+      "email": "aa@aa.sk",
+      "fullName": "Meno",
+      "phoneNumber": "+42111111111"
+    },
+    "currency": "EUR",
+    "doors": [
+      {
+        "category": "best-selling",
+        "material": "lamino-jelsa",
+        "type": "v1",
+        "width": "",
+        "isDoorFrameEnabled": true,
+        "isDtdSelected": null
+      },
+      {
+        "category": "best-selling",
+        "material": "lamino-jelsa",
+        "type": "v1",
+        "width": "",
+        "isDoorFrameEnabled": true,
+        "isDtdSelected": null
+      },
+      {
+        "category": "wien_1",
+        "material": "wien-biela",
+        "type": "W1_L2_K2_O2",
+        "width": "W90",
+        "isDoorFrameEnabled": false,
+        "isDtdSelected": null
+      }
+    ],
+    "customHandle": {
+      "name": "Custom handle",
+      "price": 1,
+      "count": 2
+    },
+    "handle": {
+      "count": 3,
+      "id": "Alt_wien",
+      "isCountDirty": false
+    },
+    "isAssemblyDoorsCountDirty": false,
+    "isAssemblyHandlesRosettesCountDirty": false,
+    "note": "Note",
+    "technicalSurcharges": [
+      {
+        "id": "technical-surcharges-hollow-particle-board-filling",
+        "count": 0,
+        "isCountDirty": ""
+      },
+      {
+        "id": "technical-surcharges-silicone-frame",
+        "count": 3,
+        "isCountDirty": ""
+      },
+      {
+        "id": "technical-surcharges-silicone-wall-frame",
+        "count": 3,
+        "isCountDirty": ""
+      },
+      {
+        "id": "technical-surcharges-carrying",
+        "count": 0,
+        "isCountDirty": ""
+      },
+      {
+        "id": "technical-surcharges-thicker-walls",
+        "count": 0,
+        "isCountDirty": ""
+      },
+      {
+        "id": "technical-surcharges-higher-doors",
+        "count": 0,
+        "isCountDirty": ""
+      },
+      {
+        "id": "technical-surcharges-original-steel-door-frames-cladding",
+        "count": 0,
+        "isCountDirty": ""
+      },
+      {
+        "id": "technical-surcharges-tiles-cutting",
+        "count": 0,
+        "isCountDirty": ""
+      }
+    ],
+    "technicalSurchargesLineItems": [
+      {
+        "name": "Technical surcharge 1",
+        "price": 1,
+        "count": 1
+      },
+      {
+        "name": "Technical surcharge 2",
+        "price": 2,
+        "count": 2
+      },
+      {
+        "name": "Technical surcharge 2",
+        "price": 3,
+        "count": 3
+      }
+    ],
+    "rosettes": [
+      {
+        "id": "bb",
+        "count": 1
+      },
+      {
+        "id": "wc",
+        "count": 1
+      },
+      {
+        "id": "fab",
+        "count": 0
+      }
+    ],
+    "rosettesLineItems": [
+      {
+        "count": 1,
+        "name": "Custom rosette",
+        "price": 10
+      },
+      {
+        "count": 2,
+        "name": "Custom rosette 2",
+        "price": 10
+      }
+    ],
+    "selectedDoorsLineItems": [
+      {
+        "isDoorFrameEnabled": true,
+        "name": "Custom door 1",
+        "price": 100,
+        "width": "W70"
+      },
+      {
+        "isDoorFrameEnabled": false,
+        "name": "Custom door 2",
+        "price": 100,
+        "width": "W80"
+      }
+    ],
+    "aestheticAccessories": [
+      {
+        "id": "aesthetic-accessories-colored-hinge-caps",
+        "count": 1,
+        "selectedPrice": 0
+      },
+      {
+        "id": "aesthetic-accessories-colorful-magnetic-locks",
+        "count": 0,
+        "selectedPrice": 0
+      },
+      {
+        "id": "aesthetic-accessories-sliding-door-shells",
+        "count": 0,
+        "selectedPrice": 0
+      },
+      {
+        "id": "aesthetic-accessories-colorful-hidden-hardware",
+        "count": 5,
+        "selectedPrice": 1
+      },
+      {
+        "id": "aesthetic-accessories-thimble",
+        "count": 0,
+        "selectedPrice": 0
+      },
+      {
+        "id": "aesthetic-accessories-spraying-surcharge",
+        "count": 0,
+        "selectedPrice": 0
+      },
+      {
+        "id": "aesthetic-accessories-veneer-surcharge",
+        "count": 0,
+        "selectedPrice": 0
+      },
+      {
+        "id": "aesthetic-accessories-glass-surcharge",
+        "count": 0,
+        "selectedPrice": 0
+      },
+      {
+        "id": "aesthetic-accessories-door-ventilation-grilles",
+        "count": 0,
+        "selectedPrice": 0
+      }
+    ],
+    "aestheticAccessoriesLineItems": [
+      {
+        "name": "Aesthetic accessory 1",
+        "price": 1,
+        "count": 1
+      },
+      {
+        "name": "Aesthetic accessory 2",
+        "price": 2,
+        "count": 2
+      },
+      {
+        "name": "Aesthetic accessory 3",
+        "price": 3,
+        "count": 3
+      }
+    ],
+    "specialSurcharges": [
+      {
+        "id": "special-surcharges-double-door-frame",
+        "count": 1,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-sliding-doors-fittings-curtain-rod",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-minima",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-sliding-doors-hardware-built-in-housing",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-hidden-hinges",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-reversible-doors",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-double-leaf-non-rebated-door-with-frame",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-double-leaf-sliding-door-curtain",
+        "count": 1,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-double-leaf-sliding-door-minima",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-frame-for-double-leaf-doors-in-case",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-barn-1",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-minima-black",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-door-to-case-with-frame",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-door-to-case-without-frame",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-double-leaf-door-to-case",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-folding-interior-doors",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-sliding-hardware-invisible",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-barn-4",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-barn-3",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      },
+      {
+        "id": "special-surcharges-barn-2",
+        "count": 0,
+        "isAssemblySelected": false,
+        "isAssemblySelectedDirty": false
+      }
+    ],
+    "specialSurchargesLineItems": [
+      {
+        "name": "Special surcharges 1",
+        "price": 1,
+        "count": 1
+      },
+      {
+        "name": "Special surcharges 2",
+        "price": 2,
+        "count": 2
+      },
+      {
+        "name": "Special surcharges 3",
+        "price": 3,
+        "count": 3
+      }
+    ]
+  }
+}

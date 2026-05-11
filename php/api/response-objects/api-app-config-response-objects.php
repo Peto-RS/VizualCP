@@ -18,5 +18,3 @@ class AppConfigResponse
         $this->reCaptchaSiteKey = $reCaptchaSiteKey;
     }
 }
-
-?>

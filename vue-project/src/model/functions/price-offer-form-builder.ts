@@ -38,6 +38,7 @@ export interface FormPriceOffer {
     isAssemblyHandlesRosettesCountDirty: boolean,
     note: string,
     technicalSurcharges: FormTechnicalSurcharge[],
+    technicalSurchargesMeta: Record<string, TechnicalSurchargeMeta>,
     technicalSurchargesLineItems: FormLineItem[],
     rosettes: FormRosette[],
     rosettesLineItems: FormLineItem[],
@@ -45,6 +46,7 @@ export interface FormPriceOffer {
     aestheticAccessories: FormAestheticAccessory[],
     aestheticAccessoriesLineItems: FormLineItem[],
     specialSurcharges: FormSpecialSurcharge[],
+    specialSurchargesMeta: Record<string, SpecialSurchargeMeta>,
     specialSurchargesLineItems: FormLineItem[]
 }
 
@@ -103,10 +105,24 @@ export interface FormSpecialSurcharge {
     isAssemblySelectedDirty: boolean
 }
 
+export interface SpecialSurchargeMeta {
+    id: string
+    assemblyCosts: number | null
+    configuredPrice: number | null
+    labelAssemblyKey: string | null
+    labelKey: string | null
+}
+
 export interface FormTechnicalSurcharge {
     id: string
     count: number
     isCountDirty: boolean
+}
+
+export interface TechnicalSurchargeMeta {
+    id: string
+    configuredPrice: number | null
+    labelKey: string | null
 }
 
 export function constructReactiveFormPriceOffer(json: ApiResponse | undefined): FormPriceOffer {
@@ -123,6 +139,7 @@ export function constructReactiveFormPriceOffer(json: ApiResponse | undefined): 
         isAssemblyHandlesRosettesCountDirty: json?.priceOffer.isAssemblyHandlesRosettesCountDirty || false,
         note: json?.priceOffer.note || "",
         technicalSurcharges: constructReactiveFormTechnicalSurcharges(json?.priceOffer.technicalSurcharges || []),
+        technicalSurchargesMeta: constructTechnicalSurchargesMeta(json?.priceOffer.technicalSurcharges || []),
         technicalSurchargesLineItems: json?.priceOffer.technicalSurchargesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
         rosettes: constructReactiveFormRosettes(json?.priceOffer.rosettes || []),
         rosettesLineItems: json?.priceOffer.rosettesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
@@ -130,7 +147,8 @@ export function constructReactiveFormPriceOffer(json: ApiResponse | undefined): 
         aestheticAccessories: constructReactiveAestheticAccessories(json?.priceOffer.aestheticAccessories || []),
         aestheticAccessoriesLineItems: json?.priceOffer.aestheticAccessoriesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
         specialSurcharges: constructReactiveSpecialSurcharges(json?.priceOffer.specialSurcharges || []),
-        specialSurchargesLineItems: json?.priceOffer.specialSurchargesLineItems.map(it => constructReactiveFormLineItem(it)) || []
+        specialSurchargesLineItems: json?.priceOffer.specialSurchargesLineItems.map(it => constructReactiveFormLineItem(it)) || [],
+        specialSurchargesMeta: constructSpecialSurchargesMeta(json?.priceOffer.specialSurcharges || [])
     }
 }
 
@@ -206,6 +224,18 @@ export function constructReactiveFormTechnicalSurcharges(charges: TechnicalSurch
     })
 }
 
+function constructTechnicalSurchargesMeta(technicalSurcharges: TechnicalSurchargeResponse[]): Record<string, TechnicalSurchargeMeta> {
+    return technicalSurcharges.reduce((acc, it) => {
+        const id = it.id
+        acc[id] = {
+            id: it.id,
+            configuredPrice: it.configuredPrice,
+            labelKey: it.labelKey
+        }
+        return acc
+    }, {} as Record<string, TechnicalSurchargeMeta>)
+}
+
 export function constructReactiveFormRosettes(rosettes: RosetteResponse[]): FormRosette[] {
     return rosettes.map(rosette => {
         return {
@@ -234,6 +264,20 @@ export function constructReactiveSpecialSurcharges(specialSurcharges: SpecialSur
             isAssemblySelectedDirty: specialSurcharge.isAssemblySelectedDirty ?? false
         }
     })
+}
+
+function constructSpecialSurchargesMeta(specialSurcharges: SpecialSurchargeResponse[]): Record<string, SpecialSurchargeMeta> {
+    return specialSurcharges.reduce((acc, it) => {
+        const id = it.id
+        acc[id] = {
+            id: it.id,
+            assemblyCosts: it.assemblyCosts,
+            configuredPrice: it.configuredPrice,
+            labelAssemblyKey: it.labelAssemblyKey,
+            labelKey: it.labelKey
+        }
+        return acc
+    }, {} as Record<string, SpecialSurchargeMeta>)
 }
 
 export function constructReactiveSelectedDoorsLineItems(selectedDoorsLineItems: SelectedDoorLineItemResponse[]): FormSelectedDoorLineItem[] {

@@ -6,5 +6,6 @@
   "dtdSurcharge": 30,
   "framePrice": 99,
   "framePriceOffer": 80,
+  "interiorDoorsPriceFrom": 210.0,
   "vat": 1.23
 }

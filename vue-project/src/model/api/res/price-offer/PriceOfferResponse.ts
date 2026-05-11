@@ -10,18 +10,24 @@ import {SpecialSurchargeResponse} from "./SpecialSurchargeResponse.js";
 import {LineItemResponse} from "./LineItemResponse.js";
 import {SelectedDoorLineItemResponse} from "./SelectedDoorLineItemResponse.js";
 import {HandleResponse} from "@/model/api/res/price-offer/HandleResponse.js";
+import {CampaignDetailResponse} from "@/model/api/res/price-offer/CampaignDetailResponse.js";
 
 export interface PriceOfferResponse {
     address: AddressResponse
     assemblyDoorsCount: number | null
+    assemblyDoorsCost: number | null
+    assemblyDoorsCostMin: number | null
     assemblyDoorsCalculatedPrice: number
     assemblyHandlesRosettesCount: number | null
     assemblyPriceHandlesRosettesCalculatedPrice: number
     calculatedPrice: number
     calculatedPriceVat: number
+    campaignDetails: CampaignDetailResponse[]
     contact: ContactResponse
+    currency: string
     customHandle: CustomHandleResponse
     deliveryPrice: number
+    deliveryPricePerKm: number
     doors: SelectedDoorResponse[]
     handle: HandleResponse | null
     isAssemblyDoorsCountDirty: boolean | null

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, onMounted, onBeforeUnmount, watch} from 'vue'
+import {ref, onMounted, watch, WatchHandle, onBeforeUnmount} from 'vue'
 import {HintInterface} from "../model/interface/HintInterface.js";
 import {modal} from "@/composables/modal.js";
 import ModalYoutubeVideo from "@/components/ModalYoutubeVideo.vue";
@@ -12,6 +12,7 @@ const props = defineProps<{
 
 const galleryContainer = ref<HTMLElement | null>(null)
 const {appConfig} = useAppState()
+let watchHandle: WatchHandle | undefined = undefined
 
 function openModal() {
   modal.open(ModalYoutubeVideo, {
@@ -20,7 +21,7 @@ function openModal() {
 }
 
 onMounted(() => {
-  watch(() => props.hintObj.imgSrc, () => {
+  watchHandle = watch(() => props.hintObj.imgSrc, () => {
     if (galleryContainer.value) {
       usePhotoSwipeGallery(galleryContainer.value);
     }
@@ -28,12 +29,16 @@ onMounted(() => {
 
 
 })
+
+onBeforeUnmount(() => {
+  watchHandle?.()
+})
 </script>
 
 <template>
   <span ref="galleryContainer">
     <a v-if="hintObj.imgSrc"
-       :href="appConfig?.baseUrl + '/' + hintObj.imgSrc"
+       :href="appConfig!.baseUrl + '/' + hintObj.imgSrc"
        data-pswp-width="714"
        data-pswp-height="1024"
        rel="noreferrer">

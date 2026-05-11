@@ -21,16 +21,16 @@
     "doorAddedToPriceOffer": "Ușa a fost adăugată la oferta de preț.",
     "campaign": {
       "doors": {
-        "title": "<b>Uși de interior cu toc</b> de la <b>219,- €",
-        "body": "Vă oferim uși de interior și tocuri în toate tipurile de laminate la prețul promoțional de 219€. Prețul este valabil și pentru ușile pe care venim să le măsurăm personal înainte de producție."
+        "title": "<b>Uși de interior cu toc</b> de la <b>{interiorDoorsPriceFrom}",
+        "body": "Vă oferim uși de interior și tocuri în toate tipurile de laminate la prețul promoțional de {interiorDoorsPriceFrom}. Prețul este valabil și pentru ușile pe care venim să le măsurăm personal înainte de producție."
       },
       "freeMeasurement": {
         "title": "<b>Măsurarea</b> golurilor de zidărie <b>gratuită</b>",
         "body": "Vă îngrijorează dimensiunile atipice? Pentru noi nu sunt o problemă. Măsurăm personal fiecare gol și fabricăm ușile astfel încât să se potrivească cât mai precis. Ușile la comandă sunt FĂRĂ SUPLIMENT de preț."
       },
       "assembly": {
-        "title": "<b>Montaj</b> uși de interior și toc <b>35€</b>",
-        "body": "Vă oferim montajul setului complet de ușă de interior cu toc la un preț redus de la 35€/buc. Acest preț promoțional este valabil pentru montajul a șase sau mai multe piese."
+        "title": "<b>Montaj</b> uși de interior și toc <b>{assemblyDoorsCost}</b>",
+        "body": "Vă oferim montajul setului complet de ușă de interior cu toc la un preț redus de la {assemblyDoorsCost}/buc. Acest preț promoțional este valabil pentru montajul a șase sau mai multe piese."
       }
     }
   },
@@ -50,7 +50,7 @@
     "contact": "Date de contact"
   },
   "assemblyDoors": {
-    "note": "Montaj promoțional ușă cu toc 35 € / bucată. Promoția este valabilă pentru 6 sau mai multe bucăți. Suma minimă pentru doi montatori este 210 €."
+    "note": "Montaj promoțional ușă cu toc {assemblyDoorsCost} / bucată. Promoția este valabilă pentru 6 sau mai multe bucăți. Suma minimă pentru doi montatori este {assemblyDoorsCostMin}."
   },
   "components": {
     "hint": {
@@ -150,6 +150,9 @@
         "header": "Grile de ventilație pentru uși",
         "label": "Grile de ventilație pentru uși"
       }
+    },
+    "campaigns": {
+      "doors": "Reducere sezonieră extra actuală de 15% la toate ușile și tocurile."
     },
     "doorCategories": {
       "barbora": {
@@ -305,137 +308,137 @@
     "specialSurcharges": {
       "special-surcharges-double-door-frame": {
         "header": "Toc pentru uși duble",
-        "label": "Preț toc pentru uși duble (selectați 2 buc canaturi de ușă și bifați acest toc.) 103 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Preț toc pentru uși duble (selectați 2 buc canaturi de ușă și bifați acest toc.) {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-sliding-doors-fittings-curtain-rod": {
         "header": "Uși glisante - feronerie Garniža",
-        "label": "Uși glisante - feronerie Garniža 150 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Uși glisante - feronerie Garniža {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-minima": {
         "header": "Uși glisante - feronerie Minima",
-        "label": "Uși glisante - feronerie Minima 250 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Uși glisante - feronerie Minima {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-sliding-doors-hardware-built-in-housing": {
         "header": "Uși glisante - feronerie pentru sistem încastrat",
-        "label": "Uși glisante - feronerie pentru sistem încastrat 0 €. Toc pentru sistem încastrat 150 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Uși glisante - feronerie pentru sistem încastrat 0 €. Toc pentru sistem încastrat {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-hidden-hinges": {
         "header": "Supliment pentru balamale ascunse",
-        "label": "Supliment pentru balamale ascunse ușă 130 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Supliment pentru balamale ascunse ușă {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-reversible-doors": {
         "header": "Supliment pentru uși reversibile",
-        "label": "Supliment pentru uși reversibile 265 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Supliment pentru uși reversibile {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-double-leaf-non-rebated-door-with-frame": {
         "header": "Uși duble fără falț cu toc",
-        "label": "Uși duble fără falț cu toc 285 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Uși duble fără falț cu toc {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-curtain": {
         "header": "Supliment pentru uși glisante duble Garniža",
-        "label": "Supliment pentru uși glisante duble Garniža 250 €.",
-        "labelAssembly": "Montaj + 50 €."
+        "label": "Supliment pentru uși glisante duble Garniža {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-minima": {
         "header": "Supliment pentru uși glisante duble Minima",
-        "label": "Supliment pentru uși glisante duble Minima 350 €.",
-        "labelAssembly": "Montaj + 50 €."
+        "label": "Supliment pentru uși glisante duble Minima {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-frame-for-double-leaf-doors-in-case": {
         "header": "Toc pentru uși duble în casetă",
-        "label": "Supliment pentru uși glisante duble în casetă 0 €. Toc pentru uși duble în casetă 180 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Supliment pentru uși glisante duble în casetă 0 €. Toc pentru uși duble în casetă {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-barn-1": {
         "header": "Feronerie glisantă - Barn 1 negru",
-        "label": "Feronerie glisantă - Barn 1 negru 150 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Feronerie glisantă - Barn 1 negru {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-minima-black": {
         "header": "Feronerie glisantă - Minima negru",
-        "label": "Feronerie glisantă - Minima negru 290 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Feronerie glisantă - Minima negru {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-door-to-case-with-frame": {
         "header": "Ușă în casetă cu toc",
-        "label": "Ușă în casetă cu toc 57 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Ușă în casetă cu toc {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-door-to-case-without-frame": {
         "header": "Ușă în casetă fără toc",
-        "label": "Ușă în casetă fără toc 0 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Ușă în casetă fără toc {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-double-leaf-door-to-case": {
         "header": "Uși duble în casetă",
-        "label": "Uși duble în casetă 87 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Uși duble în casetă {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-folding-interior-doors": {
         "header": "Uși de interior pliabile",
-        "label": "Uși de interior pliabile 220 €.",
-        "labelAssembly": "Montaj + 50 €."
+        "label": "Uși de interior pliabile {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-sliding-hardware-invisible": {
         "header": "Feronerie glisantă - invizibilă",
-        "label": "Feronerie glisantă - invizibilă 490 €.",
-        "labelAssembly": "Montaj + 50 €."
+        "label": "Feronerie glisantă - invizibilă {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-barn-4": {
         "header": "Feronerie glisantă - Barn 4 negru",
-        "label": "Feronerie glisantă - Barn 4 negru 210 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Feronerie glisantă - Barn 4 negru {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-barn-3": {
         "header": "Feronerie glisantă - Barn 3 negru",
-        "label": "Feronerie glisantă - Barn 3 negru 190 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Feronerie glisantă - Barn 3 negru {price}.",
+        "labelAssembly": "Montaj + {price}."
       },
       "special-surcharges-barn-2": {
         "header": "Feronerie glisantă - Barn 2 negru",
-        "label": "Feronerie glisantă - Barn 2 negru 180 €.",
-        "labelAssembly": "Montaj + 25 €."
+        "label": "Feronerie glisantă - Barn 2 negru {price}.",
+        "labelAssembly": "Montaj + {price}."
       }
     },
     "technicalSurcharges": {
       "technical-surcharges-hollow-particle-board-filling": {
         "header": "Umplutură PAL tubular",
-        "label": "Umplutură PAL tubular: Ușile pot fi umplute cu fagure de hârtie sau PAL tubular pentru un supliment de 30 €. Fagurele este un strat de hârtie, PAL-ul tubular este din așchii de lemn. Recomandăm PAL tubular pentru ușile V1, dar se poate folosi pentru toate ușile din categoria Vanesa și Petra. PAL-ul tubular este mai greu, mai rezistent și izolează mai bine."
+        "label": "Umplutură PAL tubular: Ușile pot fi umplute cu fagure de hârtie sau PAL tubular pentru un supliment de {price}. Fagurele este un strat de hârtie, PAL-ul tubular este din așchii de lemn. Recomandăm PAL tubular pentru ușile V1, dar se poate folosi pentru toate ușile din categoria Vanesa și Petra. PAL-ul tubular este mai greu, mai rezistent și izolează mai bine."
       },
       "technical-surcharges-silicone-frame": {
         "header": "Garnitură de silicon în toc",
-        "label": "Garnitură de silicon în toc 10 €/buc: Frezăm un canal în toc în care se introduce garnitura de silicon. Avantajul este că ușa este mai silențioasă la închidere și garnitura elimină sunetul din camera vecină."
+        "label": "Garnitură de silicon în toc {price}/buc: Frezăm un canal în toc în care se introduce garnitura de silicon. Avantajul este că ușa este mai silențioasă la închidere și garnitura elimină sunetul din camera vecină."
       },
       "technical-surcharges-silicone-wall-frame": {
         "header": "Etanșarea neregularităților între perete și toc",
-        "label": "Etanșarea neregularităților între perete și toc 6 €/buc: La montarea tocului, în cazul pereților strâmbi, poate apărea un spațiu între perete și toc. Putem umple acest spațiu cu silicon acrilic. Datorită elasticității siliconului, se pot acoperi doar spații de până la 0,5 cm. Baia și WC-ul nu se siliconizează la interior. De asemenea, nu se siliconizează când ușa este în colț."
+        "label": "Etanșarea neregularităților între perete și toc {price}/buc: La montarea tocului, în cazul pereților strâmbi, poate apărea un spațiu între perete și toc. Putem umple acest spațiu cu silicon acrilic. Datorită elasticității siliconului, se pot acoperi doar spații de până la 0,5 cm. Baia și WC-ul nu se siliconizează la interior. De asemenea, nu se siliconizează când ușa este în colț."
       },
       "technical-surcharges-carrying": {
         "header": "Transport pe scări la etajul 3 și mai sus fără lift",
-        "label": "Transport pe scări la etajul 3 și mai sus fără lift: Pentru transportul manual la etajul 3 sau mai sus fără lift se percepe un supliment pentru transportul ușilor, tocurilor, materialelor și uneltelor de 100 €."
+        "label": "Transport pe scări la etajul 3 și mai sus fără lift: Pentru transportul manual la etajul 3 sau mai sus fără lift se percepe un supliment pentru transportul ușilor, tocurilor, materialelor și uneltelor de {price}."
       },
       "technical-surcharges-thicker-walls": {
         "header": "Supliment pentru pereți mai groși",
-        "label": "Supliment pentru pereți mai groși de 20 cm 12 €/extra 10 cm: Dacă pereții sunt mai groși de 20 cm, se percepe un supliment pentru material extra de 12 € pentru fiecare 10 cm suplimentari."
+        "label": "Supliment pentru pereți mai groși de 20 cm {price}/extra 10 cm: Dacă pereții sunt mai groși de 20 cm, se percepe un supliment pentru material extra de {price} pentru fiecare 10 cm suplimentari."
       },
       "technical-surcharges-higher-doors": {
         "header": "Supliment pentru uși mai înalte",
-        "label": "Supliment pentru uși mai înalte de 207 cm 20 €/buc: Ușile cu înălțimea între 207 cm și 240 cm au un supliment de 20 €/buc pentru materialul mai scump. Nu toate materialele pot fi livrate la înălțimi peste 207 cm."
+        "label": "Supliment pentru uși mai înalte de 207 cm {price}/buc: Ușile cu înălțimea între 207 cm și 240 cm au un supliment de {price}/buc pentru materialul mai scump. Nu toate materialele pot fi livrate la înălțimi peste 207 cm."
       },
       "technical-surcharges-original-steel-door-frames-cladding": {
         "header": "Îmbrăcarea tocurilor de oțel existente",
-        "label": "Îmbrăcarea tocurilor de oțel existente 25 €/buc: În cazul îmbrăcării tocurilor de oțel vechi, se percepe un supliment de 25€. Trebuie însă avut în vedere că la îmbrăcarea tocurilor vechi, golul de trecere se va îngusta cu cca 3,5 cm pe fiecare parte (3,5 cm sus și 7 cm pe lățime)."
+        "label": "Îmbrăcarea tocurilor de oțel existente {price}/buc: În cazul îmbrăcării tocurilor de oțel vechi, se percepe un supliment de {price}. Trebuie însă avut în vedere că la îmbrăcarea tocurilor vechi, golul de trecere se va îngusta cu cca 3,5 cm pe fiecare parte (3,5 cm sus și 7 cm pe lățime)."
       },
       "technical-surcharges-tiles-cutting": {
         "header": "Supliment pentru tăierea pervazurilor",
-        "label": "Supliment pentru tăierea pervazurilor 15 €/buc: Pervazurile se taie la montaj dacă golurile de zidărie nu sunt corect executate. De exemplu, dacă există diferențe de nivel între camere mai mari de 5 mm, dacă nu există spalet pentru toc, sau dacă faianța din baie/WC este mai joasă decât înălțimea ușii."
+        "label": "Supliment pentru tăierea pervazurilor {price}/buc: Pervazurile se taie la montaj dacă golurile de zidărie nu sunt corect executate. De exemplu, dacă există diferențe de nivel între camere mai mari de 5 mm, dacă nu există spalet pentru toc, sau dacă faianța din baie/WC este mai joasă decât înălțimea ușii."
       }
     }
   }

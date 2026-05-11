@@ -1,10 +1,11 @@
 <?php
-include_once "api-common.php";
-include_once "cart-model.php";
-include_once("php/api/request-objects/api-price-offer-request-objects.php");
-include_once("php/api/response-objects/api-price-offer-response-objects.php");
-include_once("php/api/request-objects/api-configurator-request-objects.php");
-include_once "validation.php";
+require_once __DIR__ . "/api-common.php";
+require_once __DIR__ . "/php/api/model/cart-model.php";
+require_once __DIR__ . "/php/api/price-offer-facade.php";
+require_once __DIR__ . "/php/api/request-objects/api-price-offer-request-objects.php";
+require_once __DIR__ . "/php/api/response-objects/api-price-offer-response-objects.php";
+require_once __DIR__ . "/php/api/request-objects/api-configurator-request-objects.php";
+require_once __DIR__ . "/php/api/model/validation-message.php";
 
 session_start();
 //session_destroy();
@@ -15,19 +16,11 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['getApiResponse'])) {
         try {
-            if (!isPriceOfferInSessionValid($_SESSION)) {
-                error_log("Session price offer is invalid, resetting." . json_encode($_SESSION));
-                $_SESSION['priceOffer'] = new PriceOffer();
-            }
-
-            /** @var PriceOffer $sessionPriceOffer */
-            $sessionPriceOffer = $_SESSION['priceOffer'];
-            $responsePriceOffer = PriceOffer::fromSession($sessionPriceOffer)->toResponse();
-
-            sendJsonResponse(new ApiResponse(
+            $apiResponse = new ApiResponse(
                 DistrictsJsonDataManipulation::getAll() ?? array(),
-                $responsePriceOffer
-            ), 200);
+                getPriceOfferResponse()
+            );
+            sendJsonResponse($apiResponse, 200);
         } catch (Throwable $e) {
             error_log($e);
             sendJsonResponse(['error' => $e->getTrace()], 500);
@@ -48,16 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sendJsonResponse(['error' => 'Invalid JSON'], 400);
     }
 
-    $parsedObject = new PriceOfferApiRequest($requestBody);
-    $priceOffer = PriceOffer::fromRequest($parsedObject->priceOffer);
-    $_SESSION['priceOffer'] = $priceOffer;
-
-    $validations = validate($parsedObject);
-    sendJsonResponse($validations, 200);
+    sendJsonResponse(createOrUpdatePriceOffer($requestBody), 200);
 }
 
 // ---------------------
 // If neither GET nor POST
 // ---------------------
 sendJsonResponse(['error' => 'Unsupported request method'], 405);
-?>

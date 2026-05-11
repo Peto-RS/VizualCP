@@ -2,7 +2,7 @@
 
 import {computed, nextTick, onBeforeMount, onMounted, ref, Ref, watch} from "vue";
 import {Room} from "@/model/api/res/configurator/Room.js";
-import {postAddDoor} from "../model/api/rest.js";
+import {getConfigurator, postAddDoor} from "../model/api/rest.js";
 import {useAppState} from "../composables/app-state.js";
 import {useI18n} from "vue-i18n";
 import DoorMiniature from "@/components/DoorMiniature.vue";
@@ -21,13 +21,13 @@ import AccordionItem from "@/components/AccordionItem.vue";
 import {offcanvas} from "@/composables/offcanvas.js";
 import NavTabs from "@/components/NavTabs.vue";
 import {safeT} from "@/model/functions/translation-utils.js";
+import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
 
 const {addAlert} = useAlerts()
-const {appConfig} = useAppState()
+const {appConfig, currency} = useAppState()
 const {t} = useI18n();
 
 const props = defineProps<{
-  configuratorApiResponse: ConfiguratorResponse,
   initialSelectedDoor: SelectedDoor | null
 }>()
 
@@ -38,6 +38,7 @@ const emit = defineEmits<{
   (e: 'price-offer-clicked'): void
 }>()
 
+const configuratorApiResponse = ref<ConfiguratorResponse | null>(null);
 const doorTypesSelectionSection = ref<HTMLElement | null>(null);
 const galleryRef = ref<HTMLElement | null>(null)
 const doorsGalleryRef = ref<HTMLElement | null>(null)
@@ -161,12 +162,22 @@ function handleMaterialChange(material: string) {
   }
 }
 
+async function getConfiguratorResponse(): Promise<ConfiguratorResponse> {
+  const response = await getConfigurator(currency.value!)
+  if (response.ok) {
+    return (await response.json()) as ConfiguratorResponse;
+  } else {
+    throw new Error('Error fetching getConfiguratorResponse')
+  }
+}
+
 onBeforeMount(async () => {
+  configuratorApiResponse.value = await getConfiguratorResponse();
   selectedDoor.value = props.initialSelectedDoor
 })
 
-onMounted(() => {
-  watch(props.configuratorApiResponse.glasses, () => {
+onMounted(async () => {
+  watch(() => configuratorApiResponse.value?.glasses, () => {
     if (glassGalleryRef.value) {
       usePhotoSwipeGallery(glassGalleryRef.value);
     }
@@ -183,6 +194,13 @@ onMounted(() => {
       usePhotoSwipeGallery(doorsGalleryRef.value);
     }
   }, {immediate: true})
+
+  watch(currency, async () => {
+    configuratorApiResponse.value = await getConfiguratorResponse();
+    handleDoorCategoryChange(configuratorApiResponse.value.doorCategories.find(
+        it => it.categoryId === selectedDoor.value?.categoryId
+    )!)
+  });
 })
 </script>
 
@@ -205,7 +223,7 @@ onMounted(() => {
             <div class="row">
               <div v-for="doorCategory in configuratorApiResponse.doorCategories"
                    :class="`${doorClasses} text-center door-miniature`">
-                <DoorMiniature :base-url="appConfig?.baseUrl"
+                <DoorMiniature :base-url="appConfig!.baseUrl"
                                :door-category="doorCategory.categoryId"
                                :door-state="computeDoorCategoryState(doorCategory.categoryId)"
                                :door-type="doorCategory.doorConfiguratorDefault.type"
@@ -217,13 +235,13 @@ onMounted(() => {
           <AccordionItem id="doorType"
                          :is-open-by-default="true"
                          :title="t('configurator.accordionHeaders.doorType', {doorType: safeT(selectedDoor?.doorCategory?.nameKey)})">
-          <div ref="doorTypesSelectionSection">{{ safeT(selectedDoor?.doorCategory?.descriptionKey) }}</div>
+            <div ref="doorTypesSelectionSection">{{ safeT(selectedDoor?.doorCategory?.descriptionKey) }}</div>
             <div class="row"
                  v-if="selectedDoor?.doorCategory">
               <div v-for="(value, doorType) in selectedDoor?.doorCategory.doorTypes"
                    :key="doorType"
                    :class="`${doorClasses} text-center door-miniature`">
-                <DoorMiniature :base-url="appConfig?.baseUrl"
+                <DoorMiniature :base-url="appConfig!.baseUrl"
                                :door-category="selectedDoor?.doorCategory.categoryId"
                                :door-state="doorTypeState(doorType)"
                                :door-type="doorType"
@@ -235,7 +253,10 @@ onMounted(() => {
                 <div class="door-category-word-break text-uppercase">{{ doorType }}</div>
               </div>
             </div>
-            <div>{{ t('configurator.doorFramePrice', {price: formatPrice(99)}) }}</div>
+            <div>{{
+                t('configurator.doorFramePrice', {price: formatPrice(configuratorApiResponse?.framePrice, CURRENCY_SIGN[currency!])})
+              }}
+            </div>
           </AccordionItem>
           <AccordionItem id="laminates"
                          v-if="Object.keys(availableMaterialsForDoorCategories(configuratorApiResponse?.materials.laminates)).length"
@@ -254,7 +275,7 @@ onMounted(() => {
                 'border-5': selectedDoor?.material === key
               }"
                     @click="handleMaterialChange(key)"
-                    :src="appConfig?.baseUrl + '/images/materials/min/' + key + '.jpg'"
+                    :src="appConfig!.baseUrl + '/images/materials/min/' + key + '.jpg'"
                 />
                 <span class="door-category-word-break text-uppercase">{{ safeT(value.labelKey) }}</span>
               </div>
@@ -277,7 +298,7 @@ onMounted(() => {
                 'border-5': selectedDoor?.material === key
               }"
                     @click="handleMaterialChange(key)"
-                    :src="appConfig?.baseUrl + '/images/materials/min/' + key + '.jpg'"
+                    :src="appConfig!.baseUrl + '/images/materials/min/' + key + '.jpg'"
                 />
                 <span class="door-category-word-break text-uppercase">{{ safeT(value.labelKey) }}</span>
               </div>
@@ -302,7 +323,7 @@ onMounted(() => {
                 'border-5': selectedDoor?.handleId === key
               }"
                     @click="handleHandleChange(key)"
-                    :src="appConfig?.baseUrl + value.imgSrc"
+                    :src="appConfig!.baseUrl + value.imgSrc"
                 />
                 <BadgePrice
                     class="w-100"
@@ -326,7 +347,7 @@ onMounted(() => {
                     <ImageWithLoadingPlaceholder
                         :alt="itemIdx.toString()"
                         class="img-fluid w-100 ratio-1x1"
-                        :src="appConfig?.baseUrl + item.imgSrc"
+                        :src="appConfig!.baseUrl + item.imgSrc"
                     />
                     <span class="door-category-word-break text-uppercase">{{ item.label }}</span>
                   </div>
@@ -342,14 +363,14 @@ onMounted(() => {
                    :key="key"
                    :class="`${doorClasses} text-center door-miniature`">
                 <a
-                    :href="appConfig?.baseUrl + '/images/glasses/' + key + '.jpg'"
+                    :href="appConfig!.baseUrl + '/images/glasses/' + key + '.jpg'"
                     data-pswp-width="500"
                     data-pswp-height="500"
                     rel="noreferrer">
                   <ImageWithLoadingPlaceholder
                       :alt="key"
                       class="img-fluid w-100 ratio-1x1"
-                      :src="appConfig?.baseUrl + '/images/glasses/min/' + key + '.jpg'"
+                      :src="appConfig!.baseUrl + '/images/glasses/min/' + key + '.jpg'"
                   />
                 </a>
                 <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
@@ -364,14 +385,14 @@ onMounted(() => {
               <div v-for="(value, key) in selectedDoor?.doorCategory?.gallery"
                    :key="key"
                    class="col-sm-6 gx-1 gy-1 text-center">
-                <a :href="appConfig?.baseUrl + value.imgSrc"
+                <a :href="appConfig!.baseUrl + value.imgSrc"
                    data-pswp-width="1838"
                    data-pswp-height="1365"
                    rel="noreferrer">
                   <ImageWithLoadingPlaceholder
                       :alt="key.toString()"
                       class="img-fluid ratio-1x1"
-                      :src="appConfig?.baseUrl + value.imgSrc"/>
+                      :src="appConfig!.baseUrl + value.imgSrc"/>
                 </a>
               </div>
             </div>
@@ -383,32 +404,34 @@ onMounted(() => {
               <div v-for="room in configuratorApiResponse.rooms" class="col-sm-6 gx-1 gy-1">
                 <ImageWithLoadingPlaceholder class="img-fluid door-selector-img"
                                              alt="logo"
-                                             :src="appConfig?.baseUrl + room.imgSrcMiniature"
+                                             :src="appConfig!.baseUrl + room.imgSrcMiniature"
                                              @click="emit('room-selected', room)"/>
               </div>
             </div>
-            <div class="row">
-              <AccordionItem id="gallery"
-                             :is-open-by-default="false"
-                             :title="t('configurator.accordionHeaders.gallery')">
-                <div class="row" ref="galleryRef">
-                  <div v-for="(value, key) in configuratorApiResponse.gallery"
-                       :key="key"
-                       :class="`col-${value.col} gx-1 gy-1 text-center`">
-                    <a :href="appConfig?.baseUrl + value.imgSrc"
-                       :data-pswp-width="value.width"
-                       :data-pswp-height="value.height"
-                       rel="noreferrer">
-                      <ImageWithLoadingPlaceholder
-                          :alt="key.toString()"
-                          class="img-fluid ratio-1x1"
-                          :src="appConfig?.baseUrl + value.imgSrc"
-                          loading="lazy"
-                      />
-                    </a>
+            <div data-bs-theme="price-offer">
+              <div class="accordion mb-2" id="accordion-button-gallery">
+                <AccordionItem id="gallery"
+                               :is-open-by-default="false"
+                               :title="t('configurator.accordionHeaders.gallery')">
+                  <div class="row" ref="galleryRef">
+                    <div v-for="(value, key) in configuratorApiResponse.gallery"
+                         :key="key"
+                         :class="`col-${value.col} gx-1 gy-1 text-center`">
+                      <a :href="appConfig!.baseUrl + value.imgSrc"
+                         :data-pswp-width="value.width"
+                         :data-pswp-height="value.height"
+                         rel="noreferrer">
+                        <ImageWithLoadingPlaceholder
+                            :alt="key.toString()"
+                            class="img-fluid ratio-1x1"
+                            :src="appConfig!.baseUrl + value.imgSrc"
+                            loading="lazy"
+                        />
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </AccordionItem>
+                </AccordionItem>
+              </div>
             </div>
           </AccordionItem>
           <AccordionItem id="currentActions"
@@ -419,16 +442,17 @@ onMounted(() => {
                 <ImageWithLoadingPlaceholder
                     alt="interierove-dvere-cena.jpg"
                     class="img-fluid w-100 ratio-1x1"
-                    :src="appConfig?.baseUrl + '/images/interierove-dvere-cena.jpg'"/>
+                    :src="appConfig!.baseUrl + '/images/interierove-dvere-cena.jpg'"/>
                 <div class="p-1">
-                  <div class="text-uppercase text-center mb-3" v-html="t('configurator.campaign.doors.title')"/>
+                  <div class="text-uppercase text-center mb-3"
+                       v-html="t('configurator.campaign.doors.title', {interiorDoorsPriceFrom: formatPrice(configuratorApiResponse.interiorDoorsPriceFrom, CURRENCY_SIGN[currency!])})"/>
                 </div>
               </div>
               <div class="col-12 col-lg-4">
                 <ImageWithLoadingPlaceholder
                     alt="zameranie-zadarmo.jpg"
                     class="img-fluid w-100 ratio-1x1"
-                    :src="appConfig?.baseUrl + '/images/zameranie-zadarmo.jpg'"
+                    :src="appConfig!.baseUrl + '/images/zameranie-zadarmo.jpg'"
                 />
                 <div class="p-1">
                   <div class="text-uppercase text-center mb-3"
@@ -439,17 +463,22 @@ onMounted(() => {
                 <ImageWithLoadingPlaceholder
                     alt="montaz-dveri.jpg"
                     class="img-fluid w-100 ratio-1x1"
-                    :src="appConfig?.baseUrl + '/images/montaz-dveri.jpg'"
+                    :src="appConfig!.baseUrl + '/images/montaz-dveri.jpg'"
                 />
                 <div class="p-1">
-                  <div class="text-uppercase text-center mb-3" v-html="t('configurator.campaign.assembly.title')"/>
+                  <div class="text-uppercase text-center mb-3"
+                       v-html="t('configurator.campaign.assembly.title', {assemblyDoorsCost: formatPrice(configuratorApiResponse.assemblyDoorsCost, CURRENCY_SIGN[currency!])})"/>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-12 col-lg-4">
                 <div class="p-1">
-                  <div class="text-align-justify small">{{ t('configurator.campaign.doors.body') }}</div>
+                  <div class="text-align-justify small">
+                    {{
+                      t('configurator.campaign.doors.body', {interiorDoorsPriceFrom: formatPrice(configuratorApiResponse.interiorDoorsPriceFrom, CURRENCY_SIGN[currency!])})
+                    }}
+                  </div>
                 </div>
               </div>
               <div class="col-12 col-lg-4">
@@ -459,7 +488,11 @@ onMounted(() => {
               </div>
               <div class="col-12 col-lg-4">
                 <div class="p-1">
-                  <div class="text-align-justify small">{{ t('configurator.campaign.assembly.body') }}</div>
+                  <div class="text-align-justify small">
+                    {{
+                      t('configurator.campaign.assembly.body', {assemblyDoorsCost: formatPrice(configuratorApiResponse.assemblyDoorsCost, CURRENCY_SIGN[currency!])})
+                    }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -483,6 +516,11 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+#accordion-button-gallery .accordion-button.collapsed {
+  background-color: var(--bs-accordion-active-bg);
+  color: var(--bs-accordion-active-color);
+}
+
 .btn-add-to-price-offer {
   position: absolute;
   bottom: 25px;

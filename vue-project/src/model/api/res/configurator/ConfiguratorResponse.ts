@@ -17,7 +17,9 @@ export interface Material {
 }
 
 export interface ConfiguratorResponse {
+    assemblyDoorsCost: number
     doorCategories: DoorCategory[]
+    framePrice: number
     gallery: Array<{
         col: number
         height: number
@@ -28,6 +30,7 @@ export interface ConfiguratorResponse {
         label: string
     }>
     handles: Record<string, Handle>
+    interiorDoorsPriceFrom: number,
     materials: {
         laminates: Record<string, Material>,
         veneers: Record<string, Material>

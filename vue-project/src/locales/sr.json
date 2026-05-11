@@ -21,16 +21,16 @@
     "doorAddedToPriceOffer": "Vrata su dodata u ponudu.",
     "campaign": {
       "doors": {
-        "title": "Unutrašnja <b>vrata sa štokom</b> od <b>219,- €",
-        "body": "Nudimo Vam unutrašnja vrata i štokove u svim vrstama laminata po akcijskoj ceni od 219€. Cena važi i za vrata za koja dolazimo lično da uzmemo mere pre proizvodnje."
+        "title": "Unutrašnja <b>vrata sa štokom</b> od <b>{interiorDoorsPriceFrom}",
+        "body": "Nudimo Vam unutrašnja vrata i štokove u svim vrstama laminata po akcijskoj ceni od {interiorDoorsPriceFrom}. Cena važi i za vrata za koja dolazimo lično da uzmemo mere pre proizvodnje."
       },
       "freeMeasurement": {
         "title": "<b>Besplatno uzimanje mera</b> građevinskih otvora",
         "body": "Brinu vas atipične mere otvora? Za nas to nije problem. Svaki otvor lično merimo i vrata proizvodimo tako da se uklope što preciznije. Vrata po meri su kod nas BEZ DOPLATE."
       },
       "assembly": {
-        "title": "<b>Montaža</b> unutrašnjih vrata i štoka <b>35€</b>",
-        "body": "Nudimo Vam montažu kompleta unutrašnjih vrata sa štokom po sniženoj ceni od 35€/kom. Ova akcijska cena važi za montažu šest i više komada vrata i štokova."
+        "title": "<b>Montaža</b> unutrašnjih vrata i štoka <b>{assemblyDoorsCost}</b>",
+        "body": "Nudimo Vam montažu kompleta unutrašnjih vrata sa štokom po sniženoj ceni od {assemblyDoorsCost}/kom. Ova akcijska cena važi za montažu šest i više komada vrata i štokova."
       }
     }
   },
@@ -50,7 +50,7 @@
     "contact": "Kontakt podaci"
   },
   "assemblyDoors": {
-    "note": "Akcijska montaža vrata sa štokom 35 € / komad. Akcija važi za 6 i više komada. Minimalni iznos za dva montažera je 210 €."
+    "note": "Akcijska montaža vrata sa štokom {assemblyDoorsCost} / komad. Akcija važi za 6 i više komada. Minimalni iznos za dva montažera je {assemblyDoorsCostMin}."
   },
   "components": {
     "hint": {
@@ -150,6 +150,9 @@
         "header": "Ventilacione rešetke za vrata",
         "label": "Ventilacione rešetke za vrata"
       }
+    },
+    "campaigns": {
+      "doors": "Aktuelni sezonski dodatni popust od 15% na sva vrata i dovratnike."
     },
     "doorCategories": {
       "barbora": {
@@ -305,137 +308,137 @@
     "specialSurcharges": {
       "special-surcharges-double-door-frame": {
         "header": "Štok za dvokrilna vrata",
-        "label": "Cena štoka za dvokrilna vrata (izaberite 2 krila i označite ovaj štok.) 103 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Cena štoka za dvokrilna vrata (izaberite 2 krila i označite ovaj štok.) {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-sliding-doors-fittings-curtain-rod": {
         "header": "Klizna vrata - okov Garniža",
-        "label": "Klizna vrata - okov Garniža 150 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Klizna vrata - okov Garniža {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-minima": {
         "header": "Klizna vrata - okov Minima",
-        "label": "Klizna vrata - okov Minima 250 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Klizna vrata - okov Minima {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-sliding-doors-hardware-built-in-housing": {
         "header": "Klizna vrata - okov za ugradnu kasetu",
-        "label": "Klizna vrata - okov za ugradnu kasetu 0 €. Štok za ugradnu kasetu 150 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Klizna vrata - okov za ugradnu kasetu 0 €. Štok za ugradnu kasetu {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-hidden-hinges": {
         "header": "Doplata za skrivene šarke",
-        "label": "Doplata za skrivene šarke na vratima 130 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Doplata za skrivene šarke na vratima {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-reversible-doors": {
         "header": "Doplata za reverzna vrata",
-        "label": "Doplata za reverzna vrata 265 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Doplata za reverzna vrata {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-double-leaf-non-rebated-door-with-frame": {
         "header": "Dvokrilna vrata bez falca sa štokom",
-        "label": "Dvokrilna vrata bez falca sa štokom 285 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Dvokrilna vrata bez falca sa štokom {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-curtain": {
         "header": "Doplata za dvokrilna klizna vrata Garniža",
-        "label": "Doplata za dvokrilna klizna vrata Garniža 250 €.",
-        "labelAssembly": "Montaža + 50 €."
+        "label": "Doplata za dvokrilna klizna vrata Garniža {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-minima": {
         "header": "Doplata za dvokrilna klizna vrata Minima",
-        "label": "Doplata za dvokrilna klizna vrata Minima 350 €.",
-        "labelAssembly": "Montaža + 50 €."
+        "label": "Doplata za dvokrilna klizna vrata Minima {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-frame-for-double-leaf-doors-in-case": {
         "header": "Štok za dvokrilna vrata u kaseti",
-        "label": "Doplata za dvokrilna klizna vrata u kaseti 0 €. Štok za dvokrilna vrata u kaseti 180 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Doplata za dvokrilna klizna vrata u kaseti 0 €. Štok za dvokrilna vrata u kaseti {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-barn-1": {
         "header": "Klizni okov - Barn 1 crni",
-        "label": "Klizni okov - Barn 1 crni 150 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Klizni okov - Barn 1 crni {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-minima-black": {
         "header": "Klizni okov - Minima crni",
-        "label": "Klizni okov - Minima crni 290 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Klizni okov - Minima crni {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-door-to-case-with-frame": {
         "header": "Vrata u kaseti sa štokom",
-        "label": "Vrata u kaseti sa štokom 57 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Vrata u kaseti sa štokom {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-door-to-case-without-frame": {
         "header": "Vrata u kaseti bez štoka",
-        "label": "Vrata u kaseti bez štoka 0 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Vrata u kaseti bez štoka {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-double-leaf-door-to-case": {
         "header": "Dvokrilna vrata u kaseti",
-        "label": "Dvokrilna vrata u kaseti 87 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Dvokrilna vrata u kaseti {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-folding-interior-doors": {
         "header": "Sklapajuća (harmonika) unutrašnja vrata",
-        "label": "Sklapajuća unutrašnja vrata 220 €.",
-        "labelAssembly": "Montaža + 50 €."
+        "label": "Sklapajuća unutrašnja vrata {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-sliding-hardware-invisible": {
         "header": "Klizni okov - nevidljivi",
-        "label": "Klizni okov - nevidljivi 490 €.",
-        "labelAssembly": "Montaža + 50 €."
+        "label": "Klizni okov - nevidljivi {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-barn-4": {
         "header": "Klizni okov - Barn 4 crni",
-        "label": "Klizni okov - Barn 4 crni 210 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Klizni okov - Barn 4 crni {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-barn-3": {
         "header": "Klizni okov - Barn 3 crni",
-        "label": "Klizni okov - Barn 3 crni 190 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Klizni okov - Barn 3 crni {price}.",
+        "labelAssembly": "Montaža + {price}."
       },
       "special-surcharges-barn-2": {
         "header": "Klizni okov - Barn 2 crni",
-        "label": "Klizni okov - Barn 2 crni 180 €.",
-        "labelAssembly": "Montaža + 25 €."
+        "label": "Klizni okov - Barn 2 crni {price}.",
+        "labelAssembly": "Montaža + {price}."
       }
     },
     "technicalSurcharges": {
       "technical-surcharges-hollow-particle-board-filling": {
         "header": "Ispuna od perforirane iverice",
-        "label": "Ispuna od perforirane iverice: Vrata mogu biti ispunjena papirnim saćem ili perforiranom ivericom uz doplatu od 30 €. Saće je papirni sloj, dok je perforirana iverica od drvenog opiljka. Perforiranu ivericu preporučujemo za vrata V1, ali može ići u sva vrata iz kategorije Vanesa i Petra. Perforirana iverica je teža, čvršća i bolje izoluje."
+        "label": "Ispuna od perforirane iverice: Vrata mogu biti ispunjena papirnim saćem ili perforiranom ivericom uz doplatu od {price}. Saće je papirni sloj, dok je perforirana iverica od drvenog opiljka. Perforiranu ivericu preporučujemo za vrata V1, ali može ići u sva vrata iz kategorije Vanesa i Petra. Perforirana iverica je teža, čvršća i bolje izoluje."
       },
       "technical-surcharges-silicone-frame": {
         "header": "Silikonski keder u štoku",
-        "label": "Silikonski keder u štoku 10 €/kom: U štoku se frezuje kanal u koji se umeće silikonski keder. Prednost je što su vrata tiša pri zatvaranju, a silikon eliminiše zvuk iz susedne prostorije."
+        "label": "Silikonski keder u štoku {price}/kom: U štoku se frezuje kanal u koji se umeće silikonski keder. Prednost je što su vrata tiša pri zatvaranju, a silikon eliminiše zvuk iz susedne prostorije."
       },
       "technical-surcharges-silicone-wall-frame": {
         "header": "Zaptivanje neravnina između zida i štoka",
-        "label": "Zaptivanje neravnina između zida i štoka 6 €/kom: Pri montaži na krivim zidovima može nastati procep između zida i štoka. Taj procep popunjavamo akrilnim silikonom. Zbog elastičnosti se mogu popuniti samo procepi do 0,5 cm. Kupatilo i WC se ne silikonišu iznutra, kao ni vrata u ćošku."
+        "label": "Zaptivanje neravnina između zida i štoka {price}/kom: Pri montaži na krivim zidovima može nastati procep između zida i štoka. Taj procep popunjavamo akrilnim silikonom. Zbog elastičnosti se mogu popuniti samo procepi do 0,5 cm. Kupatilo i WC se ne silikonišu iznutra, kao ni vrata u ćošku."
       },
       "technical-surcharges-carrying": {
         "header": "Unošenje na 3. i više spratove bez lifta",
-        "label": "Unošenje na 3. i više spratove bez lifta: Za ručno unošenje vrata, štokova, materijala i alata na 3. sprat i više naplaćuje se doplata od 100 €."
+        "label": "Unošenje na 3. i više spratove bez lifta: Za ručno unošenje vrata, štokova, materijala i alata na 3. sprat i više naplaćuje se doplata od {price}."
       },
       "technical-surcharges-thicker-walls": {
         "header": "Doplata za deblje zidove",
-        "label": "Doplata za zidove deblje od 20 cm - 12 € na svakih 10 cm: Ako su zidovi deblji od 20 cm, naplaćuje se doplata za dodatni materijal od 12 € na svakih dodatnih 10 cm debljine."
+        "label": "Doplata za zidove deblje od 20 cm - {price} na svakih 10 cm: Ako su zidovi deblji od 20 cm, naplaćuje se doplata za dodatni materijal od {price} na svakih dodatnih 10 cm debljine."
       },
       "technical-surcharges-higher-doors": {
         "header": "Doplata za viša vrata",
-        "label": "Doplata za vrata viša od 207 cm - 20 €/kom: Vrata visine od 207 cm do 240 cm su uz doplatu od 20 €/kom zbog skupljeg materijala. Ne mogu se svi materijali izraditi u visini preko 207 cm."
+        "label": "Doplata za vrata viša od 207 cm - {price}/kom: Vrata visine od 207 cm do 240 cm su uz doplatu od {price}/kom zbog skupljeg materijala. Ne mogu se svi materijali izraditi u visini preko 207 cm."
       },
       "technical-surcharges-original-steel-door-frames-cladding": {
         "header": "Oblaganje postojećih metalnih štokova",
-        "label": "Oblaganje postojećih metalnih štokova 25 €/kom: Kod oblaganja starih metalnih štokova naplaćuje se doplata od 25 €. Treba uzeti u obzir da se građevinski otvor sužava za oko 3,5 cm sa svake strane (7 cm u širinu i 3,5 cm u visinu)."
+        "label": "Oblaganje postojećih metalnih štokova {price}/kom: Kod oblaganja starih metalnih štokova naplaćuje se doplata od {price}. Treba uzeti u obzir da se građevinski otvor sužava za oko 3,5 cm sa svake strane (7 cm u širinu i 3,5 cm u visinu)."
       },
       "technical-surcharges-tiles-cutting": {
         "header": "Doplata za usecanje pervajza",
-        "label": "Doplata za usecanje pervajza 15 €/kom: Pervajz lajsne se usecaju pri montaži ako otvori nisu pravilno pripremljeni (npr. nivo poda između soba varira više od 5 mm, nema mesta za štok na zidu, ili su pločice u kupatilu niže od visine vrata)."
+        "label": "Doplata za usecanje pervajza {price}/kom: Pervajz lajsne se usecaju pri montaži ako otvori nisu pravilno pripremljeni (npr. nivo poda između soba varira više od 5 mm, nema mesta za štok na zidu, ili su pločice u kupatilu niže od visine vrata)."
       }
     }
   }

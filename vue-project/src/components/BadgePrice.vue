@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
 import {formatPrice} from "@/model/functions/formatters.js";
+import {useAppState} from "@/composables/app-state.js";
+const {currency} = useAppState()
 
 const props = defineProps<{ price: number | undefined }>()
 </script>
 
 <template>
-    <span class="badge bg-primary align-content-center fs-5">{{
-        formatPrice(props.price)
+    <span
+        style="background-color: var(--bs-primary);"
+        class="badge align-content-center fs-7 text-wrap">{{
+        formatPrice(props.price, CURRENCY_SIGN[currency!])
       }}
     </span>
 </template>

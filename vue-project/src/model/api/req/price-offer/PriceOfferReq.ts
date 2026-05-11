@@ -15,6 +15,7 @@ export interface PriceOfferReq {
     assemblyDoorsCount: number
     assemblyHandlesRosettesCount: number
     contact: ContactReq
+    currency: string
     customHandle: CustomHandleReq
     doors: DoorReq[]
     handle: HandleReq | null

@@ -11,6 +11,7 @@ const selectedDoorsLineItems = defineModel<FormSelectedDoorLineItem[]>('lineItem
 })
 
 const props = defineProps<{
+  currency: string,
   selectedDoorsLineItemsResponse?: SelectedDoorLineItemResponse[]
 }>()
 
@@ -72,7 +73,7 @@ function findLineItemByOrderIdx(orderIdx: number) {
                    v-model.number="it.price"
                    class="form-control"
                    min="0"/>
-            <span class="input-group-text">€</span>
+            <span class="input-group-text">{{ currency }}</span>
           </div>
         </div>
         <div class="col-12">

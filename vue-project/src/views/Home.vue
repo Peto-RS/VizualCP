@@ -7,11 +7,6 @@ import AppOffCanvas from "@/components/generic/AppOffCanvas.vue";
 import Toasts from "@/components/generic/Toasts.vue";
 import AppModal from "@/components/generic/AppModal.vue";
 
-const {appConfig} = useAppState()
-
-onBeforeMount(async () => {
-  appConfig.value = await getAppConfig()
-})
 </script>
 
 <template>

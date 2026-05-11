@@ -1,22 +1,35 @@
 <?php
-include_once "api-common.php";
-include_once "json-data-manipulation.php";
-include_once("php/api/request-objects/api-configurator-request-objects.php");
-include_once("php/api/response-objects/api-configurator-response-objects.php");
+require_once __DIR__ . "/api-common.php";
+require_once __DIR__ . "/php/api/json-data-manipulation-facade.php";
+require_once __DIR__ . "/php/api/configurator-facade.php";
+require_once __DIR__ . "/php/api/request-objects/api-configurator-request-objects.php";
+require_once __DIR__ . "/php/api/response-objects/api-configurator-response-objects.php";
+require_once __DIR__ . "/php/enums/CurrencyEnum.php";
 
 session_start();
 //session_destroy();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $doorCategories = DoorCategoriesJsonDataManipulation::getAll();
+    $currencyId = $_GET['currency'] ?? CurrencyEnum::EUR;
+    $doorCategories = mapDoorCategoriesToResponse($currencyId);
     $gallery = GalleryJsonDataManipulation::getAll();
     $glasses = GlassesJsonDataManipulation::getAll();
-    $handles = HandlesJsonDataManipulation::getAll();
+    $handles = mapHandlesToResponse($currencyId);
     $materials = MaterialsJsonDataManipulation::getAll();
     $rooms = RoomsJsonDataManipulation::getAll();
 
     sendJsonResponse(
-        new ConfiguratorResponse($doorCategories, $gallery, $glasses, $handles, $materials, $rooms),
+        new ConfiguratorResponse(
+            currencyTransformation($currencyId, ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"] ?? 0.0, null),
+            $doorCategories,
+            currencyTransformation($currencyId, ParametersJsonDataManipulation::getAll()["framePrice"] ?? 0.0, null),
+            $gallery,
+            $glasses,
+            $handles,
+            currencyTransformation($currencyId, ParametersJsonDataManipulation::getAll()["interiorDoorsPriceFrom"] ?? 0.0, null),
+            $materials,
+            $rooms
+        ),
         200
     );
 }
@@ -50,4 +63,3 @@ if (preg_match('#/add-door$#', $path)) {
     sendJsonResponse($priceOffer, 200);
 }
 */
-?>

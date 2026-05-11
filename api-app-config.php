@@ -1,8 +1,8 @@
 <?php
-include_once "api-common.php";
-include_once("php/api/response-objects/api-app-config-response-objects.php");
-include_once "cart-model.php";
-include_once "validation.php";
+require_once __DIR__ . "/api-common.php";
+require_once __DIR__ . "/php/api/response-objects/api-app-config-response-objects.php";
+require_once __DIR__ . "/php/api/model/cart-model.php";
+require_once __DIR__ . "/php/api/model/validation-message.php";
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -19,4 +19,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 sendJsonResponse(['error' => 'Unsupported request method'], 405);
-?>

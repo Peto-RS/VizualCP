@@ -37,5 +37,3 @@
     {
         echo '<script src="' . $filename . '"></script>' . "\r\n\t\t";
     }
-
-?>

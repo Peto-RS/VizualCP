@@ -1,8 +1,5 @@
 <?php
 
-include_once('constants.php');
-include_once('functions.php');
-
 class AddressResponse implements JsonSerializable
 {
     /** @var string|null $city */
@@ -333,9 +330,9 @@ class TechnicalSurchargeResponse implements JsonSerializable
 
     public function __construct(
         string  $id,
-        float $calculatedPrice,
-        ?float $configuredPrice,
-        ?int $count,
+        float   $calculatedPrice,
+        ?float  $configuredPrice,
+        ?int    $count,
         ?string $isCountDirty,
         ?string $header,
         ?string $headerKey,
@@ -428,8 +425,8 @@ class RosetteResponse implements JsonSerializable
 
     public function __construct(
         string  $id,
-        float $calculatedPrice,
-        ?int $count,
+        float   $calculatedPrice,
+        ?int    $count,
         ?string $header,
         ?string $headerKey,
         ?string $hint,
@@ -437,7 +434,7 @@ class RosetteResponse implements JsonSerializable
         ?string $imgSrc,
         ?string $label,
         ?string $labelKey,
-        ?float $price,
+        ?float  $price,
         ?string $youtubeVideoCode,
         ?string $videoSrc
     )
@@ -477,7 +474,7 @@ class RosetteResponse implements JsonSerializable
     }
 }
 
-class SectionsCalculatedPriceResponse implements JsonSerializable
+class CalculatedPriceResponse implements JsonSerializable
 {
     /** @var float $doors */
     public $doors;
@@ -629,6 +626,9 @@ class SpecialSurchargeResponse implements JsonSerializable
     /** @var string $id */
     public $id;
 
+    /** @var float|null $assemblyCosts */
+    public $assemblyCosts;
+
     /** @var float $calculatedPrice */
     public $calculatedPrice;
 
@@ -679,6 +679,7 @@ class SpecialSurchargeResponse implements JsonSerializable
 
     public function __construct(
         string  $id,
+        ?float  $assemblyCosts,
         float   $calculatedPrice,
         ?float  $configuredPrice,
         ?int    $count,
@@ -698,6 +699,7 @@ class SpecialSurchargeResponse implements JsonSerializable
     )
     {
         $this->id = $id;
+        $this->assemblyCosts = $assemblyCosts;
         $this->calculatedPrice = $calculatedPrice;
         $this->configuredPrice = $configuredPrice;
         $this->count = $count;
@@ -720,6 +722,7 @@ class SpecialSurchargeResponse implements JsonSerializable
     {
         return [
             'id' => $this->id,
+            'assemblyCosts' => $this->assemblyCosts,
             'calculatedPrice' => $this->calculatedPrice,
             'configuredPrice' => $this->configuredPrice,
             'count' => $this->count,
@@ -740,6 +743,34 @@ class SpecialSurchargeResponse implements JsonSerializable
     }
 }
 
+class CampaignDetailResponse
+{
+    /** @var float $discountAmount */
+    public $discountAmount;
+
+    /** @var string $id */
+    public $id;
+
+    /** @var string $translationKey */
+    public $translationKey;
+
+    /** @var string $type */
+    public $type;
+
+    public function __construct(
+        float $discountAmount,
+        string $id,
+        string $translationKey,
+        string $type
+    )
+    {
+        $this->discountAmount = $discountAmount;
+        $this->id = $id;
+        $this->translationKey = $translationKey;
+        $this->type = $type;
+    }
+}
+
 class PriceOfferResponse implements JsonSerializable
 {
     /** @var AddressResponse $address */
@@ -747,6 +778,12 @@ class PriceOfferResponse implements JsonSerializable
 
     /** @var float $assemblyDoorsCalculatedPrice */
     public $assemblyDoorsCalculatedPrice;
+
+    /** @var float|null $assemblyDoorsCost */
+    public $assemblyDoorsCost;
+
+    /** @var float|null $assemblyDoorsCostMin */
+    public $assemblyDoorsCostMin;
 
     /** @var int|null $assemblyDoorsCount */
     public $assemblyDoorsCount;
@@ -763,11 +800,20 @@ class PriceOfferResponse implements JsonSerializable
     /** @var float $calculatedPriceVat */
     public $calculatedPriceVat;
 
+    /** @var CampaignDetailResponse[] $campaignDetails */
+    public $campaignDetails;
+
     /** @var ContactResponse $contact */
     public $contact;
 
+    /** @var string $currency */
+    public $currency;
+
     /** @var float $deliveryPrice */
     public $deliveryPrice;
+
+    /** @var float $deliveryPricePerKm */
+    public $deliveryPricePerKm;
 
     /** @var DoorResponse[] $doors */
     public $doors;
@@ -798,7 +844,7 @@ class PriceOfferResponse implements JsonSerializable
     /** @var LineItemResponse[] $rosettesLineItems */
     public $rosettesLineItems;
 
-    /** @var SectionsCalculatedPriceResponse $sectionsCalculatedPrice */
+    /** @var CalculatedPriceResponse $sectionsCalculatedPrice */
     public $sectionsCalculatedPrice;
 
     /** @var SelectedDoorLineItemResponse[] $selectedDoorsLineItems */
@@ -817,42 +863,52 @@ class PriceOfferResponse implements JsonSerializable
     public $specialSurchargesLineItems;
 
     public function __construct(
-        AddressResponse                 $address,
-        float                           $assemblyDoorsCalculatedPrice,
-        ?int                            $assemblyDoorsCount,
-        ?int                            $assemblyHandlesRosettesCount,
-        float                           $assemblyPriceHandlesRosettesCalculatedPrice,
-        float                           $calculatedPrice,
-        float                           $calculatedPriceVat,
-        ContactResponse                 $contact,
-        float                           $deliveryPrice,
-        array                           $doors,
-        CustomHandleResponse            $customHandle,
-        ?HandleResponse                 $handle,
-        ?bool                           $isAssemblyDoorsCountDirty,
-        ?bool                           $isAssemblyHandlesRosettesCountDirty,
-        ?string                         $note,
-        array                           $technicalSurcharges,
-        array                           $technicalSurchargesLineItems,
-        array                           $rosettes,
-        array                           $rosettesLineItems,
-        SectionsCalculatedPriceResponse $sectionsCalculatedPrice,
-        array                           $selectedDoorsLineItems,
-        array                           $aestheticAccessories,
-        array                           $aestheticAccessoriesLineItems,
-        array                           $specialSurcharges,
-        array                           $specialSurchargesLineItems
+        AddressResponse      $address,
+        float                $assemblyDoorsCalculatedPrice,
+        ?float               $assemblyDoorsCost,
+        ?float               $assemblyDoorsCostMin,
+        ?int                 $assemblyDoorsCount,
+        ?int                 $assemblyHandlesRosettesCount,
+        float                $assemblyPriceHandlesRosettesCalculatedPrice,
+        float                $calculatedPrice,
+        float                $calculatedPriceVat,
+        array                $campaignDetails,
+        ContactResponse      $contact,
+        string               $currency,
+        float                $deliveryPrice,
+        float                $deliveryPricePerKm,
+        array                $doors,
+        CustomHandleResponse $customHandle,
+        ?HandleResponse      $handle,
+        ?bool                $isAssemblyDoorsCountDirty,
+        ?bool                $isAssemblyHandlesRosettesCountDirty,
+        ?string              $note,
+        array                   $technicalSurcharges,
+        array                   $technicalSurchargesLineItems,
+        array                   $rosettes,
+        array                   $rosettesLineItems,
+        CalculatedPriceResponse $sectionsCalculatedPrice,
+        array                   $selectedDoorsLineItems,
+        array                   $aestheticAccessories,
+        array                   $aestheticAccessoriesLineItems,
+        array                   $specialSurcharges,
+        array                   $specialSurchargesLineItems
     )
     {
         $this->address = $address;
         $this->assemblyDoorsCalculatedPrice = $assemblyDoorsCalculatedPrice;
+        $this->assemblyDoorsCost = $assemblyDoorsCost;
+        $this->assemblyDoorsCostMin = $assemblyDoorsCostMin;
         $this->assemblyDoorsCount = $assemblyDoorsCount;
         $this->assemblyHandlesRosettesCount = $assemblyHandlesRosettesCount;
         $this->assemblyPriceHandlesRosettesCalculatedPrice = $assemblyPriceHandlesRosettesCalculatedPrice;
         $this->calculatedPrice = $calculatedPrice;
         $this->calculatedPriceVat = $calculatedPriceVat;
+        $this->campaignDetails = $campaignDetails;
         $this->contact = $contact;
+        $this->currency = $currency;
         $this->deliveryPrice = $deliveryPrice;
+        $this->deliveryPricePerKm = $deliveryPricePerKm;
         $this->doors = $doors;
         $this->customHandle = $customHandle;
         $this->handle = $handle;
@@ -876,13 +932,18 @@ class PriceOfferResponse implements JsonSerializable
         return [
             'address' => $this->address,
             'assemblyDoorsCalculatedPrice' => $this->assemblyDoorsCalculatedPrice,
+            'assemblyDoorsCost' => $this->assemblyDoorsCost,
+            'assemblyDoorsCostMin' => $this->assemblyDoorsCostMin,
             'assemblyDoorsCount' => $this->assemblyDoorsCount,
             'assemblyHandlesRosettesCount' => $this->assemblyHandlesRosettesCount,
             'assemblyPriceHandlesRosettesCalculatedPrice' => $this->assemblyPriceHandlesRosettesCalculatedPrice,
             'calculatedPrice' => $this->calculatedPrice,
             'calculatedPriceVat' => $this->calculatedPriceVat,
+            'campaignDetails' => $this->campaignDetails,
             'contact' => $this->contact,
+            'currency' => $this->currency,
             'deliveryPrice' => $this->deliveryPrice,
+            'deliveryPricePerKm' => $this->deliveryPricePerKm,
             'doors' => $this->doors,
             'customHandle' => $this->customHandle,
             'handle' => $this->handle,
@@ -925,5 +986,3 @@ class ApiResponse implements JsonSerializable
         ];
     }
 }
-
-?>

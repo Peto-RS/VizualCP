@@ -2,6 +2,7 @@ import {HintInterface} from "../../../interface/HintInterface.js";
 
 export interface SpecialSurchargeResponse extends HintInterface {
     id: string
+    assemblyCosts: number | null
     calculatedPrice: number
     configuredPrice: number | null
     count: number | null

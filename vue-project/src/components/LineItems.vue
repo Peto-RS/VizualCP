@@ -15,6 +15,7 @@ const lineItems = defineModel<FormLineItem[]>('lineItems', {
  * regular props (not part of v-model)
  */
 const props = defineProps<{
+  currency: string,
   lineItemsResponse?: LineItemResponse[]
 }>()
 
@@ -56,7 +57,7 @@ function findLineItemByOrderIdx(orderIdx: number) {
 
       <div class="col-sm-10 col-xl-5">
         <input
-            v-model="it.name"
+            v-model.lazy="it.name"
             class="form-control"
             :placeholder="t('components.lineItems.namePlaceholder')"
         />
@@ -70,7 +71,7 @@ function findLineItemByOrderIdx(orderIdx: number) {
               class="form-control"
               min="0"
           />
-          <span class="input-group-text">€</span>
+          <span class="input-group-text">{{ currency }}</span>
         </div>
       </div>
 

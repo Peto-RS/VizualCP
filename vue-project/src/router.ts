@@ -1,23 +1,59 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import InteriorDoorsView from "./views/InteriorDoorsView.vue";
 import PriceOfferFinished from "@/views/PriceOfferFinished.vue";
+import {
+    defaultLocale,
+    isSupportedLocale,
+    setLocale,
+    SupportedLocale,
+    supportedLocales
+} from "@/model/functions/translation-utils.js";
+
+// const langPattern = supportedLocales.join('|')
 
 const routes = [
     {
         path: '/',
-        redirect: '/interior-doors'
+        redirect: '/sk/interior-doors'
     },
     {
-        path: '/interior-doors',
-        component: InteriorDoorsView
-    },
-    {
-        path: '/price-offer-finished',
-        component: PriceOfferFinished
+        path: `/:lang`,
+        children: [
+            {
+                path: '',
+                redirect: '/sk/interior-doors'
+            },
+            {
+                path: 'interior-doors',
+                name: 'InteriorDoors',
+                component: InteriorDoorsView
+            },
+            {
+                path: 'price-offer-finished',
+                name: 'PriceOfferFinished',
+                component: PriceOfferFinished
+            }
+        ]
     }
 ]
 
 export const router = createRouter({
     history: createWebHashHistory(),
     routes
+})
+
+router.beforeEach(async (to, _, next) => {
+    const routeLang = to.params.lang as string | undefined
+
+    if (!routeLang || !isSupportedLocale(routeLang)) {
+        return next({
+            path: `/${defaultLocale}`,
+            replace: true
+        })
+    }
+
+    const locale = routeLang as SupportedLocale
+    await setLocale(locale)
+
+    next()
 })

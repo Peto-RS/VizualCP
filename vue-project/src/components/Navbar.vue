@@ -3,8 +3,9 @@ import {useI18n} from 'vue-i18n'
 import LoadingBar from "@/components/generic/LoadingBar.vue";
 import {useAppState} from "@/composables/app-state.js";
 import LanguageSelector from "@/components/generic/LanguageSelector.vue";
+import CurrencySelector from "@/components/CurrencySelector.vue";
 
-const {offCanvasActiveView} = useAppState()
+const {currency, offCanvasActiveView} = useAppState()
 const {t} = useI18n()
 
 const emit = defineEmits<{
@@ -29,6 +30,7 @@ const emit = defineEmits<{
     <div class="container-fluid">
       <div>
         <LanguageSelector/>
+        <CurrencySelector v-model:currency="currency"/>
       </div>
       <div>
         <ul class="nav nav-underline fs-3 font-bold">
@@ -56,7 +58,10 @@ const emit = defineEmits<{
   </nav>
 
   <div class="fixed-top d-sm-none bg-white">
-    <LanguageSelector/>
+    <div class="d-flex">
+      <LanguageSelector/>
+      <CurrencySelector v-model:currency="currency"/>
+    </div>
   </div>
 
   <nav class="navbar fixed-bottom border d-sm-none bg-white">

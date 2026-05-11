@@ -1,5 +1,5 @@
 <?php
-include_once "cart-model.php";
+require_once __DIR__ . "/php/api/model/cart-model.php";
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Dompdf\Dompdf;

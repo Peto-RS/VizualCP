@@ -21,16 +21,16 @@
     "doorAddedToPriceOffer": "La puerta ha sido añadida al presupuesto.",
     "campaign": {
       "doors": {
-        "title": "<b>Puertas de interior con marco</b> desde <b>219,- €",
-        "body": "Le ofrecemos puertas de interior y marcos en todos los tipos de laminados por un precio promocional de 219 €. El precio también se aplica a las puertas que vayamos a medir personalmente antes de la fabricación."
+        "title": "<b>Puertas de interior con marco</b> desde <b>{interiorDoorsPriceFrom}",
+        "body": "Le ofrecemos puertas de interior y marcos en todos los tipos de laminados por un precio promocional de {interiorDoorsPriceFrom}. El precio también se aplica a las puertas que vayamos a medir personalmente antes de la fabricación."
       },
       "freeMeasurement": {
         "title": "<b>Medición</b> de huecos de obra <b>gratis</b>",
         "body": "¿Le preocupan las medidas atípicas? Para nosotros no son un problema. Medimos cada hueco personalmente y fabricamos las puertas para que encajen con la mayor precisión posible. Las puertas a medida no tienen SUPLEMENTO."
       },
       "assembly": {
-        "title": "<b>Montaje</b> de puertas de inte&shy;rior y marcos <b>35€</b>",
-        "body": "Le ofrecemos el montaje del conjunto de puerta de interior con marco por un precio reducido desde 35 €/unidad. Este precio promocional se aplica al montaje de seis o más unidades de puertas y marcos."
+        "title": "<b>Montaje</b> de puertas de inte&shy;rior y marcos <b>{assemblyDoorsCost}</b>",
+        "body": "Le ofrecemos el montaje del conjunto de puerta de interior con marco por un precio reducido desde {assemblyDoorsCost}/unidad. Este precio promocional se aplica al montaje de seis o más unidades de puertas y marcos."
       }
     }
   },
@@ -50,7 +50,7 @@
     "contact": "Datos de contacto"
   },
   "assemblyDoors": {
-    "note": "Montaje promocional de puertas con marco 35 € / unidad. La oferta es válida para 6 o más unidades. El importe mínimo para dos montadores es de 210 €."
+    "note": "Montaje promocional de puertas con marco {assemblyDoorsCost} / unidad. La oferta es válida para 6 o más unidades. El importe mínimo para dos montadores es de {assemblyDoorsCostMin}."
   },
   "components": {
     "hint": {
@@ -150,6 +150,9 @@
         "header": "Rejillas de ventilación para puertas",
         "label": "Rejillas de ventilación para puertas"
       }
+    },
+    "campaigns": {
+      "doors": "Descuento extra de temporada actual del 15 % en todas las puertas y marcos."
     },
     "doorCategories": {
       "barbora": {
@@ -305,137 +308,137 @@
     "specialSurcharges": {
       "special-surcharges-double-door-frame": {
         "header": "Marco para puerta doble",
-        "label": "Precio de marco para puerta doble (elija 2 hojas y marque este marco) 103 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Precio de marco para puerta doble (elija 2 hojas y marque este marco) {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-sliding-doors-fittings-curtain-rod": {
         "header": "Puertas correderas - herraje Galería",
-        "label": "Puertas correderas - herraje Galería 150 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Puertas correderas - herraje Galería {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-minima": {
         "header": "Puertas correderas - herraje Minima",
-        "label": "Puertas correderas - herraje Minima 250 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Puertas correderas - herraje Minima {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-sliding-doors-hardware-built-in-housing": {
         "header": "Puertas correderas - herraje para casoneto",
-        "label": "Puertas correderas - herraje para casoneto 0 €. Marco para casoneto 150 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Puertas correderas - herraje para casoneto 0 €. Marco para casoneto {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-hidden-hinges": {
         "header": "Suplemento por bisagras ocultas",
-        "label": "Suplemento por bisagras ocultas puerta 130 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Suplemento por bisagras ocultas puerta {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-reversible-doors": {
         "header": "Suplemento por puerta reversible",
-        "label": "Suplemento por puerta reversible 265 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Suplemento por puerta reversible {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-double-leaf-non-rebated-door-with-frame": {
         "header": "Puerta doble sin solape con marco",
-        "label": "Puerta doble sin solape con marco 285 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Puerta doble sin solape con marco {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-curtain": {
         "header": "Suplemento puerta corredera doble galería",
-        "label": "Suplemento puerta corredera doble galería 250 €.",
-        "labelAssembly": "Montaje + 50 €."
+        "label": "Suplemento puerta corredera doble galería {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-minima": {
         "header": "Suplemento puerta corredera doble Minima",
-        "label": "Suplemento puerta corredera doble Minima 350 €.",
-        "labelAssembly": "Montaje + 50 €."
+        "label": "Suplemento puerta corredera doble Minima {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-frame-for-double-leaf-doors-in-case": {
         "header": "Marco para puerta doble en casoneto",
-        "label": "Suplemento puerta corredera doble en casoneto 0 €. Marco para puerta doble en casoneto 180 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Suplemento puerta corredera doble en casoneto 0 €. Marco para puerta doble en casoneto {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-barn-1": {
         "header": "Herraje corredero - Barn 1 negro",
-        "label": "Herraje corredero - Barn 1 negro 150 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Herraje corredero - Barn 1 negro {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-minima-black": {
         "header": "Herraje corredero - Minima negro",
-        "label": "Herraje corredero - Minima negro 290 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Herraje corredero - Minima negro {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-door-to-case-with-frame": {
         "header": "Puerta en casoneto con marco",
-        "label": "Puerta en casoneto con marco 57 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Puerta en casoneto con marco {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-door-to-case-without-frame": {
         "header": "Puerta en casoneto sin marco",
-        "label": "Puerta en casoneto sin marco 0 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Puerta en casoneto sin marco {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-double-leaf-door-to-case": {
         "header": "Puerta doble en casoneto",
-        "label": "Puerta doble en casoneto 87 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Puerta doble en casoneto {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-folding-interior-doors": {
         "header": "Puertas de interior plegables",
-        "label": "Puertas de interior plegables 220 €.",
-        "labelAssembly": "Montaje + 50 €."
+        "label": "Puertas de interior plegables {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-sliding-hardware-invisible": {
         "header": "Herraje corredero - invisible",
-        "label": "Herraje corredero - invisible 490 €.",
-        "labelAssembly": "Montaje + 50 €."
+        "label": "Herraje corredero - invisible {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-barn-4": {
         "header": "Herraje corredero - Barn 4 negro",
-        "label": "Herraje corredero - Barn 4 negro 210 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Herraje corredero - Barn 4 negro {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-barn-3": {
         "header": "Herraje corredero - Barn 3 negro",
-        "label": "Herraje corredero - Barn 3 negro 190 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Herraje corredero - Barn 3 negro {price}.",
+        "labelAssembly": "Montaje + {price}."
       },
       "special-surcharges-barn-2": {
         "header": "Herraje corredero - Barn 2 negro",
-        "label": "Herraje corredero - Barn 2 negro 180 €.",
-        "labelAssembly": "Montaje + 25 €."
+        "label": "Herraje corredero - Barn 2 negro {price}.",
+        "labelAssembly": "Montaje + {price}."
       }
     },
     "technicalSurcharges": {
       "technical-surcharges-hollow-particle-board-filling": {
         "header": "Relleno de aglomerado alveolar",
-        "label": "Relleno de aglomerado alveolar: Las puertas pueden rellenarse con nido de abeja de papel o aglomerado alveolar por un suplemento de 30 €. El nido de abeja es una capa de papel, el aglomerado alveolar es de virutas de madera. Recomendamos el aglomerado alveolar para puertas V1, pero puede usarse en todas las puertas de las categorías Vanesa y Petra. El aglomerado alveolar es más pesado, fuerte y aislante."
+        "label": "Relleno de aglomerado alveolar: Las puertas pueden rellenarse con nido de abeja de papel o aglomerado alveolar por un suplemento de {price}. El nido de abeja es una capa de papel, el aglomerado alveolar es de virutas de madera. Recomendamos el aglomerado alveolar para puertas V1, pero puede usarse en todas las puertas de las categorías Vanesa y Petra. El aglomerado alveolar es más pesado, fuerte y aislante."
       },
       "technical-surcharges-silicone-frame": {
         "header": "Junta de silicona para el marco",
-        "label": "Junta de silicona para el marco 10 €/unidad: Fresamos una ranura en el marco e insertamos una junta de silicona. Esto tiene la ventaja de que la puerta es más silenciosa al cerrar y, cuando está cerrada, la junta elimina el sonido de la estancia contigua."
+        "label": "Junta de silicona para el marco {price}/unidad: Fresamos una ranura en el marco e insertamos una junta de silicona. Esto tiene la ventaja de que la puerta es más silenciosa al cerrar y, cuando está cerrada, la junta elimina el sonido de la estancia contigua."
       },
       "technical-surcharges-silicone-wall-frame": {
         "header": "Sellado de irregularidades entre pared y marco",
-        "label": "Sellado de irregularidades entre pared y marco 6 €/unidad: Al colocar el marco, si las paredes están torcidas, puede quedar un hueco. Podemos rellenarlo con silicona acrílica. Debido a la elasticidad, solo se pueden cubrir huecos de hasta 0,5 cm. El baño y WC no se sellan por dentro. Tampoco cuando la puerta está en una esquina."
+        "label": "Sellado de irregularidades entre pared y marco {price}/unidad: Al colocar el marco, si las paredes están torcidas, puede quedar un hueco. Podemos rellenarlo con silicona acrílica. Debido a la elasticidad, solo se pueden cubrir huecos de hasta 0,5 cm. El baño y WC no se sellan por dentro. Tampoco cuando la puerta está en una esquina."
       },
       "technical-surcharges-carrying": {
         "header": "Subida a 3er piso o superior sin ascensor",
-        "label": "Subida a 3er piso o superior sin ascensor: Se cobra un suplemento de 100 € por subir puertas, marcos, material y herramientas al 3er piso o superior sin ascensor."
+        "label": "Subida a 3er piso o superior sin ascensor: Se cobra un suplemento de {price} por subir puertas, marcos, material y herramientas al 3er piso o superior sin ascensor."
       },
       "technical-surcharges-thicker-walls": {
         "header": "Suplemento por paredes más gruesas",
-        "label": "Suplemento por paredes de más de 20 cm 12 €/10 cm extra: Si las paredes superan los 20 cm, se cobra un suplemento de 12 € por material extra por cada 10 cm adicionales."
+        "label": "Suplemento por paredes de más de 20 cm {price}/10 cm extra: Si las paredes superan los 20 cm, se cobra un suplemento de {price} por material extra por cada 10 cm adicionales."
       },
       "technical-surcharges-higher-doors": {
         "header": "Suplemento por puertas más altas",
-        "label": "Suplemento por puertas de más de 207 cm 20 €/unidad: Las puertas con altura de 207 cm a 240 cm tienen un suplemento de 20 €/unidad por material más caro. No todos los materiales pueden suministrarse en alturas superiores a 207 cm."
+        "label": "Suplemento por puertas de más de 207 cm {price}/unidad: Las puertas con altura de 207 cm a 240 cm tienen un suplemento de {price}/unidad por material más caro. No todos los materiales pueden suministrarse en alturas superiores a 207 cm."
       },
       "technical-surcharges-original-steel-door-frames-cladding": {
         "header": "Revestimiento de marcos de acero originales",
-        "label": "Revestimiento de marcos de acero originales 25 €/unidad: Si es un revestimiento de marcos originales, se cobra 25 €. Hay que tener en cuenta que el hueco de obra se estrecha unos 3,5 cm por cada lado (3,5 cm arriba y 7 cm de ancho)."
+        "label": "Revestimiento de marcos de acero originales {price}/unidad: Si es un revestimiento de marcos originales, se cobra {price}. Hay que tener en cuenta que el hueco de obra se estrecha unos 3,5 cm por cada lado (3,5 cm arriba y 7 cm de ancho)."
       },
       "technical-surcharges-tiles-cutting": {
         "header": "Suplemento por corte de tapajuntas",
-        "label": "Suplemento por corte de tapajuntas 15 €/unidad: Los tapajuntas se cortan si los huecos están mal resueltos. Por ejemplo, si hay desniveles de más de 5 mm, si no hay espacio para el marco en la pared o si el azulejo del baño es más bajo que la puerta y hay que fresar el tapajuntas."
+        "label": "Suplemento por corte de tapajuntas {price}/unidad: Los tapajuntas se cortan si los huecos están mal resueltos. Por ejemplo, si hay desniveles de más de 5 mm, si no hay espacio para el marco en la pared o si el azulejo del baño es más bajo que la puerta y hay que fresar el tapajuntas."
       }
     }
   }

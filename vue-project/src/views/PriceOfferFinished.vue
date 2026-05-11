@@ -33,7 +33,7 @@ onMounted(() => {
       <h3>STOLÁRSTVO - SUČANSKÝ</h3>
     </div>
     <div>
-      <a :href="appConfig?.baseUrl ?? '/'">
+      <a :href="appConfig!.baseUrl ?? '/'">
         <button class="btn btn-primary">{{ t('returnToHomepage') }}</button>
       </a>
     </div>

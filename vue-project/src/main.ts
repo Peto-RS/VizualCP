@@ -1,13 +1,13 @@
-import {createApp} from 'vue'
+import {createApp, onBeforeMount} from 'vue'
 import 'bootstrap';
 import {router} from "./router.js";
 import Home from "./views/Home.vue";
 import {
-    getDefaultLocale,
-    i18n,
-    setLocale,
-    SupportedLocale
+    i18n
 } from "@/model/functions/translation-utils.js";
+import {useAppState} from "@/composables/app-state.js";
+import {getAppConfig} from "@/model/api/rest.js";
+import {CurrencyEnum} from "@/model/enums/CurrencyEnum.js";
 
 /*
 let vueAppInstance: ReturnType<typeof createApp> | null = null
@@ -33,8 +33,10 @@ window.addEventListener("DOMContentLoaded", () => {
 });
  */
 
-const locale: SupportedLocale = getDefaultLocale()
-await setLocale(locale)
+
+const {appConfig, currency} = useAppState()
+appConfig.value = await getAppConfig()
+currency.value = localStorage.getItem('currency') ?? CurrencyEnum.EUR
 
 //single-page application
 const app = createApp(Home);

@@ -1,8 +1,9 @@
 <?php
-include_once 'json-data-manipulation.php';
-include_once 'cart-model.php';
+require_once __DIR__ . '/json-data-manipulation-facade.php';
+require_once __DIR__ . '/model/cart-model.php';
+require_once __DIR__ . '/../enums/DoorsWidthEnum.php';
 
-require 'vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -11,11 +12,11 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-function generateSpreadSheet(PriceOfferResponse $priceOffer): string
+function generateSpreadSheet(PriceOfferResponse $priceOffer): Spreadsheet
 {
-    $spreadsheet = loadSpreadSheet('assets/xlsx/cenova_ponuka_Hutas_30012026.xlsx');
+    $spreadsheet = loadSpreadSheet(__DIR__ . '/../../assets/xlsx/cenova_ponuka_Hutas_30012026.xlsx');
     addBusinessDataIntoSpreadsheet($spreadsheet, $priceOffer);
-    return writeSpreadSheetToOutput($spreadsheet);
+    return $spreadsheet;
 }
 
 function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResponse $priceOffer): void
@@ -55,10 +56,16 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     }
     $rowIdx++;
 
+    $note = $priceOffer->note;
+    if ($email) {
+        $sheet->setCellValue('F' . $rowIdx, $note);
+    }
+    $rowIdx++;
+
     /*** Doors ***/
     $doors = $priceOffer->doors;
     $selectedDoorsLineItems = $priceOffer->selectedDoorsLineItems;
-    $rowIdx = $rowIdx + 2;
+    $rowIdx++;
 
     $doorsCount = count($doors);
     $selectedDoorsLineItemsCount = count($selectedDoorsLineItems);
@@ -70,7 +77,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     }
 
     foreach ($doors as $door) {
-        $sheet->setCellValue("A$rowIdx", Width::getWidthString($door->width) ?: 60);
+        $sheet->setCellValue("A$rowIdx", DoorsWidthEnum::getWidthString($door->width) ?: 60);
         $sheet->setCellValue("B$rowIdx", $door->type);
         $sheet->setCellValue("C$rowIdx", $door->material ? MaterialsJsonDataManipulation::getTranslation($door->material) : "");
         $sheet->setCellValue("E$rowIdx", "=IFERROR(VLOOKUP(B$rowIdx, $sheetNameCalculations!A:B, 2, FALSE), 0)+IF(A$rowIdx<=69, 0,IF(A$rowIdx<=79, 3,IF(A$rowIdx<=89, 6, 9)))");
@@ -84,7 +91,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     }
 
     foreach ($selectedDoorsLineItems as $door) {
-        $sheet->setCellValue("A$rowIdx", Width::getWidthString($door->width) ?: 60);
+        $sheet->setCellValue("A$rowIdx", DoorsWidthEnum::getWidthString($door->width) ?: 60);
         $sheet->setCellValue("B$rowIdx", $door->name);
         $sheet->setCellValue("E$rowIdx", $door->price);
         $sheet->setCellValue("F$rowIdx", $door->isDoorFrameEnabled ? $trueValue : $falseValue);
@@ -148,7 +155,7 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     $rowIdx = $rowIdx + 3;
     $district = $priceOffer->address->district;
     if ($district) {
-        $districtConfig = DistrictsJsonDataManipulation::findByIdOrFalse($district);
+        $districtConfig = DistrictsJsonDataManipulation::findByIdOrNull($district);
         $sheet->setCellValue('F' . $rowIdx, $districtConfig ? $districtConfig['label'] : "");
     }
 

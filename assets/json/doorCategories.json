@@ -56,20 +56,6 @@
     "descriptionKey": "db.doorCategories.zuzana.description",
     "name": "Zuzana",
     "nameKey": "db.doorCategories.zuzana.name",
-    "nameTranslate": {
-      "bg": "",
-      "cs": "",
-      "de": "",
-      "en": "",
-      "es": "",
-      "fr": "",
-      "hu": "",
-      "it": "",
-      "pl": "",
-      "ro": "",
-      "sk": "Zuzana",
-      "sr": ""
-    },
     "doorConfiguratorDefault": {
       "handle": "Nova_nerez_R",
       "material": "canyon-dark",
@@ -231,7 +217,7 @@
     "nameKey": "db.doorCategories.greta.name",
     "doorConfiguratorDefault": {
       "handle": "Qubik_mosadz_brusena_HR",
-      "material": "ORECH",
+      "material": "orech",
       "type": "g9"
     },
     "doorTypes": {
@@ -417,7 +403,7 @@
     "nameKey": "db.doorCategories.barbora.name",
     "doorConfiguratorDefault": {
       "handle": "Qubik_cierna_matna_HR",
-      "material": "DUB-HALIFAX",
+      "material": "dub-halifax",
       "type": "b7"
     },
     "doorTypes": {

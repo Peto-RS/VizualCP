@@ -21,16 +21,16 @@
     "doorAddedToPriceOffer": "La porta è stata aggiunta al preventivo.",
     "campaign": {
       "doors": {
-        "title": "<b>Porte per interni con telaio</b> da <b>219,- €",
-        "body": "Ti offriamo porte per interni e telai in tutti i tipi di laminato al prezzo promozionale di 219 €. Il prezzo si applica anche alle porte per le quali effettueremo personalmente il rilievo delle misure prima della produzione."
+        "title": "<b>Porte per interni con telaio</b> da <b>{interiorDoorsPriceFrom}",
+        "body": "Ti offriamo porte per interni e telai in tutti i tipi di laminato al prezzo promozionale di {interiorDoorsPriceFrom}. Il prezzo si applica anche alle porte per le quali effettueremo personalmente il rilievo delle misure prima della produzione."
       },
       "freeMeasurement": {
         "title": "<b>Rilievo misure</b> dei fori muro <b>gratuito</b>",
         "body": "Ti preoccupano le misure atipiche dei fori? Per noi non sono un problema. Effettuiamo personalmente il rilievo di ogni foro e produciamo le porte in modo che si adattino con la massima precisione. Le porte su misura sono SENZA SUPPLEMENTO."
       },
       "assembly": {
-        "title": "<b>Montaggio</b> porte per in&shy;ter&shy;ni e telai <b>35 €</b>",
-        "body": "Ti offriamo il montaggio del set completo porta per interni con telaio al prezzo scontato a partire da 35 €/pz. Questo prezzo promozionale è valido per il montaggio di sei o più porte e telai."
+        "title": "<b>Montaggio</b> porte per in&shy;ter&shy;ni e telai <b>{assemblyDoorsCost}</b>",
+        "body": "Ti offriamo il montaggio del set completo porta per interni con telaio al prezzo scontato a partire da {assemblyDoorsCost}/pz. Questo prezzo promozionale è valido per il montaggio di sei o più porte e telai."
       }
     }
   },
@@ -50,7 +50,7 @@
     "contact": "Dati di contatto"
   },
   "assemblyDoors": {
-    "note": "Montaggio promozionale porte con telaio 35 € / pezzo. La promozione è valida per 6 o più pezzi. L'importo minimo per due installatori è di 210 €."
+    "note": "Montaggio promozionale porte con telaio {assemblyDoorsCost} / pezzo. La promozione è valida per 6 o più pezzi. L'importo minimo per due installatori è di {assemblyDoorsCostMin}."
   },
   "components": {
     "hint": {
@@ -150,6 +150,9 @@
         "header": "Griglie di ventilazione per porte",
         "label": "Griglie di ventilazione per porte"
       }
+    },
+    "campaigns": {
+      "doors": "Attuale sconto extra stagionale del 15% su tutte le porte e i telai."
     },
     "doorCategories": {
       "barbora": {
@@ -305,137 +308,137 @@
     "specialSurcharges": {
       "special-surcharges-double-door-frame": {
         "header": "Telaio per porta a due ante",
-        "label": "Prezzo telaio per porta a due ante (scegliere 2 ante e cliccare su questo telaio) 103 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Prezzo telaio per porta a due ante (scegliere 2 ante e cliccare su questo telaio) {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-sliding-doors-fittings-curtain-rod": {
         "header": "Porte scorrevoli - binario a mantovana",
-        "label": "Porte scorrevoli - binario a mantovana 150 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Porte scorrevoli - binario a mantovana {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-minima": {
         "header": "Porte scorrevoli - binario Minima",
-        "label": "Porte scorrevoli - binario Minima 250 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Porte scorrevoli - binario Minima {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-sliding-doors-hardware-built-in-housing": {
         "header": "Porte scorrevoli - ferramenta per controtelaio a scomparsa",
-        "label": "Porte scorrevoli - ferramenta per controtelaio 0 €. Telaio per controtelaio 150 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Porte scorrevoli - ferramenta per controtelaio 0 €. Telaio per controtelaio {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-hidden-hinges": {
         "header": "Supplemento cerniere a scomparsa",
-        "label": "Supplemento cerniere a scomparsa porta 130 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Supplemento cerniere a scomparsa porta {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-reversible-doors": {
         "header": "Supplemento porta reversibile",
-        "label": "Supplemento porta reversibile 265 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Supplemento porta reversibile {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-double-leaf-non-rebated-door-with-frame": {
         "header": "Porta a due ante a filo con telaio",
-        "label": "Porta a due ante a filo con telaio 285 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Porta a due ante a filo con telaio {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-curtain": {
         "header": "Supplemento porta scorrevole doppia mantovana",
-        "label": "Supplemento porta scorrevole doppia mantovana 250 €.",
-        "labelAssembly": "Montaggio + 50 €."
+        "label": "Supplemento porta scorrevole doppia mantovana {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-minima": {
         "header": "Supplemento porta scorrevole doppia Minima",
-        "label": "Supplemento porta scorrevole doppia Minima 350 €.",
-        "labelAssembly": "Montaggio + 50 €."
+        "label": "Supplemento porta scorrevole doppia Minima {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-frame-for-double-leaf-doors-in-case": {
         "header": "Telaio per porta doppia a scomparsa",
-        "label": "Supplemento porta scorrevole doppia a scomparsa 0 €. Telaio per porta doppia a scomparsa 180 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Supplemento porta scorrevole doppia a scomparsa 0 €. Telaio per porta doppia a scomparsa {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-barn-1": {
         "header": "Sistema scorrevole - Barn 1 nero",
-        "label": "Sistema scorrevole - Barn 1 nero 150 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Sistema scorrevole - Barn 1 nero {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-minima-black": {
         "header": "Sistema scorrevole - Minima nero",
-        "label": "Sistema scorrevole - Minima nero 290 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Sistema scorrevole - Minima nero {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-door-to-case-with-frame": {
         "header": "Porta a scomparsa con telaio",
-        "label": "Porta a scomparsa con telaio 57 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Porta a scomparsa con telaio {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-door-to-case-without-frame": {
         "header": "Porta a scomparsa senza telaio",
-        "label": "Porta a scomparsa senza telaio 0 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Porta a scomparsa senza telaio {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-double-leaf-door-to-case": {
         "header": "Porta doppia a scomparsa",
-        "label": "Porta doppia a scomparsa 87 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Porta doppia a scomparsa {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-folding-interior-doors": {
         "header": "Porte per interni a libro",
-        "label": "Porte per interni a libro 220 €.",
-        "labelAssembly": "Montaggio + 50 €."
+        "label": "Porte per interni a libro {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-sliding-hardware-invisible": {
         "header": "Sistema scorrevole - invisibile",
-        "label": "Sistema scorrevole - invisibile 490 €.",
-        "labelAssembly": "Montaggio + 50 €."
+        "label": "Sistema scorrevole - invisibile {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-barn-4": {
         "header": "Sistema scorrevole - Barn 4 nero",
-        "label": "Sistema scorrevole - Barn 4 nero 210 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Sistema scorrevole - Barn 4 nero {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-barn-3": {
         "header": "Sistema scorrevole - Barn 3 nero",
-        "label": "Sistema scorrevole - Barn 3 nero 190 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Sistema scorrevole - Barn 3 nero {price}.",
+        "labelAssembly": "Montaggio + {price}."
       },
       "special-surcharges-barn-2": {
         "header": "Sistema scorrevole - Barn 2 nero",
-        "label": "Sistema scorrevole - Barn 2 nero 180 €.",
-        "labelAssembly": "Montaggio + 25 €."
+        "label": "Sistema scorrevole - Barn 2 nero {price}.",
+        "labelAssembly": "Montaggio + {price}."
       }
     },
     "technicalSurcharges": {
       "technical-surcharges-hollow-particle-board-filling": {
         "header": "Riempimento in truciolare forato",
-        "label": "Riempimento in truciolare forato: Le porte possono essere riempite con nido d'ape di carta o truciolare forato con un supplemento di 30 €. Il nido d'ape è uno strato di carta, il truciolare forato è fatto di trucioli di legno. Raccomandiamo il truciolare forato per le porte V1, ma può essere utilizzato per tutte le porte delle categorie Vanesa e Petra. Il truciolare forato è più pesante, robusto e isolante."
+        "label": "Riempimento in truciolare forato: Le porte possono essere riempite con nido d'ape di carta o truciolare forato con un supplemento di {price}. Il nido d'ape è uno strato di carta, il truciolare forato è fatto di trucioli di legno. Raccomandiamo il truciolare forato per le porte V1, ma può essere utilizzato per tutte le porte delle categorie Vanesa e Petra. Il truciolare forato è più pesante, robusto e isolante."
       },
       "technical-surcharges-silicone-frame": {
         "header": "Guarnizione in silicone per il telaio",
-        "label": "Guarnizione in silicone per il telaio 10 €/pezzo: Fresiamo una scanalatura nel telaio e vi inseriamo una guarnizione in silicone. Questo ha il vantaggio di rendere la porta più silenziosa in chiusura e, quando è chiusa, la guarnizione elimina il suono proveniente dalla stanza adiacente."
+        "label": "Guarnizione in silicone per il telaio {price}/pezzo: Fresiamo una scanalatura nel telaio e vi inseriamo una guarnizione in silicone. Questo ha il vantaggio di rendere la porta più silenziosa in chiusura e, quando è chiusa, la guarnizione elimina il suono proveniente dalla stanza adiacente."
       },
       "technical-surcharges-silicone-wall-frame": {
         "header": "Sigillatura irregolarità tra muro e telaio",
-        "label": "Sigillatura irregolarità tra muro e telaio 6 €/pezzo: Durante la posa del telaio, in caso di pareti irregolari, può crearsi una fessura. Possiamo riempirla con silicone acrilico. Data l'elasticità, si possono coprire solo fessure fino a 0,5 cm. Bagno e WC non vengono sigillati all'interno. Non si sigilla nemmeno quando la porta è in un angolo."
+        "label": "Sigillatura irregolarità tra muro e telaio {price}/pezzo: Durante la posa del telaio, in caso di pareti irregolari, può crearsi una fessura. Possiamo riempirla con silicone acrilico. Data l'elasticità, si possono coprire solo fessure fino a 0,5 cm. Bagno e WC non vengono sigillati all'interno. Non si sigilla nemmeno quando la porta è in un angolo."
       },
       "technical-surcharges-carrying": {
         "header": "Trasporto al 3° piano o superiore senza ascensore",
-        "label": "Trasporto al 3° piano o superiore senza ascensore: Per il trasporto al 3° piano o superiore senza ascensore è previsto un supplemento di 100 € per il trasporto di porte, telai, materiale e attrezzatura."
+        "label": "Trasporto al 3° piano o superiore senza ascensore: Per il trasporto al 3° piano o superiore senza ascensore è previsto un supplemento di {price} per il trasporto di porte, telai, materiale e attrezzatura."
       },
       "technical-surcharges-thicker-walls": {
         "header": "Supplemento per pareti più spesse",
-        "label": "Supplemento per pareti oltre i 20 cm 12 €/10 cm extra: Se le pareti superano i 20 cm, viene applicato un supplemento di 12 € per il materiale extra per ogni 10 cm aggiuntivi."
+        "label": "Supplemento per pareti oltre i 20 cm {price}/10 cm extra: Se le pareti superano i 20 cm, viene applicato un supplemento di {price} per il materiale extra per ogni 10 cm aggiuntivi."
       },
       "technical-surcharges-higher-doors": {
         "header": "Supplemento per porte più alte",
-        "label": "Supplemento per porte oltre i 207 cm 20 €/pezzo: Le porte con altezza da 207 cm a 240 cm hanno un supplemento di 20 €/pezzo per il materiale più costoso. Non tutti i materiali possono essere forniti in altezze superiori a 207 cm."
+        "label": "Supplemento per porte oltre i 207 cm {price}/pezzo: Le porte con altezza da 207 cm a 240 cm hanno un supplemento di {price}/pezzo per il materiale più costoso. Non tutti i materiali possono essere forniti in altezze superiori a 207 cm."
       },
       "technical-surcharges-original-steel-door-frames-cladding": {
         "header": "Rivestimento vecchi telai in acciaio",
-        "label": "Rivestimento vecchi telai in acciaio 25 €/pezzo: Per il rivestimento di telai in acciaio preesistenti si applica un supplemento di 25 €. Bisogna considerare che il foro muro si restringe di circa 3,5 cm per lato (3,5 cm in alto e 7 cm in larghezza)."
+        "label": "Rivestimento vecchi telai in acciaio {price}/pezzo: Per il rivestimento di telai in acciaio preesistenti si applica un supplemento di {price}. Bisogna considerare che il foro muro si restringe di circa 3,5 cm per lato (3,5 cm in alto e 7 cm in larghezza)."
       },
       "technical-surcharges-tiles-cutting": {
         "header": "Supplemento per taglio mostrine",
-        "label": "Supplemento per taglio mostrine 15 €/pezzo: Le mostrine vengono tagliate se i fori muro sono irregolari. Ad esempio se il dislivello tra le stanze è superiore a 5 mm, se non c'è spazio sul muro per il telaio o se il rivestimento in bagno è più basso dell'altezza porta e bisogna fresare la mostrina."
+        "label": "Supplemento per taglio mostrine {price}/pezzo: Le mostrine vengono tagliate se i fori muro sono irregolari. Ad esempio se il dislivello tra le stanze è superiore a 5 mm, se non c'è spazio sul muro per il telaio o se il rivestimento in bagno è più basso dell'altezza porta e bisogna fresare la mostrina."
       }
     }
   }

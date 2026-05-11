@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useI18n} from "vue-i18n";
-import {setLocale, SupportedLocale} from "@/model/functions/translation-utils.js";
+import {setLocale, SupportedLocale, switchLanguage} from "@/model/functions/translation-utils.js";
 
 const {locale} = useI18n()
 
@@ -21,7 +21,7 @@ const locales: Record<SupportedLocale, string> = {
 
 const changeLocale = async (event: any) => {
   const newLocale = event.target.value
-  await setLocale(newLocale)
+  await switchLanguage(newLocale)
 }
 </script>
 

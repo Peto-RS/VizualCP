@@ -21,16 +21,16 @@
     "doorAddedToPriceOffer": "La porte a été ajoutée au devis.",
     "campaign": {
       "doors": {
-        "title": "<b>Portes intérieures avec cadre</b> à partir de <b>219,- €",
-        "body": "Nous vous proposons des portes intérieures et des cadres dans tous les types de stratifiés au prix promotionnel de 219€. Le prix s'applique également aux portes que nous venons mesurer personnellement avant la fabrication."
+        "title": "<b>Portes intérieures avec cadre</b> à partir de <b>{interiorDoorsPriceFrom}",
+        "body": "Nous vous proposons des portes intérieures et des cadres dans tous les types de stratifiés au prix promotionnel de {interiorDoorsPriceFrom}. Le prix s'applique également aux portes que nous venons mesurer personnellement avant la fabrication."
       },
       "freeMeasurement": {
         "title": "<b>Prise de mesure</b> des ouvertures de construction <b>gratuite</b>",
         "body": "Les dimensions atypiques vous inquiètent ? Pour nous, ce n'est pas un problème. Nous mesurons personnellement chaque ouverture et fabriquons les portes de manière à ce qu'elles s'adaptent le plus précisément possible. Les portes sur mesure sont chez nous SANS SUPPLÉMENT."
       },
       "assembly": {
-        "title": "<b>Montage</b> de portes inté&shy;rieu&shy;res et de cadres <b>35€</b>",
-        "body": "Nous vous proposons le montage du kit complet porte intérieure avec cadre à un prix avantageux à partir de 35€/pce. Ce prix promotionnel s'applique au montage de six pièces ou plus de portes et de cadres."
+        "title": "<b>Montage</b> de portes inté&shy;rieu&shy;res et de cadres <b>{assemblyDoorsCost}</b>",
+        "body": "Nous vous proposons le montage du kit complet porte intérieure avec cadre à un prix avantageux à partir de {assemblyDoorsCost}/pce. Ce prix promotionnel s'applique au montage de six pièces ou plus de portes et de cadres."
       }
     }
   },
@@ -50,7 +50,7 @@
     "contact": "Coordonnées de contact"
   },
   "assemblyDoors": {
-    "note": "Montage promotionnel de portes avec cadre 35 € / pièce. L'offre est valable pour 6 pièces ou plus. Le montant minimum pour deux monteurs est de 210 €."
+    "note": "Montage promotionnel de portes avec cadre {assemblyDoorsCost} / pièce. L'offre est valable pour 6 pièces ou plus. Le montant minimum pour deux monteurs est de {assemblyDoorsCostMin}."
   },
   "components": {
     "hint": {
@@ -150,6 +150,9 @@
         "header": "Grilles de ventilation pour portes",
         "label": "Grilles de ventilation pour portes"
       }
+    },
+    "campaigns": {
+      "doors": "Remise saisonnière supplémentaire actuelle de 15 % sur toutes les portes et huisseries."
     },
     "doorCategories": {
       "barbora": {
@@ -305,137 +308,137 @@
     "specialSurcharges": {
       "special-surcharges-double-door-frame": {
         "header": "Cadre pour porte à deux vantaux",
-        "label": "Prix du cadre pour porte à deux vantaux (choisissez 2 vantaux de porte et cochez ce cadre) 103 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Prix du cadre pour porte à deux vantaux (choisissez 2 vantaux de porte et cochez ce cadre) {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-sliding-doors-fittings-curtain-rod": {
         "header": "Portes coulissantes - ferrure Garniža",
-        "label": "Portes coulissantes - ferrure Garniža 150 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Portes coulissantes - ferrure Garniža {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-minima": {
         "header": "Portes coulissantes - ferrure Minima",
-        "label": "Portes coulissantes - ferrure Minima 250 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Portes coulissantes - ferrure Minima {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-sliding-doors-hardware-built-in-housing": {
         "header": "Portes coulissantes - ferrure pour châssis à galandage",
-        "label": "Portes coulissantes - ferrure pour châssis à galandage 0 €. Cadre pour châssis à galandage 150 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Portes coulissantes - ferrure pour châssis à galandage 0 €. Cadre pour châssis à galandage {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-hidden-hinges": {
         "header": "Supplément pour charnières invisibles",
-        "label": "Supplément pour charnières invisibles par porte 130 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Supplément pour charnières invisibles par porte {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-reversible-doors": {
         "header": "Supplément pour porte réversible",
-        "label": "Supplément pour porte réversible 265 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Supplément pour porte réversible {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-double-leaf-non-rebated-door-with-frame": {
         "header": "Porte à deux vantaux à fleur de paroi avec cadre",
-        "label": "Porte à deux vantaux à fleur de paroi avec cadre 285 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Porte à deux vantaux à fleur de paroi avec cadre {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-curtain": {
         "header": "Supplément pour porte coulissante à deux vantaux Garniža",
-        "label": "Supplément pour porte coulissante à deux vantaux Garniža 250 €.",
-        "labelAssembly": "Montage + 50 €."
+        "label": "Supplément pour porte coulissante à deux vantaux Garniža {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-double-leaf-sliding-door-minima": {
         "header": "Supplément pour porte coulissante à deux vantaux Minima",
-        "label": "Supplément pour porte coulissante à deux vantaux Minima 350 €.",
-        "labelAssembly": "Montage + 50 €."
+        "label": "Supplément pour porte coulissante à deux vantaux Minima {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-frame-for-double-leaf-doors-in-case": {
         "header": "Cadre pour porte à deux vantaux à galandage",
-        "label": "Supplément pour porte coulissante à deux vantaux à galandage 0 €. Cadre pour porte à deux vantaux à galandage 180 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Supplément pour porte coulissante à deux vantaux à galandage 0 €. Cadre pour porte à deux vantaux à galandage {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-barn-1": {
         "header": "Ferrure coulissante - Barn 1 noire",
-        "label": "Ferrure coulissante - Barn 1 noire 150 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Ferrure coulissante - Barn 1 noire {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-minima-black": {
         "header": "Ferrure coulissante - Minima noire",
-        "label": "Ferrure coulissante - Minima noire 290 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Ferrure coulissante - Minima noire {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-door-to-case-with-frame": {
         "header": "Porte à galandage avec cadre",
-        "label": "Porte à galandage avec cadre 57 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Porte à galandage avec cadre {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-door-to-case-without-frame": {
         "header": "Porte à galandage sans cadre",
-        "label": "Porte à galandage sans cadre 0 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Porte à galandage sans cadre {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-double-leaf-door-to-case": {
         "header": "Porte à deux vantaux à galandage",
-        "label": "Porte à deux vantaux à galandage 87 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Porte à deux vantaux à galandage {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-folding-interior-doors": {
         "header": "Portes intérieures pliantes",
-        "label": "Portes intérieures pliantes 220 €.",
-        "labelAssembly": "Montage + 50 €."
+        "label": "Portes intérieures pliantes {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-sliding-hardware-invisible": {
         "header": "Ferrure coulissante - invisible",
-        "label": "Ferrure coulissante - invisible 490 €.",
-        "labelAssembly": "Montage + 50 €."
+        "label": "Ferrure coulissante - invisible {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-barn-4": {
         "header": "Ferrure coulissante - Barn 4 noire",
-        "label": "Ferrure coulissante - Barn 4 noire 210 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Ferrure coulissante - Barn 4 noire {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-barn-3": {
         "header": "Ferrure coulissante - Barn 3 noire",
-        "label": "Ferrure coulissante - Barn 3 noire 190 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Ferrure coulissante - Barn 3 noire {price}.",
+        "labelAssembly": "Montage + {price}."
       },
       "special-surcharges-barn-2": {
         "header": "Ferrure coulissante - Barn 2 noire",
-        "label": "Ferrure coulissante - Barn 2 noire 180 €.",
-        "labelAssembly": "Montage + 25 €."
+        "label": "Ferrure coulissante - Barn 2 noire {price}.",
+        "labelAssembly": "Montage + {price}."
       }
     },
     "technicalSurcharges": {
       "technical-surcharges-hollow-particle-board-filling": {
         "header": "Remplissage en aggloméré tubulaire",
-        "label": "Remplissage en aggloméré tubulaire : Les portes peuvent être remplies de nid d'abeille en papier ou d'aggloméré tubulaire pour un supplément de 30 €. Le nid d'abeille est une couche de papier, l'aggloméré tubulaire est fait de copeaux de bois. Nous recommandons l'aggloméré tubulaire pour les portes V1, mais il peut être utilisé pour toutes les portes des catégories Vanesa et Petra. L'aggloméré tubulaire est plus lourd, plus solide et plus isolant."
+        "label": "Remplissage en aggloméré tubulaire : Les portes peuvent être remplies de nid d'abeille en papier ou d'aggloméré tubulaire pour un supplément de {price}. Le nid d'abeille est une couche de papier, l'aggloméré tubulaire est fait de copeaux de bois. Nous recommandons l'aggloméré tubulaire pour les portes V1, mais il peut être utilisé pour toutes les portes des catégories Vanesa et Petra. L'aggloméré tubulaire est plus lourd, plus solide et plus isolant."
       },
       "technical-surcharges-silicone-frame": {
         "header": "Joint en silicone pour le cadre",
-        "label": "Joint en silicone pour le cadre 10 €/pce : Nous fraisons une rainure dans le cadre et y insérons un joint en silicone. Cela présente l'avantage que la porte est plus silencieuse à la fermeture et, lorsqu'elle est fermée, le joint en silicone élimine le bruit de la pièce voisine."
+        "label": "Joint en silicone pour le cadre {price}/pce : Nous fraisons une rainure dans le cadre et y insérons un joint en silicone. Cela présente l'avantage que la porte est plus silencieuse à la fermeture et, lorsqu'elle est fermée, le joint en silicone élimine le bruit de la pièce voisine."
       },
       "technical-surcharges-silicone-wall-frame": {
         "header": "Masticage des irrégularités entre le mur et le cadre",
-        "label": "Masticage des irrégularités entre le mur et le cadre 6 €/pce : Lors de la pose du cadre sur des murs irréguliers, un espace peut apparaître entre le mur et le cadre. Nous pouvons combler cet espace avec du silicone acrylique. En raison de l'élasticité du silicone, seuls les espaces jusqu'à 0,5 cm peuvent être comblés. Les salles de bains et WC ne sont pas siliconés de l'intérieur. De plus, on ne silicone pas lorsque la porte est dans un coin."
+        "label": "Masticage des irrégularités entre le mur et le cadre {price}/pce : Lors de la pose du cadre sur des murs irréguliers, un espace peut apparaître entre le mur et le cadre. Nous pouvons combler cet espace avec du silicone acrylique. En raison de l'élasticité du silicone, seuls les espaces jusqu'à 0,5 cm peuvent être comblés. Les salles de bains et WC ne sont pas siliconés de l'intérieur. De plus, on ne silicone pas lorsque la porte est dans un coin."
       },
       "technical-surcharges-carrying": {
         "header": "Portage au 3ème étage et plus sans ascenseur",
-        "label": "Portage au 3ème étage et plus sans ascenseur : Pour le portage au 3ème étage et plus sans ascenseur, un supplément de 100 € est facturé pour le portage des portes, cadres, matériel et outils."
+        "label": "Portage au 3ème étage et plus sans ascenseur : Pour le portage au 3ème étage et plus sans ascenseur, un supplément de {price} est facturé pour le portage des portes, cadres, matériel et outils."
       },
       "technical-surcharges-thicker-walls": {
         "header": "Supplément pour murs plus épais",
-        "label": "Supplément pour murs de plus de 20 cm 12 €/10 cm supplémentaires : Si les murs font plus de 20 cm d'épaisseur, un supplément pour matériel supplémentaire de 12 € est facturé pour chaque tranche de 10 cm supplémentaire."
+        "label": "Supplément pour murs de plus de 20 cm {price}/10 cm supplémentaires : Si les murs font plus de 20 cm d'épaisseur, un supplément pour matériel supplémentaire de {price} est facturé pour chaque tranche de 10 cm supplémentaire."
       },
       "technical-surcharges-higher-doors": {
         "header": "Supplément pour portes plus hautes",
-        "label": "Supplément pour portes de plus de 207 cm 20 €/pce : Les portes d'une hauteur de 207 cm à 240 cm font l'objet d'un supplément de 20 €/pce pour un matériel plus coûteux. Tous les matériaux ne peuvent pas être fournis dans des hauteurs supérieures à 207 cm."
+        "label": "Supplément pour portes de plus de 207 cm {price}/pce : Les portes d'une hauteur de 207 cm à 240 cm font l'objet d'un supplément de {price}/pce pour un matériel plus coûteux. Tous les matériaux ne peuvent pas être fournis dans des hauteurs supérieures à 207 cm."
       },
       "technical-surcharges-original-steel-door-frames-cladding": {
         "header": "Habillage des anciens cadres de porte en acier",
-        "label": "Habillage des anciens cadres de porte en acier 25 €/pce : S'il s'agit d'un habillage de cadres en acier existants, un supplément de 25 € est facturé. Il faut cependant tenir compte du fait que lors de l'habillage des anciens cadres, l'ouverture de construction rétrécit d'environ 3,5 cm de chaque côté. Cela signifie environ 3,5 cm en haut et environ 7 cm en largeur."
+        "label": "Habillage des anciens cadres de porte en acier {price}/pce : S'il s'agit d'un habillage de cadres en acier existants, un supplément de {price} est facturé. Il faut cependant tenir compte du fait que lors de l'habillage des anciens cadres, l'ouverture de construction rétrécit d'environ 3,5 cm de chaque côté. Cela signifie environ 3,5 cm en haut et environ 7 cm en largeur."
       },
       "technical-surcharges-tiles-cutting": {
         "header": "Supplément pour la découpe des champlats",
-        "label": "Supplément pour la découpe des champlats 15 €/pce : Les champlats sont découpés lors du montage si les ouvertures de construction sont mal conçues. Par exemple, si les marches entre les pièces font plus de 5 mm, ou s'il n'y a pas de fixations sur les murs pour le cadre et qu'il faut recouper le champlat, ou si le carrelage de la salle de bain / WC arrive à une hauteur inférieure à celle de la porte et qu'il faut fraiser une rainure dans le champlat."
+        "label": "Supplément pour la découpe des champlats {price}/pce : Les champlats sont découpés lors du montage si les ouvertures de construction sont mal conçues. Par exemple, si les marches entre les pièces font plus de 5 mm, ou s'il n'y a pas de fixations sur les murs pour le cadre et qu'il faut recouper le champlat, ou si le carrelage de la salle de bain / WC arrive à une hauteur inférieure à celle de la porte et qu'il faut fraiser une rainure dans le champlat."
       }
     }
   }

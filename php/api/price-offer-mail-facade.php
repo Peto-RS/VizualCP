@@ -1,6 +1,6 @@
 <?php
 
-include_once 'db.php';
+require_once 'db.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -24,7 +24,7 @@ function sendMailWithExcelAttachment(string $excelSpreadsheet, PriceOfferRespons
         $email->addAddress($mailAddressTo);
 
         $email->addEmbeddedImage(
-            __DIR__ . '/assets/img/mail.jpg',
+            __DIR__ . '/../../assets/img/mail.jpg',
             'mail_image',
             'logo.jpg',
             'base64',
@@ -34,7 +34,7 @@ function sendMailWithExcelAttachment(string $excelSpreadsheet, PriceOfferRespons
         $priceOfferSequentialId = str_pad(queryPriceOfferNumber(getDb()), 3, '0', STR_PAD_LEFT);
         $priceOfferNumber = date('y-m') . "-" . $priceOfferSequentialId;
         $email->Subject = '💥 STOLÁRSTVO SUČANSKÝ 💥 - CENOVÁ PONUKA - 🚪 INTERIÉROVÉ DVERE 🚪 ČÍSLO - ' . $priceOfferNumber;
-        $email->Body = file_get_contents(__DIR__ . '/price-offer-mail.html');
+        $email->Body = file_get_contents(__DIR__ . '/../../price-offer-mail.html');
         $email->addStringAttachment(
             $excelSpreadsheet,
             "cenova_ponuka_$priceOfferNumber.xlsx",

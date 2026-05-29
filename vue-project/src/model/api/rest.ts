@@ -15,8 +15,8 @@ export function getConfigurator(currency: string): Promise<any> {
     return fetch(API_CONFIGURATOR_URL + `?currency=${currency}`)
 }
 
-export function getForm(): Promise<any> {
-    return fetch(API_URL_PRICE_OFFER + '?getApiResponse=true')
+export function getForm(currency: string): Promise<any> {
+    return fetch(API_URL_PRICE_OFFER + `?currency=${currency}`)
 }
 
 export function updateForm(req: ApiRequest): Promise<any> {

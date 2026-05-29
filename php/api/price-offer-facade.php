@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/response-objects/api-price-offer-response-objects.php";
 
-function getPriceOfferResponse(): PriceOfferResponse
+function getPriceOfferResponse(string $currency): PriceOfferResponse
 {
     if (!isPriceOfferInSessionValid($_SESSION)) {
         error_log("Session price offer is invalid, resetting." . json_encode($_SESSION));
@@ -10,7 +10,7 @@ function getPriceOfferResponse(): PriceOfferResponse
 
     /** @var PriceOffer $sessionPriceOffer */
     $sessionPriceOffer = $_SESSION['priceOffer'];
-    return PriceOffer::fromSession($sessionPriceOffer)->toResponse();
+    return PriceOffer::fromSession($sessionPriceOffer)->toResponse($currency);
 }
 
 

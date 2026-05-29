@@ -14,19 +14,16 @@ session_start();
 // Handle GET requests
 // ---------------------
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['getApiResponse'])) {
-        try {
-            $apiResponse = new ApiResponse(
-                DistrictsJsonDataManipulation::getAll() ?? array(),
-                getPriceOfferResponse()
-            );
-            sendJsonResponse($apiResponse, 200);
-        } catch (Throwable $e) {
-            error_log($e);
-            sendJsonResponse(['error' => $e->getTrace()], 500);
-        }
-    } else {
-        sendJsonResponse(['error' => 'Missing getApiResponse parameter'], 400);
+    try {
+        $currencyId = CurrencyEnum::isValid($_GET['currency']) ? $_GET['currency'] : CurrencyEnum::EUR;
+        $apiResponse = new ApiResponse(
+            DistrictsJsonDataManipulation::getAll() ?? array(),
+            getPriceOfferResponse($currencyId)
+        );
+        sendJsonResponse($apiResponse, 200);
+    } catch (Throwable $e) {
+        error_log($e);
+        sendJsonResponse(['error' => $e->getTrace()], 500);
     }
 }
 

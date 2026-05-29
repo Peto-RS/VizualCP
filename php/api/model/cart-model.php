@@ -976,8 +976,9 @@ class PriceOffer
         ) : null;
     }
 
-    public function toResponse(): PriceOfferResponse
+    public function toResponse(string $currency): PriceOfferResponse
     {
+        $this->currency = $currency;
         $doorsCount = $this->getDoorsCount();
         $assemblyDoorsEffectiveCount = $this->getEffectiveCountIsAssemblyDoorsCount($doorsCount);
         $assemblyHandlesRosettesEffectiveCount = $this->getEffectiveCountIsAssemblyHandlesRosettesCount($doorsCount);
@@ -1013,7 +1014,7 @@ class PriceOffer
             $this->calculateAssemblyPriceHandlesRosettes($assemblyHandlesRosettesEffectiveCount),
             $price,
             $this->calculatePriceVat($price),
-            getCalculatedCampaignDetails($calculatedDoorsPrice, $doorsCampaigns),
+            getCalculatedCampaignDetails($calculatedDoorsPriceNoCampaign, $doorsCampaigns),
             $this->contact ? $this->contact->toResponse() : ContactResponse::empty(),
             $this->currency,
             $calculatedDeliveryCosts,

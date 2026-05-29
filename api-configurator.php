@@ -10,7 +10,7 @@ session_start();
 //session_destroy();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $currencyId = $_GET['currency'] ?? CurrencyEnum::EUR;
+    $currencyId = CurrencyEnum::isValid($_GET['currency']) ? $_GET['currency'] : CurrencyEnum::EUR;
     $doorCategories = mapDoorCategoriesToResponse($currencyId);
     $gallery = GalleryJsonDataManipulation::getAll();
     $glasses = GlassesJsonDataManipulation::getAll();
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $priceOffer->fromPostConfigurator($parsedObject);
     $_SESSION['priceOffer'] = $priceOffer;
 
-    sendJsonResponse($priceOffer->toResponse(), 200);
+    sendJsonResponse($priceOffer->toResponse(CurrencyEnum::EUR), 200);
 }
 
 sendJsonResponse(['error' => 'Unsupported request method'], 405);

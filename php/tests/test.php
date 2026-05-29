@@ -11,7 +11,7 @@ class ApiIntegrationTest extends TestCase
 {
     private $configuratorUrl = 'http://localhost:8080/api-configurator.php';
     private $priceOfferSaveUrl = 'http://localhost:8080/api.php';
-    private $priceOfferGetUrl = 'http://localhost:8080/api.php?getApiResponse=true';
+    private $priceOfferGetUrl = 'http://localhost:8080/api.php';
     private $sessionId = 'testsession123';
 
     public function testPriceOffer()
@@ -104,13 +104,13 @@ class ApiIntegrationTest extends TestCase
 
         /*
         * 3.    POST /api.php
-        *       GET /api.php?getApiResponse=true
+        *       GET /api.php
         */
         $req = getArrayFromJsonFile(__DIR__ . "/resources/price-offer-request.json");
         $res = $this->request('POST', $this->priceOfferSaveUrl, $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
 
-        $res = $this->request('GET', $this->priceOfferGetUrl, $sessionId);
+        $res = $this->request('GET', $this->priceOfferGetUrl . "?currency=" . CurrencyEnum::EUR, $sessionId);
         $resBody = json_decode($res['body'], true);
 
         $this->assertEquals('City', $resBody['priceOffer']['address']['city']);
@@ -128,7 +128,7 @@ class ApiIntegrationTest extends TestCase
         /*
         * 4.    generateSpreadSheet
         */
-        $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest(new PriceOfferRequest($resBody['priceOffer']))->toResponse());
+        $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest(new PriceOfferRequest($resBody['priceOffer']))->toResponse(CurrencyEnum::EUR));
         $this->assertEquals("Meno", $spreadsheet->getActiveSheet()->getCell('F1')->getValue());
         $this->assertEquals("+42111111111", $spreadsheet->getActiveSheet()->getCell('F2')->getValue());
         $this->assertEquals("Street 1, 97901 City", $spreadsheet->getActiveSheet()->getCell('F3')->getValue());

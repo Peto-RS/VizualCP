@@ -57,7 +57,9 @@ if ($_SERVER['HTTPS'] != "on"){
         'self'
         https://www.google-analytics.com
         https://region1.google-analytics.com
+        https://www.google.com
         https://www.googletagmanager.com
+        https://www.gstatic.com
         ws://localhost:5173
         http://localhost:5173;
 

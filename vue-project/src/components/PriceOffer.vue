@@ -71,7 +71,7 @@ function getFieldValidations(id: string): ValidationMessage[] {
 }
 
 const fetchDataFromApi = async (): Promise<ApiResponse> => {
-  const response = await getForm();
+  const response = await getForm(currency.value!);
   const json = await response.json()
   if (response.ok)
     return json as ApiResponse;

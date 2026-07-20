@@ -76,8 +76,9 @@
   "delivery": {
     "address": "Adresa de livrare (opțional)",
     "city": "Localitate",
-    "district": "Selectați orașul de reședință",
-    "note": "Prețul transportului este de 0,5 € pe km. Transportul se calculează de la unitatea de producție din localitatea Čachtice.",
+    "chooseDistrict": "Selectați orașul de reședință",
+    "district": "Orașul de reședință",
+    "note": "Prețul transportului este de {price} pe km. Transportul se calculează de la unitatea de producție din localitatea Čachtice.",
     "street": "Stradă",
     "streetNumber": "Număr casă",
     "zipCode": "Cod poștal"
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "Designul simplu și în același timp elegant al ușilor de interior Zuzana poate satisface așteptările chiar și ale celor mai exigenți clienți.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova oțel inoxidabil R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova oțel inoxidabil HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima oțel inoxidabil R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima oțel inoxidabil HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun oțel inoxidabil R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma oțel inoxidabil R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma oțel inoxidabil HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio grafit HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio nichel satinat HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio patină HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit alamă periată HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta nichel satinat HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Euforia grafit HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Euforia patină HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz oțel inoxidabil HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks negru mat HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik alamă periată HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik nichel satinat HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik crom lucios HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik alb mat HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik negru mat HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Placă"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Supliment pentru tăierea pervazurilor {price}/buc: Pervazurile se taie la montaj dacă golurile de zidărie nu sunt corect executate. De exemplu, dacă există diferențe de nivel între camere mai mari de 5 mm, dacă nu există spalet pentru toc, sau dacă faianța din baie/WC este mai joasă decât înălțimea ușii."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Adresă",
+    "assembly": "Montaj",
+    "boolean": {
+      "true": "Da",
+      "false": "Nu"
+    },
+    "city": "Oraș",
+    "count": "buc",
+    "currency": "Valută",
+    "disclaimer": {
+      "title": "Termeni și condiții",
+      "interiorDoors": {
+        "title": "Uși de interior",
+        "description": "Ușile sunt certificate ca uși de interior. Aceasta înseamnă că sunt destinate unui mediu interior care este identic pe ambele părți ale ușii. În cazul în care o parte este expusă unei umidități ridicate, se poate produce curbarea sau deformarea acestora. Ușile sunt fabricate în conformitate cu normele STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "Uși vopsite alb (prin pulverizare)",
+        "description": "În cazul produselor vopsite alb prin pulverizare, clientul a fost informat că vopsirea în cadrul companiei noastre este o muncă manuală, nu o vopsire în cameră cu vid, motiv pentru care pot apărea mici defecte pe produs."
+      },
+      "whiteLaminateDoors": {
+        "title": "Uși din laminat alb",
+        "description": "Laminatul alb nu este un material care să fie alb în profunzime. Decorul alb este doar la suprafață. Din acest motiv, la acest decor se formează îmbinări vizibile pe toate canturile, care pot fi observate."
+      },
+      "slidingDoors": {
+        "title": "Uși glisante",
+        "description": "Aceste uși servesc la compartimentarea spațiului. Datorită funcționalității ușii, apare în mod inevitabil un spațiu (rost) între toc și ușă."
+      },
+      "veneeredDoors": {
+        "title": "Uși furniruite",
+        "description": "În cazul ușilor furniruite, clientul a fost informat că furnirul este un material natural. În cadrul aceleiași specii de lemn pot apărea mai multe nuanțe."
+      },
+      "laminateDoors": {
+        "title": "Uși laminate",
+        "description": "În cazul ușilor laminate, nuanța este garantată de producător. Plăcile laminate sunt sortate conform normei interne a companiei, care permite existența impurităților în limita a: 2 mm²/1m². Norma permite 2-3 puncte pe placă. Uniformitatea laminatului este dată de întreaga placă livrată de producător. Aceasta înseamnă că piesa uniformă utilizată pentru producție se află în cadrul aceleiași plăci."
+      },
+      "assembly": {
+        "title": "Montaj",
+        "description": "Prețul pentru montajul ușilor și tocurilor include instalarea fără alte modificări aduse produsului (tocuri și uși) față de starea în care au fost aduse pentru montaj. Lățimea standard a pervazului este de 6,5 cm. Dacă pereții și pardoselile sunt neregulate, iar beneficiarul nu le îndreaptă, sub pervaz vor rămâne în mod inevitabil rosturi. Producătorul nu este responsabil pentru neregularitățile pardoselii și ale pereților. Aceasta înseamnă că, dacă pereții nu sunt drepți, sub pervaz poate apărea un rost care urmărește neregularitatea peretelui și a pardoselii. Rosturile din jurul peretelui pot fi remediate prin chituire. Se chituiesc rosturi de maximum 5 mm lățime, rosturile mai mari trebuind remediate de client în regie proprie.\nManopera pentru chituirea neregularităților din jurul tocurilor se calculează separat la prețul de 6 € pentru 1 bucată. Chituirea din jurul tocurilor poate fi anulată. În caz contrar, este necesar ca clientul să își îndrepte peretele. Nu efectuăm lucrări de zidărie. In cazul găuririi în perete sau pardoseală, se pot produce deteriorări ale tencuielii sau ale gresiei. Deoarece nu putem evalua dacă în interior există o cavitate, nu ne asumăm responsabilitatea pentru daunele menționate. La montarea ușilor în goluri de construcție nestandardizate, unde montatorii trebuie să efectueze ajustări la fața locului cu unelte electrice de mână, este imposibil ca calitatea finisării prin această metodă să atingă calitatea producției de fabrică. Dacă va fi necesară ajustarea la fața locului prin rindeluire sau tăiere, clientul trebuie să asigure spațiu în apartament pentru aceste modificări. Se percepe un supliment de 15 € pentru 1 bucată. Montăm ușile în golurile pregătite, așa cum s-a convenit la măsurători. Dacă clientul adaugă profile de trecere, covor sau parchet laminat sub ușă, adică modifică înălțimea de sub ușă și va fi necesară o ajustare a ușii, vom efectua această lucrare pe baza unei comenzi separate, ceea ce înseamnă că nu face parte din livrarea standard a ușii."
+      },
+      "customMadeDoors": {
+        "title": "Uși pe comandă (la dimensiune)",
+        "description": "Aceasta se referă la dimensiuni atipice și nu la curbura pereților. În cazul în care pardoseala nu este dreaptă (nu este orizontală), o parte trebuie calată (susținută) și va apărea un rost sub toc. Un gol de construcție standard este cel care are o grosime regulată a peretelui, identică pe toate părțile. În cazul măsurătorilor efectuate înainte de montarea pardoselilor, dacă apar diferențe de înălțime în timpul realizării, responsabilitatea revine clientului. Dacă este necesară efectuarea diverselor tăieri pe elemente deja existente în apartament, de exemplu, profile de trecere, plinte, pardoseli, parchet, dulapuri, aceste acțiuni trebuie convenite separat, pe baza unui preț stabilit individual. Lucrările menționate nu fac parte din livrare. Fixăm pervazurile și baghetele de sticlă cu știfturi (cuie subțiri) cu o grosime de 0,6 mm, care sunt vizibile la toate ușile cu baghete. Baghetele de sticlă au îmbinări vizibile pe una dintre părți."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Îmbrăcare tocuri metalice",
+        "description": "La îmbrăcarea unui toc metalic sau la alte placări atipice de pereți, unde pervazul standard nu acoperă golul de construcție și trebuie fabricat unul mai lat, se aplică un supliment de 25 € pentru 1 bucată. Acest supliment va fi calculat după inspecție, deoarece este posibil să nu fi cunoscut acest aspect în oferta preliminară. În cazul demontării unui toc din oțel, din cauza muncii manuale, se pot produce deteriorări ale tencuielii sau ale vopselei."
+      },
+      "parking": {
+        "title": "Parcare",
+        "description": "În cazul în care nu se asigură o parcare fără probleme și descărcarea la intrare, se percepe un supliment de 100 €."
+      },
+      "opticalDefects": {
+        "title": "Defecte optice",
+        "description": "Se consideră defect optic un defect vizibil la lumina zilei de la o distanță de 1 metro, sub un unghi care corespunde utilizării normale."
+      },
+      "misc": {
+        "1": "Nu este intenția noastră de a nu spune adevărul clientului, dar cum fabricarea ușilor este o muncă manuală, pot apărea situații neprevăzute și de aceea ne rezervăm dreptul de a amâna termenul de montaj convenit cu 1-3 zile.",
+        "2": "Clientul este conștient că 1.) nu are 2.) are lățimi și înălțimi identice",
+        "3": "Clientul solicită ca dimensiunea să fie 1.) unificată 2.) neunificată",
+        "4": "Pentru transportul și eliminarea ușilor și tocurilor originale taxăm..............................................Є.",
+        "5": "Beneficiarul a citit totul, este de acord cu sensul de deschidere și golurile măsurate, a verificat toutul și a discutat toate neclaritățile cu persoana care a efectuat măsurătorile. Este conștient de faptul că nu poate solicita lucrări suplimentare în afara contractului fără dreptul la remunerare. Vom efectua cu plăcere lucrări suplimentare, dar solicităm ca acestea să fie incluse în comandă și plătite."
+      }
+    },
+    "doorsTable": {
+      "frame": "Toc",
+      "glass": "Sticlă",
+      "material": "Material",
+      "measurement": "Dimensiune",
+      "model": "Model"
+    },
+    "handlesWithUrl": "MÂNERE găsiți pe kluckynadvere.sk",
+    "material": "Material",
+    "pricePerUnit": "Preț / buc",
+    "priceVatFinal": "Preț total cu TVA",
+    "priceWoVat": "Preț fără TVA",
+    "priceWoVatFinal": "Preț total fără TVA",
+    "title": "Ofertă de preț pentru uși de interior"
+  },
+  "priceOfferMail": "<div>\n    <p>Bună ziua,</p>\n\n    <p>\n        În atașament vă trimitem oferta de preț pentru <strong>uși de interior</strong> pe care ați generat-o.\n    </p>\n\n    <p>\n        Puteți vedea ușile personal în ČACHTICE, BRATISLAVA sau TRNAVA.\n    </p>\n\n    <p>\n        Dacă doriți să comandați ușile sau aveți nevoie de mai multe informații,<br>\n        vă rugăm să ne trimiteți un e-mail la adresa:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        sau să sunați la numărul de telefon:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        Cu stimă,<br>\n        Ing. Peter Sučanský\n    </p>\n</div>"
 }

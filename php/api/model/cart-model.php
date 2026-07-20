@@ -232,7 +232,7 @@ class Handle implements Product
     {
         $effectiveCount = $this->getEffectiveCount($doorsCount);
         $basePriceDb = $this->getBasePriceFromDb($db) ?? 0.0;
-        $currencyPrice = currencyTransformation($currencyId, $basePriceDb, null);
+        $currencyPrice = currencyRateTransformation($currencyId, $basePriceDb, null);
 
         return new HandleResponse(
             $this->calculatePrice($effectiveCount, $currencyId),
@@ -248,7 +248,7 @@ class Handle implements Product
     {
         $db = HandlesJsonDataManipulation::findByIdOrNull($this->id);
         $basePrice = $this->getBasePriceFromDb($db) ?? 0.0;
-        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+        $currencyPrice = currencyRateTransformation($currencyId, $basePrice, null);
         return $effectiveCount * $currencyPrice;
     }
 
@@ -307,7 +307,7 @@ class TechnicalSurcharge implements Product
     public function toResponse(?array $technicalSurchargeDb, int $doorsCount, ?string $currencyId): TechnicalSurchargeResponse
     {
         $basePrice = $this->getBasePriceFromDb($technicalSurchargeDb) ?? 0.0;
-        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+        $currencyPrice = currencyRateTransformation($currencyId, $basePrice, null);
 
         $effectiveCount = $this->getEffectiveCount($technicalSurchargeDb, $doorsCount);
         return new TechnicalSurchargeResponse(
@@ -341,7 +341,7 @@ class TechnicalSurcharge implements Product
     function calculatePrice(?array $itemJson, int $effectiveCount, ?string $currencyId): float
     {
         $basePrice = $this->getBasePriceFromDb($itemJson) ?? 0.0;
-        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+        $currencyPrice = currencyRateTransformation($currencyId, $basePrice, null);
 
         $coefficient = $this->id == TechnicalSurcharge::$SILICONE_ID ? TechnicalSurcharge::$SILICONE_PRICE_MULTIPLIER : 1.0;
         return $effectiveCount * $currencyPrice * $coefficient;
@@ -384,7 +384,7 @@ class Rosette implements Product
     public function toResponse(array $rosetteDb, ?string $currencyId): RosetteResponse
     {
         $basePrice = $this->getBasePriceFromDb($rosetteDb) ?? 0.0;
-        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+        $currencyPrice = currencyRateTransformation($currencyId, $basePrice, null);
 
         return new RosetteResponse(
             $this->id,
@@ -406,7 +406,7 @@ class Rosette implements Product
     function calculatePrice(?array $rosetteDb, ?string $currencyId): float
     {
         $basePrice = $this->getBasePriceFromDb($rosetteDb) ?? 0.0;
-        $currencyPrice = currencyTransformation($currencyId, $basePrice, null);
+        $currencyPrice = currencyRateTransformation($currencyId, $basePrice, null);
         return ($this->count ?? 0) * $currencyPrice;
     }
 
@@ -495,7 +495,7 @@ class AestheticAccessory implements Product
     public function toResponse(array $aestheticAccessoryDb, ?string $currencyId): AestheticAccessoryResponse
     {
         $basePriceDb = $this->getBasePriceFromDb($aestheticAccessoryDb);
-        $currencyPrice = $basePriceDb ? currencyTransformation($currencyId, $basePriceDb, null) : null;
+        $currencyPrice = $basePriceDb ? currencyRateTransformation($currencyId, $basePriceDb, null) : null;
 
         return new AestheticAccessoryResponse(
             $this->id,
@@ -521,7 +521,7 @@ class AestheticAccessory implements Product
         $basePriceDb = $this->getBasePriceFromDb($aestheticAccessoryDb);
 
         if ($basePriceDb != null) {
-            return ($this->count ?? 0) * currencyTransformation($currencyId, $basePriceDb, null);
+            return ($this->count ?? 0) * currencyRateTransformation($currencyId, $basePriceDb, null);
         }
 
         return ($this->count ?? 0) * ($this->selectedPrice ?? 0.0);
@@ -574,11 +574,11 @@ class SpecialSurcharge implements Product
     public function toResponse(?array $specialSurchargeDb, ?string $currencyId): SpecialSurchargeResponse
     {
         $basePriceDb = $this->getBasePriceFromDb($specialSurchargeDb) ?? 0.0;
-        $currencyPrice = currencyTransformation($currencyId, $basePriceDb, null);
+        $currencyPrice = currencyRateTransformation($currencyId, $basePriceDb, null);
 
         return new SpecialSurchargeResponse(
             $this->id,
-            array_key_exists("assemblyCosts", $specialSurchargeDb) ? currencyTransformation($currencyId, $specialSurchargeDb["assemblyCosts"], null) : null,
+            array_key_exists("assemblyCosts", $specialSurchargeDb) ? currencyRateTransformation($currencyId, $specialSurchargeDb["assemblyCosts"], null) : null,
             $this->calculatePrice($specialSurchargeDb, $currencyId),
             $currencyPrice,
             $this->count,
@@ -603,7 +603,7 @@ class SpecialSurcharge implements Product
         $assemblyCosts = $specialSurchargeDb["assemblyCosts"] ?? 0.0;
         $assemblyPrice = $this->isAssemblySelected ? $assemblyCosts : 0.0;
         $price = $this->getBasePriceFromDb($specialSurchargeDb) ?? 0.0;
-        return ($this->count ?? 0) * currencyTransformation($currencyId, $price + $assemblyPrice, null);
+        return ($this->count ?? 0) * currencyRateTransformation($currencyId, $price + $assemblyPrice, null);
     }
 
     static function getEffectiveIsAssemblySelected(?int $count, ?bool $isAssemblySelected, ?bool $isAssemblySelectedDirty): bool
@@ -715,7 +715,7 @@ class Door implements Product
 
         $price = $price + DoorsWidthEnum::getFee($this->width);//extra fee for width
         $price = $price + ($this->isDtdSelected ? ParametersJsonDataManipulation::getAll()["dtdSurcharge"] : 0);//extra fee for DTD
-        return ($this->count ?? 0) * currencyTransformation($currencyId, $price, null);
+        return ($this->count ?? 0) * currencyRateTransformation($currencyId, $price, null);
     }
 
     function isDtdAvailable(): bool
@@ -1007,8 +1007,8 @@ class PriceOffer
         return new PriceOfferResponse(
             $this->address ? $this->address->toResponse() : AddressResponse::empty(),
             $assemblyDoorsCalculatedPrice,
-            currencyTransformation($this->currency, ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"] ?? 0.0, null),
-            currencyTransformation($this->currency, ParametersJsonDataManipulation::getAll()["assemblyDoorsCostMin"] ?? 0.0, null),
+            currencyRateTransformation($this->currency, ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"] ?? 0.0, null),
+            currencyRateTransformation($this->currency, ParametersJsonDataManipulation::getAll()["assemblyDoorsCostMin"] ?? 0.0, null),
             $assemblyDoorsEffectiveCount,
             $assemblyHandlesRosettesEffectiveCount,
             $this->calculateAssemblyPriceHandlesRosettes($assemblyHandlesRosettesEffectiveCount),
@@ -1018,7 +1018,7 @@ class PriceOffer
             $this->contact ? $this->contact->toResponse() : ContactResponse::empty(),
             $this->currency,
             $calculatedDeliveryCosts,
-            currencyTransformation($this->currency, ParametersJsonDataManipulation::getAll()["deliveryPricePerKm"], null),
+            currencyRateTransformation($this->currency, ParametersJsonDataManipulation::getAll()["deliveryPricePerKm"], null),
             array_map(function (Door $door): DoorResponse {
                 return $door->toResponse($this->currency);
             }, $this->doors),
@@ -1096,7 +1096,7 @@ class PriceOffer
                 $assemblyDoorsCount * ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"],
                 ParametersJsonDataManipulation::getAll()["assemblyDoorsCostMin"]
             );
-            return currencyTransformation($this->currency, $result, null);
+            return currencyRateTransformation($this->currency, $result, null);
         }
 
         return 0.0;
@@ -1107,7 +1107,7 @@ class PriceOffer
         if ($this->address) {
             $config = DistrictsJsonDataManipulation::findByIdOrNull($this->address->district);
             return $config ?
-                currencyTransformation(
+                currencyRateTransformation(
                     $this->currency,
                     2 * $config["distance"] * ParametersJsonDataManipulation::getAll()["deliveryPricePerKm"], null
                 ) : 0.0;
@@ -1247,7 +1247,7 @@ class PriceOffer
 
     function calculateAssemblyPriceHandlesRosettes(int $effectiveCount): float
     {
-        return $effectiveCount * currencyTransformation(
+        return $effectiveCount * currencyRateTransformation(
                 $this->currency,
                 ParametersJsonDataManipulation::getAll()["assemblyPriceHandlesRosettes"],
                 null
@@ -1319,7 +1319,7 @@ function mapSpecialSurchargesToResponse(array $selectedSpecialSurcharges, ?strin
     }, SpecialSurchargesJsonDataManipulation::getAll());
 }
 
-function currencyTransformation(
+function currencyRateTransformation(
     ?string $currencyId,
     float   $price,
     ?array  $priceCurrencyOverride

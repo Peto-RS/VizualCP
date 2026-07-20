@@ -76,8 +76,9 @@
   "delivery": {
     "address": "Adresse de livraison (facultatif)",
     "city": "Commune/Ville",
-    "district": "Sélectionnez la ville de district",
-    "note": "Le prix du transport est de 0,5 € par km. Le transport est calculé à partir de la production dans la commune de Čachtice.",
+    "chooseDistrict": "Sélectionnez la ville de district",
+    "district": "Ville de district",
+    "note": "Le prix du transport est de {price} par km. Le transport est calculé à partir de la production dans la commune de Čachtice.",
     "street": "Rue",
     "streetNumber": "Numéro de maison",
     "zipCode": "Code postal"
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "Le design simple et élégant des portes d'intérieur Zuzana saura répondre aux attentes des clients les plus exigeants.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova acier inoxydable R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova acier inoxydable HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima acier inoxydable R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima acier inoxydable HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun acier inoxydable R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma acier inoxydable R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma acier inoxydable HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio graphite HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio nickel satiné HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio patine HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit laiton brossé HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta nickel satiné HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Euforia graphite HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Euforia patine HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz acier inoxydable HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks noir mat HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik laiton brossé HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik nickel satiné HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik chrome brillant HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik blanc mat HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik noir mat HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Plaque"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Supplément pour la découpe des champlats {price}/pce : Les champlats sont découpés lors du montage si les ouvertures de construction sont mal conçues. Par exemple, si les marches entre les pièces font plus de 5 mm, ou s'il n'y a pas de fixations sur les murs pour le cadre et qu'il faut recouper le champlat, ou si le carrelage de la salle de bain / WC arrive à une hauteur inférieure à celle de la porte et qu'il faut fraiser une rainure dans le champlat."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Adresse",
+    "assembly": "Installation",
+    "boolean": {
+      "true": "Oui",
+      "false": "Non"
+    },
+    "city": "Ville",
+    "count": "pcs",
+    "currency": "Devise",
+    "disclaimer": {
+      "title": "Conditions générales",
+      "interiorDoors": {
+        "title": "Portes d'intérieur",
+        "description": "Les portes sont certifiées comme portes d'intérieur. Cela signifie qu'elles sont destinées à un environnement intérieur identique des deux côtés de la porte. Si un côté est exposé à une forte humidité, elles risquent de se voiler ou de se déformer. Les portes sont fabriquées conformément aux normes STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "Portes laquées blanc",
+        "description": "Pour les produits laqués blanc, le client a été informé que le laquage au sein de notre entreprise est un travail manuel et non un laquage en cabine à vide ; par conséquent, de mineurs défauts peuvent apparaître sur le produit."
+      },
+      "whiteLaminateDoors": {
+        "title": "Portes stratifiées blanches",
+        "description": "Le stratifié blanc n'est pas un matériau blanc dans la masse. Le décor blanc est uniquement en surface. C'est pourquoi, avec ce décor, des joints apparents se forment sur tous les chants et sont visibles."
+      },
+      "slidingDoors": {
+        "title": "Portes coulissantes",
+        "description": "Ces portes servent à diviser l'espace. En raison de la fonctionnalité de la porte, un espace apparaît inévitablement entre le cadre et la porte."
+      },
+      "veneeredDoors": {
+        "title": "Portes plaquées",
+        "description": "Pour les portes plaquées, le client a été informé que le placage est un matériau naturel. Plusieurs nuances peuvent apparaître au sein d'une même essence de bois."
+      },
+      "laminateDoors": {
+        "title": "Portes stratifiées",
+        "description": "Pour les portes stratifiées, la nuance est garantie par le fabricant. Les panneaux stratifiés sont triés selon la norme de l'entreprise, qui autorise la présence d'impuretés dans une limite de : 2 mm²/1m². La norme autorise 2 à 3 points par panneau. L'uniformité du stratifié est définie par le panneau complet fourni par le fabricant. Cela signifie que l'élément uniforme utilisé pour la fabrication provient d'un seul et même panneau."
+      },
+      "assembly": {
+        "title": "Installation / Montage",
+        "description": "Le prix de l'installation des portes et des cadres comprend la pose sans autres modifications du produit (cadres et portes) par rapport à l'état dans lequel ils ont été livrés. La largeur standard du couvre-joint é de 6,5 cm. Si les murs et les sols sont irréguliers et que le client ne les égalise pas, des espaces subsisteront inévitablement sous le couvre-joint. Le fabricant n'est pas responsable des irrégularités du sol et des murs. Cela signifie que si les murs ne sont pas droits, un espace peut apparaître sous le couvre-joint, épousant l'irrégularité du mur et du sol. Les espaces autour du mur peuvent être corrigés par jointoiement/masticage. Les joints d'une largeur maximale de 5 mm sont mastiqués, les espaces plus grands doivent être réparés par le client lui-même.\nLa prestation de masticage des irrégularités autour des cadres est facturée séparément au prix de 6 € par unité. Le masticage autour des cadres peut être annulé. Dans le cas contraire, le client doit faire égaliser le mur. Nous n'effectuons pas de travaux de maçonnerie. En cas de perçage dans le mur ou le sol, le plâtre ou le carrelage peut être endommagé. Comme nous ne pouvons pas évaluer s'il y a une cavité à l'intérieur, nous déclinons toute responsabilité pour lesdits dommages. Lors de l'installation de portes dans des ouvertures de construction non standard où les installateurs doivent effectuer des ajustements sur place à l'aide d'outils électroportatifs, la qualité de finition par cette méthode ne peut atteindre celle d'une fabrication en atelier. Si un ajustement sur place par rabotage ou découpe est nécessaire, le client doit disposer d'un espace suffisant dans l'appartement pour ces travaux. Nous facturons un supplément de 15 € par unité. Nous installons les portes dans les ouvertures préparées, comme convenu lors de la prise de mesures. Si le client ajoute des seuils de porte, de la moquette ou un parquet flottant sous la porte, modifiant ainsi la hauteur sous la porte et rendant un ajustement de la porte nécessaire, nous réaliserons cette prestation sur la base d'une commande distincte ; elle ne fait donc pas partie de la livraison standard de la porte."
+      },
+      "customMadeDoors": {
+        "title": "Portes sur mesure",
+        "description": "Cela fait référence à des dimensions atypiques et non à la courbure des murs. Si le sol n'est pas de niveau (pas horizontal), un côté doit être calé, ce qui crée un espace sous le cadre. Une ouverture de maçonnerie standard est une ouverture dont l'épaisseur de mur est régulière et identique de tous les côtés. Lors de la prise de mesures, si les sols ne sont pas posés et que des différences de hauteur apparaissent lors de la réalisation, la responsabilité en incombe au client. S'il est nécessaire d'effectuer diverses découpes sur des aménagements existants de l'appartement (par exemple, profilés de transition, plinthes, sols, parquets, armoires), ces opérations doivent être convenues séparément sur la base d'un prix fixé individuellement. Ces travaux ne font pas partie de la livraison. Nous fixons les couvre-joints et les parcloses avec des broches de 0,6 mm d'épaisseur, visibles sur toutes les portes à moulures. Les parcloses présentent des joints visibles sur l'un des côtés."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Habillage de cadres de porte métalliques",
+        "description": "Lors de l'habillage d'un cadre métallique ou pour d'autres habillages muraux atypiques où le couvre-joint standard ne recouvre pas l'ouverture de maçonnerie et doit être fabriqué plus large, un supplément de 25 € par unité est appliqué. Ce supplément sera calculé après inspection, car nous ne pouvions pas le prévoir lors du devis préliminaire. En cas de démontage d'un cadre en acier, le travail manuel peut entraîner des dommages au plâtre ou à la peinture."
+      },
+      "parking": {
+        "title": "Stationnement",
+        "description": "Si un stationnement sans problème et le déchargement à l'entrée ne sont pas garantis, un supplément de 100 € est facturé."
+      },
+      "opticalDefects": {
+        "title": "Défauts optiques",
+        "description": "Un défaut optique est un défaut visible à la lumière du jour à une distance de 1 mètre, sous un angle correspondant à une utilisation normale."
+      },
+      "misc": {
+        "1": "Il n'est pas dans notre intention de cacher la vérité au client, mais la fabrication de portes étant un travail humain, des imprévus peuvent survenir. C'est pourquoi nous nous réservons le droit de reporter la date d'installation convenue de 1 à 3 jours.",
+        "2": "Le client est conscient que 1.) il n'a pas 2.) il a des largeurs et hauteurs identiques",
+        "3": "Le client demande que la dimension soit 1.) unifiée 2.) non unifiée",
+        "4": "Pour l'enlèvement et l'évacuation des portes et cadres d'origine, nous facturons..............................................Є.",
+        "5": "Le client a tout lu, accepte le sens d'ouverture et les ouvertures mesurées, a tout vérifié et a discuté de toutes les ambiguïtés avec le technicien de mesure. Il est conscient qu'il ne peut exiger de travail supplémentaire hors contrat sans droit à rémunération. Nous réaliserons volontiers des travaux supplémentaires, mais nous demandons qu'ils soient inclus dans la commande et payés."
+      }
+    },
+    "doorsTable": {
+      "frame": "Cadre / Châssis",
+      "glass": "Vitrage / Verre",
+      "material": "Matériau",
+      "measurement": "Dimension",
+      "model": "Modèle"
+    },
+    "handlesWithUrl": "POIGNÉES DE PORTE disponibles sur kluckynadvere.sk",
+    "material": "Matériau",
+    "pricePerUnit": "Prix / pc",
+    "priceVatFinal": "Prix total TTC",
+    "priceWoVat": "Prix HT",
+    "priceWoVatFinal": "Prix total HT",
+    "title": "Devis pour portes d'intérieur"
+  },
+  "priceOfferMail": "<div>\n    <p>Bonjour,</p>\n\n    <p>\n        Vous trouverez en pièce jointe le devis pour les <strong>portes d'intérieur</strong> que vous avez généré.\n    </p>\n\n    <p>\n        Vous pouvez voir les portes en personne à ČACHTICE, BRATISLAVA ou TRNAVA.\n    </p>\n\n    <p>\n        Si vous souhaitez commander les portes ou si vous avez besoin de plus d'informations,<br>\n        veuillez nous envoyer un e-mail à l'adresse suivante :\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        ou nous appeler au numéro de téléphone :\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        Cordialement,<br>\n        Ing. Peter Sučanský\n    </p>\n</div>"
 }

@@ -11,7 +11,8 @@ function mapHandlesToResponse(?string $currencyId): array
             $handle['hiddenForDoorCategory'] ?? null,
             $handle['imgSrc'],
             $handle['label'],
-            currencyTransformation($currencyId, $handle['price'], null)
+            $handle['labelKey'],
+            currencyRateTransformation($currencyId, $handle['price'], null)
         );
     }, $handles);
 }
@@ -44,7 +45,7 @@ function mapDoorTypesToResponse(array $doorTypes, ?string $currencyId): array
         $price = $doorType['price'] ?? null;
 
         if (is_numeric($price)) {
-            $doorType['price'] = currencyTransformation($currencyId, $price, null);
+            $doorType['price'] = currencyRateTransformation($currencyId, $price, null);
         }
 
         $result[$key] = $doorType;

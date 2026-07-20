@@ -76,8 +76,9 @@
   "delivery": {
     "address": "Szállítási cím (nem kötelező)",
     "city": "Település",
-    "district": "Válasszon járási székhelyet",
-    "note": "A szállítási díj 0,5 €/km. A szállítást a csejtei (Čachtice) gyártóüzemtől számítjuk.",
+    "chooseDistrict": "Válasszon járási székhelyet",
+    "district": "Járási székhelyet",
+    "note": "A szállítási díj {price}/km. A szállítást a csejtei (Čachtice) gyártóüzemtől számítjuk.",
     "street": "Utca",
     "streetNumber": "Házszám",
     "zipCode": "Irányítószám"
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "A Zuzana beltéri ajtók egyszerű, mégis elegáns kialakítása a legigényesebb vásárlók elvárásait is képes teljesíteni.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova rozsdamentes acél R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova rozsdamentes acél HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima rozsdamentes acél R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima rozsdamentes acél HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun rozsdamentes acél R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma rozsdamentes acél R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma rozsdamentes acél HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio grafit HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio szatén nikkel HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio patina HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit szálcsiszolt sárgaréz HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta szatén nikkel HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Euforia grafit HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Euforia patina HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz rozsdamentes acél HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks matt fekete HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik szálcsiszolt sárgaréz HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik szatén nikkel HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik fényes króm HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik matt fehér HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik matt fekete HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Címlap"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Borítások vágási felára {price}/db: A borításokat akkor kell vágni, ha a falnyílások nem megfelelően vannak kialakítva. Például ha a helyiségek közötti szintkülönbség több mint 5 mm, vagy ha a tok rögzítéséhez le kell vágni a borításból, vagy ha a fürdő/WC csempézése alacsonyabb az ajtó magasságánál."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Cím",
+    "assembly": "Beépítés",
+    "boolean": {
+      "true": "Igen",
+      "false": "Nem"
+    },
+    "city": "Város",
+    "count": "db",
+    "currency": "Pénznem",
+    "disclaimer": {
+      "title": "Szerződési feltételek",
+      "interiorDoors": {
+        "title": "Beltéri ajtók",
+        "description": "Az ajtók beltéri ajtóként vannak tanúsítva. Ez azt jelenti, hogy olyan belső környezetbe valóak, ahol a körülmények az ajtó mindkét oldalán azonosak. Abban az esetben, ha az egyik oldalról nagy nedvességnek vannak kitéve, az ajtók meghajolhatnak. Az ajtók az STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2 szabványok szerint készülnek."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "Fehér fújt (festett) ajtók",
+        "description": "A fehér fújt termékek esetében a vásárló tájékoztatást kapott arról, hogy a cégnél történő festés kézi munka, nem pedig vákuumkamrás fújás, ezért a terméken apróbb hibák előfordulhatnak."
+      },
+      "whiteLaminateDoors": {
+        "title": "Fehér laminált ajtók",
+        "description": "A fehér laminátum nem olyan anyag, amely teljes mélységében fehér lenne. A fehér dekoráció csak a felületen van. Emiatt ennél a dekornál minden élen látható illesztések (fugák) keletkeznek, amelyek észrevehetőek."
+      },
+      "slidingDoors": {
+        "title": "Tolóajtók",
+        "description": "Ezek az ajtók a tér elválasztására szolgálnak. Az ajtó funkcionalitása miatt a tok és az ajtó között elkerülhetetlenül rés keletkezik."
+      },
+      "veneeredDoors": {
+        "title": "Furnérozott ajtók",
+        "description": "A furnérozott ajtóknál a vásárló tájékoztatást kapott arról, hogy a furnér természetes anyag. Egy fafajon belül több színárnyalat is előfordulhat."
+      },
+      "laminateDoors": {
+        "title": "Laminált ajtók",
+        "description": "A laminált ajtóknál az árnyalatot a gyártó garantálja. A laminált lapokat a vállalati szabvány szerint osztályozzák, amely a szennyeződések előfordulását a következő tartományban engedélyezi: 2 mm²/1m². A szabvány laponként 2-3 darab pontot engedélyez. A laminátum egységességét a gyártó által szállított teljes lap adja. Ez azt jelenti, hogy a gyártáshoz használt egységes elem egyetlen lapon belül értendő."
+      },
+      "assembly": {
+        "title": "Beépítés / Szerelés",
+        "description": "Az ajtók és tokok beépítési ára magában foglalja a szerelést a terméken (tokokon és ajtókon) végzett további módosítások nélkül, abban az állapotban, ahogyan azokat a helyszínre szállították. A takaróléc szabványos szélessége 6,5 cm. Ha a falak és a padlók egyenetlenek, és a megrendelő nem egyenlíti ki azokat, a takaróléc alatt elkerülhetetlenül rések maradnak. A gyártó nem vállal felelősséget a padló és a falak egyenetlenségeiért. Ez azt jelenti, hogy ha a falak nem egyenesek, a takaróléc alatt olyan rés keletkezhet, amely követi a fal és a padló egyenetlenségeit. A fal körüli réseket tömítéssel lehet javítani. Legfeljebb 5 mm széles rést tömítünk, a nagyobb réseket a vásárlónak saját magának kell kijavítania.\nA tokok körüli egyenetlenségek tömítésének díja külön kerül felszámításra, ára 6 € / 1 darab. A tokok körüli tömítés lemondható. Ellenkező esetben a vásárlónak ki kell egyenesíttetnie a falat. Kőműves munkákat nem végzünk. A falba vagy padlóba történő fúrás esetén a vakolat vagy a csempe megsérülhet. Mivel nem tudjuk megítélni, hogy a belsejében van-e üreg, az említett sérülésekért nem vállalunk felelősséget. Az ajtók nem szabványos falnyílásokba történő beépítésekor, ahol a szerelőknek elektromos kéziszerszámokkal kell módosításokat végezniük a szerelés helyszínén, a megmunkálás minősége ezzel a módszerrel nem érheti el a gyári gyártás minőségét. Ha a helyszínen gyalulással vagy vágással kell módosítani, a vásárlónak helyet kell biztosítania a lakásban ezekhez a munkákhoz. 15 € felárat számítunk fel darabonként. Az ajtókat az előkészített nyílásokba szereljük be, ahogyan azt a felmérés során egyeztettük. Ha a vásárló az ajtó alá burkolatváltó profilt, szőnyeget vagy úszópadlót helyez el, azaz megváltoztatja az ajtó alatti magasságot, és az ajtó igazítása válik szükségessé, ezt külön megrendelés alapján végezzük el, tehát nem képezi az ajtó alapszállításának részét."
+      },
+      "customMadeDoors": {
+        "title": "Egyedi gyártású ajtók",
+        "description": "Ez atipikus méretet jelent, nem pedig a falak görbeségét. Abban az esetben, ha a padló nem egyenes (nem vízszintes), az egyik oldalt alá kell bakolni, és a tok aljánál rés keletkezik. A szabványos falnyílás olyan, amely szabályos falvastagsággal rendelkezik, minden oldalon azonos méretű. A felmérés során, ha a padló még nincs lefektetve, és a kivitelezés során magasságkülönbségek adódnak, ezekért a felelősség a vásárlót terheli. Ha a lakás már meglévő berendezésein (pl. átmeneti-, lábazati-, szegélylécek, padlók, parketták, szekrények) különböző vágásokat kell végezni, ezeket a műveleteket külön, egyedileg meghatározott ár alapján kell egyeztetni. Ezen munkák nem képezik a szállítás részét. A takaróléceket és az üvegező léceket 0,6 mm vastagságú tűkkel rögzítjük, amelyek minden lécezett ajtónál láthatóak. Az üvegező léceknek az egyik oldalon látható illesztései vannak."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Fémtokok utólagos burkolása",
+        "description": "Fémtok burkolása vagy egyéb atipikus falburkolatok esetén, ahol a szabványos takaróléc nem fedi le a falnyílást, és szélesebbet kell gyártani, a felár 25 € / 1 darab. Ez a felár a helyszíni szemle után kerül pontosításra, mivel az előzetes árajánlatnál ezt nem feltétlenül tudhattuk. Acéltok kiszerelése esetén a kézi munka zbog sérülhet a vakolat vagy a festés."
+      },
+      "parking": {
+        "title": "Parkolás",
+        "description": "Abban az esetben, ha a bejáratnál nem biztosított a problémamentes parkolás és az anyagok behordása, 100 € felárat számítunk fel."
+      },
+      "opticalDefects": {
+        "title": "Optikai hibák",
+        "description": "Optikai hibának minősül az a hiba, amely nappali fénynél, 1 méter távolságból, a normál használatnak megfelelő szögben látható."
+      },
+      "misc": {
+        "1": "Nem áll szándékunkban elhallgatni az igazságot a vásárló elől, de mivel az ajtógyártás emberi kéz munkája, előre nem látható körülmények adódhatnak, ezért fenntartjuk a jogot, hogy a megbeszélt szerelési határidőt 1-3 nappal eltoljuk.",
+        "2": "A vásárló tudomásul veszi, hogy 1.) nem azonosak 2.) azonosak a szélességek és magasságok",
+        "3": "A méretet 1.) egységesíteni 2.) nem egységesíteni kéri",
+        "4": "Eredeti ajtók és tokok elszállításáért és megsemmisítéséért felszámítunk..............................................Є.",
+        "5": "A megrendelő mindent elolvasott, egyetért a nyitási irányokkal és a mért nyílásokkal, mindent ellenőrzött, és minden tisztázatlan kérdést átbeszélt a felmérést végző személlyel. Tisztában van azzal, hogy ellenszolgáltatás nélkül nem követelhet a szerződésben foglaltakon felüli munkát. A pluszmunkát szívesen elvégezzük, de kérjük, hogy az szerepeljen a megrendelésben és kerüljön kifizetésre."
+      }
+    },
+    "doorsTable": {
+      "frame": "Ajtótok",
+      "glass": "Üveg",
+      "material": "Anyag",
+      "measurement": "Méret",
+      "model": "Modell"
+    },
+    "handlesWithUrl": "KILINCSEK a kluckynadvere.sk oldalon találhatóak",
+    "material": "Anyag",
+    "pricePerUnit": "Ár / db",
+    "priceVatFinal": "Végösszeg áfával",
+    "priceWoVat": "Ár áfa nélkül",
+    "priceWoVatFinal": "Végösszeg áfa nélkül",
+    "title": "Árajánlat beltéri ajtókra"
+  },
+  "priceOfferMail": "<div>\n    <p>Üdvözöljük!</p>\n\n    <p>\n        Mellékelten küldjük az Ön által generált árajánlatot a <strong>beltéri ajtókra</strong>.\n    </p>\n\n    <p>\n        Az ajtókat személyesen is megtekintheti CSOHTÁBAN (ČACHTICE), POZSONYBAN (BRATISLAVA) vagy NAGYSZOMBATBAN (TRNAVA).\n    </p>\n\n    <p>\n        Amennyiben meg szeretné rendelni az ajtókat, vagy további információra van szüksége,<br>\n        kérjük, küldjön e-mailt a következő címre:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        vagy hívja az alábbi telefonszámot:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        Üdvözlettel,<br>\n        Ing. Peter Sučanský\n    </p>\n</div>"
 }

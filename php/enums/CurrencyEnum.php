@@ -9,4 +9,16 @@ abstract class CurrencyEnum
     {
         return in_array($currency, [self::CZK, self::EUR], true);
     }
+
+    public static function getCurrencySign($currencyEnum): string
+    {
+        switch ($currencyEnum) {
+            case CurrencyEnum::CZK:
+                return "Kč";
+            case CurrencyEnum::EUR:
+                return "€";
+            default:
+                return "";
+        }
+    }
 }

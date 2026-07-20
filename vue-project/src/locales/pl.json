@@ -76,8 +76,9 @@
   "delivery": {
     "address": "Adres dostawy (opcjonalnie)",
     "city": "Miejscowość",
-    "district": "Wybierz miasto powiatowe",
-    "note": "Cena transportu wynosi 0,5 € za km. Transport liczony jest od produkcji w miejscowości Čachtice.",
+    "chooseDistrict": "Wybierz miasto powiatowe",
+    "district": "Miasto powiatowe",
+    "note": "Cena transportu wynosi {price} za km. Transport liczony jest od produkcji w miejscowości Čachtice.",
     "street": "Ulica",
     "streetNumber": "Numer domu",
     "zipCode": "Kod pocztowy"
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "Prosty, a zarazem elegancki design drzwi wewnętrznych Zuzana jest w stanie spełnić oczekiwania nawet najbardziej wymagających klientów.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova stal nierdzewna R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova stal nierdzewna HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima stal nierdzewna R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima stal nierdzewna HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun stal nierdzewna R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma stal nierdzewna R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma stal nierdzewna HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio grafit HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio nikiel satynowy HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio patyna HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit mosiądz szczotkowany HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta nikiel satynowy HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Euforia grafit HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Euforia patyna HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz stal nierdzewna HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks czarny mat HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik mosiądz szczotkowany HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik nikiel satynowy HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik chrom błyszczący HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik biały mat HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik czarny mat HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Szyld"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Dopłata za podcinanie opasek {price}/sztuka: Opaski są podcinane podczas montażu, jeśli otwory budowlane są niewłaściwie przygotowane. Na przykład, gdy różnica poziomów między pokojami przekracza 5 mm, gdy na ścianach brakuje miejsca na ościeżnicę i trzeba ją dociąć, lub gdy płytki w łazience/WC sięgają niżej niż wysokość drzwi i trzeba wyfrezować rowek w opasce."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Adres",
+    "assembly": "Montaż",
+    "boolean": {
+      "true": "Tak",
+      "false": "Nie"
+    },
+    "city": "Miasto",
+    "count": "szt.",
+    "currency": "Waluta",
+    "disclaimer": {
+      "title": "Warunki umowy",
+      "interiorDoors": {
+        "title": "Drzwi wewnętrzne",
+        "description": "Drzwi są certyfikowane jako drzwi wewnętrzne. Oznacza to, że są przeznaczone do środowiska wewnętrznego, w którym warunki po obu stronach drzwi są takie same. W przypadku, gdy jedna strona jest narażona na wysoką wilgotność, może dojść do ich wygięcia. Drzwi są produkowane zgodnie z normami STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "Drzwi lakierowane na biało",
+        "description": "W przypadku białych produktów lakierowanych natryskowo klient został poinformowany, że lakierowanie w naszej firmie to praca ręczna, a nie lakierowanie w komorze próżniowej, dlatego na produkcie mogą wystąpić drobne wady."
+      },
+      "whiteLaminateDoors": {
+        "title": "Drzwi z białego laminatu",
+        "description": "Biały laminat nie jest materiałem, który byłby biały w całym swoim przekroju. Biały dekor znajduje się tylko na powierzchni. Z tego powodu przy tym dekorze na wszystkich krawędziach powstają widoczne spoiny (łączenia), które są zauważalne."
+      },
+      "slidingDoors": {
+        "title": "Drzwi przesuwne",
+        "description": "Drzwi te służą do podziału przestrzeni. Ze względu na funkcjonalność drzwi, pomiędzy ościeżnicą a drzwiami nieuchronnie powstaje szczelina."
+      },
+      "veneeredDoors": {
+        "title": "Drzwi fornirowane",
+        "description": "W przypadku drzwi fornirowanych klient został poinformowany, że fornir jest materiałem naturalnym. W ramach jednego gatunku drewna występuje wiele odcieni."
+      },
+      "laminateDoors": {
+        "title": "Drzwi laminowane",
+        "description": "W przypadku drzwi laminowanych odcień jest gwarantowany przez producenta. Płyty laminowane są sortowane według normy zakładowej, która dopuszcza występowanie zanieczyszczeń w zakresie: 2 mm²/1m². Norma pozwala na 2-3 szt. kropek na płycie. Jednolitość laminatu jest określona przez całą płytę dostarczoną przez producenta. Oznacza to, że jednolity element użyty do produkcji mieści się w ramach jednej płyty."
+      },
+      "assembly": {
+        "title": "Montaż",
+        "description": "Cena montażu drzwi i ościeżnic obejmuje montaż bez dalszych modyfikacji produktu (ościeżnic i drzwi) w stosunku do stanu, w jakim zostały dostarczone na montaż. Standardowa szerokość opaski maskującej wynosi 6,5 cm. Jeśli ściany i podłogi są nierówne, a zamawiający ich nie wyrówna, pod opaską nieuchronnie pozostaną szczeliny. Producent nie ponosi odpowiedzialności za nierówności podłogi i ścian. Oznacza to, że jeśli ściany nie są proste, pod opaską może powstać szczelina, która odwzorowuje nierówność ściany i podłogi. Szczeliny wokół ściany można naprawić poprzez uszczelnienie/akrylowanie. Uszczelnia się szczeliny o maksymalnej szerokości 5 mm, większe szczeliny klient musi naprawić we własnym zakresie.\nUsługa uszczelnienia nierówności wokół ościeżnic jest kalkulowana oddzielnie w cenie 6 € za 1 sztukę. Akrylowanie wokół ościeżnic można anulować. W przeciwnym razie konieczne jest, aby klient wyrównał ścianę. Prac murarskich nie wykonujemy. W przypadku wiercenia w ścianie lub podłodze może dojść do uszkodzenia tynku lub płytek. Ponieważ nie jesteśmy w stanie ocenić, czy wewnątrz znajduje się pustka, nie ponosimy odpowiedzialności za wspomniane uszkodzenia. Przy montażu drzwi w niestandardowych otworach budowlanych, gdzie montażyści muszą dokonać korekt na miejscu montażu za pomocą elektrycznych narzędzi ręcznych, jakość obróbki tą metodou nie może osiągnąć jakości produkcji warsztatowej. Jeśli konieczna będzie korekta na miejscu poprzez struganie lub przycinanie, klient musi zapewnić przestrzeń w mieszkaniu na te prace. Naliczamy dopłatę w wysokości 15 € za 1 sztukę. Drzwi montujemy w przygotowanych otworach zgodnie z ustaleniami podczas pomiaru. Jeśli klient doda pod drzwi listwy progowe, dywan lub podłogę pływającą, czyli zmieni wysokość pod drzwiami i konieczna będzie modyfikacja drzwi, wykonamy ją na podstawie osobnego zamówienia, co oznacza, że nie jest to część standardowej dostawy drzwi."
+      },
+      "customMadeDoors": {
+        "title": "Drzwi na wymiar",
+        "description": "Oznacza to nietypowy wymiar, a nie krzywiznę ścian. W przypadku, gdy podłoga nie jest wypoziomowana, jedną stronę należy podeprzeć, co spowoduje powstanie szczeliny pod ościeżnicą. Standardowy otwór budowlany to taki, który ma regularną i identyczną grubość muru ze wszystkich stron. W przypadku pomiarów wykonywanych przed położeniem podłóg, jeśli podczas realizacji wystąpią różnice wysokości, odpowiedzialność za nie ponosi klient. Jeśli konieczne jest wykonanie różnych docięć na już istniejącym wyposażeniu mieszkania, np. listew progowych, odbojnikowych, cokołowych, podłóg, parkietów, szaf, czynności te należy uzgodnić osobno na podstawie indywidualnie ustalonej ceny. Wyżej wymienione prace nie wchodzą w zakres dostawy. Opaski i listwy przyszybowe mocujemy sztyftami o grubości 0,6 mm, które są widoczne we wszystkich drzwiach z listwami. Listwy przyszybowe mają widoczne łączenia z jednej strony."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Zabudowa ościeżnic metalowych",
+        "description": "W przypadku zabudowy ościeżnicy metalowej lub innych nietypowych okładzin ściennych, gdzie standardowa opaska nie zakrywa otworu budowlanego i należy wyprodukować szerszą, dopłata wynosi 25 € za 1 sztukę. Dopłata ta zostanie doliczona po oględzinach, ponieważ mogliśmy o tym nie wiedzieć przy wstępnej ofercie. W przypadku demontażu ościeżnicy stalowej, ze względu na pracę ręczną, może dojść do uszkodzenia tynku lub powłoki malarskiej."
+      },
+      "parking": {
+        "title": "Parking",
+        "description": "W przypadku braku zapewnienia bezproblemowego parkowania i rozładunku przy wejściu, naliczana jest dopłata w wysokości 100 €."
+      },
+      "opticalDefects": {
+        "title": "Wady optyczne",
+        "description": "Za wadę optyczną uważa się wadę widoczną w świetle dziennym z odległości 1 metra pod kątem odpowiadającym normalnemu użytkowaniu."
+      },
+      "misc": {
+        "1": "Nie jest naszym celem ukrywanie prawdy przed klientem, ale ponieważ produkcja drzwi to praca ludzkich rąk, mogą wystąpić nieprzewidziane okoliczności, dlatego zastrzegamy sobie prawo do przesunięcia uzgodnionego terminu montażu o 1-3 dni.",
+        "2": "Klient jest świadomy, że 1.) nie ma 2.) ma identyczne szerokości i wysokości",
+        "3": "Klient żąda, aby wymiar był 1.) ujednolicony 2.) nieujednolicony",
+        "4": "Za wywóz i utylizację oryginalnych drzwi i ościeżnic pobieramy opłatę..............................................Є.",
+        "5": "Odbiorca przeczytał wszystko, zgadza się z kierunkiem otwierania i zmierzonymi otworami, wszystko sprawdził i omówił wszelkie niejasności z osobą wykonującą pomiar. Jest świadomy, że nie może żądać dodatkowej pracy poza umową bez prawa do wynagrodzenia. Dodatkowe prace chętnie wykonamy, ale wymagamy, aby zostały one uwzględnione w zamówieniu i opłacone."
+      }
+    },
+    "doorsTable": {
+      "frame": "Ościeżnica",
+      "glass": "Szkło",
+      "material": "Materiał",
+      "measurement": "Wymiar",
+      "model": "Model"
+    },
+    "handlesWithUrl": "KLAMKI znajdziesz na kluckynadvere.sk",
+    "material": "Materiał",
+    "pricePerUnit": "Cena / szt.",
+    "priceVatFinal": "Cena łączna z VAT",
+    "priceWoVat": "Cena bez VAT",
+    "priceWoVatFinal": "Cena łączna bez VAT",
+    "title": "Oferta cenowa na drzwi wewnętrzne"
+  },
+  "priceOfferMail": "<div>\n    <p>Dzień dobry,</p>\n\n    <p>\n        W załączniku przesyłamy wygenerowaną przez Ciebie ofertę cenową na <strong>drzwi wewnętrzne</strong>.\n    </p>\n\n    <p>\n        Drzwi można obejrzeć osobiście w CZACHTICACH, BRATYSŁAWIE lub TRNAWIE.\n    </p>\n\n    <p>\n        Jeśli chcesz zamówić drzwi lub potrzebujesz więcej informacji,<br>\n        wyślij nam wiadomość e-mail na adres:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        lub zadzwoń pod numer telefonu:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        Z poważaniem,<br>\n        inż. Peter Sučanský\n    </p>\n</div>"
 }

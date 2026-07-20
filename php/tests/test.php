@@ -1,11 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 require_once __DIR__ . '/../../functions.php';
 require_once __DIR__ . '/../../php/enums/CurrencyEnum.php';
 require_once __DIR__ . '/../api/model/cart-model.php';
 require_once __DIR__ . '/../api/price-offer-spreadsheet-facade.php';
+require_once __DIR__ . '/../enums/SupportedLanguagesEnum.php';
 
 class ApiIntegrationTest extends TestCase
 {
@@ -126,9 +128,15 @@ class ApiIntegrationTest extends TestCase
         $this->assertEquals(3554.21, round($resBody['priceOffer']['calculatedPriceVat'], 2));
 
         /*
-        * 4.    generateSpreadSheet
+        * 4.    generateSpreadSheet currency=EUR
         */
-        $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest(new PriceOfferRequest($resBody['priceOffer']))->toResponse(CurrencyEnum::EUR));
+        $priceOfferReq = new PriceOfferRequest($resBody['priceOffer']);
+        $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest($priceOfferReq)->toResponse(CurrencyEnum::EUR), SupportedLanguagesEnum::SK);
+
+        //save to disk
+        $writer = new Xlsx($spreadsheet);
+        $writer->save(__DIR__ . '/test-price-offer.xlsx');
+
         $this->assertEquals("Meno", $spreadsheet->getActiveSheet()->getCell('F1')->getValue());
         $this->assertEquals("+42111111111", $spreadsheet->getActiveSheet()->getCell('F2')->getValue());
         $this->assertEquals("Street 1, 97901 City", $spreadsheet->getActiveSheet()->getCell('F3')->getValue());
@@ -138,11 +146,11 @@ class ApiIntegrationTest extends TestCase
         $this->assertDoorsRow($spreadsheet, "7", "60", "v1", "Jelša", "139", "Áno", "1", "219");
         $this->assertDoorsRow($spreadsheet, "8", "60", "v1", "Jelša", "139", "Áno", "1", "219");
         $this->assertDoorsRow($spreadsheet, "9", "90", "W1_L2_K2_O2", "Striekaná biela", "1018", "Nie", "1", "1018");
-        $this->assertDoorsRow($spreadsheet, "10", "70", "Custom door 1", "", "100", "Áno", "1", "202");
-        $this->assertDoorsRow($spreadsheet, "11", "80", "Custom door 2", "", "100", "Nie", "1", "106");
+        $this->assertDoorsRow($spreadsheet, "10", "70", "Custom door 1", "", "103", "Áno", "1", "202");
+        $this->assertDoorsRow($spreadsheet, "11", "80", "Custom door 2", "", "106", "Nie", "1", "106");
 
         $this->assertEquals("ALT WIEN Štít", $spreadsheet->getActiveSheet()->getCell('A18')->getValue());
-        $this->assertEquals("38", $spreadsheet->getActiveSheet()->getCell('F18')->getValue());
+        $this->assertEquals("38", $spreadsheet->getActiveSheet()->getCell('F18')->getCalculatedValue());
         $this->assertEquals("3", $spreadsheet->getActiveSheet()->getCell('G18')->getValue());
         $this->assertEquals("114", $spreadsheet->getActiveSheet()->getCell('H18')->getCalculatedValue());
 
@@ -152,17 +160,17 @@ class ApiIntegrationTest extends TestCase
         $this->assertEquals("2", $spreadsheet->getActiveSheet()->getCell('H19')->getCalculatedValue());
 
         $this->assertEquals("Rozeta - BB štandardný interiérový zámok", $spreadsheet->getActiveSheet()->getCell('A20')->getValue());
-        $this->assertEquals("0", $spreadsheet->getActiveSheet()->getCell('F20')->getValue());
+        $this->assertEquals("0", $spreadsheet->getActiveSheet()->getCell('F20')->getCalculatedValue());
         $this->assertEquals("1", $spreadsheet->getActiveSheet()->getCell('G20')->getValue());
         $this->assertEquals("0", $spreadsheet->getActiveSheet()->getCell('H20')->getCalculatedValue());
 
         $this->assertEquals("Rozeta - WC zámok", $spreadsheet->getActiveSheet()->getCell('A21')->getValue());
-        $this->assertEquals("11", $spreadsheet->getActiveSheet()->getCell('F21')->getValue());
+        $this->assertEquals("11", $spreadsheet->getActiveSheet()->getCell('F21')->getCalculatedValue());
         $this->assertEquals("1", $spreadsheet->getActiveSheet()->getCell('G21')->getValue());
         $this->assertEquals("11", $spreadsheet->getActiveSheet()->getCell('H21')->getCalculatedValue());
 
         $this->assertEquals("Rozeta - FAB zámok", $spreadsheet->getActiveSheet()->getCell('A22')->getValue());
-        $this->assertEquals("0", $spreadsheet->getActiveSheet()->getCell('F22')->getValue());
+        $this->assertEquals("0", $spreadsheet->getActiveSheet()->getCell('F22')->getCalculatedValue());
         $this->assertEquals("", $spreadsheet->getActiveSheet()->getCell('G22')->getValue());
         $this->assertEquals("0", $spreadsheet->getActiveSheet()->getCell('H22')->getCalculatedValue());
 
@@ -176,8 +184,8 @@ class ApiIntegrationTest extends TestCase
         $this->assertEquals("2", $spreadsheet->getActiveSheet()->getCell('G24')->getValue());
         $this->assertEquals("20", $spreadsheet->getActiveSheet()->getCell('H24')->getCalculatedValue());
 
-        $this->assertEquals("Montáž kľučiek a roziet 5€", $spreadsheet->getActiveSheet()->getCell('A25')->getValue());
-        $this->assertEquals("5", $spreadsheet->getActiveSheet()->getCell('F25')->getValue());
+        $this->assertEquals("Montáž kľučiek a roziet", $spreadsheet->getActiveSheet()->getCell('A25')->getValue());
+        $this->assertEquals("5", $spreadsheet->getActiveSheet()->getCell('F25')->getCalculatedValue());
         $this->assertEquals("3", $spreadsheet->getActiveSheet()->getCell('G25')->getValue());
         $this->assertEquals("15", $spreadsheet->getActiveSheet()->getCell('H25')->getCalculatedValue());
 
@@ -193,7 +201,7 @@ class ApiIntegrationTest extends TestCase
 
         $this->assertEquals("Akciová montáž dverí so zárubňou 35 € / kus. Akcia platí pri počte 6 a viac kusov. Minimálna suma na dvoch montážnikov je 210 €.", $spreadsheet->getActiveSheet()->getCell('A35')->getCalculatedValue());
 
-        $this->assertEquals("12", $spreadsheet->getActiveSheet()->getCell('F38')->getValue());
+        $this->assertEquals("12", $spreadsheet->getActiveSheet()->getCell('F38')->getCalculatedValue());
         $this->assertEquals("1", $spreadsheet->getActiveSheet()->getCell('G38')->getValue());
         $this->assertEquals("12", $spreadsheet->getActiveSheet()->getCell('H38')->getCalculatedValue());
 
@@ -216,7 +224,7 @@ class ApiIntegrationTest extends TestCase
         $this->assertEquals("3", $spreadsheet->getActiveSheet()->getCell('G49')->getValue());
         $this->assertEquals("9", $spreadsheet->getActiveSheet()->getCell('H49')->getCalculatedValue());
 
-        $this->assertEquals("10", $spreadsheet->getActiveSheet()->getCell('F53')->getValue());
+        $this->assertEquals("10", $spreadsheet->getActiveSheet()->getCell('F53')->getCalculatedValue());
         $this->assertEquals("3", $spreadsheet->getActiveSheet()->getCell('G53')->getValue());
         $this->assertEquals("30", $spreadsheet->getActiveSheet()->getCell('H53')->getCalculatedValue());
 
@@ -262,8 +270,33 @@ class ApiIntegrationTest extends TestCase
         $this->assertEquals("3", $spreadsheet->getActiveSheet()->getCell('G87')->getValue());
         $this->assertEquals("9", $spreadsheet->getActiveSheet()->getCell('H87')->getCalculatedValue());
 
-        $this->assertEquals(2889.6, round(floatval($spreadsheet->getActiveSheet()->getCell('H89')->getCalculatedValue()), 2));
-        $this->assertEquals(3554.21, round(floatval($spreadsheet->getActiveSheet()->getCell('H90')->getCalculatedValue()), 2));
+        $this->assertEquals(CurrencyEnum::EUR, $spreadsheet->getActiveSheet()->getCell('H90')->getValue());
+        $this->assertEquals(2889.6, round(floatval($spreadsheet->getActiveSheet()->getCell('H91')->getCalculatedValue()), 2));
+        $this->assertEquals(3554.21, round(floatval($spreadsheet->getActiveSheet()->getCell('H92')->getCalculatedValue()), 2));
+
+        /*
+        * 5.    generateSpreadSheet currency=CZK
+        */
+        $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest($priceOfferReq)->toResponse(CurrencyEnum::CZK), SupportedLanguagesEnum::EN);
+
+        //save to disk
+        $writer = new Xlsx($spreadsheet);
+        $writer->save(__DIR__ . '/test-price-offer-CZK.xlsx');
+
+        $this->assertEquals(CurrencyEnum::CZK, $spreadsheet->getActiveSheet()->getCell('H90')->getValue());
+        $this->assertEquals(63899.32, round(floatval($spreadsheet->getActiveSheet()->getCell('H91')->getCalculatedValue()), 2));
+        $this->assertEquals(78596.17, round(floatval($spreadsheet->getActiveSheet()->getCell('H92')->getCalculatedValue()), 2));
+
+        /*
+        * 6.    generateSpreadSheet for all supported languages
+        */
+        foreach (SupportedLanguagesEnum::getAll() as $lang) {
+            $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest($priceOfferReq)->toResponse(CurrencyEnum::EUR), $lang);
+
+            $this->assertEquals(CurrencyEnum::EUR, $spreadsheet->getActiveSheet()->getCell('H90')->getValue());
+            $this->assertEquals(2889.6, round(floatval($spreadsheet->getActiveSheet()->getCell('H91')->getCalculatedValue()), 2));
+            $this->assertEquals(3554.21, round(floatval($spreadsheet->getActiveSheet()->getCell('H92')->getCalculatedValue()), 2));
+        }
     }
 
     function assertDoorsRow(

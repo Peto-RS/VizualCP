@@ -76,8 +76,9 @@
   "delivery": {
     "address": "Lieferadresse (optional)",
     "city": "Gemeinde/Stadt",
-    "district": "Bezirksstadt wählen",
-    "note": "Der Transportpreis beträgt 0,5 € pro km. Der Transport wird ab der Produktion in der Gemeinde Čachtice berechnet.",
+    "chooseDistrict": "Bezirksstadt wählen",
+    "district": "Bezirksstadt",
+    "note": "Der Transportpreis beträgt {price} pro km. Der Transport wird ab der Produktion in der Gemeinde Čachtice berechnet.",
     "street": "Straße",
     "streetNumber": "Hausnummer",
     "zipCode": "PLZ"
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "Das schlichte und zugleich elegante Design der Innentüren Zuzana kann selbst die Erwartungen der anspruchsvollsten Kunden erfüllen.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova Edelstahl R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova Edelstahl HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima Edelstahl R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima Edelstahl HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun Edelstahl R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma Edelstahl R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma Edelstahl HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio Graphit HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio Satin Nickel HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio Patina HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit gebürstetes Messing HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta Satin Nickel HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Euforia Graphit HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Euforia Patina HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz Edelstahl HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks Mattschwarz HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik gebürstetes Messing HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik Satin Nickel HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik Glanzchrom HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik Mattweiß HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik Mattschwarz HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Schild"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Aufpreis für das Zuschneiden der Zierbekleidungen {price}/Stück: Die Zierbekleidungen werden bei der Montage zugeschnitten, wenn die Bauöffnungen falsch gelöst sind. Zum Beispiel, wenn die Stufen zwischen den Räumen mehr als 5 mm betragen, wenn keine Halterungen an den Wänden für die Zarge vorhanden sind und von der Bekleidung abgeschnitten werden muss, oder wenn die Fliesen im Bad / WC niedriger als die Türhöhe sind und eine Nut aus der Bekleidung gefräst werden muss."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Adresse",
+    "assembly": "Montage",
+    "boolean": {
+      "true": "Ja",
+      "false": "Nein"
+    },
+    "city": "Stadt",
+    "count": "Stk.",
+    "currency": "Währung",
+    "disclaimer": {
+      "title": "Allgemeine Geschäftsbedingungen",
+      "interiorDoors": {
+        "title": "Innentüren",
+        "description": "Die Türen sind als Innentüren zertifiziert. Das bedeutet, dass sie für Innenräume bestimmt sind, in denen das Umgebungsklima auf beiden Seiten der Tür gleich ist. Falls eine Seite einer hohen Feuchtigkeit ausgesetzt ist, kann es zu Verzug oder Verbiegungen kommen. Die Türen werden gemäß den Normen STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2 hergestellt."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "Weiß lackierte Türen",
+        "description": "Bei weiß spritzlackierten Produkten wurde der Kunde darüber informiert, dass es sich bei der Lackierung in unserem Unternehmen um Handarbeit und nicht um eine Lackierung in einer Vakuumkammer handelt, weshalb kleine Mängel am Produkt auftreten können."
+      },
+      "whiteLaminateDoors": {
+        "title": "Weiße Laminattüren",
+        "description": "Weißes Laminat ist kein Material, das durchgehend weiß ist. Das weiße Dekor befindet sich nur auf der Oberfläche. Aus diesem Grund entstehen bei diesem Dekor an allen Kanten sichtbare Stoßfugen, die optisch auffallen."
+      },
+      "slidingDoors": {
+        "title": "Schiebetüren",
+        "description": "Diese Türen dienen der Raumteilung. Aufgrund der Funktionalität der Tür entsteht zwangsläufig ein Spalt zwischen der Zarge und der Tür."
+      },
+      "veneeredDoors": {
+        "title": "Furnierte Türen",
+        "description": "Bei furnierten Türen wurde der Kunde darüber informiert, dass Furnier ein Naturprodukt ist. Innerhalb derselben Holzart können verschiedene Farbtöne auftreten."
+      },
+      "laminateDoors": {
+        "title": "Laminattüren",
+        "description": "Bei laminierten Türen wird der Farbton vom Hersteller garantiert. Laminatplatten werden nach der Werksnorm sortiert, die das Auftreten von Verunreinigungen im Umfang von maximal 2 mm²/1m² zulässt. Die Norm erlaubt 2-3 Punkte pro Platte. Die Einheitlichkeit des Laminats wird durch die gesamte vom Hersteller gelieferte Platte bestimmt. Das bedeutet, dass das für die Produktion verwendete einheitliche Teil innerhalb einer Platte liegt."
+      },
+      "assembly": {
+        "title": "Montage",
+        "description": "Der Montagepreis für Türen und Zargen beinhaltet die Montage ohne weitere Anpassungen am Produkt (Zargen und Türen), die über den Zustand bei der Anlieferung hinausgehen. Die Standardbreite der Bekleidung beträgt 6,5 cm. Wenn Wände und Böden uneben sind und der Auftraggeber diese nicht ausgleicht, verbleiben unter der Bekleidung zwangsläufig Fugen. Der Hersteller haftet nicht für Unebenheiten von Böden und Wänden. Das bedeutet: Wenn die Wände nicht gerade sind, kann unter der Bekleidung eine Fuge entstehen, die der Unebenheit von Wand und Boden folgt. Fugen an der Wand können durch Verspachteln/Ausbessern korrigiert werden. Es werden Fugen bis zu einer maximalen Breite von 5 mm verspachtelt, größere Fugen muss der Kunde selbst ausbessern.\nDie Gebühr für das Verspachteln von Unebenheiten um die Zargen wird separat mit 6 € pro Stück berechnet. Das Verspachteln um die Zargen kann abbestellt werden. Andernfalls ist es erforderlich, dass der Kunde die Wand ausgleichen lässt. Maurerarbeiten führen wir nicht aus. Beim Bohren in Wände oder Böden kann es zu Beschädigungen am Putz oder an den Fliesen kommen. Da wir nicht prüfen können, ob sich im Inneren ein Hohlraum befindet, übernehmen wir für diese Schäden keine Haftung. Bei der Montage von Türen in unvollständigen oder nicht standardmäßigen Bauöffnungen, bei denen die Monteure Anpassungen vor Ort mit elektrischen Handwerkzeugen vornehmen müssen, kann die Qualität der Verarbeitung bei dieser Methode nicht die Qualität der Werkstattfertigung erreichen. Müssen Anpassungen vor Ort durch Hobeln oder Zuschneiden vorgenommen werden, muss der Kunde in der Wohnung Platz für diese Arbeiten bereitstellen. Wir berechnen einen Aufschlag von 15 € pro Stück. Wir montieren die Türen in die vorbereiteten Öffnungen, wie es beim Aufmaß vereinbart wurde. Wenn der Kunde nachträglich Übergangsleisten, Teppiche oder Laminatböden unter der Tür anbringt, d. h. die Höhe unter der Tür verändert, und eine Anpassung der Tür erforderlich wird, führen wir diese auf Basis eines separaten Auftrags aus; sie ist somit nicht im Lieferumfang der Tür enthalten."
+      },
+      "customMadeDoors": {
+        "title": "Türen nach Maß",
+        "description": "Dies bezieht sich auf untypische Maße und nicht auf die Schiefe der Wände. Wenn der Boden uneben (nicht waagerecht) ist, muss eine Seite unterlegt werden, wodurch an der Unterseite der Zarge eine Fuge entsteht. Eine Standard-Bauöffnung zeichnet sich durch eine gleichmäßige Wandstärke aus, die auf allen Seiten identisch ist. Wenn beim Aufmaß die Böden noch nicht verlegt sind und bei der Umsetzung Höhenunterschiede entstehen, trägt der Kunde dafür die Verantwortung. Müssen nachträglich Schnitte an bereits vorhandenen Wohnungseinrichtungen vorgenommen werden (z. B. Übergangs-, Prall-, Sockelleisten, Böden, Parkett, Schränke), müssen diese Leistungen separat zu einem individuell vereinbarten Preis vereinbart werden. Diese Arbeiten sind nicht Teil des Lieferumfangs. Wir befestigen Bekleidungen und Glasleisten Stiften mit einer Dicke von 0,6 mm, die bei allen Türen mit Leisten sichtbar sind. Glasleisten weisen auf einer Seite sichtbare Verbindungsstellen auf."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Verkleidung von Stahlzargen",
+        "description": "Bei der Verkleidung einer Stahlzarge oder bei anderen untypischen Wandverkleidungen, bei denen die Standardbekleidung die Bauöffnung nicht abdeckt und eine breitere angefertigt werden muss, beträgt der Aufschlag 25 € pro Stück. Dieser Aufschlag wird nach der Besichtigung berechnet, da uns dies beim vorläufigen Angebot nicht bekannt sein konnte. Beim Ausbau von Stahlzargen kann es aufgrund der Handarbeit zu Beschädigungen am Putz oder am Anstrich kommen."
+      },
+      "parking": {
+        "title": "Parken",
+        "description": "Falls kein problemloses Parken und Entladen am Eingang gewährleistet ist, wird ein Aufschlag von 100 € berechnet."
+      },
+      "opticalDefects": {
+        "title": "Optische Mängel",
+        "description": "Als optischer Mangel gilt ein Mangel, der bei Tageslicht aus einer Entfernung von 1 Meter unter einem Winkel sichtbar ist, der der normalen Nutzung entspricht."
+      },
+      "misc": {
+        "1": "Es ist nicht unsere Absicht, dem Kunden die Unwahrheit zu sagen. Da die Herstellung von Türen jedoch Handarbeit ist, können unvorhergesehene Umstände eintreffen. Daher behalten wir uns das Recht vor, den vereinbarten Montagetermin um 1-3 Tage zu verschieben.",
+        "2": "Der Kunde ist sich bewusst, dass er 1.) keine 2.) identische Breiten und Höhen hat",
+        "3": "Das Maß soll laut Wunsch 1.) vereinheitlicht 2.) nicht vereinheitlicht werden",
+        "4": "Für den Abtransport und die Entsorgung der alten Türen und Zargen berechnen wir..............................................Є.",
+        "5": "Der Besteller hat alles gelesen, stimmt den Öffnungsrichtungen und den gemessenen Öffnungen zu, hat alles überprüft und alle Unklarheiten mit dem Aufmaßtechniker besprochen. Er ist sich bewusst, dass er keine Mehrarbeit ohne Vergütungsanspruch verlangen kann. Zusätzliche Arbeiten führen wir gerne aus, fordern jedoch, dass diese in den Auftrag aufgenommen und bezahlt werden."
+      }
+    },
+    "doorsTable": {
+      "frame": "Türframe / Zarge",
+      "glass": "Glas",
+      "material": "Material",
+      "measurement": "Maß / Abmessung",
+      "model": "Modell"
+    },
+    "handlesWithUrl": "TÜRKLINKEN finden Sie auf kluckynadvere.sk",
+    "material": "Material",
+    "pricePerUnit": "Preis / Stk.",
+    "priceVatFinal": "Gesamtpreis inkl. MwSt.",
+    "priceWoVat": "Preis exkl. MwSt.",
+    "priceWoVatFinal": "Gesamtpreis exkl. MwSt.",
+    "title": "Angebot für Innentüren"
+  },
+  "priceOfferMail": "<div>\n    <p>Guten Tag,</p>\n\n    <p>\n        anbei senden wir Ihnen das von Ihnen erstellte Preisangebot für <strong>Innentüren</strong>.\n    </p>\n\n    <p>\n        Sie können sich die Türen persönlich in ČACHTICE, BRATISLAVA oder TRNAVA ansehen.\n    </p>\n\n    <p>\n        Wenn Sie die Türen bestellen möchten oder weitere Informationen benötigen,<br>\n        senden Sie uns bitte eine E-Mail an:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        oder rufen Sie uns unter folgender Telefonnummer an:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        Mit freundlichen Grüßen<br>\n        Dipl.-Ing. Peter Sučanský\n    </p>\n</div>"
 }

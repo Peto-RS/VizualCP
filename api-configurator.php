@@ -20,13 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     sendJsonResponse(
         new ConfiguratorResponse(
-            currencyTransformation($currencyId, ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"] ?? 0.0, null),
+            currencyRateTransformation($currencyId, ParametersJsonDataManipulation::getAll()["assemblyDoorsCost"] ?? 0.0, null),
             $doorCategories,
-            currencyTransformation($currencyId, ParametersJsonDataManipulation::getAll()["framePrice"] ?? 0.0, null),
+            currencyRateTransformation($currencyId, ParametersJsonDataManipulation::getAll()["framePrice"] ?? 0.0, null),
             $gallery,
             $glasses,
             $handles,
-            currencyTransformation($currencyId, ParametersJsonDataManipulation::getAll()["interiorDoorsPriceFrom"] ?? 0.0, null),
+            currencyRateTransformation($currencyId, ParametersJsonDataManipulation::getAll()["interiorDoorsPriceFrom"] ?? 0.0, null),
             $materials,
             $rooms
         ),

@@ -76,8 +76,9 @@
   "delivery": {
     "address": "Adresa isporuke (opciono)",
     "city": "Mesto",
-    "district": "Izaberite okružni centar",
-    "note": "Cena prevoza je 0,5 € po km. Prevoz se računa od proizvodnje u mestu Čachtice.",
+    "chooseDistrict": "Izaberite okružni centar",
+    "district": "Okružni centar",
+    "note": "Cena prevoza je {price} po km. Prevoz se računa od proizvodnje u mestu Čachtice.",
     "street": "Ulica",
     "streetNumber": "Broj kuće",
     "zipCode": "Poštanski broj"
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "Jednostavan a istovremeno elegantan dizajn unutrašnjih vrata Zuzana može ispuniti očekivanja i najzahtevnijih kupaca.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova nerđajući čelik R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova nerđajući čelik HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima nerđajući čelik R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima nerđajući čelik HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun nerđajući čelik R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma nerđajući čelik R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma nerđajući čelik HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio grafit HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio satenski nikl HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio patina HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit brušeni mesing HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta satenski nikl HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Euforia grafit HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Euforia patina HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz nerđajući čelik HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks mat crna HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik brušeni mesing HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik satenski nikl HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik sjajni hrom HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik mat bela HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik mat crna HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Štit"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Doplata za usecanje pervajza {price}/kom: Pervajz lajsne se usecaju pri montaži ako otvori nisu pravilno pripremljeni (npr. nivo poda između soba varira više od 5 mm, nema mesta za štok na zidu, ili su pločice u kupatilu niže od visine vrata)."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Adresa",
+    "assembly": "Montaža",
+    "boolean": {
+      "true": "Da",
+      "false": "Ne"
+    },
+    "city": "Grad",
+    "count": "kom",
+    "currency": "Valuta",
+    "disclaimer": {
+      "title": "Uslovi ugovora",
+      "interiorDoors": {
+        "title": "Unutrašnja vrata",
+        "description": "Vrata su sertifikovana kao unutrašnja vrata. To znači da su namenjena za unutrašnje okruženje koje je isto sa obe strane vrata. U slučaju da je jedna strana izložena visokoj vlažnosti, može doći do njihovog iskrivljenja. Vrata su proizvedena u skladu sa standardima STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "Bela farbana (špricana) vrata",
+        "description": "Kod belih farbanih proizvoda kupac je upoznat sa činjenicom da je farbanje u našoj firmi ručni rad, a ne farbanje u vakuumskoj komori, zbog čega se na proizvodu mogu pojaviti sitni nedostaci."
+      },
+      "whiteLaminateDoors": {
+        "title": "Bela laminatna vrata",
+        "description": "Beli laminat nije materijal koji je beo u čitavoj svojoj dubini. Beli dekor je samo na površini. Iz tog razloga kod ovog dekora na svim ivicama nastaju vidljivi spojevi koji se primećuju."
+      },
+      "slidingDoors": {
+        "title": "Klizna vrata",
+        "description": "Ova vrata služe za pregrađivanje prostora. Zbog funkcionalnosti vrata, neizbežno nastaje zazor između štoka i vrata."
+      },
+      "veneeredDoors": {
+        "title": "Furnirana vrata",
+        "description": "Kod furniranih vrata kupac je upoznat sa činjenicom da je furnir prirodni materijal. U okviru iste vrste drveta javlja se više nijansi."
+      },
+      "laminateDoors": {
+        "title": "Laminatna vrata",
+        "description": "Kod laminiranih vrata nijansa je garantovana od strane proizvođača. Laminatne ploče se sortiraju prema fabričkom standardu koji dozvoljava prisustvo nečistoća u opsegu: 2 mm²/1m². Standard dozvoljava 2-3 komada tačkica po ploči. Jedinstvenost laminata je data celom pločom koju isporučuje proizvođač. To znači da je jedinstveni deo korišćen za proizvodnju u okviru jedne ploče."
+      },
+      "assembly": {
+        "title": "Montaža",
+        "description": "Cena montaže vrata i štokova uključuje montažu bez daljih izmena na proizvodu (štokovima i vratima) u odnosu na stanje u kojem su dovezeni na montažu. Standardna širina pervajz lajsne je 6,5 cm. Ukoliko su zidovi i podovi neravni, a naručilac ih ne izravna, ispod lajsne će neizbežno ostati zazori. Proizvođač ne odgovara za neravnine poda i zidova. To znači da, ukoliko zidovi nisu ravni, ispod pervajza može nastati zazor koji prati neravninu zida i poda. Zazori oko zida se mogu sanirati gitovanjem/akrilisanjem. Gituje se zazor maksimalne širine do 5 mm, veće zazore kupac mora sam da sanira.\nUsluga gitovanja neravnina oko štokova se posebno naplaćuje po ceni od 6 € za 1 komad. Gitovanje oko štokova se može otkazati. U suprotnom, neophodno je da kupac izravna zid. Građevinske i zidarske radove ne izvodimo. U slučaju bušenja u zid ili pod, može doći do oštećenja maltera ili pločica. Budući da ne možemo proceniti da li se unutra nalazi šupljina, ne preuzimamo odgovornost za navedena oštećenja. Prilikom montaže vrata u nestandardne građevinske otvore, gde montažeri moraju da izvrše prepravke na licu mesta električnim ručnim alatima, nije moguće da kvalitet obrade ovom metodom dostigne kvalitet fabričke proizvodnje. Ukoliko bude potrebno prilagođavanje na licu mesta rendisanjem ili sečenjem, kupac mora obezbediti prostor u stanu za te radove. Naplaćujemo doplatu od 15 € za 1 komad. Vrata montiramo u pripremljene otvore kao što je dogovoreno prilikom merenja. Ukoliko kupac postavi prelazne lajsne, tepih ili lamelirani pod ispod vrata, odnosno promeni visinu ispod vrata i bude neophodna prepravka vrata, istu ćemo izvršiti na osnovu posebnog naloga, što znači da to nije deo standardne isporuke vrata."
+      },
+      "customMadeDoors": {
+        "title": "Vrata po meri",
+        "description": "Ovo se odnosi na atipične dimenzije, a ne na krivinu zidova. U slučaju da pod nije ravan (nije horizontalan), jedna strana se mora podložiti i nastati zazor sa donje strane štoka. Standardni građevinski otvor je onaj koji ima pravilnu debljinu zida, istu sa svih strana. Prilikom merenja, ukoliko podovi nisu postavljeni i tokom realizacije nastanu razlike u visini, odgovornost za njih snosi kupac. Ukoliko je potrebno izvršiti različita ukrajanja na već postojećem nameštaju i elementima u stanu, npr. prelazne, odbojne ili sokl lajsne, podove, parkete, ormare, ove radnje se moraju ugovoriti odvojeno, na osnovu individualno određene cene. Navedeni radovi nisu deo isporuke. Pervajz i staklene lajsne pričvršćujemo iglicama debljine 0,6 mm, koje su vidljive na svim vratima sa lajsnama. Staklene lajsne imaju vidljive spojeve sa jedne strane."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Oblaganje metalnih štokova",
+        "description": "Prilikom oblaganja metalnog štoka ili kod drugih atipičnih oblaganja zidova, gde standardna pervajz lajsna ne pokriva građevinski otvor i mora se izraditi šira, doplata iznosi 25 € za 1 komad. Ova doplata će se obračunati nakon pregleda, jer to nismo mogli znati prilikom preliminarne ponude. U slučaju demontaže čeličnog štoka, zbog ručnog rada može doći do oštećenja maltera ili farbe."
+      },
+      "parking": {
+        "title": "Parking",
+        "description": "U slučaju da ne bude obezbeđen nesmetan parking i unošenje stvari kod ulaza, naplaćuje se doplata od 100 €."
+      },
+      "opticalDefects": {
+        "title": "Optički nedostaci",
+        "description": "Pod optičkim nedostatkom se podrazumeva nedostatak vidljiv na dnevnoj svetlosti sa udaljenosti od 1 metra pod uglom koji odgovara uobičajenoj upotrebi."
+      },
+      "misc": {
+        "1": "Nije naša namera da kupcu ne govorimo istinu, ali pošto je proizvodnja vrata rad ljudskih ruku, može se desiti nepredviđena okolnost i zato zadržavamo pravo da pomerimo dogovoreni termin montaže za 1-3 dana.",
+        "2": "Kupac je svestan da 1.) nema 2.) ima identične širine i visine",
+        "3": "Dimenziju zahteva 1.) objediniti 2.) ne objediniti",
+        "4": "Za odvoz i odlaganje starih vrata i štokova naplaćujemo..............................................Є.",
+        "5": "Kupac je sve pročitao, saglasan je sa smerom otvaranja i izmerenim otvorima, sve je prekontrolisao i prodiskutovao sve nejasnoće sa licem koje je vršilo merenje. Svestan je da ne može zahtevati dodatni rad van ugovora bez prava na naknadu. Dodatne radove ćemo rado izvršiti, ali zahtevamo da budu uključeni u porudžbinu i plaćeni."
+      }
+    },
+    "doorsTable": {
+      "frame": "Štok / Dovratnik",
+      "glass": "Staklo",
+      "material": "Materijal",
+      "measurement": "Dimenzija",
+      "model": "Model"
+    },
+    "handlesWithUrl": "KVAKE možete naći na kluckynadvere.sk",
+    "material": "Materijal",
+    "pricePerUnit": "Cena / kom",
+    "priceVatFinal": "Ukupna cena sa PDV-om",
+    "priceWoVat": "Cena bez PDV-a",
+    "priceWoVatFinal": "Ukupna cena bez PDV-a",
+    "title": "Ponuda cena za unutrašnja vrata"
+  },
+  "priceOfferMail": "<div>\n    <p>Dobar dan,</p>\n\n    <p>\n        U prilogu Vam šaljemo ponudu cena za <strong>unutrašnja vrata</strong> koju ste generisali.\n    </p>\n\n    <p>\n        Vrata možete lično pogledati u ČAHTICAMA, BRATISLAVI ili TRNAVI.\n    </p>\n\n    <p>\n        Ako želite da naručite vrata ili Vam je potrebno više informacija,<br>\n        molimo Vas da nam pošaljete e-mail na adresu:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        ili pozovite na broj telefona:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        Srdačan pozdrav,<br>\n        inž. Peter Sučanský\n    </p>\n</div>"
 }

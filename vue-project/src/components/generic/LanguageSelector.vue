@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useI18n} from "vue-i18n";
-import {setLocale, SupportedLocale, switchLanguage} from "@/model/functions/translation-utils.js";
+import {SupportedLocale, switchLanguage} from "@/model/functions/translation-utils.js";
 
 const {locale} = useI18n()
 

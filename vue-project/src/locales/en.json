@@ -76,8 +76,9 @@
   "delivery": {
     "address": "Delivery address (optional)",
     "city": "City/Village",
-    "district": "Select district town",
-    "note": "The shipping price is €0.5 per km. Shipping is calculated from production in the village of Čachtice.",
+    "chooseDistrict": "Select district town",
+    "district": "District town",
+    "note": "The shipping price is {price} per km. Shipping is calculated from production in the village of Čachtice.",
     "street": "Street",
     "streetNumber": "House number",
     "zipCode": "ZIP Code"
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "The simple yet elegant design of Zuzana interior doors can satisfy the expectations of even the most demanding customers.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova stainless steel R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova stainless steel HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima stainless steel R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima stainless steel HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun stainless steel R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma stainless steel R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma stainless steel HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio graphite HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio satin nickel HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio patina HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit brushed brass HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta satin nickel HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Euforia graphite HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Euforia patina HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz stainless steel HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks matte black HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik brushed brass HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik satin nickel HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik polished chrome HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik matte white HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik matte black HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Plate"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Surcharge for cutting architraves {price}/piece: Architraves are cut during installation if the structural openings are incorrectly designed. For example, if the steps between rooms are more than 5 mm, or if there are no grips on the walls for the frame and the architrave must be trimmed, or if the tiling in the bathroom/WC is lower than the door height and a groove must be milled from the architrave."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Address",
+    "assembly": "Assembly",
+    "boolean": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "city": "City",
+    "count": "qty",
+    "currency": "Currency",
+    "disclaimer": {
+      "title": "Terms and Conditions",
+      "interiorDoors": {
+        "title": "Interior Doors",
+        "description": "The doors are certified as interior doors. This means they are intended for indoor environments where conditions are identical on both sides of the door. If one side is exposed to high humidity, warping or bending may occur. The doors are manufactured in accordance with the standards STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "White Spray-Painted Doors",
+        "description": "For white spray-painted products, the customer has been informed that the painting in our company is manual work, not painting in a vacuum room, and therefore minor defects may occur on the product."
+      },
+      "whiteLaminateDoors": {
+        "title": "White Laminate Doors",
+        "description": "White laminate is not a material that is white through its entire depth. The white decor is only on the surface. For this reason, visible joints are formed on all edges with this decor, which are noticeable."
+      },
+      "slidingDoors": {
+        "title": "Sliding Doors",
+        "description": "These doors serve to divide space. Due to the functionality of the door, a gap inevitably arises between the door frame and the door."
+      },
+      "veneeredDoors": {
+        "title": "Veneered Doors",
+        "description": "For veneered doors, the customer has been informed that veneer is a natural material. Multiple shades can occur within a single wood species."
+      },
+      "laminateDoors": {
+        "title": "Laminate Doors",
+        "description": "For laminate doors, the shade is guaranteed by the manufacturer. Laminate boards are sorted according to the company standard, which allows the occurrence of impurities within the range of 2 mm²/1m². The standard allows 2-3 dots per board. The uniformity of the laminate is determined by the whole board supplied by the manufacturer. This means that the uniform piece used for production is within a single board."
+      },
+      "assembly": {
+        "title": "Assembly / Installation",
+        "description": "The price for the installation of doors and frames includes installation without any further modifications to the product (frames and doors) from the state in which they were delivered. The standard width of the casing is 6.5 cm. If the walls and floors are uneven and the customer does not level them, gaps will inevitably remain under the casing. The manufacturer is not responsible for uneven floors and walls. This means that if the walls are not straight, a gap may appear under the casing that copies the unevenness of the wall and floor. Gaps around the wall can be repaired by caulking. Gaps up to a maximum width of 5 mm are caulked; larger gaps must be repaired by the customer themselves.\nThe charge for caulking unevenness around the door frames is calculated separately at a price of €6 per piece. Caulking around the frames can be canceled. Otherwise, it is necessary for the customer to have the wall leveled. We do not perform masonry work. In the case of drilling into the wall or floor, damage to the plaster or tiles may occur. Since we cannot assess whether there is a cavity inside, we assume no responsibility for such damage. When installing doors into non-standard structural openings where installers must make adjustments on-site using handheld power tools, it is not possible for the quality of workmanship by this method to match workshop quality. If on-site adjustment by planing or cutting is necessary, the customer must provide space in the apartment for these modifications. We charge a surcharge of €15 per piece. We install doors into prepared openings as agreed during the measurement. If the customer adds transition strips, carpets, or floating floors under the door—thereby changing the height under the door and necessitating door adjustments—we will perform this based on a separate order, meaning it is not part of the standard door delivery."
+      },
+      "customMadeDoors": {
+        "title": "Custom-Made Doors",
+        "description": "This refers to atypical dimensions and not the crookedness of walls. If the floor is not level (not horizontal), one side must be shimmed, creating a gap underneath the frame. A standard structural opening is one that has a regular wall thickness, identical on all sides. In the case of measurements taken before floors are laid, if height differences arise during implementation, the customer bears responsibility for them. If it is necessary to make various cuts to already existing apartment furnishings, e.g., transition, kick, or baseboard moldings, floors, parquets, or wardrobes, these actions must be agreed upon separately based on an individually set price. These works are not part of the delivery. We fasten casings and glazing beads with 0.6 mm pins, which are visible on all paneled/beaded doors. Glazing beads have visible joints on one side."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Metal Door Frame Cladding",
+        "description": "When cladding a metal door frame or during other atypical wall cladding where the standard casing does not cover the structural opening and a wider one must be made, there is a surcharge of €25 per piece. This surcharge will be calculated after inspection, as we might not have known about this during the preliminary quote. In the case of dismantling a steel door frame, due to manual labor, damage to the plaster or paint may occur."
+      },
+      "parking": {
+        "title": "Parking",
+        "description": "In the event that problem-free parking and unloading at the entrance is not secured, a surcharge of €100 is charged."
+      },
+      "opticalDefects": {
+        "title": "Optical Defects",
+        "description": "An optical defect is considered a defect visible in daylight from a distance of 1 meter at an angle that corresponds to normal use."
+      },
+      "misc": {
+        "1": "It is not our intention to withhold the truth from the customer, but since door manufacturing involves human labor, unforeseen circumstances may occur, and therefore we reserve the right to postpone the agreed installation date by 1-3 days.",
+        "2": "The customer realizes that they 1.) do not have 2.) have identical widths and heights",
+        "3": "The customer requests the dimension to be 1.) unified 2.) not unified",
+        "4": "For the removal and disposal of original doors and frames, we charge..............................................Є.",
+        "5": "The customer has read everything, agrees with the opening direction and measured openings, checked everything, and discussed all ambiguities with the surveyor. They are aware that they cannot demand extra work beyond the scope of the contract without entitlement to remuneration. We will gladly perform extra work, but we require it to be included in the order and paid for."
+      }
+    },
+    "doorsTable": {
+      "frame": "Frame",
+      "glass": "Glass",
+      "material": "Material",
+      "measurement": "Size",
+      "model": "Model"
+    },
+    "handlesWithUrl": "DOOR HANDLES can be found at kluckynadvere.sk",
+    "material": "Material",
+    "pricePerUnit": "Price / Unit",
+    "priceVatFinal": "Price incl. VAT",
+    "priceWoVat": "Price excl. VAT",
+    "priceWoVatFinal": "Price excl. VAT",
+    "title": "Interior doors price offer"
+  },
+  "priceOfferMail": "<div>\n    <p>Hello,</p>\n\n    <p>\n        Please find attached the price quotation for <strong>interior doors</strong> that you have generated.\n    </p>\n\n    <p>\n        You can view the doors in person in ČACHTICE, BRATISLAVA, or TRNAVA.\n    </p>\n\n    <p>\n        If you wish to order the doors or need more information,<br>\n        please send us an email at:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        or call the phone number:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        Best regards,<br>\n        Ing. Peter Sučanský\n    </p>\n</div>"
 }

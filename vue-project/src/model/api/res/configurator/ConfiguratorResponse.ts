@@ -6,6 +6,7 @@ export interface Handle {
     hiddenForDoorCategory?: string[]
     imgSrc: string
     label: string
+    labelKey: string
     price: number
 }
 

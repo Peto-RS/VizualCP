@@ -328,7 +328,7 @@ onMounted(async () => {
                 <BadgePrice
                     class="w-100"
                     :price="value.price"/>
-                <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
+                <span class="door-category-word-break text-uppercase">{{ safeT(value.labelKey) }}</span>
               </div>
             </div>
           </AccordionItem>

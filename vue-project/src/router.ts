@@ -5,8 +5,7 @@ import {
     defaultLocale,
     isSupportedLocale,
     setLocale,
-    SupportedLocale,
-    supportedLocales
+    SupportedLocale
 } from "@/model/functions/translation-utils.js";
 
 // const langPattern = supportedLocales.join('|')

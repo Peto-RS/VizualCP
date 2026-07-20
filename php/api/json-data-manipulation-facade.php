@@ -179,18 +179,6 @@ class MaterialsJsonDataManipulation
     {
         return getArrayFromJsonFile(__DIR__ . "/../../assets/json/materials.json");
     }
-
-    public static function getTranslation(string $id)
-    {
-        $json = getArrayFromJsonFile(__DIR__ . "/../../assets/json/materials.json");
-        if (array_key_exists($id, $json["laminates"])) {
-            return $json["laminates"][$id]["label"];
-        } else if (array_key_exists($id, $json["veneers"])) {
-            return $json["veneers"][$id]["label"];
-        } else {
-            return $id;
-        }
-    }
 }
 
 class RoomsJsonDataManipulation

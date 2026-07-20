@@ -3,6 +3,22 @@
     "id": "doors",
     "percentageDiscount": 15,
     "startDateTime": "2026-01-01T00:00:00+01:00",
+    "endDateTime": "2026-08-30T23:59:59+01:00",
+    "translationKey": "db.campaigns.doors",
+    "type": "DOORS"
+  },
+  {
+    "id": "doors2",
+    "percentageDiscount": 15,
+    "startDateTime": "2026-01-01T00:00:00+01:00",
+    "endDateTime": "2026-06-30T23:59:59+01:00",
+    "translationKey": "db.campaigns.doors",
+    "type": "DOORS"
+  },
+  {
+    "id": "doors3",
+    "percentageDiscount": 15,
+    "startDateTime": "2026-01-01T00:00:00+01:00",
     "endDateTime": "2026-06-30T23:59:59+01:00",
     "translationKey": "db.campaigns.doors",
     "type": "DOORS"

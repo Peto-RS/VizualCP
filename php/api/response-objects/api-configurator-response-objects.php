@@ -77,6 +77,9 @@ class HandleConfiguratorResponse
     /** @var string $label */
     public $label;
 
+    /** @var string $labelKey */
+    public $labelKey;
+
     /** @var float $price */
     public $price;
 
@@ -85,6 +88,7 @@ class HandleConfiguratorResponse
         ?array  $hiddenForDoorCategory,
         ?string $imgSrc,
         string  $label,
+        string  $labelKey,
         float   $price
     )
     {
@@ -92,6 +96,7 @@ class HandleConfiguratorResponse
         $this->hiddenForDoorCategory = $hiddenForDoorCategory ?? null;
         $this->imgSrc = $imgSrc;
         $this->label = $label;
+        $this->labelKey = $labelKey;
         $this->price = $price;
     }
 }

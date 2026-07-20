@@ -10,7 +10,8 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $rawData = file_get_contents("php://input");
     $requestBody = json_decode($rawData, true);
-    $validations = submitPriceOffer($requestBody);
+    $lang = $_GET['lang'];
+    $validations = submitPriceOffer($requestBody, $lang);
 
     if (count($validations) > 0) {
         sendJsonResponse($validations, 400);

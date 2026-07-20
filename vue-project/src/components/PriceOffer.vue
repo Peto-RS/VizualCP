@@ -31,7 +31,7 @@ import {ConfiguratorResponse, Handle} from "@/model/api/res/configurator/Configu
 import ImageWithLoadingPlaceholder from "@/components/generic/ImageWithLoadingPlaceholder.vue";
 import {offcanvas} from "@/composables/offcanvas.js";
 import NavTabs from "@/components/NavTabs.vue";
-import {safeT} from "@/model/functions/translation-utils.js";
+import {i18n, safeT} from "@/model/functions/translation-utils.js";
 import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
 
 const router = useRouter()
@@ -157,12 +157,12 @@ async function handleFormSubmit(e: Event): Promise<void> {
   const validationsEmpty = Object.keys(formValidations.value).length === 0;
   if (validationsEmpty) {
     const recaptchaToken = (document.querySelector('.g-recaptcha-response') as HTMLTextAreaElement)?.value;
-    const response = await submitForm(recaptchaToken);
+    const response = await submitForm(i18n.global.locale.value, recaptchaToken);
 
     if (response.ok) {
       await handleFormSaveAndReRender(constructReactiveFormPriceOffer(undefined));
       sessionStorage.setItem('offerCompleted', 'true')
-      await router.push({ name: 'PriceOfferFinished' })
+      await router.push({name: 'PriceOfferFinished'})
     } else {
       addAlert(t("alerts.MAIL_SENDING_ERROR"));
     }
@@ -298,7 +298,7 @@ onBeforeUnmount(async () => {
                           class="w-100"
                           :price="findHandleByHandleId(reactiveForm.handle.id)?.price"/>
                       <span class="door-category-word-break text-uppercase">{{
-                          findHandleByHandleId(reactiveForm.handle.id)?.label
+                          safeT(findHandleByHandleId(reactiveForm.handle.id)?.labelKey)
                         }}</span>
                       <button type="button"
                               @click="reactiveForm.handle = null;"
@@ -346,7 +346,7 @@ onBeforeUnmount(async () => {
                           <BadgePrice
                               class="w-100"
                               :price="value.price"/>
-                          <span class="door-category-word-break text-uppercase">{{ value.label }}</span>
+                          <span class="door-category-word-break text-uppercase">{{ value.label }} ss</span>
                         </div>
                       </div>
                     </AccordionItem>
@@ -466,10 +466,10 @@ onBeforeUnmount(async () => {
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <div class="row mb-2">
-                    <div class="col-sm-12 col-xl-6">{{ t("delivery.district") }}</div>
+                    <div class="col-sm-12 col-xl-6">{{ t("delivery.chooseDistrict") }}</div>
                     <div class="col-sm-8 col-xl-4">
                       <select class="form-select" v-model="reactiveForm.address.district">
-                        <option value="">{{ t("delivery.district") }}</option>
+                        <option value="">{{ t("delivery.chooseDistrict") }}</option>
                         <option v-for="d in apiResponse?.districts"
                                 :key="d.id"
                                 :value="d.id">{{ d.label }}
@@ -785,8 +785,8 @@ onBeforeUnmount(async () => {
           </div>
           <div v-if="apiResponse" class="price-sticky py-1 px-3 rounded mb-2">
             <template
-                      v-for="campaignDetail in apiResponse.priceOffer.campaignDetails"
-                      :key="campaignDetail.id">
+                v-for="campaignDetail in apiResponse.priceOffer.campaignDetails"
+                :key="campaignDetail.id">
               <div data-bs-theme="configurator"
                    class="row mb-2"
                    style="background-color: var(--bs-primary-bg-subtle)">

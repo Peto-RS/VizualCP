@@ -1,6 +1,7 @@
 <?php
 
 require_once 'db.php';
+require_once __DIR__ . '/../model/utils/translation-utils.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -10,7 +11,7 @@ require "vendor/autoload.php";
 /**
  * @throws \PHPMailer\PHPMailer\Exception
  */
-function sendMailWithExcelAttachment(string $excelSpreadsheet, PriceOfferResponse $priceOffer): void
+function sendMailWithExcelAttachment(string $excelSpreadsheet, PriceOfferResponse $priceOffer, string $lang): void
 {
     $appConfig = AppConfigJsonDataManipulation::getAll();
     $email = $appConfig["isProductionSmtp"] ? getMailConfigProd($appConfig) : getMailConfigLocalhost();
@@ -34,7 +35,19 @@ function sendMailWithExcelAttachment(string $excelSpreadsheet, PriceOfferRespons
         $priceOfferSequentialId = str_pad(queryPriceOfferNumber(getDb()), 3, '0', STR_PAD_LEFT);
         $priceOfferNumber = date('y-m') . "-" . $priceOfferSequentialId;
         $email->Subject = '💥 STOLÁRSTVO SUČANSKÝ 💥 - CENOVÁ PONUKA - 🚪 INTERIÉROVÉ DVERE 🚪 ČÍSLO - ' . $priceOfferNumber;
-        $email->Body = file_get_contents(__DIR__ . '/../../price-offer-mail.html');
+
+        $isForeignLanguage = $lang !== "sk";
+        $translationFileSk = getArrayFromJsonFile(__DIR__ . '/../../vue-project/src/locales/' . SupportedLanguagesEnum::SK . '.json');
+        $translationFileForeign = getArrayFromJsonFile(__DIR__ . '/../../vue-project/src/locales/' . $lang . '.json');
+
+        $email->Body = replaceTranslationParams(
+            file_get_contents(__DIR__ . '/../../price-offer-mail.html'),
+            array(
+                'content_foreign_language' => $isForeignLanguage ? $translationFileForeign['priceOfferMail'] : '',
+                'content_sk' => $translationFileSk['priceOfferMail']
+            )
+        );
+
         $email->addStringAttachment(
             $excelSpreadsheet,
             "cenova_ponuka_$priceOfferNumber.xlsx",

@@ -76,7 +76,8 @@
   "delivery": {
     "address": "Adresa dovozu (nepovinné)",
     "city": "Obec",
-    "district": "Vyberte okresné mesto",
+    "district": "Okresné mesto",
+    "chooseDistrict": "Vyberte okresné mesto",
     "note": "Cena prepravy je {price} za km. Preprava sa počíta od výroby v obci Čachtice.",
     "street": "Ulica",
     "streetNumber": "Číslo domu",
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "Jednoduchý a zároveň elegantný dizajn Interiérových dverí Zuzana dokáže naplniť očakávania aj tých najnáročnejších zákazníkov.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova nerez R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova nerez HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima nerez R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima nerez HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun nerez R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma nerez R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma nerez HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio grafit HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio nikel saténový HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio patina HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit mosadz brúsená HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta nikel saténový HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Eufória grafit HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Eufória patina HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz nerez HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks čierna matná HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik mosadz brúsená HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik nikel saténový HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik chróm lesklý HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik biela matná HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik čierna matná HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Štít"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Príplatok za zarezávanie obložiek {price}/kus: Obložky sa pri montáži zarezávajú, ak sú nesprávne riešené stavebné otvory. Napríklad ak sú schody medzi miestnosťami viac ako 5 mm, ďalej ak nie sú úchyty na stenách na zárubnu a musí sa z obložky zrezávať, alebo ak je obklad v kúpelňi / WC do výšky menej ako je výška dverí a treva z obložky odfrézovať drážku."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Adresa",
+    "assembly": "Montáž",
+    "boolean": {
+      "true": "Áno",
+      "false": "Nie"
+    },
+    "city": "Mesto",
+    "count": "ks",
+    "currency": "Mena",
+    "disclaimer": {
+      "title": "Zmluvné podmienky",
+      "interiorDoors": {
+        "title": "Interiérové dvere",
+        "description": "Dvere sú certifikované ako interiérové. To znamená, že sú určené do vnútorného prostredia, ktoré je z oboch strán dverí rovnaké. V prípade, že je z jednej strany zaťažené veľkou vlhkosťou, môže dôjsť k ich prehnutiu. Dvere sú vyrobené v zmysle normy STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "Biele striekané dvere",
+        "description": "Pri bielych striekaných výrobkoch bol zákazník oboznámený s tým, že striekanie v našej firme je ručná práca, nie je to striekanie vo vákuovej miestnosti, preto sa na výrobku môže vyskytnúť drobná vada."
+      },
+      "whiteLaminateDoors": {
+        "title": "Biele laminátové dvere",
+        "description": "Biely laminát nie je materiál, ktorý by bol do hĺbky biely. Biely dekor je len na povrchu. Z toho dôvodu pri tomto dekore vznikajú na všetkých hranách priznané spoje, ktoré sú vidno."
+      },
+      "slidingDoors": {
+        "title": "Posuvné dvere",
+        "description": "Tieto dvere slúžia na predelenie priestoru. Kvôli funkčnosti dverí nevyhnutne vzniká medzi zárubňou a dverami medzera."
+      },
+      "veneeredDoors": {
+        "title": "Dyhované dvere",
+        "description": "Pri dyhovaných dverách bol zákazník oboznámený s tým, že dyha je prírodný materiál. V rámci jednej dreviny sa vyskytuje viac odtieňov."
+      },
+      "laminateDoors": {
+        "title": "Laminátové dvere",
+        "description": "Pri laminovaných dverách je odtieň zaručený výrobcom. Laminátové dosky sú triedené podľa podnikovej normy, ktorá dovoľuje výskyt nečistôt v rozsahu: 2 mm2/1m2. Norma dovoľuje 2-3 ks bodiek na doske. Jednotnosť lamina je daná celou doskou dodávanou výrobcom. To namená jednotný diel, ktorý je na výrobu použitý, je v rámci jednej dosky."
+      },
+      "assembly": {
+        "title": "Montáž",
+        "description": "Cena montáže dverí a zárubní zahíňa montáž bez ďalších úprav vykonaných na výrobku (zárubne a dvere) ako boli privezené na montáž. Štandardná šírka obložky je 6,5 cm. Pokiaľ sú steny a podlahy nerovné a objednávateľ si ich nevyrovná, pod obložkou nevyhnutne zostanú špáry. Výrobca nezodpovedá za nerovnosti podlahy a stien. To znamená, že pokiaľ nie sú steny rovné, pod obkladom môže vzniknúť špára, ktorá kopíruje nerovnost steny a podlahy. Špáry okolo steny je možné vyspraviť vytmelením. Tmelí sa špára maximálne 5 mm široká, vāčšie špáry si musí zákazník vyspraviť sám.\nÚprava za vytmelenie nerovností okolo zárubní je samostatne započítaná v cene 6 € za 1 kus. Tmelenie okolo zárubní je možné zrušiť. V opačnom prípade je nutné, aby si dal stenu zákazník vyrovnať. Murárske práce nevykonávame. V prípade vŕtania do steny, prípadne podlahy, môže dôjsť k poškodeniu omietky alebo dlažby. Nakoľko nevieme posúdiť či sa vo vnútri nenachádza dutina, za uvedené poškodenie nepreberáme zodpovednosť. Pri montáži dverí do neštandardných stavebných otvorov, kde musia montážni pracovníci vykonať úpravy na mieste montáže elektrickým ručným náradím, nie je možné, aby kvalita opracovania touto metódou dosahovala kvality dielenskej výroby. Pokiaľ sa bude musieť upravovať na mieste hobľovaním alebo zrezávaním, musí mať zákazník priestor v byte na uvedené úpravy. Účtujeme príplatok 15 € za 1 kus. Dvere montujeme do pripravených otvorov tak, ako sa dohodlo pri zameraní. Pokiaľ si zákazník pridá pod dvere prechodové lišty, koberec, plávajúcu podlahu, teda zmení výšku pod dverami a bude nevyhnutná úprava dverí, túto mu vykonáme na základe samostatnej objednávky, teda nie je súčasťou dodávky dverí."
+      },
+      "customMadeDoors": {
+        "title": "Dvere na mieru",
+        "description": "Znamená atypický rozmer a nie krivosť stien. V prípade, že nie je rovná podlaha (nie je vodorovná) musí sa jedna strana podložiť a vznikne zospodu zárubne špára. Štandardný stavebný otvor je taký, ktorý má pravideľnú hrúbku múru, zo všetkých strán rovnakú. V prípade zamerania, ak nie sú položené podlahy a pri realizácií vzniknú výškové rozdiely, za tieto si nesie zodpovednosť zákazník. Pokiaľ je nutné vykonať rôzne dorezy, na už jestnujúcom zariadení bytu, napr. prechodové, okopové, soklové lišty, podlahy, parkety, skrine, treba si tieto úkony dohodnúť samostatne, na základe individuálne nastavenej ceny. Uvedené práce nie sú súčasťou dodávky. Obložky a zasklievacie lišty upevňujeme pinkami s hrúbkou 0,6 mm, ktoré sú viditeľné pri všetkých lištovaných dverách. Zasklievacie lišty majú z jednej strany viditeľné spoje."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Obklad kovových zárubní",
+        "description": "Pri obklade kovovej zárubne alebo pri iných atypických obloženiach stien, kde štandardná obložka neprekrýva stavebný otvor a musí sa vyrobiť širšia, je príplatok 25€ za 1 kus. Tento príplatok sa dopočíta po obhliadke, nakoľko pri predbežnej ponuke sme to nemuseli vedieť. V prípade demontáže oceľovej zárubne sa z dôvodu ručnej práce môže vyskytnúť, že sa poškodí omietka alebo náter."
+      },
+      "parking": {
+        "title": "Parkovanie",
+        "description": "V prípade že nebude zabezpečené bezproblémové parkovanie a vynášanie pri vchode, účtuje sa príplatok 100 €."
+      },
+      "opticalDefects": {
+        "title": "Optické vady",
+        "description": "Za optickú vadu sa považuje vada viditeľná za denného svetla zo vzdialenosti 1 meter pod uhlom, ktorý zodpovedá bežnému využitiu."
+      },
+      "misc": {
+        "1": "Nie je našou snahou, aby sme nehovorili zákaznkovi pravdu, ale keďže výroba dverí je práca ľudských rúk, môže sa prihodiť nepredvídaná skutočnosť a preto si vyhradujeme právo posunúť i dohodnutý termín montáže o 1-3 dni.",
+        "2": "Zákazník si uvedomuje že 1.) nemá 2.) má rovnaké šírky a výšky",
+        "3": "Rozmer žiada 1.) zjednotiť 2.) nezjednotiť",
+        "4": "Za odvoz a likvidáciu pôvodných dverí a zárubní účtujeme..............................................Є.",
+        "5": "Odberateľ si všetko prečítal, súhlasí s otváravosťou a nameranými otvormi, všetko si prekontroloval a prekonzultoval všetky nejasnosti so zameriavajúcim. Je si vedomý, že nemôže chcief prácu nad rámec bez nároku na odmenu. Prácu naviac radi vykonáme, ale žiadame, aby bola zahrnutá v objednávke a uhradená."
+      }
+    },
+    "doorsTable": {
+      "frame": "Zárubeň",
+      "glass": "Sklo",
+      "material": "Materiál",
+      "measurement": "Rozmer",
+      "model": "Model"
+    },
+    "handlesWithUrl": "KĽUČKY nájdete na kluckynadvere.sk",
+    "material": "Materiál",
+    "pricePerUnit": "Cena / ks",
+    "priceVatFinal": "Cena spolu s DPH",
+    "priceWoVat": "Cena bez DPH",
+    "priceWoVatFinal": "Cena spolu bez DPH",
+    "title": "Cenová ponuka interiérové dvere"
+  },
+  "priceOfferMail": "<div>\n    <p>Dobrý deň,</p>\n\n    <p>\n        V prílohe Vám posielame Vami vygenerovanú cenovú ponuku <strong>interiérových dverí</strong>.\n    </p>\n\n    <p>\n        Dvere si môžete osobne prezrieť v ČACHTICIACH, BRATISLAVE alebo TRNAVE.\n    </p>\n\n    <p>\n        Ak si prajete dvere objednať, alebo potrebujete viac informácií,<br>\n        pošlite nám prosím e-mail na adresu:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        alebo volajte na telefónne číslo:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        S pozdravom,<br>\n        Ing. Peter Sučanský\n    </p>\n</div>"
 }

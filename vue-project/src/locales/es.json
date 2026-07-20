@@ -76,8 +76,9 @@
   "delivery": {
     "address": "Dirección de entrega (opcional)",
     "city": "Localidad/Ciudad",
-    "district": "Seleccione la ciudad de distrito",
-    "note": "El precio del transporte es de 0,5 € por km. El transporte se calcula desde la fabricación en la localidad de Čachtice.",
+    "chooseDistrict": "Seleccione la ciudad de distrito",
+    "district": "Ciudad de distrito",
+    "note": "El precio del transporte es de {price} por km. El transporte se calcula desde la fabricación en la localidad de Čachtice.",
     "street": "Calle",
     "streetNumber": "Número de casa",
     "zipCode": "Código postal"
@@ -198,6 +199,74 @@
       "zuzana": {
         "description": "El diseño sencillo y elegante de las puertas de interior Zuzana puede satisfacer las expectativas de los clientes más exigentes.",
         "name": "Zuzana"
+      }
+    },
+    "handles": {
+      "Nova_nerez_R": {
+        "label": "Nova acero inoxidable R"
+      },
+      "Nova_nerez_HR": {
+        "label": "Nova acero inoxidable HR"
+      },
+      "Proxima_nerez_R": {
+        "label": "Proxima acero inoxidable R"
+      },
+      "Proxima_nerez_HR": {
+        "label": "Proxima acero inoxidable HR"
+      },
+      "Neptun_nerez_R": {
+        "label": "Neptun acero inoxidable R"
+      },
+      "Roma_nerez_R": {
+        "label": "Roma acero inoxidable R"
+      },
+      "Roma_nerez_HR": {
+        "label": "Roma acero inoxidable HR"
+      },
+      "Rio_grafit_HR": {
+        "label": "Rio grafito HR"
+      },
+      "Rio_nikel_satenovy_HR": {
+        "label": "Rio níquel satinado HR"
+      },
+      "Rio_patina_HR": {
+        "label": "Rio pátina HR"
+      },
+      "Quanta_Fit_mosadz_brusena_HR": {
+        "label": "Quanta Fit latón cepillado HR"
+      },
+      "Beta_nikel_satenovy_HR": {
+        "label": "Beta níquel satinado HR"
+      },
+      "Euforia_grafit_HR": {
+        "label": "Euforia grafito HR"
+      },
+      "Euforia_patina_HR": {
+        "label": "Euforia pátina HR"
+      },
+      "Topaz_nerez_HR": {
+        "label": "Topaz acero inoxidable HR"
+      },
+      "Foks_cierna_matna_HR": {
+        "label": "Foks negro mate HR"
+      },
+      "Qubik_mosadz_brusena_HR": {
+        "label": "Qubik latón cepillado HR"
+      },
+      "Qubik_nikel_satenovy_HR": {
+        "label": "Qubik níquel satinado HR"
+      },
+      "Qubik_chrom_leskly_HR": {
+        "label": "Qubik cromo brillante HR"
+      },
+      "Qubik_biela_matna_HR": {
+        "label": "Qubik blanco mate HR"
+      },
+      "Qubik_cierna_matna_HR": {
+        "label": "Qubik negro mate HR"
+      },
+      "Alt_wien": {
+        "label": "ALT WIEN Placa"
       }
     },
     "materials": {
@@ -441,5 +510,85 @@
         "label": "Suplemento por corte de tapajuntas {price}/unidad: Los tapajuntas se cortan si los huecos están mal resueltos. Por ejemplo, si hay desniveles de más de 5 mm, si no hay espacio para el marco en la pared o si el azulejo del baño es más bajo que la puerta y hay que fresar el tapajuntas."
       }
     }
-  }
+  },
+  "priceOfferSpreadSheet": {
+    "address": "Dirección",
+    "assembly": "Instalación",
+    "boolean": {
+      "true": "Sí",
+      "false": "No"
+    },
+    "city": "Ciudad",
+    "count": "uds",
+    "currency": "Moneda",
+    "disclaimer": {
+      "title": "Términos y condiciones",
+      "interiorDoors": {
+        "title": "Puertas de interior",
+        "description": "Las puertas están certificadas como puertas de interior. Esto significa que están diseñadas para ambientes internos donde las condiciones son idénticas en ambos lados de la puerta. Si un lado está expuesto a una alta humedad, puede producirse deformación o arqueamiento. Las puertas se fabrican conforme a las normas STN 74 64/01, STN 74 01/Z1, STN 74 01/Z2."
+      },
+      "whiteSprayPaintedDoors": {
+        "title": "Puertas lacadas en blanco",
+        "description": "En los productos lacados en blanco, el cliente ha sido informado de que el lacado en nuestra empresa es un trabajo manual y no un lacado en cámara de vacío, por lo que pueden aparecer pequeños defectos en el producto."
+      },
+      "whiteLaminateDoors": {
+        "title": "Puertas laminadas blancas",
+        "description": "El laminado blanco no es un material que sea blanco en todo su grosor. El decorado blanco está solo en la superficie. Por este motivo, con este acabado se forman juntas visibles en todos los cantos, que resultan perceptibles."
+      },
+      "slidingDoors": {
+        "title": "Puertas correderas",
+        "description": "Estas puertas sirven para dividir espacios. Debido a la funcionalidad de la puerta, inevitablemente queda un espacio entre el marco y la puerta."
+      },
+      "veneeredDoors": {
+        "title": "Puertas chapadas",
+        "description": "En las puertas chapadas, se ha informado al cliente de que la chapa es un material natural. Pueden darse varios tonos dentro de una misma especie de madera."
+      },
+      "laminateDoors": {
+        "title": "Puertas laminadas",
+        "description": "En las puertas laminadas, el tono está garantizado por el fabricante. Los tableros laminados se clasifican según la norma de la empresa, que permite la presencia de impurezas en un rango de: 2 mm²/1m². La norma permite de 2 a 3 puntos por tablero. La uniformidad del laminado viene dada por todo el tablero suministrado por el fabricante. Esto significa que la pieza uniforme utilizada para la producción se encuentra dentro de un mismo tablero."
+      },
+      "assembly": {
+        "title": "Instalación / Montaje",
+        "description": "El precio de la instalación de puertas y marcos incluye el montaje sin modificaciones adicionales en el producto (marcos y puertas) con respecto al estado en que fueron entregados. El ancho estándar del tapajuntas es de 6,5 cm. Si las paredes y los suelos están desparejos y el comprador no los nivele, inevitablemente quedarán huecos debajo del tapajuntas. El fabricante no se hace responsable de las irregularidades del suelo y de las paredes. Esto significa que si las paredes no están rectas, puede aparecer un hueco debajo del revestimiento que siga la irregularidad de la pared y el suelo. Las juntas alrededor de la pared se pueden reparar mediante sellado. Se sellan juntas de un ancho máximo de 5 mm, las juntas mayores las debe reparar el propio cliente.\nEl ajuste por sellado de irregularidades alrededor de los marcos se calcula por separado a un precio de 6 € por unidad. El sellado alrededor de los marcos se puede cancelar. De lo contrario, es necesario que el cliente nivele la pared. No realizamos trabajos de albañilería. En caso de taladrar en la pared o en el suelo, se pueden producir daños en el yeso o en los azulejos. Dado que no podemos evaluar si hay una cavidad en el interior, no asumimos responsabilidad por dichos daños. Al instalar puertas en aberturas de construcción no estándar donde los instaladores deban realizar ajustes en el lugar de montaje con herramientas eléctricas manuales, no es posible que la calidad del acabado por este método alcance la calidad de la fabricación en taller. Si fuera necesario realizar ajustes en el lugar mediante cepillado o corte, el cliente deberá disponer de espacio en la vivienda para dichas modificaciones. Cobramos un suplemento de 15 € por unidad. Instalamos las puertas en los huecos preparados según lo acordado durante la medición. Si el cliente añade perfiles de transición, alfombras o suelo laminado debajo de la puerta, es decir, cambia la altura debajo de la puerta y se requiere un ajuste de la misma, lo realizaremos bajo un pedido independiente, por lo que no forma parte del suministro estándar de la puerta."
+      },
+      "customMadeDoors": {
+        "title": "Puertas a medida",
+        "description": "Esto se refiere a dimensiones atípicas y no a la curvatura de las paredes. En caso de que el suelo no esté nivelado (no esté horizontal), se debe calzar un lado, creando un hueco debajo del marco. Una abertura de construcción estándar es aquella que tiene un grosor de pared regular e idéntico en todos los lados. En el caso de mediciones realizadas antes de la colocación de los suelos, si surgen diferencias de altura durante la ejecución, la responsabilidad correrá a cargo del cliente. Si es necesario realizar varios cortes en el mobiliario ya existente de la vivienda, por ejemplo, en perfiles de transición, rodapiés, suelos, parqués o armarios, estas acciones deberán acordarse por separado en función de un precio fijado individualmente. Dichos trabajos no forman parte del suministro. Fijamos los tapajuntas y los junquillos de acristalamiento con pasadores de 0,6 mm de grosor, que son visibles en todas las puertas con molduras. Los junquillos de acristalamiento tienen juntas visibles en uno de los lados."
+      },
+      "metalDoorFrameCladding": {
+        "title": "Revestimiento de marcos de puerta metálicos",
+        "description": "Al revestir un marco metálico o en otros revestimientos de pared atípicos donde el tapajuntas estándar no cubre la abertura de la construcción y se debe fabricar uno más ancho, se aplica un suplemento de 25 € por unidad. Este suplemento se calculará tras la inspección, ya que es posible que no lo supiéramos en el presupuesto preliminar. En caso de desmontar un marco de acero, debido al trabajo manual, se pueden producir daños en el yeso o en la pintura."
+      },
+      "parking": {
+        "title": "Aparcamiento",
+        "description": "En caso de que no se garantice un aparcamiento sin problemas y la descarga en la entrada, se cobrará un suplemento de 100 €."
+      },
+      "opticalDefects": {
+        "title": "Defectos ópticos",
+        "description": "Se considera defecto óptico aquel defecto visible a la luz del día desde una distancia de 1 metro bajo un ángulo que corresponda al uso normal."
+      },
+      "misc": {
+        "1": "No es nuestra intención ocultar la verdad al cliente, pero dado que la fabricación de puertas es un trabajo humano, pueden ocurrir circunstancias imprevistas y, por lo tanto, nos reservamos el derecho de posponer la fecha de instalación acordada entre 1 y 3 días.",
+        "2": "El cliente es consciente de que 1.) no tiene 2.) tiene anchuras i alturas idénticas",
+        "3": "El cliente solicita que la dimensión sea 1.) unificada 2.) no unificada",
+        "4": "Por la retirada y eliminación de las puertas y marcos originales cobramos..............................................Є.",
+        "5": "El cliente lo ha leído todo, está de acuerdo con el sentido de apertura y las aberturas medidas, lo ha comprobado todo y ha consultado todas las dudas con el técnico de medición. Es consciente de que no puede exigir trabajos adicionales fuera del contrato sin derecho a remuneración. Estaremos encantados de realizar trabajos adicionales, pero exigimos que se incluyan en el pedido y se paguen."
+      }
+    },
+    "doorsTable": {
+      "frame": "Marco / Precerco",
+      "glass": "Cristal / Vidrio",
+      "material": "Material",
+      "measurement": "Medida",
+      "model": "Modelo"
+    },
+    "handlesWithUrl": "MANILLAS disponibles en kluckynadvere.sk",
+    "material": "Material",
+    "pricePerUnit": "Precio / ud",
+    "priceVatFinal": "Precio total con IVA",
+    "priceWoVat": "Precio sin IVA",
+    "priceWoVatFinal": "Precio total sin IVA",
+    "title": "Presupuesto de puertas de interior"
+  },
+  "priceOfferMail": "<div>\n    <p>Hola:</p>\n\n    <p>\n        Adjunto le enviamos el presupuesto de <strong>puertas de interior</strong> generado por usted.\n    </p>\n\n    <p>\n        Puede ver las puertas en persona en ČACHTICE, BRATISLAVA o TRNAVA.\n    </p>\n\n    <p>\n        Si desea realizar un pedido o necesita más información,<br>\n        envíenos un correo electrónico a la siguiente dirección:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        o llame al número de teléfono:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        Atentamente,<br>\n        Ing. Peter Sučanský\n    </p>\n</div>"
 }

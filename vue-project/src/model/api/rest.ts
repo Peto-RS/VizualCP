@@ -1,6 +1,7 @@
 import {ApiRequest} from "@/model/api/req/price-offer/ApiRequest.js";
 import {AppConfigResponse} from "@/model/api/res/price-offer/AppConfigResponse.js";
 import {ConfiguratorAddDoorReq} from "@/model/api/req/configurator/configuratorAddDoorReq.js";
+import {SupportedLocale} from "@/model/functions/translation-utils.js";
 
 const API_URL_PRICE_OFFER = 'api.php';
 const API_CONFIGURATOR_URL = 'api-configurator.php';
@@ -27,8 +28,8 @@ export function updateForm(req: ApiRequest): Promise<any> {
     })
 }
 
-export function submitForm(recaptchaToken: string | undefined): Promise<any> {
-    return fetch(API_URL_SUBMISSION, {
+export function submitForm(lang: string, recaptchaToken: string | undefined): Promise<any> {
+    return fetch(API_URL_SUBMISSION + `?lang=${lang}`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({

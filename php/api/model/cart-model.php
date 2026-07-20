@@ -953,7 +953,7 @@ class PriceOffer
         return $instance;
     }
 
-    public function fromPostConfigurator(ConfiguratorPostRequest $request)
+    public function fromPostConfigurator(ConfiguratorPostRequest $request): PriceOffer
     {
         $door = new Door(
             $request->category,
@@ -974,6 +974,8 @@ class PriceOffer
             $this->handle ? $this->handle->isCountDirty : false,
             $request->handleId
         ) : null;
+
+        return $this;
     }
 
     public function toResponse(string $currency): PriceOfferResponse

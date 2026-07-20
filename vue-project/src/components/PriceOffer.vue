@@ -13,7 +13,7 @@ import {prepareRequest} from "@/model/functions/price-offer-api-request-builder.
 import BadgePrice from "./BadgePrice.vue";
 import AccordionItem from "./AccordionItem.vue";
 import {formatPrice} from "@/model/functions/formatters.js";
-import {getForm, submitForm, updateForm} from "../model/api/rest.js";
+import {deleteForm, getForm, submitForm, updateForm} from "../model/api/rest.js";
 import {ValidationMessage} from "../model/validation-message.js";
 import ValidationMessages from "./ValidationMessages.vue";
 import Hint from "./Hint.vue";
@@ -160,7 +160,7 @@ async function handleFormSubmit(e: Event): Promise<void> {
     const response = await submitForm(i18n.global.locale.value, recaptchaToken);
 
     if (response.ok) {
-      await handleFormSaveAndReRender(constructReactiveFormPriceOffer(undefined));
+      await deleteForm()
       sessionStorage.setItem('offerCompleted', 'true')
       await router.push({name: 'PriceOfferFinished'})
     } else {

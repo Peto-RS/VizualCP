@@ -13,7 +13,7 @@ session_start();
 // ---------------------
 // Handle GET requests
 // ---------------------
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     try {
         $currencyId = CurrencyEnum::isValid($_GET['currency']) ? $_GET['currency'] : CurrencyEnum::EUR;
         $apiResponse = new ApiResponse(
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // ---------------------
 // Handle POST requests (JSON body)
 // ---------------------
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rawData = file_get_contents("php://input");
     $requestBody = json_decode($rawData, true);
 
@@ -39,6 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     sendJsonResponse(createOrUpdatePriceOffer($requestBody), 200);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    if (isset($_SESSION['priceOffer'])) {
+        unset($_SESSION['priceOffer']);
+    }
+
+    http_response_code(204);
+    exit;
 }
 
 // ---------------------

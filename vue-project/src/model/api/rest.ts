@@ -16,6 +16,12 @@ export function getConfigurator(currency: string): Promise<any> {
     return fetch(API_CONFIGURATOR_URL + `?currency=${currency}`)
 }
 
+export function deleteForm(): Promise<any> {
+    return fetch(API_URL_PRICE_OFFER, {
+        method: 'DELETE'
+    })
+}
+
 export function getForm(currency: string): Promise<any> {
     return fetch(API_URL_PRICE_OFFER + `?currency=${currency}`)
 }

@@ -44,8 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $parsedObject = new ConfiguratorPostRequest($requestBody);
     $priceOffer = isset($_SESSION['priceOffer']) ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer();
-    $priceOffer->fromPostConfigurator($parsedObject);
-    $_SESSION['priceOffer'] = $priceOffer;
+    $_SESSION['priceOffer'] = $priceOffer->fromPostConfigurator($parsedObject);
 
     sendJsonResponse($priceOffer->toResponse(CurrencyEnum::EUR), 200);
 }

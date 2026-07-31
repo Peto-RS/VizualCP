@@ -2,10 +2,12 @@
 require_once __DIR__ . "/api-common.php";
 require_once __DIR__ . "/php/api/model/cart-model.php";
 require_once __DIR__ . "/php/api/price-offer-facade.php";
+require_once __DIR__ . "/php/api/price-offer-view-facade.php";
 require_once __DIR__ . "/php/api/request-objects/api-price-offer-request-objects.php";
 require_once __DIR__ . "/php/api/response-objects/api-price-offer-response-objects.php";
 require_once __DIR__ . "/php/api/request-objects/api-configurator-request-objects.php";
 require_once __DIR__ . "/php/api/model/validation-message.php";
+require_once __DIR__ . "/php/enums/SupportedLanguagesEnum.php";
 
 session_start();
 //session_destroy();
@@ -16,11 +18,11 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     try {
         $currencyId = CurrencyEnum::isValid($_GET['currency']) ? $_GET['currency'] : CurrencyEnum::EUR;
-        $apiResponse = new ApiResponse(
-            DistrictsJsonDataManipulation::getAll() ?? array(),
-            getPriceOfferResponse($currencyId)
-        );
-        sendJsonResponse($apiResponse, 200);
+        $lang = SupportedLanguagesEnum::isValid($_GET['lang']) ? $_GET['lang'] : SupportedLanguagesEnum::SK;
+
+        $response = getPriceOfferViewResponse($currencyId, $lang);
+
+        sendJsonResponse($response, 200);
     } catch (Throwable $e) {
         error_log($e);
         sendJsonResponse(['error' => $e->getTrace()], 500);
@@ -38,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         sendJsonResponse(['error' => 'Invalid JSON'], 400);
     }
 
-    sendJsonResponse(createOrUpdatePriceOffer($requestBody), 200);
+    $lang = SupportedLanguagesEnum::isValid($_GET['lang']) ? $_GET['lang'] : SupportedLanguagesEnum::SK;
+    sendJsonResponse(createOrUpdatePriceOffer($requestBody, $lang), 200);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {

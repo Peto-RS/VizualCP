@@ -76,6 +76,7 @@
   "delivery": {
     "address": "Adresa isporuke (opciono)",
     "city": "Mesto",
+    "chooseDeliveryCountry": "Izaberite zemlju",
     "chooseDistrict": "Izaberite okružni centar",
     "district": "Okružni centar",
     "note": "Cena prevoza je {price} po km. Prevoz se računa od proizvodnje u mestu Čachtice.",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Aktuelni sezonski dodatni popust od 15% na sva vrata i dovratnike."
+      "doors-august-2026": "AKTUELNI POPUST OD 10% NA SVA VRATA NARUČENA DO KRAJA AVGUSTA.",
+      "doors-september-2026": "AKTUELNI POPUST OD 5% NA SVA VRATA NARUČENA DO KRAJA SEPTEMBRA.",
+      "doors-november-2026": "AKTUELNI POPUST OD 10% NA SVA VRATA NARUČENA DO KRAJA NOVEMBRA.",
+      "doors-december-2026": "AKTUELNI POPUST OD 5% NA SVA VRATA NARUČENA DO KRAJA DECEMBRA."
+    },
+    "deliveryCountries": {
+      "at": "Austrija",
+      "cz": "Češka",
+      "sk": "Slovačka"
+    },
+    "districts": {
+      "own-transport": "Lično preuzimanje Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "Grad",
     "count": "kom",
     "currency": "Valuta",
+    "deliveryCountry": "Zemlja",
     "disclaimer": {
       "title": "Uslovi ugovora",
       "interiorDoors": {

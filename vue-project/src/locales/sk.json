@@ -77,6 +77,7 @@
     "address": "Adresa dovozu (nepovinné)",
     "city": "Obec",
     "district": "Okresné mesto",
+    "chooseDeliveryCountry": "Vyberte krajinu",
     "chooseDistrict": "Vyberte okresné mesto",
     "note": "Cena prepravy je {price} za km. Preprava sa počíta od výroby v obci Čachtice.",
     "street": "Ulica",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Aktuálna sezónna extra zľava na všetky dvere a zárubne 15%."
+      "doors-august-2026": "AKTUÁLNA ZĽAVA 10% NA VŠETKY DVERE OBJEDNANÉ DO KONCA AUGUSTA.",
+      "doors-september-2026": "AKTUÁLNA ZĽAVA 5% NA VŠETKY DVERE OBJEDNANÉ DO KONCA SEPTEMBRA.",
+      "doors-november-2026": "AKTUÁLNA ZĽAVA 10% NA VŠETKY DVERE OBJEDNANÉ DO KONCA NOVEMBRA.",
+      "doors-december-2026": "AKTUÁLNA ZĽAVA 5% NA VŠETKY DVERE OBJEDNANÉ DO KONCA DECEMBRA."
+    },
+    "deliveryCountries": {
+      "at": "Rakúsko",
+      "cz": "Česko",
+      "sk": "Slovensko"
+    },
+    "districts": {
+      "own-transport": "Vlastný odber Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "Mesto",
     "count": "ks",
     "currency": "Mena",
+    "deliveryCountry": "Krajina",
     "disclaimer": {
       "title": "Zmluvné podmienky",
       "interiorDoors": {

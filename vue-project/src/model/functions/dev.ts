@@ -362,5 +362,5 @@ export async function devFunction() {
         '  }\n' +
         '}'
 
-    await updateForm(JSON.parse(test));
+    await updateForm(JSON.parse(test), 'sk');
 }

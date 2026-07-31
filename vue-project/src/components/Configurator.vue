@@ -25,7 +25,7 @@ import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
 
 const {addAlert} = useAlerts()
 const {appConfig, currency} = useAppState()
-const {t} = useI18n();
+const {locale, t} = useI18n();
 
 const props = defineProps<{
   initialSelectedDoor: SelectedDoor | null
@@ -121,7 +121,7 @@ async function handleAddDoorButtonClick(): Promise<any> {
         handleId: selectedDoor.value.handleId,
         material: selectedDoor.value.material!,
         type: selectedDoor.value.type!
-      })
+      }, locale.value)
 
       if (response.ok) {
         addAlert(t('configurator.doorAddedToPriceOffer'))

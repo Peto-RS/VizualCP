@@ -76,6 +76,7 @@
   "delivery": {
     "address": "Lieferadresse (optional)",
     "city": "Gemeinde/Stadt",
+    "chooseDeliveryCountry": "Land auswählen",
     "chooseDistrict": "Bezirksstadt wählen",
     "district": "Bezirksstadt",
     "note": "Der Transportpreis beträgt {price} pro km. Der Transport wird ab der Produktion in der Gemeinde Čachtice berechnet.",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Aktuelle saisonale Zusatzrabatt von 15 % auf alle Türen und Zargen."
+      "doors-august-2026": "AKTUELLER RABATT VON 10% AUF ALLE TÜREN, DIE BIS ENDE AUGUST BESTELLT WERDEN.",
+      "doors-september-2026": "AKTUELLER RABATT VON 5% AUF ALLE TÜREN, DIE BIS ENDE SEPTEMBER BESTELLT WERDEN.",
+      "doors-november-2026": "AKTUELLER RABATT VON 10% AUF ALLE TÜREN, DIE BIS ENDE NOVEMBER BESTELLT WERDEN.",
+      "doors-december-2026": "AKTUELLER RABATT VON 5% AUF ALLE TÜREN, DIE BIS ENDE DEZEMBER BESTELLT WERDEN."
+    },
+    "deliveryCountries": {
+      "at": "Österreich",
+      "cz": "Tschechien",
+      "sk": "Slowakei"
+    },
+    "districts": {
+      "own-transport": "Selbstabholung Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "Stadt",
     "count": "Stk.",
     "currency": "Währung",
+    "deliveryCountry": "Land",
     "disclaimer": {
       "title": "Allgemeine Geschäftsbedingungen",
       "interiorDoors": {

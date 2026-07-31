@@ -1,7 +1,6 @@
 import {ApiRequest} from "@/model/api/req/price-offer/ApiRequest.js";
 import {AppConfigResponse} from "@/model/api/res/price-offer/AppConfigResponse.js";
 import {ConfiguratorAddDoorReq} from "@/model/api/req/configurator/configuratorAddDoorReq.js";
-import {SupportedLocale} from "@/model/functions/translation-utils.js";
 
 const API_URL_PRICE_OFFER = 'api.php';
 const API_CONFIGURATOR_URL = 'api-configurator.php';
@@ -22,12 +21,12 @@ export function deleteForm(): Promise<any> {
     })
 }
 
-export function getForm(currency: string): Promise<any> {
-    return fetch(API_URL_PRICE_OFFER + `?currency=${currency}`)
+export function getForm(currency: string, lang: string): Promise<any> {
+    return fetch(API_URL_PRICE_OFFER + `?currency=${currency}&lang=${lang}`)
 }
 
-export function updateForm(req: ApiRequest): Promise<any> {
-    return fetch(API_URL_PRICE_OFFER, {
+export function updateForm(req: ApiRequest, lang: string): Promise<any> {
+    return fetch(API_URL_PRICE_OFFER + `?lang=${lang}`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(req)
@@ -44,8 +43,8 @@ export function submitForm(lang: string, recaptchaToken: string | undefined): Pr
     })
 }
 
-export function postAddDoor(req: ConfiguratorAddDoorReq): Promise<any> {
-    return fetch(API_CONFIGURATOR_URL, {
+export function postAddDoor(req: ConfiguratorAddDoorReq, lang: string): Promise<any> {
+    return fetch(API_CONFIGURATOR_URL + `?lang=${lang}`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(req)

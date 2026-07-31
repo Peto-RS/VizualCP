@@ -76,6 +76,7 @@
   "delivery": {
     "address": "Indirizzo di consegna (opzionale)",
     "city": "Comune/Città",
+    "chooseDeliveryCountry": "Seleziona il paese",
     "chooseDistrict": "Seleziona capoluogo di provincia",
     "district": "Capoluogo di provincia",
     "note": "Il prezzo del trasporto è di {price} al km. Il trasporto viene calcolato a partire dalla produzione nel comune di Čachtice.",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Attuale sconto extra stagionale del 15% su tutte le porte e i telai."
+      "doors-august-2026": "ATTUALE SCONTO DEL 10% SU TUTTE LE PORTE ORDINATE ENTRO LA FINE DI AGOSTO.",
+      "doors-september-2026": "ATTUALE SCONTO DEL 5% SU TUTTE LE PORTE ORDINATE ENTRO LA FINE DI SETTEMBRE.",
+      "doors-november-2026": "ATTUALE SCONTO DEL 10% SU TUTTE LE PORTE ORDINATE ENTRO LA FINE DI NOVEMBRE.",
+      "doors-december-2026": "ATTUALE SCONTO DEL 5% SU TUTTE LE PORTE ORDINATE ENTRO LA FINE DI DICEMBRE."
+    },
+    "deliveryCountries": {
+      "at": "Austria",
+      "cz": "Repubblica Ceca",
+      "sk": "Slovacchia"
+    },
+    "districts": {
+      "own-transport": "Ritiro di persona a Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "Città",
     "count": "pz",
     "currency": "Valuta",
+    "deliveryCountry": "Paese",
     "disclaimer": {
       "title": "Termini e condizioni",
       "interiorDoors": {

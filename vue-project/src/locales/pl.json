@@ -76,6 +76,7 @@
   "delivery": {
     "address": "Adres dostawy (opcjonalnie)",
     "city": "Miejscowość",
+    "chooseDeliveryCountry": "Wybierz kraj",
     "chooseDistrict": "Wybierz miasto powiatowe",
     "district": "Miasto powiatowe",
     "note": "Cena transportu wynosi {price} za km. Transport liczony jest od produkcji w miejscowości Čachtice.",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Aktualna sezonowa dodatkowa zniżka 15% na wszystkie drzwi i ościeżnice."
+      "doors-august-2026": "AKTUALNY RABAT 10% NA WSZYSTKIE DRZWI ZAMÓWIONE DO KOŃCA SIERPNIA.",
+      "doors-september-2026": "AKTUALNY RABAT 5% NA WSZYSTKIE DRZWI ZAMÓWIONE DO KOŃCA WRZEŚNIA.",
+      "doors-november-2026": "AKTUALNY RABAT 10% NA WSZYSTKIE DRZWI ZAMÓWIONE DO KOŃCA LISTOPADA.",
+      "doors-december-2026": "AKTUALNY RABAT 5% NA WSZYSTKIE DRZWI ZAMÓWIONE DO KOŃCA GRUDNIA."
+    },
+    "deliveryCountries": {
+      "at": "Austria",
+      "cz": "Czechy",
+      "sk": "Słowacja"
+    },
+    "districts": {
+      "own-transport": "Odbiór osobisty Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "Miasto",
     "count": "szt.",
     "currency": "Waluta",
+    "deliveryCountry": "Kraj",
     "disclaimer": {
       "title": "Warunki umowy",
       "interiorDoors": {

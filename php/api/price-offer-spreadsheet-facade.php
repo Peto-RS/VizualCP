@@ -19,7 +19,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 function generateSpreadSheet(PriceOfferResponse $priceOffer, string $lang): Spreadsheet
 {
-    $spreadsheet = loadSpreadSheet(__DIR__ . '/../../assets/xlsx/cenova_ponuka_Hutas_13072026.xlsx');
+    $spreadsheet = loadSpreadSheet(__DIR__ . '/../../assets/xlsx/cenova_ponuka_Hutas_28072026.xlsx');
     addBusinessDataIntoSpreadsheet($spreadsheet, $priceOffer, $lang);
     return $spreadsheet;
 }
@@ -458,15 +458,56 @@ function addBusinessDataIntoSpreadsheet(Spreadsheet $spreadsheet, PriceOfferResp
     }
 
     $district = $priceOffer->address->district;
+    $deliveryCountry = $priceOffer->address->deliveryCountry;
     if ($district) {
-        $districtConfig = DistrictsJsonDataManipulation::findByIdOrNull($district);
-        $sheet->setCellValue('F' . $rowIdx, $districtConfig ? $districtConfig['label'] : "");
+        $districtDb = DistrictsJsonDataManipulation::findByIdAndCountryOrNull($district, $deliveryCountry);
+
+        if ($isForeignLanguage) {
+            fillCellWithTranslation(
+                $sheet,
+                getDistrictLabel($districtDb, $translationFileSk),
+                getDistrictLabel($districtDb, $translationFileForeign),
+                'F' . $rowIdx,
+                $rowIdx,
+                32
+            );
+        } else {
+            $sheet->setCellValue('F' . $rowIdx, $districtDb ? $districtDb['label'] : '');
+        }
     }
 
     $deliveryCost = $priceOffer->deliveryPrice;
     if ($deliveryCost) {
         $sheet->setCellValue('G' . $rowIdx, $deliveryCost);
     }
+    $rowIdx++;
+
+    if ($isForeignLanguage) {
+        fillCellWithTranslation(
+            $sheet,
+            $translationFileSk["priceOfferSpreadSheet"]["deliveryCountry"],
+            $translationFileForeign["priceOfferSpreadSheet"]["deliveryCountry"],
+            "A$rowIdx",
+            $rowIdx,
+            32
+        );
+    }
+
+    $deliveryCountry = $priceOffer->address->deliveryCountry;
+    if ($deliveryCountry) {
+        if ($isForeignLanguage)
+            fillCellWithTranslation(
+                $sheet,
+                $translationFileSk["db"]["deliveryCountries"][$priceOffer->address->deliveryCountry],
+                $translationFileForeign["db"]["deliveryCountries"][$priceOffer->address->deliveryCountry],
+                "F$rowIdx",
+                $rowIdx,
+                32
+            );
+        else
+            $sheet->setCellValue('F' . $rowIdx, $translationFileSk["db"]["deliveryCountries"][$priceOffer->address->deliveryCountry]);
+    }
+
     $rowIdx++;
 
     if ($isForeignLanguage) {
@@ -1128,7 +1169,17 @@ function insertCampaigns(
     }
 
     foreach ($priceOffer->campaignDetails as $campaignDetail) {
-        $sheet->mergeCells("A$rowIdx:G$rowIdx");
+        $sheet->mergeCells("A$rowIdx:E$rowIdx");
+        $sheet->getStyle("A$rowIdx")
+            ->getAlignment()
+            ->setWrapText(true);
+
+        $sheet->getRowDimension($rowIdx)->setRowHeight(32);
+        $sheet->getStyle("A$rowIdx:H$rowIdx")
+            ->getFill()
+            ->setFillType(Fill::FILL_SOLID)
+            ->getStartColor()
+            ->setARGB('DCB946');
 
         if ($isForeignLanguage) {
             fillCellWithTranslation(
@@ -1143,6 +1194,7 @@ function insertCampaigns(
             $sheet->setCellValue("A$rowIdx", getTranslation($translationFileSk, $campaignDetail->translationKey));
         }
 
+        $sheet->setCellValue("F$rowIdx", "=H$rowIdx*" . ParametersJsonDataManipulation::getAll()["vat"]);
         $sheet->setCellValue("H$rowIdx", -($campaignDetail->discountAmount));
         $rowIdx = $rowIdx + 1;
     }
@@ -1267,6 +1319,14 @@ function formatPrice(?float $price, string $currencySuffix): string
     $formatted = rtrim(rtrim($formatted, '0'), ',');
 
     return $formatted . ' ' . $currencySuffix;
+}
+
+function getDistrictLabel(array $districtDb, array $translationFile): string
+{
+    if ($districtDb && array_key_exists('translationKey', $districtDb))
+        return $translationFile['db']['districts'][$districtDb['translationKey']];
+    else
+        return $districtDb['label'];
 }
 
 ?>

@@ -5,6 +5,7 @@ require_once __DIR__ . "/php/api/configurator-facade.php";
 require_once __DIR__ . "/php/api/request-objects/api-configurator-request-objects.php";
 require_once __DIR__ . "/php/api/response-objects/api-configurator-response-objects.php";
 require_once __DIR__ . "/php/enums/CurrencyEnum.php";
+require_once __DIR__ . "/php/enums/SupportedLanguagesEnum.php";
 
 session_start();
 //session_destroy();
@@ -37,13 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rawData = file_get_contents("php://input");
     $requestBody = json_decode($rawData, true);
+    $lang = SupportedLanguagesEnum::isValid($_GET['lang']) ? $_GET['lang'] : SupportedLanguagesEnum::SK;
 
     if (json_last_error() !== JSON_ERROR_NONE) {
         sendJsonResponse(['error' => 'Invalid JSON'], 400);
     }
 
     $parsedObject = new ConfiguratorPostRequest($requestBody);
-    $priceOffer = isset($_SESSION['priceOffer']) ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer();
+    $priceOffer = isset($_SESSION['priceOffer']) ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer($lang);
     $_SESSION['priceOffer'] = $priceOffer->fromPostConfigurator($parsedObject);
 
     sendJsonResponse($priceOffer->toResponse(CurrencyEnum::EUR), 200);

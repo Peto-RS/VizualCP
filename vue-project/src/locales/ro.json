@@ -76,6 +76,7 @@
   "delivery": {
     "address": "Adresa de livrare (opțional)",
     "city": "Localitate",
+    "chooseDeliveryCountry": "Selectați țara",
     "chooseDistrict": "Selectați orașul de reședință",
     "district": "Orașul de reședință",
     "note": "Prețul transportului este de {price} pe km. Transportul se calculează de la unitatea de producție din localitatea Čachtice.",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Reducere sezonieră extra actuală de 15% la toate ușile și tocurile."
+      "doors-august-2026": "REDUCERE ACTUALĂ DE 10% LA TOATE UȘILE COMANDATE PÂNĂ LA SFÂRȘITUL LUNII AUGUST.",
+      "doors-september-2026": "REDUCERE ACTUALĂ DE 5% LA TOATE UȘILE COMANDATE PÂNĂ LA SFÂRȘITUL LUNII SEPTEMBRIE.",
+      "doors-november-2026": "REDUCERE ACTUALĂ DE 10% LA TOATE UȘILE COMANDATE PÂNĂ LA SFÂRȘITUL LUNII NOIEMBRIE.",
+      "doors-december-2026": "REDUCERE ACTUALĂ DE 5% LA TOATE UȘILE COMANDATE PÂNĂ LA SFÂRȘITUL LUNII DECEMBRIE."
+    },
+    "deliveryCountries": {
+      "at": "Austria",
+      "cz": "Cehia",
+      "sk": "Slovacia"
+    },
+    "districts": {
+      "own-transport": "Ridicare personală Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "Oraș",
     "count": "buc",
     "currency": "Valută",
+    "deliveryCountry": "Țară",
     "disclaimer": {
       "title": "Termeni și condiții",
       "interiorDoors": {

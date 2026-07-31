@@ -6,8 +6,14 @@ class AddressRequest
     /** @var string|null $city */
     public $city;
 
+    /** @var string|null $deliveryCountry */
+    public $deliveryCountry;
+
     /** @var string|null $district */
     public $district;
+
+    /** @var bool|null $isDeliveryCountryDirty */
+    public $isDeliveryCountryDirty;
 
     /** @var string|null $street */
     public $street;
@@ -21,7 +27,9 @@ class AddressRequest
     public function __construct(array $json)
     {
         $this->city = $json['city'] ?? null;
+        $this->deliveryCountry = $json['deliveryCountry'] ?? null;
         $this->district = $json['district'] ?? null;
+        $this->isDeliveryCountryDirty = $json['isDeliveryCountryDirty'] ?? null;
         $this->street = $json['street'] ?? null;
         $this->streetNumber = $json['streetNumber'] ?? null;
         $this->zipCode = $json['zipCode'] ?? null;

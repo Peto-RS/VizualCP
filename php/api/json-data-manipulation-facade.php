@@ -23,16 +23,31 @@ class CurrencyRatesJsonDataManipulation
     }
 }
 
-class DistrictsJsonDataManipulation
+class DeliveryCountriesJsonDataManipulation
 {
     public static function getAll(): array
     {
-        return getArrayFromJsonFile(__DIR__ . "/../../assets/json/districts.json");
+        return getArrayFromJsonFile(__DIR__ . "/../../assets/json/countries-delivery.json");
+    }
+}
+
+class DistrictsJsonDataManipulation
+{
+    public static function getAllByCountry(?string $countryId): array
+    {
+        switch ($countryId) {
+            case "at":
+                return getArrayFromJsonFile(__DIR__ . "/../../assets/json/districts-at.json");
+            case "cz":
+                return getArrayFromJsonFile(__DIR__ . "/../../assets/json/districts-cz.json");
+            default:
+                return getArrayFromJsonFile(__DIR__ . "/../../assets/json/districts.json");
+        }
     }
 
-    public static function findByIdOrNull(?string $id)
+    public static function findByIdAndCountryOrNull(?string $id, ?string $country)
     {
-        $list = DistrictsJsonDataManipulation::getAll();
+        $list = DistrictsJsonDataManipulation::getAllByCountry($country);
         $item = array_filter($list, function ($r) use ($id) {
             return $r["id"] == $id;
         });

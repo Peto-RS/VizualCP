@@ -1,4 +1,4 @@
-import {ApiResponse} from "@/model/api/res/price-offer/ApiResponse.js";
+import {PriceOfferViewResponse} from "@/model/api/res/price-offer/PriceOfferViewResponse.js";
 import {SelectedDoorResponse} from "@/model/api/res/price-offer/SelectedDoorResponse.js";
 import {CustomHandleResponse} from "@/model/api/res/price-offer/CustomHandleResponse.js";
 import {AddressResponse} from "@/model/api/res/price-offer/AddressResponse.js";
@@ -19,7 +19,9 @@ interface FormContact {
 
 export interface FormAddress {
     city: string
+    deliveryCountry: string
     district: string
+    isDeliveryCountryDirty: boolean
     street: string
     streetNumber: string
     zipCode: string
@@ -125,7 +127,7 @@ export interface TechnicalSurchargeMeta {
     labelKey: string | null
 }
 
-export function constructReactiveFormPriceOffer(json: ApiResponse | undefined): FormPriceOffer {
+export function constructReactiveFormPriceOffer(json: PriceOfferViewResponse | undefined): FormPriceOffer {
     return {
         address: constructReactiveFormAddress(json?.priceOffer.address),
         assemblyDoorsCount: json?.priceOffer.assemblyDoorsCount || 0,
@@ -163,7 +165,9 @@ export function constructReactiveFormContact(contact: ContactResponse | undefine
 export function constructReactiveFormAddress(address: AddressResponse | undefined): FormAddress {
     return {
         city: address?.city || "",
+        deliveryCountry: address?.deliveryCountry || "",
         district: address?.district || "",
+        isDeliveryCountryDirty: address?.isDeliveryCountryDirty || false,
         street: address?.street || "",
         streetNumber: address?.streetNumber || "",
         zipCode: address?.zipCode || ""
@@ -307,18 +311,18 @@ const rosetteMetaById = computed(() =>
 )
 */
 
-export function findTechnicalSurchargeById(id: string, apiResponse: ApiResponse | undefined): TechnicalSurchargeResponse | undefined {
+export function findTechnicalSurchargeById(id: string, apiResponse: PriceOfferViewResponse | undefined): TechnicalSurchargeResponse | undefined {
     return apiResponse?.priceOffer.technicalSurcharges.find(it => it.id === id)
 }
 
-export function findRosetteById(id: string, apiResponse: ApiResponse | undefined): RosetteResponse | undefined {
+export function findRosetteById(id: string, apiResponse: PriceOfferViewResponse | undefined): RosetteResponse | undefined {
     return apiResponse?.priceOffer.rosettes.find(it => it.id === id)
 }
 
-export function findAestheticAccessoryById(id: string, apiResponse: ApiResponse | undefined): AestheticAccessoriesResponse | undefined {
+export function findAestheticAccessoryById(id: string, apiResponse: PriceOfferViewResponse | undefined): AestheticAccessoriesResponse | undefined {
     return apiResponse?.priceOffer.aestheticAccessories.find(it => it.id === id)
 }
 
-export function findSpecialSurchargeById(id: string, apiResponse: ApiResponse | undefined): SpecialSurchargeResponse | undefined {
+export function findSpecialSurchargeById(id: string, apiResponse: PriceOfferViewResponse | undefined): SpecialSurchargeResponse | undefined {
     return apiResponse?.priceOffer.specialSurcharges.find(it => it.id === id)
 }

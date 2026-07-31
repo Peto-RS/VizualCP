@@ -20,8 +20,14 @@ class Address
     /** @var string|null $city */
     public $city;
 
+    /** @var string|null $deliveryCountry */
+    public $deliveryCountry;
+
     /** @var string|null $district */
     public $district;
+
+    /** @var bool|null $isDeliveryCountryDirty */
+    public $isDeliveryCountryDirty;
 
     /** @var string|null $street */
     public $street;
@@ -32,23 +38,27 @@ class Address
     /** @var string|null $zipCode */
     public $zipCode;
 
-    public function __construct()
+    public function __construct(?string $lang)
     {
         $this->city = null;
+        $this->deliveryCountry = $this->getDeliveryCountry(null, $lang);
         $this->district = null;
+        $this->isDeliveryCountryDirty = null;
         $this->street = null;
         $this->streetNumber = null;
         $this->zipCode = null;
     }
 
-    public static function fromRequest(?AddressRequest $req): Address
+    public static function fromRequest(?AddressRequest $req, ?string $lang): Address
     {
-        $instance = new self();
+        $instance = new self($lang);
 
         if ($req == null) {
             return $instance;
         }
 
+        $instance->isDeliveryCountryDirty = $req->isDeliveryCountryDirty;
+        $instance->deliveryCountry = $instance->getDeliveryCountry($req->deliveryCountry, $lang);
         $instance->city = $req->city;
         $instance->district = $req->district;
         $instance->street = $req->street;
@@ -62,11 +72,29 @@ class Address
     {
         return new AddressResponse(
             $this->city,
+            $this->deliveryCountry,
             $this->district,
+            $this->isDeliveryCountryDirty,
             $this->street,
             $this->streetNumber,
             $this->zipCode
         );
+    }
+
+    function getDeliveryCountry(?string $valueToBe, ?string $lang): ?string
+    {
+        if ($this->isDeliveryCountryDirty || $lang == null) {
+            return $valueToBe;
+        }
+
+        switch ($lang) {
+            case SupportedLanguagesEnum::CS:
+                return "cz";
+            case SupportedLanguagesEnum::DE:
+                return "at";
+            default:
+                return "sk";
+        }
     }
 }
 
@@ -838,9 +866,9 @@ class PriceOffer
     /** @var LineItem[] $specialSurchargesLineItems */
     public $specialSurchargesLineItems;
 
-    function __construct()
+    function __construct(?string $lang)
     {
-        $this->address = new Address();
+        $this->address = new Address($lang);
         $this->assemblyDoorsCount = null;
         $this->assemblyHandlesRosettesCount = null;
         $this->contact = new Contact();
@@ -870,8 +898,8 @@ class PriceOffer
 
     public static function fromSession(PriceOffer $session): PriceOffer
     {
-        $instance = new self();
-        $instance->address = $session->address ?? new Address();
+        $instance = new self(null);
+        $instance->address = $session->address ?? new Address(null);
         $instance->assemblyHandlesRosettesCount = $session->assemblyHandlesRosettesCount ?? null;
         $instance->assemblyDoorsCount = $session->assemblyDoorsCount ?? null;
         $instance->contact = $session->contact ?? new Contact();
@@ -895,10 +923,10 @@ class PriceOffer
         return $instance;
     }
 
-    public static function fromRequest(PriceOfferRequest $req): PriceOffer
+    public static function fromRequest(PriceOfferRequest $req, ?string $lang): PriceOffer
     {
-        $instance = new self();
-        $instance->address = Address::fromRequest($req->address);
+        $instance = new self($lang);
+        $instance->address = Address::fromRequest($req->address, $lang);
         $instance->assemblyDoorsCount = $req->assemblyDoorsCount;
         $instance->assemblyHandlesRosettesCount = $req->assemblyHandlesRosettesCount;
         $instance->contact = Contact::fromRequest($req->contact);
@@ -1107,7 +1135,7 @@ class PriceOffer
     function calculateDeliveryCosts(): float
     {
         if ($this->address) {
-            $config = DistrictsJsonDataManipulation::findByIdOrNull($this->address->district);
+            $config = DistrictsJsonDataManipulation::findByIdAndCountryOrNull($this->address->district, $this->address->deliveryCountry);
             return $config ?
                 currencyRateTransformation(
                     $this->currency,

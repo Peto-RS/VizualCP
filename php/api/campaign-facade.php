@@ -30,19 +30,20 @@ function getActiveCampaignsOfType(string $type, DateTime $dateTime): array
 
 
 /**
- * @param float $price
- * @param Campaign[] $campaigns
+ * @param float $$calculatedDoorsPriceNoCampaign
+ * @param Campaign[] $doorsCampaigns
  * @return CampaignDetailResponse[]
  */
-function getCalculatedCampaignDetails(float $price, array $campaigns): array
+function getCalculatedCampaignDetails(float $calculatedDoorsPriceNoCampaign, array $doorsCampaigns): array
 {
     $result = array();
-    $resultPrice = $price;
-    foreach ($campaigns as $campaign) {
+    $resultPrice = $calculatedDoorsPriceNoCampaign;
+    foreach ($doorsCampaigns as $campaign) {
         $discountAmount = $resultPrice * ($campaign->percentageDiscount / 100.0);
         $resultPrice = $resultPrice - $discountAmount;
         $result[] = new CampaignDetailResponse(
             $discountAmount,
+            $discountAmount * ParametersJsonDataManipulation::getAll()["vat"],
             $campaign->id,
             $campaign->translationKey,
             $campaign->type

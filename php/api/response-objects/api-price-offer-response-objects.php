@@ -5,8 +5,14 @@ class AddressResponse implements JsonSerializable
     /** @var string|null $city */
     public $city;
 
+    /** @var string|null $deliveryCountry */
+    public $deliveryCountry;
+
     /** @var string|null $district */
     public $district;
+
+    /** @var bool|null $isDeliveryCountryDirty */
+    public $isDeliveryCountryDirty;
 
     /** @var string|null $street */
     public $street;
@@ -17,10 +23,20 @@ class AddressResponse implements JsonSerializable
     /** @var string|null $zipCode */
     public $zipCode;
 
-    public function __construct(?string $city, ?string $district, ?string $street, ?string $streetNumber, ?string $zipCode)
+    public function __construct(
+        ?string $city,
+        ?string $deliveryCountry,
+        ?string $district,
+        ?bool   $isDeliveryCountryDirty,
+        ?string $street,
+        ?string $streetNumber,
+        ?string $zipCode
+    )
     {
         $this->city = $city;
+        $this->deliveryCountry = $deliveryCountry;
         $this->district = $district;
+        $this->isDeliveryCountryDirty = $isDeliveryCountryDirty;
         $this->street = $street;
         $this->streetNumber = $streetNumber;
         $this->zipCode = $zipCode;
@@ -28,14 +44,16 @@ class AddressResponse implements JsonSerializable
 
     public static function empty(): AddressResponse
     {
-        return new AddressResponse(null, null, null, null, null);
+        return new AddressResponse(null, null, null, null, null, null, null);
     }
 
     public function jsonSerialize(): array
     {
         return [
             'city' => $this->city,
+            'deliveryCountry' => $this->deliveryCountry,
             'district' => $this->district,
+            'isDeliveryCountryDirty' => $this->isDeliveryCountryDirty,
             'street' => $this->street,
             'streetNumber' => $this->streetNumber,
             'zipCode' => $this->zipCode
@@ -748,6 +766,9 @@ class CampaignDetailResponse
     /** @var float $discountAmount */
     public $discountAmount;
 
+    /** @var float $discountAmountVat */
+    public $discountAmountVat;
+
     /** @var string $id */
     public $id;
 
@@ -758,13 +779,15 @@ class CampaignDetailResponse
     public $type;
 
     public function __construct(
-        float $discountAmount,
+        float  $discountAmount,
+        float  $discountAmountVat,
         string $id,
         string $translationKey,
         string $type
     )
     {
         $this->discountAmount = $discountAmount;
+        $this->discountAmountVat = $discountAmountVat;
         $this->id = $id;
         $this->translationKey = $translationKey;
         $this->type = $type;
@@ -863,26 +886,26 @@ class PriceOfferResponse implements JsonSerializable
     public $specialSurchargesLineItems;
 
     public function __construct(
-        AddressResponse      $address,
-        float                $assemblyDoorsCalculatedPrice,
-        ?float               $assemblyDoorsCost,
-        ?float               $assemblyDoorsCostMin,
-        ?int                 $assemblyDoorsCount,
-        ?int                 $assemblyHandlesRosettesCount,
-        float                $assemblyPriceHandlesRosettesCalculatedPrice,
-        float                $calculatedPrice,
-        float                $calculatedPriceVat,
-        array                $campaignDetails,
-        ContactResponse      $contact,
-        string               $currency,
-        float                $deliveryPrice,
-        float                $deliveryPricePerKm,
-        array                $doors,
-        CustomHandleResponse $customHandle,
-        ?HandleResponse      $handle,
-        ?bool                $isAssemblyDoorsCountDirty,
-        ?bool                $isAssemblyHandlesRosettesCountDirty,
-        ?string              $note,
+        AddressResponse         $address,
+        float                   $assemblyDoorsCalculatedPrice,
+        ?float                  $assemblyDoorsCost,
+        ?float                  $assemblyDoorsCostMin,
+        ?int                    $assemblyDoorsCount,
+        ?int                    $assemblyHandlesRosettesCount,
+        float                   $assemblyPriceHandlesRosettesCalculatedPrice,
+        float                   $calculatedPrice,
+        float                   $calculatedPriceVat,
+        array                   $campaignDetails,
+        ContactResponse         $contact,
+        string                  $currency,
+        float                   $deliveryPrice,
+        float                   $deliveryPricePerKm,
+        array                   $doors,
+        CustomHandleResponse    $customHandle,
+        ?HandleResponse         $handle,
+        ?bool                   $isAssemblyDoorsCountDirty,
+        ?bool                   $isAssemblyHandlesRosettesCountDirty,
+        ?string                 $note,
         array                   $technicalSurcharges,
         array                   $technicalSurchargesLineItems,
         array                   $rosettes,
@@ -964,16 +987,24 @@ class PriceOfferResponse implements JsonSerializable
     }
 }
 
-class ApiResponse implements JsonSerializable
+class PriceOfferViewResponse implements JsonSerializable
 {
+    /** @var array $deliveryCountries */
+    public $deliveryCountries;
+
     /** @var array $districts */
     public $districts;
 
     /** @var PriceOfferResponse $priceOffer */
     public $priceOffer;
 
-    public function __construct(array $districts, PriceOfferResponse $priceOffer)
+    public function __construct(
+        array              $deliveryCountries,
+        array              $districts,
+        PriceOfferResponse $priceOffer
+    )
     {
+        $this->deliveryCountries = $deliveryCountries;
         $this->districts = $districts;
         $this->priceOffer = $priceOffer;
     }
@@ -981,6 +1012,7 @@ class ApiResponse implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'deliveryCountries' => $this->deliveryCountries,
             'districts' => $this->districts,
             'priceOffer' => $this->priceOffer
         ];

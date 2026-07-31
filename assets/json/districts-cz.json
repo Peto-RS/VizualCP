@@ -1,0 +1,367 @@
+[
+  {
+    "id": "own-transport",
+    "distance": 0,
+    "translationKey": "db.districts.own-transport"
+  },
+  {
+    "id": "benesov",
+    "label": "Benešov",
+    "distance": 220
+  },
+  {
+    "id": "beroun",
+    "label": "Beroun",
+    "distance": 300
+  },
+  {
+    "id": "blansko",
+    "label": "Blansko",
+    "distance": 160
+  },
+  {
+    "id": "brno",
+    "label": "Brno",
+    "distance": 130
+  },
+  {
+    "id": "bruntal",
+    "label": "Bruntál",
+    "distance": 260
+  },
+  {
+    "id": "breclav",
+    "label": "Břeclav",
+    "distance": 150
+  },
+  {
+    "id": "ceska-lipa",
+    "label": "Česká Lípa",
+    "distance": 390
+  },
+  {
+    "id": "ceske-budejovice",
+    "label": "České Budějovice",
+    "distance": 340
+  },
+  {
+    "id": "cesky-krumlov",
+    "label": "Český Krumlov",
+    "distance": 370
+  },
+  {
+    "id": "decin",
+    "label": "Děčín",
+    "distance": 430
+  },
+  {
+    "id": "domazlice",
+    "label": "Domažlice",
+    "distance": 430
+  },
+  {
+    "id": "frydek-mistek",
+    "label": "Frýdek-Místek",
+    "distance": 200
+  },
+  {
+    "id": "havlickuv-brod",
+    "label": "Havlíčkův Brod",
+    "distance": 240
+  },
+  {
+    "id": "hodonin",
+    "label": "Hodonín",
+    "distance": 110
+  },
+  {
+    "id": "hradec-kralove",
+    "label": "Hradec Králové",
+    "distance": 300
+  },
+  {
+    "id": "cheb",
+    "label": "Cheb",
+    "distance": 500
+  },
+  {
+    "id": "chomutov",
+    "label": "Chomutov",
+    "distance": 460
+  },
+  {
+    "id": "chrudim",
+    "label": "Chrudim",
+    "distance": 270
+  },
+  {
+    "id": "jablonec-nad-nisou",
+    "label": "Jablonec nad Nisou",
+    "distance": 390
+  },
+  {
+    "id": "jesenik",
+    "label": "Jeseník",
+    "distance": 260
+  },
+  {
+    "id": "jicin",
+    "label": "Jičín",
+    "distance": 310
+  },
+  {
+    "id": "jihlava",
+    "label": "Jihlava",
+    "distance": 200
+  },
+  {
+    "id": "jindrichuv-hradec",
+    "label": "Jindřichův Hradec",
+    "distance": 290
+  },
+  {
+    "id": "karlovy-vary",
+    "label": "Karlovy Vary",
+    "distance": 500
+  },
+  {
+    "id": "karvina",
+    "label": "Karviná",
+    "distance": 220
+  },
+  {
+    "id": "kladno",
+    "label": "Kladno",
+    "distance": 320
+  },
+  {
+    "id": "klatovy",
+    "label": "Klatovy",
+    "distance": 400
+  },
+  {
+    "id": "kolin",
+    "label": "Kolín",
+    "distance": 270
+  },
+  {
+    "id": "kromeriz",
+    "label": "Kroměříž",
+    "distance": 135
+  },
+  {
+    "id": "kutna-hora",
+    "label": "Kutná Hora",
+    "distance": 280
+  },
+  {
+    "id": "liberec",
+    "label": "Liberec",
+    "distance": 410
+  },
+  {
+    "id": "litomerice",
+    "label": "Litoměřice",
+    "distance": 390
+  },
+  {
+    "id": "louny",
+    "label": "Louny",
+    "distance": 410
+  },
+  {
+    "id": "melnik",
+    "label": "Mělník",
+    "distance": 340
+  },
+  {
+    "id": "mlada-boleslav",
+    "label": "Mladá Boleslav",
+    "distance": 330
+  },
+  {
+    "id": "most",
+    "label": "Most",
+    "distance": 430
+  },
+  {
+    "id": "nachod",
+    "label": "Náchod",
+    "distance": 320
+  },
+  {
+    "id": "novy-jicin",
+    "label": "Nový Jičín",
+    "distance": 185
+  },
+  {
+    "id": "nymburk",
+    "label": "Nymburk",
+    "distance": 290
+  },
+  {
+    "id": "olomouc",
+    "label": "Olomouc",
+    "distance": 180
+  },
+  {
+    "id": "opava",
+    "label": "Opava",
+    "distance": 220
+  },
+  {
+    "id": "ostrava",
+    "label": "Ostrava",
+    "distance": 210
+  },
+  {
+    "id": "pardubice",
+    "label": "Pardubice",
+    "distance": 280
+  },
+  {
+    "id": "pelhrimov",
+    "label": "Pelhřimov",
+    "distance": 240
+  },
+  {
+    "id": "pisek",
+    "label": "Písek",
+    "distance": 340
+  },
+  {
+    "id": "plzen",
+    "label": "Plzeň",
+    "distance": 390
+  },
+  {
+    "id": "praha",
+    "label": "Praha",
+    "distance": 310
+  },
+  {
+    "id": "prachatice",
+    "label": "Prachatice",
+    "distance": 390
+  },
+  {
+    "id": "prostejov",
+    "label": "Prostějov",
+    "distance": 170
+  },
+  {
+    "id": "prerov",
+    "label": "Přerov",
+    "distance": 160
+  },
+  {
+    "id": "pribram",
+    "label": "Příbram",
+    "distance": 310
+  },
+  {
+    "id": "rakovnik",
+    "label": "Rakovník",
+    "distance": 350
+  },
+  {
+    "id": "rokycany",
+    "label": "Rokycany",
+    "distance": 380
+  },
+  {
+    "id": "rychnov-nad-kneznou",
+    "label": "Rychnov nad Kněžnou",
+    "distance": 290
+  },
+  {
+    "id": "semily",
+    "label": "Semily",
+    "distance": 350
+  },
+  {
+    "id": "sokolov",
+    "label": "Sokolov",
+    "distance": 510
+  },
+  {
+    "id": "strakonice",
+    "label": "Strakonice",
+    "distance": 350
+  },
+  {
+    "id": "svitavy",
+    "label": "Svitavy",
+    "distance": 210
+  },
+  {
+    "id": "sumperk",
+    "label": "Šumperk",
+    "distance": 220
+  },
+  {
+    "id": "tabor",
+    "label": "Tábor",
+    "distance": 300
+  },
+  {
+    "id": "tachov",
+    "label": "Tachov",
+    "distance": 450
+  },
+  {
+    "id": "teplice",
+    "label": "Teplice",
+    "distance": 420
+  },
+  {
+    "id": "trutnov",
+    "label": "Trutnov",
+    "distance": 340
+  },
+  {
+    "id": "trebic",
+    "label": "Třebíč",
+    "distance": 180
+  },
+  {
+    "id": "uherske-hradiste",
+    "label": "Uherské Hradiště",
+    "distance": 90
+  },
+  {
+    "id": "usti-nad-labem",
+    "label": "Ústí nad Labem",
+    "distance": 410
+  },
+  {
+    "id": "usti-nad-orlici",
+    "label": "Ústí nad Orlicí",
+    "distance": 250
+  },
+  {
+    "id": "vsetin",
+    "label": "Vsetín",
+    "distance": 110
+  },
+  {
+    "id": "vyskov",
+    "label": "Vyškov",
+    "distance": 145
+  },
+  {
+    "id": "zlin",
+    "label": "Zlín",
+    "distance": 90
+  },
+  {
+    "id": "znojmo",
+    "label": "Znojmo",
+    "distance": 180
+  },
+  {
+    "id": "zdar-nad-sazavou",
+    "label": "Žďár nad Sázavou",
+    "distance": 180
+  }
+]

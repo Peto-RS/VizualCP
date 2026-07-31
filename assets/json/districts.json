@@ -2,7 +2,8 @@
   {
     "id": "own-transport",
     "label": "Vlastný odber Čachtice",
-    "distance": 0
+    "distance": 0,
+    "translationKey": "db.districts.own-transport"
   },
   {
     "id": "banovce-nad-bebravou",

@@ -76,6 +76,7 @@
   "delivery": {
     "address": "Adresse de livraison (facultatif)",
     "city": "Commune/Ville",
+    "chooseDeliveryCountry": "Sélectionnez le pays",
     "chooseDistrict": "Sélectionnez la ville de district",
     "district": "Ville de district",
     "note": "Le prix du transport est de {price} par km. Le transport est calculé à partir de la production dans la commune de Čachtice.",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Remise saisonnière supplémentaire actuelle de 15 % sur toutes les portes et huisseries."
+      "doors-august-2026": "REMISE ACTUELLE DE 10% SUR TOUTES LES PORTES COMMANDÉES AVANT LA FIN DU MOIS D'AOÛT.",
+      "doors-september-2026": "REMISE ACTUELLE DE 5% SUR TOUTES LES PORTES COMMANDÉES AVANT LA FIN DU MOIS DE SEPTEMBRE.",
+      "doors-november-2026": "REMISE ACTUELLE DE 10% SUR TOUTES LES PORTES COMMANDÉES AVANT LA FIN DU MOIS DE NOVEMBRE.",
+      "doors-december-2026": "REMISE ACTUELLE DE 5% SUR TOUTES LES PORTES COMMANDÉES AVANT LA FIN DU MOIS DE DÉCEMBRE."
+    },
+    "deliveryCountries": {
+      "at": "Autriche",
+      "cz": "Tchéquie",
+      "sk": "Slovaquie"
+    },
+    "districts": {
+      "own-transport": "Retrait sur place à Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "Ville",
     "count": "pcs",
     "currency": "Devise",
+    "deliveryCountry": "Pays",
     "disclaimer": {
       "title": "Conditions générales",
       "interiorDoors": {

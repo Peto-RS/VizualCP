@@ -76,6 +76,7 @@
   "delivery": {
     "address": "Delivery address (optional)",
     "city": "City/Village",
+    "chooseDeliveryCountry": "Select country",
     "chooseDistrict": "Select district town",
     "district": "District town",
     "note": "The shipping price is {price} per km. Shipping is calculated from production in the village of Čachtice.",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Current seasonal extra discount of 15% on all doors and door frames."
+      "doors-august-2026": "CURRENT 10% DISCOUNT ON ALL DOORS ORDERED UNTIL THE END OF AUGUST.",
+      "doors-september-2026": "CURRENT 5% DISCOUNT ON ALL DOORS ORDERED UNTIL THE END OF SEPTEMBER.",
+      "doors-november-2026": "CURRENT 10% DISCOUNT ON ALL DOORS ORDERED UNTIL THE END OF NOVEMBER.",
+      "doors-december-2026": "CURRENT 5% DISCOUNT ON ALL DOORS ORDERED UNTIL THE END OF DECEMBER."
+    },
+    "deliveryCountries": {
+      "at": "Austria",
+      "cz": "Czech Republic",
+      "sk": "Slovakia"
+    },
+    "districts": {
+      "own-transport": "Personal pickup Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "City",
     "count": "qty",
     "currency": "Currency",
+    "deliveryCountry": "Country",
     "disclaimer": {
       "title": "Terms and Conditions",
       "interiorDoors": {

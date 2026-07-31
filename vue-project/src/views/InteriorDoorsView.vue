@@ -120,7 +120,7 @@ async function handleAddDoorButtonClick(): Promise<any> {
         handleId: selectedDoor.value.handleId,
         material: selectedDoor.value.material!,
         type: selectedDoor.value.type!
-      })
+      }, locale.value)
 
       if (response.ok) {
         addAlert(t('configurator.doorAddedToPriceOffer'))

@@ -76,6 +76,7 @@
   "delivery": {
     "address": "Szállítási cím (nem kötelező)",
     "city": "Település",
+    "chooseDeliveryCountry": "Válasszon országot",
     "chooseDistrict": "Válasszon járási székhelyet",
     "district": "Járási székhelyet",
     "note": "A szállítási díj {price}/km. A szállítást a csejtei (Čachtice) gyártóüzemtől számítjuk.",
@@ -153,7 +154,18 @@
       }
     },
     "campaigns": {
-      "doors": "Aktuális szezonális extra kedvezmény minden ajtóra és ajtótokra: 15%."
+      "doors-august-2026": "AKTUÁLIS 10% KEDVEZMÉNY MINDEN AJTÓRA, AMELYET AUGUSZTUS VÉGÉIG MEGRENDELNEK.",
+      "doors-september-2026": "AKTUÁLIS 5% KEDVEZMÉNY MINDEN AJTÓRA, AMELYET SZEPTEMBER VÉGÉIG MEGRENDELNEK.",
+      "doors-november-2026": "AKTUÁLIS 10% KEDVEZMÉNY MINDEN AJTÓRA, AMELYET NOVEMBER VÉGÉIG MEGRENDELNEK.",
+      "doors-december-2026": "AKTUÁLIS 5% KEDVEZMÉNY MINDEN AJTÓRA, AMELYET DECEMBER VÉGÉIG MEGRENDELNEK."
+    },
+    "deliveryCountries": {
+      "at": "Ausztria",
+      "cz": "Csehország",
+      "sk": "Szlovákia"
+    },
+    "districts": {
+      "own-transport": "Személyes átvétel Čachtice"
     },
     "doorCategories": {
       "barbora": {
@@ -521,6 +533,7 @@
     "city": "Város",
     "count": "db",
     "currency": "Pénznem",
+    "deliveryCountry": "Ország",
     "disclaimer": {
       "title": "Szerződési feltételek",
       "interiorDoors": {

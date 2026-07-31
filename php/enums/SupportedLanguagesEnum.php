@@ -32,4 +32,9 @@ abstract class SupportedLanguagesEnum
             self::SR
         ];
     }
+
+    public static function isValid(?string $lang): bool
+    {
+        return in_array($lang, SupportedLanguagesEnum::getAll(), true);
+    }
 }

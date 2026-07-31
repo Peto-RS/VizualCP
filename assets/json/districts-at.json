@@ -1,0 +1,332 @@
+[
+  {
+    "id": "own-transport",
+    "distance": 0,
+    "translationKey": "db.districts.own-transport"
+  },
+  {
+    "id": "amstetten",
+    "label": "Amstetten",
+    "distance": 250
+  },
+  {
+    "id": "baden",
+    "label": "Baden",
+    "distance": 150
+  },
+  {
+    "id": "bregenz",
+    "label": "Bregenz",
+    "distance": 720
+  },
+  {
+    "id": "braunau-am-inn",
+    "label": "Braunau am Inn",
+    "distance": 410
+  },
+  {
+    "id": "bruck-an-der-leitha",
+    "label": "Bruck an der Leitha",
+    "distance": 95
+  },
+  {
+    "id": "bruck-an-der-mur",
+    "label": "Bruck an der Mur",
+    "distance": 250
+  },
+  {
+    "id": "deutschlandsberg",
+    "label": "Deutschlandsberg",
+    "distance": 290
+  },
+  {
+    "id": "dornbirn",
+    "label": "Dornbirn",
+    "distance": 715
+  },
+  {
+    "id": "eisenstadt",
+    "label": "Eisenstadt",
+    "distance": 110
+  },
+  {
+    "id": "feldkirch",
+    "label": "Feldkirch",
+    "distance": 730
+  },
+  {
+    "id": "freistadt",
+    "label": "Freistadt",
+    "distance": 340
+  },
+  {
+    "id": "ganserndorf",
+    "label": "Gänserndorf",
+    "distance": 95
+  },
+  {
+    "id": "gmund",
+    "label": "Gmünd",
+    "distance": 240
+  },
+  {
+    "id": "gmunden",
+    "label": "Gmunden",
+    "distance": 390
+  },
+  {
+    "id": "graz",
+    "label": "Graz",
+    "distance": 290
+  },
+  {
+    "id": "grieskirchen",
+    "label": "Grieskirchen",
+    "distance": 360
+  },
+  {
+    "id": "hallein",
+    "label": "Hallein",
+    "distance": 470
+  },
+  {
+    "id": "hartberg",
+    "label": "Hartberg",
+    "distance": 220
+  },
+  {
+    "id": "hermagor",
+    "label": "Hermagor",
+    "distance": 470
+  },
+  {
+    "id": "hollabrunn",
+    "label": "Hollabrunn",
+    "distance": 150
+  },
+  {
+    "id": "horn",
+    "label": "Horn",
+    "distance": 180
+  },
+  {
+    "id": "imst",
+    "label": "Imst",
+    "distance": 630
+  },
+  {
+    "id": "innsbruck",
+    "label": "Innsbruck",
+    "distance": 620
+  },
+  {
+    "id": "jennersdorf",
+    "label": "Jennersdorf",
+    "distance": 180
+  },
+  {
+    "id": "kirchdorf-an-der-krems",
+    "label": "Kirchdorf an der Krems",
+    "distance": 340
+  },
+  {
+    "id": "kitzbuhel",
+    "label": "Kitzbühel",
+    "distance": 510
+  },
+  {
+    "id": "klagenfurt",
+    "label": "Klagenfurt",
+    "distance": 390
+  },
+  {
+    "id": "krems",
+    "label": "Krems",
+    "distance": 180
+  },
+  {
+    "id": "kufstein",
+    "label": "Kufstein",
+    "distance": 560
+  },
+  {
+    "id": "landeck",
+    "label": "Landeck",
+    "distance": 670
+  },
+  {
+    "id": "leoben",
+    "label": "Leoben",
+    "distance": 280
+  },
+  {
+    "id": "lienz",
+    "label": "Lienz",
+    "distance": 500
+  },
+  {
+    "id": "liezen",
+    "label": "Liezen",
+    "distance": 350
+  },
+  {
+    "id": "lilienfeld",
+    "label": "Lilienfeld",
+    "distance": 180
+  },
+  {
+    "id": "linz",
+    "label": "Linz",
+    "distance": 300
+  },
+  {
+    "id": "melk",
+    "label": "Melk",
+    "distance": 220
+  },
+  {
+    "id": "mistelbach",
+    "label": "Mistelbach",
+    "distance": 110
+  },
+  {
+    "id": "modling",
+    "label": "Mödling",
+    "distance": 145
+  },
+  {
+    "id": "murau",
+    "label": "Murau",
+    "distance": 360
+  },
+  {
+    "id": "judenburg",
+    "label": "Judenburg",
+    "distance": 330
+  },
+  {
+    "id": "neunkirchen",
+    "label": "Neunkirchen",
+    "distance": 180
+  },
+  {
+    "id": "neusiedl-am-see",
+    "label": "Neusiedl am See",
+    "distance": 90
+  },
+  {
+    "id": "oberpullendorf",
+    "label": "Oberpullendorf",
+    "distance": 120
+  },
+  {
+    "id": "oberwart",
+    "label": "Oberwart",
+    "distance": 170
+  },
+  {
+    "id": "perg",
+    "label": "Perg",
+    "distance": 310
+  },
+  {
+    "id": "reutte",
+    "label": "Reutte",
+    "distance": 670
+  },
+  {
+    "id": "ried-im-innkreis",
+    "label": "Ried im Innkreis",
+    "distance": 400
+  },
+  {
+    "id": "rohrbach",
+    "label": "Rohrbach",
+    "distance": 370
+  },
+  {
+    "id": "salzburg",
+    "label": "Salzburg",
+    "distance": 450
+  },
+  {
+    "id": "st-johann-im-pongau",
+    "label": "St. Johann im Pongau",
+    "distance": 450
+  },
+  {
+    "id": "st-polten",
+    "label": "St. Pölten",
+    "distance": 190
+  },
+  {
+    "id": "scharding",
+    "label": "Schärding",
+    "distance": 430
+  },
+  {
+    "id": "scheibbs",
+    "label": "Scheibbs",
+    "distance": 240
+  },
+  {
+    "id": "schwaz",
+    "label": "Schwaz",
+    "distance": 590
+  },
+  {
+    "id": "steyr",
+    "label": "Steyr",
+    "distance": 300
+  },
+  {
+    "id": "tamsweg",
+    "label": "Tamsweg",
+    "distance": 420
+  },
+  {
+    "id": "villach",
+    "label": "Villach",
+    "distance": 430
+  },
+  {
+    "id": "voitsberg",
+    "label": "Voitsberg",
+    "distance": 300
+  },
+  {
+    "id": "vocklabruck",
+    "label": "Vöcklabruck",
+    "distance": 390
+  },
+  {
+    "id": "waidhofen-an-der-thaya",
+    "label": "Waidhofen an der Thaya",
+    "distance": 180
+  },
+  {
+    "id": "waidhofen-an-der-ybbs",
+    "label": "Waidhofen an der Ybbs",
+    "distance": 260
+  },
+  {
+    "id": "wels",
+    "label": "Wels",
+    "distance": 340
+  },
+  {
+    "id": "wien",
+    "label": "Wien",
+    "distance": 150
+  },
+  {
+    "id": "wiener-neustadt",
+    "label": "Wiener Neustadt",
+    "distance": 160
+  },
+  {
+    "id": "zwettl",
+    "label": "Zwettl",
+    "distance": 230
+  }
+]

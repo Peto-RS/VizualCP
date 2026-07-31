@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {computed, onBeforeUnmount, onMounted, Ref, ref, toRaw, watch, WatchHandle} from 'vue'
-import {ApiResponse} from "@/model/api/res/price-offer/ApiResponse.js";
+import {computed, nextTick, onBeforeUnmount, onMounted, Ref, ref, toRaw, watch, WatchHandle} from 'vue'
+import {PriceOfferViewResponse} from "@/model/api/res/price-offer/PriceOfferViewResponse.js";
 import {
   constructReactiveFormPriceOffer, DoorMeta,
   findTechnicalSurchargeById,
@@ -31,11 +31,12 @@ import {ConfiguratorResponse, Handle} from "@/model/api/res/configurator/Configu
 import ImageWithLoadingPlaceholder from "@/components/generic/ImageWithLoadingPlaceholder.vue";
 import {offcanvas} from "@/composables/offcanvas.js";
 import NavTabs from "@/components/NavTabs.vue";
-import {i18n, safeT} from "@/model/functions/translation-utils.js";
+import {safeT} from "@/model/functions/translation-utils.js";
 import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
+import {DistrictResponse} from "@/model/api/res/price-offer/DistrictResponse.js";
 
 const router = useRouter()
-const {t} = useI18n();
+const {locale, t} = useI18n();
 const {addAlert} = useAlerts()
 const {appConfig, currency} = useAppState()
 
@@ -48,13 +49,15 @@ const props = defineProps<{
   configuratorApiResponse: ConfiguratorResponse
 }>()
 
-const apiResponse: Ref<ApiResponse | undefined> = ref()
+const apiResponse: Ref<PriceOfferViewResponse | undefined> = ref()
 const cachedForm: Ref<string> = ref('')
 const formValidations: Ref<Record<string, ValidationMessage[]>> = ref({})
 const reactiveForm: Ref<FormPriceOffer> = ref<FormPriceOffer>(constructReactiveFormPriceOffer(undefined))
 const reCaptchaToken: Ref<string | undefined> = ref()
 
 let formWatchHandle: WatchHandle | undefined = undefined
+let watchHandleCurrency: WatchHandle | undefined = undefined
+let watchHandleLocale: WatchHandle | undefined = undefined
 
 const submitButtonDisabled = computed(() => {
   const isReCaptchaEnabled = appConfig.value!.reCaptchaEnabled ?? false;
@@ -70,11 +73,11 @@ function getFieldValidations(id: string): ValidationMessage[] {
   return formValidations.value[id] ?? []
 }
 
-const fetchDataFromApi = async (): Promise<ApiResponse> => {
-  const response = await getForm(currency.value!);
+const fetchDataFromApi = async (): Promise<PriceOfferViewResponse> => {
+  const response = await getForm(currency.value!, locale.value);
   const json = await response.json()
   if (response.ok)
-    return json as ApiResponse;
+    return json as PriceOfferViewResponse;
   else
     throw new Error(json);
 }
@@ -99,7 +102,7 @@ async function handleFormSaveAndReRender(form: FormPriceOffer): Promise<void> {
   const req = prepareRequest(form, apiResponse.value, currency.value)
 
   if (req) {
-    const response = await updateForm(req);
+    const response = await updateForm(req, locale.value);
     if (response.ok) {
       formValidations.value = await response.json();
     } else {
@@ -157,7 +160,7 @@ async function handleFormSubmit(e: Event): Promise<void> {
   const validationsEmpty = Object.keys(formValidations.value).length === 0;
   if (validationsEmpty) {
     const recaptchaToken = (document.querySelector('.g-recaptcha-response') as HTMLTextAreaElement)?.value;
-    const response = await submitForm(i18n.global.locale.value, recaptchaToken);
+    const response = await submitForm(locale.value, recaptchaToken);
 
     if (response.ok) {
       await deleteForm()
@@ -191,6 +194,10 @@ function handleDoorDuplication(index: number) {
 function handleDoorRemoval(index: number) {
   reactiveForm.value.doors.splice(index, 1)
   reactiveForm.value.doorsMeta.splice(index, 1)
+}
+
+function getDistrictLabel(d: DistrictResponse): string | null {
+  return d.translationKey ? t(d.translationKey) : d.label
 }
 
 function getTechnicalSurchargeLabel(id: string): string {
@@ -233,7 +240,11 @@ onMounted(async () => {
     debouncedHandleFormSave(newForm);
   }, {deep: true});
 
-  watch(currency, () => {
+  watchHandleCurrency = watch(currency, () => {
+    handleFormSaveAndReRender(reactiveForm.value);
+  });
+
+  watchHandleLocale = watch(locale,() => {
     handleFormSaveAndReRender(reactiveForm.value);
   });
 })
@@ -466,13 +477,29 @@ onBeforeUnmount(async () => {
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <div class="row mb-2">
+                    <div class="col-sm-12 col-xl-6">{{ t("delivery.chooseDeliveryCountry") }}</div>
+                    <div class="col-sm-8 col-xl-4">
+                      <select class="form-select"
+                              v-model="reactiveForm.address.deliveryCountry"
+                              @input="reactiveForm.address.isDeliveryCountryDirty = true">
+                        <option value="">{{ t("delivery.chooseDeliveryCountry") }}</option>
+                        <option v-for="c in apiResponse?.deliveryCountries"
+                                :key="c"
+                                :value="c">{{ t("db.deliveryCountries." + c) }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-sm-4 col-xl-2"/>
+                  </div>
+                  <div class="row mb-2">
                     <div class="col-sm-12 col-xl-6">{{ t("delivery.chooseDistrict") }}</div>
                     <div class="col-sm-8 col-xl-4">
                       <select class="form-select" v-model="reactiveForm.address.district">
                         <option value="">{{ t("delivery.chooseDistrict") }}</option>
                         <option v-for="d in apiResponse?.districts"
                                 :key="d.id"
-                                :value="d.id">{{ d.label }}
+                                :value="d.id">
+                          {{ getDistrictLabel(d) }}
                         </option>
                       </select>
                     </div>
@@ -788,15 +815,15 @@ onBeforeUnmount(async () => {
                 v-for="campaignDetail in apiResponse.priceOffer.campaignDetails"
                 :key="campaignDetail.id">
               <div data-bs-theme="configurator"
-                   class="row mb-2"
-                   style="background-color: var(--bs-primary-bg-subtle)">
-                <div class="col-sm-8 col-xl-10 align-content-center text-uppercase">
-                  {{ t(campaignDetail.translationKey) }}
+                   class="row mb-2 campaign-detail">
+                <div class="col-sm-8 col-xl-10 align-content-center text-uppercase fw-bold">
+                  {{ t(campaignDetail.translationKey)}}
                 </div>
-                <div class="col-sm-4 col-xl-2">
+                <div class="col-sm-4 col-xl-2 align-content-center">
                   <BadgePrice
                       class="price-offer-badge w-100"
-                      :price="-campaignDetail.discountAmount"/>
+                      style="background-color: var(--bs-secondary)"
+                      :price="-campaignDetail.discountAmountVat"/>
                 </div>
               </div>
             </template>
@@ -838,6 +865,11 @@ onBeforeUnmount(async () => {
 </template>
 
 <style lang="scss">
+.campaign-detail {
+  background-color: var(--bs-primary);
+  height: 50px
+}
+
 .color-dark-red {
   color: darkred;
 }

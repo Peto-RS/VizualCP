@@ -1,5 +1,5 @@
 import {FormLineItem, FormPriceOffer, FormSelectedDoorLineItem} from "./price-offer-form-builder.js";
-import {ApiResponse} from "@/model/api/res/price-offer/ApiResponse.js";
+import {PriceOfferViewResponse} from "@/model/api/res/price-offer/PriceOfferViewResponse.js";
 import {ApiRequest} from "@/model/api/req/price-offer/ApiRequest.js";
 import {DoorReq} from "@/model/api/req/price-offer/DoorReq.js";
 import {RosetteReq} from "@/model/api/req/price-offer/RosetteReq.js";
@@ -9,11 +9,10 @@ import {SpecialSurchargeReq} from "@/model/api/req/price-offer/SpecialSurchargeR
 import {LineItemReq} from "@/model/api/req/price-offer/LineItemReq.js";
 import {SelectedDoorLineItemRequest} from "@/model/api/req/price-offer/SelectedDoorLineItemRequest.js";
 import {CurrencyEnum} from "@/model/enums/CurrencyEnum.js";
-import CurrencySelector from "@/components/CurrencySelector.vue";
 
 export function prepareRequest(
     reactiveForm: FormPriceOffer,
-    apiResponse: ApiResponse | undefined,
+    apiResponse: PriceOfferViewResponse | undefined,
     currency: string | null
 ): ApiRequest | undefined {
     if (!apiResponse) {
@@ -74,7 +73,9 @@ export function prepareRequest(
         priceOffer: {
             address: {
                 city: reactiveForm.address.city || "",
+                deliveryCountry: reactiveForm.address.deliveryCountry || "",
                 district: reactiveForm.address.district || "",
+                isDeliveryCountryDirty: reactiveForm.address.isDeliveryCountryDirty || false,
                 street: reactiveForm.address.street || "",
                 streetNumber: reactiveForm.address.streetNumber || "",
                 zipCode: reactiveForm.address.zipCode || ""

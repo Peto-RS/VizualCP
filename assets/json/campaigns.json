@@ -1,26 +1,34 @@
 [
   {
-    "id": "doors",
-    "percentageDiscount": 15,
-    "startDateTime": "2026-01-01T00:00:00+01:00",
-    "endDateTime": "2026-08-30T23:59:59+01:00",
-    "translationKey": "db.campaigns.doors",
+    "id": "doors-december-2026",
+    "percentageDiscount": 5,
+    "startDateTime": "2026-12-01T00:00:00+01:00",
+    "endDateTime": "2026-12-31T23:59:59+01:00",
+    "translationKey": "db.campaigns.doors-december-2026",
     "type": "DOORS"
   },
   {
-    "id": "doors2",
-    "percentageDiscount": 15,
-    "startDateTime": "2026-01-01T00:00:00+01:00",
-    "endDateTime": "2026-06-30T23:59:59+01:00",
-    "translationKey": "db.campaigns.doors",
+    "id": "doors-november-2026",
+    "percentageDiscount": 10,
+    "startDateTime": "2026-11-01T00:00:00+01:00",
+    "endDateTime": "2026-11-30T23:59:59+01:00",
+    "translationKey": "db.campaigns.doors-november-2026",
     "type": "DOORS"
   },
   {
-    "id": "doors3",
-    "percentageDiscount": 15,
-    "startDateTime": "2026-01-01T00:00:00+01:00",
-    "endDateTime": "2026-06-30T23:59:59+01:00",
-    "translationKey": "db.campaigns.doors",
+    "id": "doors-september-2026",
+    "percentageDiscount": 5,
+    "startDateTime": "2026-09-01T00:00:00+01:00",
+    "endDateTime": "2026-09-30T23:59:59+01:00",
+    "translationKey": "db.campaigns.doors-september-2026",
+    "type": "DOORS"
+  },
+  {
+    "id": "doors-august-2026",
+    "percentageDiscount": 10,
+    "startDateTime": "2026-08-01T00:00:00+01:00",
+    "endDateTime": "2026-08-31T23:59:59+01:00",
+    "translationKey": "db.campaigns.doors-august-2026",
     "type": "DOORS"
   }
 ]

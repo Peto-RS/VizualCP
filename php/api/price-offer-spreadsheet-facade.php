@@ -13,6 +13,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\RichText\RichText;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
@@ -1194,8 +1195,18 @@ function insertCampaigns(
             $sheet->setCellValue("A$rowIdx", getTranslation($translationFileSk, $campaignDetail->translationKey));
         }
 
-        $sheet->setCellValue("F$rowIdx", "=H$rowIdx*" . ParametersJsonDataManipulation::getAll()["vat"]);
-        $sheet->setCellValue("H$rowIdx", -($campaignDetail->discountAmount));
+        $sheet->setCellValue("F$rowIdx", "=ROUND(H$rowIdx*" . ParametersJsonDataManipulation::getAll()["vat"] . ", 2)");
+        $sheet->getStyle("F$rowIdx")
+            ->getAlignment()
+            ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+            ->setVertical(Alignment::VERTICAL_CENTER);
+
+        $sheet->setCellValue("H$rowIdx", "=ROUND(" . -$campaignDetail->discountAmount . ", 2)");
+        $sheet->getStyle("H$rowIdx")
+            ->getAlignment()
+            ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+            ->setVertical(Alignment::VERTICAL_CENTER);
+
         $rowIdx = $rowIdx + 1;
     }
 

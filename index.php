@@ -83,7 +83,6 @@ if ($_SERVER['HTTPS'] != "on"){
 </head>
 
 <body>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php
 require_once __DIR__ . "/php/api/json-data-manipulation-facade.php";
 $config = AppConfigJsonDataManipulation::getAll();

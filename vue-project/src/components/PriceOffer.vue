@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, nextTick, onBeforeUnmount, onMounted, Ref, ref, toRaw, watch, WatchHandle} from 'vue'
+import {computed, nextTick, onMounted, Ref, ref, toRaw, watch} from 'vue'
 import {PriceOfferViewResponse} from "@/model/api/res/price-offer/PriceOfferViewResponse.js";
 import {
   constructReactiveFormPriceOffer, DoorMeta,
@@ -34,6 +34,7 @@ import NavTabs from "@/components/NavTabs.vue";
 import {safeT} from "@/model/functions/translation-utils.js";
 import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
 import {DistrictResponse} from "@/model/api/res/price-offer/DistrictResponse.js";
+import {useRecaptcha} from "@/composables/use-recaptcha.js";
 
 const router = useRouter()
 const {locale, t} = useI18n();
@@ -53,11 +54,11 @@ const apiResponse: Ref<PriceOfferViewResponse | undefined> = ref()
 const cachedForm: Ref<string> = ref('')
 const formValidations: Ref<Record<string, ValidationMessage[]>> = ref({})
 const reactiveForm: Ref<FormPriceOffer> = ref<FormPriceOffer>(constructReactiveFormPriceOffer(undefined))
-const reCaptchaToken: Ref<string | undefined> = ref()
-
-let formWatchHandle: WatchHandle | undefined = undefined
-let watchHandleCurrency: WatchHandle | undefined = undefined
-let watchHandleLocale: WatchHandle | undefined = undefined
+const recaptchaContainer: Ref<HTMLDivElement | null> = ref(null);
+const {
+  render,
+  token: reCaptchaToken
+} = useRecaptcha();
 
 const submitButtonDisabled = computed(() => {
   const isReCaptchaEnabled = appConfig.value!.reCaptchaEnabled ?? false;
@@ -121,22 +122,6 @@ async function fetchDataAndReRenderForm(): Promise<void> {
   apiResponse.value = json;
   reactiveForm.value = constructReactiveFormPriceOffer(json);
   cachedForm.value = JSON.stringify(reactiveForm.value);
-}
-
-function renderReCaptcha(): void {
-  if (window.grecaptcha && appConfig.value!.reCaptchaSiteKey) {
-    window.grecaptcha.render('recaptcha', {
-      sitekey: appConfig.value!.reCaptchaSiteKey,
-      callback: (token: string) => {
-        reCaptchaToken.value = token;
-      },
-      'expired-callback': () => {
-        reCaptchaToken.value = undefined;
-      }
-    });
-  } else {
-    console.error('grecaptcha not loaded');
-  }
 }
 
 function debounce<F extends (...args: any[]) => any>(func: F, wait: number) {
@@ -225,13 +210,17 @@ function getSpecialSurchargeLabel(id: string): string {
 }
 
 onMounted(async () => {
-  if (appConfig.value!.reCaptchaEnabled) {
-    renderReCaptcha();
+  if (appConfig.value!.reCaptchaEnabled && appConfig.value!.reCaptchaSiteKey) {
+    await render(
+        recaptchaContainer.value!,
+        appConfig.value!.reCaptchaSiteKey,
+        locale.value
+    );
   }
 
   await fetchDataAndReRenderForm()
 
-  formWatchHandle = watch(reactiveForm, (newForm) => {
+  watch(reactiveForm, (newForm) => {
     console.log('vueForm.value');
     console.log(reactiveForm.value);
     console.log('newVal');
@@ -240,17 +229,22 @@ onMounted(async () => {
     debouncedHandleFormSave(newForm);
   }, {deep: true});
 
-  watchHandleCurrency = watch(currency, () => {
+  watch(currency, () => {
     handleFormSaveAndReRender(reactiveForm.value);
   });
 
-  watchHandleLocale = watch(locale,() => {
-    handleFormSaveAndReRender(reactiveForm.value);
-  });
-})
+  watch(locale, async () => {
+    await handleFormSaveAndReRender(reactiveForm.value);
 
-onBeforeUnmount(async () => {
-  formWatchHandle?.()
+    if (appConfig.value!.reCaptchaEnabled && appConfig.value!.reCaptchaSiteKey) {
+      await nextTick();
+      await render(
+          recaptchaContainer.value!,
+          appConfig.value!.reCaptchaSiteKey,
+          locale.value
+      );
+    }
+  });
 })
 </script>
 
@@ -817,7 +811,7 @@ onBeforeUnmount(async () => {
               <div data-bs-theme="configurator"
                    class="row mb-2 campaign-detail">
                 <div class="col-sm-8 col-xl-10 align-content-center text-uppercase fw-bold">
-                  {{ t(campaignDetail.translationKey)}}
+                  {{ t(campaignDetail.translationKey) }}
                 </div>
                 <div class="col-sm-4 col-xl-2 align-content-center">
                   <BadgePrice
@@ -849,8 +843,11 @@ onBeforeUnmount(async () => {
             </div>
           </div>
           <div>
-            <div id="recaptcha"
-                 class="mb-1"></div>
+            <div
+                :key="locale"
+                ref="recaptchaContainer"
+                class="mb-1">
+            </div>
             <button type="submit"
                     class="btn btn-lg bg-primary text-white bold"
                     :disabled="submitButtonDisabled"

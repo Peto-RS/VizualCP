@@ -55,11 +55,11 @@ if ($_SERVER['HTTPS'] != "on"){
 
       connect-src
         'self'
-        https://www.google-analytics.com
-        https://region1.google-analytics.com
-        https://www.google.com
-        https://www.googletagmanager.com
-        https://www.gstatic.com
+        https://*.google-analytics.com
+        https://*.analytics.google.com
+        https://*.googletagmanager.com
+        https://*.google.com
+        https://*.doubleclick.net
         ws://localhost:5173
         http://localhost:5173;
 

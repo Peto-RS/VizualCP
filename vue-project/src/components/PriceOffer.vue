@@ -864,7 +864,6 @@ onMounted(async () => {
 <style lang="scss">
 .campaign-detail {
   background-color: var(--bs-primary);
-  height: 50px
 }
 
 .color-dark-red {

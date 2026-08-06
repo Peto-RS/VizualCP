@@ -1006,7 +1006,7 @@ class PriceOffer
         return $this;
     }
 
-    public function toResponse(string $currency): PriceOfferResponse
+    public function toResponse(string $currency, array $doorsCampaigns): PriceOfferResponse
     {
         $this->currency = $currency;
         $doorsCount = $this->getDoorsCount();
@@ -1017,7 +1017,6 @@ class PriceOffer
         $calculatedAestheticAccessoriesPrice = $this->calculateAestheticAccessoriesPrice();
         $calculatedDeliveryCosts = $this->calculateDeliveryCosts();
 
-        $doorsCampaigns = getActiveCampaignsOfType(CampaignTypeEnum::DOORS, new DateTime());
         $calculatedDoorsPrice = $this->calculateDoorsPrice($doorsCampaigns);
         $calculatedDoorsPriceNoCampaign = $this->calculateDoorsPrice(array());
 

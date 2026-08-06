@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/model/validation-message.php';
+require_once __DIR__ . '/campaign-facade.php';
 require_once __DIR__ . '/json-data-manipulation-facade.php';
 require_once __DIR__ . '/price-offer-spreadsheet-facade.php';
 require_once __DIR__ . '/../enums/SupportedLanguagesEnum.php';
@@ -13,7 +14,10 @@ function submitPriceOffer(array $requestBody, string $lang): array
     if (!AppConfigJsonDataManipulation::getAll()['reCaptchaEnabled'] || verifyRecaptcha($requestBody['g-recaptcha-response'])) {
         try {
             $priceOffer = PriceOffer::fromSession($_SESSION['priceOffer']);
-            $priceOfferResponse = $priceOffer->toResponse($priceOffer->currency);
+            $priceOfferResponse = $priceOffer->toResponse(
+                $priceOffer->currency,
+                getActiveCampaignsOfType(CampaignTypeEnum::DOORS, new DateTime())
+            );
             $spreadsheet = generateSpreadSheet($priceOfferResponse, $lang);
 
             sendMailWithExcelAttachment(writeSpreadSheetToOutput($spreadsheet), $priceOfferResponse, $lang);

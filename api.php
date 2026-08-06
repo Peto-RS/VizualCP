@@ -19,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     try {
         $currencyId = CurrencyEnum::isValid($_GET['currency']) ? $_GET['currency'] : CurrencyEnum::EUR;
         $lang = SupportedLanguagesEnum::isValid($_GET['lang']) ? $_GET['lang'] : SupportedLanguagesEnum::SK;
+        $campaignDisabled = $_GET['campaignDisabled'] ?? false;
 
-        $response = getPriceOfferViewResponse($currencyId, $lang);
-
+        $response = getPriceOfferViewResponse($currencyId, $lang, $campaignDisabled);
         sendJsonResponse($response, 200);
     } catch (Throwable $e) {
         error_log($e);

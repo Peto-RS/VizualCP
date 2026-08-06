@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/api-common.php";
 require_once __DIR__ . "/php/api/json-data-manipulation-facade.php";
+require_once __DIR__ . "/php/api/campaign-facade.php";
 require_once __DIR__ . "/php/api/configurator-facade.php";
 require_once __DIR__ . "/php/api/request-objects/api-configurator-request-objects.php";
 require_once __DIR__ . "/php/api/response-objects/api-configurator-response-objects.php";
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rawData = file_get_contents("php://input");
     $requestBody = json_decode($rawData, true);
     $lang = SupportedLanguagesEnum::isValid($_GET['lang']) ? $_GET['lang'] : SupportedLanguagesEnum::SK;
+    $campaignDisabled = $_GET['campaignDisabled'] ?? false;
 
     if (json_last_error() !== JSON_ERROR_NONE) {
         sendJsonResponse(['error' => 'Invalid JSON'], 400);
@@ -48,7 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $priceOffer = isset($_SESSION['priceOffer']) ? PriceOffer::fromSession($_SESSION['priceOffer']) : new PriceOffer($lang);
     $_SESSION['priceOffer'] = $priceOffer->fromPostConfigurator($parsedObject);
 
-    sendJsonResponse($priceOffer->toResponse(CurrencyEnum::EUR), 200);
+    sendJsonResponse(
+        $priceOffer->toResponse(
+            CurrencyEnum::EUR,
+            $campaignDisabled ? array() : getActiveCampaignsOfType(CampaignTypeEnum::DOORS, new DateTime())
+        ), 200
+    );
 }
 
 sendJsonResponse(['error' => 'Unsupported request method'], 405);

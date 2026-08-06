@@ -28,7 +28,7 @@ class ApiIntegrationTest extends TestCase
             "material" => "lamino-jelsa",
             "type" => "v1"
         );
-        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK, $sessionId, $req);
+        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK . "&campaignDisabled=true", $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
         $resBody = json_decode($res['body'], true);
 
@@ -53,7 +53,7 @@ class ApiIntegrationTest extends TestCase
         /*
          * 2. POST /api-configurator.php
          */
-        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK, $sessionId, $req);
+        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK . "&campaignDisabled=true", $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
         $resBody = json_decode($res['body'], true);
 
@@ -82,7 +82,7 @@ class ApiIntegrationTest extends TestCase
             "material" => "wien-biela",
             "type" => "W1_L2_K2_O2"
         );
-        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK, $sessionId, $req);
+        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK . "&campaignDisabled=true", $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
         $resBody = json_decode($res['body'], true);
 
@@ -111,7 +111,7 @@ class ApiIntegrationTest extends TestCase
         $res = $this->request('POST', $this->priceOfferUrl, $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
 
-        $res = $this->request('GET', $this->priceOfferUrl . "?currency=" . CurrencyEnum::EUR . "&lang=" . SupportedLanguagesEnum::SK, $sessionId);
+        $res = $this->request('GET', $this->priceOfferUrl . "?currency=" . CurrencyEnum::EUR . "&lang=" . SupportedLanguagesEnum::SK . "&campaignDisabled=true", $sessionId);
         $resBody = json_decode($res['body'], true);
 
         $this->assertEquals('City', $resBody['priceOffer']['address']['city']);
@@ -130,7 +130,10 @@ class ApiIntegrationTest extends TestCase
         * 4.    generateSpreadSheet currency=EUR
         */
         $priceOfferReq = new PriceOfferRequest($resBody['priceOffer']);
-        $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest($priceOfferReq, SupportedLanguagesEnum::SK)->toResponse(CurrencyEnum::EUR), SupportedLanguagesEnum::SK);
+        $spreadsheet = generateSpreadSheet(
+            PriceOffer::fromRequest($priceOfferReq, SupportedLanguagesEnum::SK)->toResponse(CurrencyEnum::EUR, array()),
+            SupportedLanguagesEnum::SK
+        );
 
         //save to disk
         $writer = new Xlsx($spreadsheet);
@@ -288,7 +291,10 @@ class ApiIntegrationTest extends TestCase
         /*
         * 5.    generateSpreadSheet currency=CZK
         */
-        $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest($priceOfferReq, SupportedLanguagesEnum::SK)->toResponse(CurrencyEnum::CZK), SupportedLanguagesEnum::EN);
+        $spreadsheet = generateSpreadSheet(
+            PriceOffer::fromRequest($priceOfferReq, SupportedLanguagesEnum::SK)->toResponse(CurrencyEnum::CZK, array()),
+            SupportedLanguagesEnum::EN
+        );
 
         //save to disk
         $writer = new Xlsx($spreadsheet);
@@ -302,7 +308,10 @@ class ApiIntegrationTest extends TestCase
         * 6.    generateSpreadSheet for all supported languages
         */
         foreach (SupportedLanguagesEnum::getAll() as $lang) {
-            $spreadsheet = generateSpreadSheet(PriceOffer::fromRequest($priceOfferReq, SupportedLanguagesEnum::SK)->toResponse(CurrencyEnum::EUR), $lang);
+            $spreadsheet = generateSpreadSheet(
+                PriceOffer::fromRequest($priceOfferReq, SupportedLanguagesEnum::SK)->toResponse(CurrencyEnum::EUR, array()),
+                $lang
+            );
 
             $this->assertEquals(CurrencyEnum::EUR, $spreadsheet->getActiveSheet()->getCell('H91')->getValue());
             $this->assertEquals(2889.6, round(floatval($spreadsheet->getActiveSheet()->getCell('H92')->getCalculatedValue()), 2));

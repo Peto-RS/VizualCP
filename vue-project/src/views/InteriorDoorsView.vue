@@ -25,10 +25,9 @@ import {useAlerts} from "@/composables/alert-composables.js";
 import {devFunction} from "@/model/functions/dev.js";
 
 const {addAlert} = useAlerts()
-const {offCanvasActiveView} = useAppState()
 const {displayLoadingBar, hideLoadingBar} = useLoadingBar()
 const {locale, t} = useI18n()
-const {appConfig, currency} = useAppState()
+const {appConfig, offCanvasActiveView, currency} = useAppState()
 
 const buttonAddToPriceOfferIsVisible = ref<Boolean>(false)
 const buttonAddToPriceOfferRef = ref<HTMLButtonElement | null>(null)
@@ -155,6 +154,10 @@ async function updateButtonPosition() {
   };
 }
 
+function isDevButtonVisible(): boolean {
+  return appConfig.value?.profile === 'DEV';
+}
+
 function handleDevButton() {
   devFunction();
 }
@@ -224,7 +227,8 @@ onUnmounted(() => {
         </button>
       </div>
     </div>
-    <button @click="handleDevButton"
+    <button v-if="isDevButtonVisible()"
+            @click="handleDevButton"
             style="bottom: 20px"
             class="btn btn-secondary btn-lg"
             type="button">

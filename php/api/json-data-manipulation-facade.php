@@ -137,7 +137,9 @@ class AppConfigJsonDataManipulation
     {
         $json = getArrayFromJsonFile(__DIR__ . "/../../app-config.json");
         $profile = $json["profile"];
-        return $json[$profile];
+        $response = $json[$profile];
+        $response["profile"] = $profile;
+        return $response;
     }
 }
 

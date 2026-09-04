@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     sendJsonResponse(
         new AppConfigResponse(
             $appConfig["baseUrl"],
+            $appConfig["profile"],
             boolval($appConfig["reCaptchaEnabled"]),
             $appConfig["reCaptchaSiteKey"]
         ),

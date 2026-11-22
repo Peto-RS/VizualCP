@@ -2,7 +2,7 @@
 
 import {computed} from "vue";
 import ImageWithLoadingPlaceholder from "@/components/generic/ImageWithLoadingPlaceholder.vue";
-import {DoorState} from "@/model/interface/configurator/DoorState.js";
+import {DoorState} from "@/model/interior-doors/configurator/interface/DoorState.js";
 
 const props = defineProps<{
   baseUrl: string | null | undefined,

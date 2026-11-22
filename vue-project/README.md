@@ -36,3 +36,30 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Playwright end-to-end tests
+
+Install Playwright and its Chromium browser once:
+
+```sh
+npm install --save-dev @playwright/test
+npx playwright install chromium
+```
+
+The app is served by PHP and the Vite dev server. Start both from the repository root / `vue-project` in separate terminals:
+
+```sh
+# Repository root
+php -S 127.0.0.1:8000
+
+# vue-project
+npm run dev -- --host 127.0.0.1
+```
+
+Then, from `vue-project`, run:
+
+```sh
+npx playwright test
+```
+
+Tests live in `e2e/`. Set `BASE_URL` to test against a different app URL.

@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .container-door-image {
   background-color: gray;
   aspect-ratio: 0.46;

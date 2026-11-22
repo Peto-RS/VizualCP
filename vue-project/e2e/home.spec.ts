@@ -1,0 +1,475 @@
+import {expect, test} from '@playwright/test'
+
+test('configurator - best selling', async ({page}) => {
+  await page.goto('/')
+
+  await expect(page).toHaveTitle('Visualizer')
+  await expect(page.locator('#vueAppFull')).toBeVisible()
+  await expect(page).toHaveURL('http://localhost:8080/#/sk/interior-doors?panel=configurator')
+
+  const languageSelect = page.locator('select:has(option[value="sk"])').first()
+  await expect(languageSelect.locator('option:checked')).toHaveText('Slovenčina')
+  await expect(languageSelect.locator('option')).toHaveCount(12)
+
+  const currencySelect = page.locator('select:has(option[value="EUR"])').first()
+  await expect(currencySelect.locator('option:checked')).toHaveText('EUR')
+  await expect(currencySelect.locator('option')).toHaveCount(2)
+
+  const configurator = page.locator('.offcanvas.show')
+  await expect(configurator).toBeVisible()
+  await expect(configurator.locator('.nav-link-configurator.active')).toHaveText('Vizualizácia')
+  await expect(configurator.locator('.accordion-button').first()).toHaveText('Kategórie interiérových dverí')
+
+  const bestSellingCategory = configurator.locator('.accordion-item').first()
+      .locator('.door-miniature')
+      .filter({hasText: 'Najpredávanejšie'})
+      .locator('img')
+  await expect(bestSellingCategory).toBeVisible()
+  await expect(bestSellingCategory).toHaveAttribute('src', /\/best-selling\/min\/open\//)
+  await expect(configurator.getByText('Najpredávanejšie', {exact: true})).toBeVisible()
+
+  const doorTypeSection = configurator.locator('.accordion-item').nth(1)
+  await expect(doorTypeSection.locator('.accordion-button'))
+      .toHaveText('Typy interiérových dverí v kategórií: Najpredávanejšie')
+  await expect(doorTypeSection.getByText(
+      'Do kategórie najpredávanejšie sme pre Vás vybrali zoznam interiérových dverí, ktoré si naši zákazníci najčastejšie objednávajú a zároveň predstavujú najpriaznivejší pomer medzi kvalitou a cenou.,',
+      {exact: true}
+  )).toBeVisible()
+
+  const defaultDoorType = doorTypeSection.locator('.door-miniature')
+      .filter({has: page.locator('img[src*="/best-selling/min/open/ov1.png"]')})
+  await expect(defaultDoorType).toHaveCount(1)
+  await expect(defaultDoorType).toContainText('139 €')
+  await expect(doorTypeSection.getByText('Zárubňa: 99 €. Ceny sú bez DPH.', {exact: true})).toBeVisible()
+
+  const laminateSection = configurator.locator('.accordion-item').nth(2)
+  await expect(laminateSection.locator('.accordion-button')).toHaveText('Druhy laminátov')
+  const defaultLaminate = laminateSection.locator('.door-miniature')
+      .filter({has: page.locator('img[alt="lamino-jelsa"]')})
+  await expect(defaultLaminate).toContainText('Jelša')
+  await expect(defaultLaminate.locator('img')).toHaveClass(/border-primary/)
+
+  const veneerSection = configurator.locator('.accordion-item').nth(3)
+  await expect(veneerSection.locator('.accordion-button')).toHaveText('Druhy dýh')
+  await expect(veneerSection.locator('.border-primary.border-5')).toHaveCount(0)
+
+  const handleSection = configurator.locator('.accordion-item').nth(4)
+  await expect(handleSection.locator('.accordion-button')).toHaveText('Varianty kľučiek')
+  const defaultHandle = handleSection.locator('.door-miniature')
+      .filter({has: page.locator('img[alt="Nova_nerez_R"]')})
+  await expect(defaultHandle).toContainText('Nova nerez R')
+  await expect(defaultHandle).toContainText('15 €')
+  await expect(defaultHandle.locator('img')).toHaveClass(/border-primary/)
+
+  const glassSection = configurator.locator('.accordion-item').nth(5)
+  await expect(glassSection.locator(':scope > .accordion-header > .accordion-button')).toHaveText('Typy skiel')
+
+  const roomSection = configurator.locator('.accordion-item').nth(6)
+  await expect(roomSection.locator(':scope > .accordion-header > .accordion-button')).toHaveText('Výber miestnosti')
+  const canvas = page.locator('canvas')
+  const initialBackground = await canvas.evaluate((element: HTMLCanvasElement) => element.toDataURL())
+  await roomSection.locator('.door-selector-img').nth(1).click()
+  await expect.poll(() => canvas.evaluate((element: HTMLCanvasElement) => element.toDataURL()))
+      .not.toBe(initialBackground)
+
+  await glassSection.locator('a').first().click()
+  const photoSwipe = page.locator('.pswp.pswp--open')
+  const photoSwipeCounter = photoSwipe.locator('.pswp__counter')
+  await expect(photoSwipe).toBeVisible()
+  await expect(photoSwipeCounter).toHaveText(/1\s*\/\s*\d+/)
+  await photoSwipe.locator('.pswp__button--arrow--next').click()
+  await expect(photoSwipeCounter).toHaveText(/2\s*\/\s*\d+/)
+
+  await page.goto('/')
+
+  const roomConfigurator = page.locator('.offcanvas.show')
+  const roomSelectionSection = roomConfigurator.locator('.accordion-item').nth(6)
+  await expect(roomSelectionSection.locator(':scope > .accordion-header > .accordion-button')).toHaveText('Výber miestnosti')
+
+  const roomGallery = roomSelectionSection.locator('.accordion-item')
+  await expect(roomGallery.locator('.accordion-button')).toHaveText('Fotogaléria')
+  await expect(roomGallery.locator('.accordion-collapse')).not.toHaveClass(/show/)
+  await roomGallery.locator('.accordion-button').click()
+  await roomGallery.locator('a').first().click()
+
+  const roomPhotoSwipe = page.locator('.pswp.pswp--open')
+  const roomPhotoSwipeCounter = roomPhotoSwipe.locator('.pswp__counter')
+  await expect(roomPhotoSwipe).toBeVisible()
+  await expect(roomPhotoSwipeCounter).toHaveText(/1\s*\/\s*\d+/)
+  await roomPhotoSwipe.locator('.pswp__button--arrow--next').click()
+  await expect(roomPhotoSwipeCounter).toHaveText(/2\s*\/\s*\d+/)
+
+  await expect(configurator.locator('.accordion-item').last()
+      .locator(':scope > .accordion-header > .accordion-button'))
+      .toHaveText('Aktuálne akcie')
+})
+
+test('configurator - wien', async ({page}) => {
+  await page.goto('/')
+
+  const configurator = page.locator('.offcanvas.show')
+  const doorCategories = configurator.locator('.accordion-item').first()
+  await expect(doorCategories.locator(':scope > .accordion-header > .accordion-button'))
+      .toHaveText('Kategórie interiérových dverí')
+
+  const wienOneCategory = doorCategories.locator('.door-miniature').filter({hasText: 'Wien 1'})
+  await wienOneCategory.locator('img').click()
+  const doorTypeSection = configurator.locator('.accordion-item').nth(1)
+  await expect(doorTypeSection.locator('.accordion-button'))
+      .toHaveText('Typy interiérových dverí v kategórií: Wien 1')
+  await expect(doorTypeSection.getByText(
+      'Kategória dverí WIEN pozostáva z nadčasových modelov. Dvere Wien vyrábame v tradičnom bielom striekanom prevedení, ktoré je pracnejšie a samozrejme aj drahšie, ale v secesných a klasických interiéroch vyzerajú nádherne.',
+      {exact: true}
+  )).toBeVisible()
+
+  const defaultDoorType = doorTypeSection.locator('.door-miniature')
+      .filter({has: page.locator('img[src*="/wien_1/min/open/oW1_L2_K2_O1.png"]')})
+  await expect(defaultDoorType).toHaveCount(1)
+  await expect(defaultDoorType).toContainText('W1_L2_K2_O1')
+  await expect(defaultDoorType).toContainText('709 €')
+  await expect(doorTypeSection.getByText('Zárubňa: 99 €. Ceny sú bez DPH.', {exact: true})).toBeVisible()
+
+  const laminateSection = configurator.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Druhy laminátov'})})
+  await expect(laminateSection.locator('.door-miniature')).toHaveCount(1)
+  const defaultLaminate = laminateSection.locator('.door-miniature')
+  await expect(defaultLaminate).toContainText('Striekaná biela')
+  await expect(defaultLaminate.locator('img')).toHaveClass(/border-primary/)
+
+  const handleSection = configurator.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Varianty kľučiek'})})
+  await expect(handleSection.locator('.door-miniature')).toHaveCount(1)
+  const defaultHandle = handleSection.locator('.door-miniature')
+  await expect(defaultHandle).toContainText('ALT WIEN Štít')
+  await expect(defaultHandle).toContainText('38 €')
+  await expect(defaultHandle.locator('img')).toHaveClass(/border-primary/)
+
+  const constructionSection = configurator.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Možnosti prevedenia konštrukcie'})})
+  await expect(constructionSection.locator('.accordion-button'))
+      .toHaveText('Možnosti prevedenia konštrukcie')
+  await expect(constructionSection).toContainText(
+      'Pre dvere z kategória Wien sú typické ozdobné typy líšt, kaziet a obložiek. Na výber je z nasledovných modelov:'
+  )
+  await expect(constructionSection).toContainText(
+      'Štandardom k dverám kategórie Wien sú zlaté kľučky ALT WIEN (piškótový tvar, ktorý sa pre tento dizajn dverí používa už stovky rokov). Tiež sú v štandarde zlaté zámky a zlaté pánty.'
+  )
+
+  const glassSection = configurator.locator('.accordion-item').nth(5)
+  await expect(glassSection.locator(':scope > .accordion-header > .accordion-button'))
+      .toHaveText('Typy skiel')
+  await glassSection.locator('a').first().click()
+  let photoSwipe = page.locator('.pswp.pswp--open')
+  let photoSwipeCounter = photoSwipe.locator('.pswp__counter')
+  await expect(photoSwipe).toBeVisible()
+  await expect(photoSwipeCounter).toHaveText(/1\s*\/\s*\d+/)
+  await photoSwipe.locator('.pswp__button--arrow--next').click()
+  await expect(photoSwipeCounter).toHaveText(/2\s*\/\s*\d+/)
+
+  await page.goto('/')
+  const reopenedConfigurator = page.locator('.offcanvas.show')
+  const reopenedDoorCategories = reopenedConfigurator.locator('.accordion-item').first()
+  await reopenedDoorCategories.locator('.door-miniature')
+      .filter({hasText: 'Wien 1'})
+      .locator('img')
+      .click()
+
+  const doorGallerySection = reopenedConfigurator.locator('.accordion-item').nth(6)
+  await expect(doorGallerySection.locator(':scope > .accordion-header > .accordion-button'))
+      .toHaveText('Fotogaléria')
+  await doorGallerySection.locator('a').first().click()
+  photoSwipe = page.locator('.pswp.pswp--open')
+  photoSwipeCounter = photoSwipe.locator('.pswp__counter')
+  await expect(photoSwipe).toBeVisible()
+  await expect(photoSwipeCounter).toHaveText(/1\s*\/\s*\d+/)
+  await photoSwipe.locator('.pswp__button--arrow--next').click()
+  await expect(photoSwipeCounter).toHaveText(/2\s*\/\s*\d+/)
+
+  await page.goto('/')
+  const finalConfigurator = page.locator('.offcanvas.show')
+  await finalConfigurator.locator('.accordion-item').first()
+      .locator('.door-miniature')
+      .filter({hasText: 'Wien 1'})
+      .locator('img')
+      .click()
+
+  const roomSection = finalConfigurator.locator('.accordion-item').nth(7)
+  await expect(roomSection.locator(':scope > .accordion-header > .accordion-button'))
+      .toHaveText('Výber miestnosti')
+  const roomGallery = roomSection.locator('.accordion-item')
+  await expect(roomGallery.locator('.accordion-button')).toHaveText('Fotogaléria')
+  await expect(roomGallery.locator('.accordion-collapse')).not.toHaveClass(/show/)
+  await roomGallery.locator('.accordion-button').click()
+  await roomGallery.locator('a').first().click()
+  photoSwipe = page.locator('.pswp.pswp--open')
+  photoSwipeCounter = photoSwipe.locator('.pswp__counter')
+  await expect(photoSwipe).toBeVisible()
+  await expect(photoSwipeCounter).toHaveText(/1\s*\/\s*\d+/)
+  await photoSwipe.locator('.pswp__button--arrow--next').click()
+  await expect(photoSwipeCounter).toHaveText(/2\s*\/\s*\d+/)
+
+  await expect(finalConfigurator.locator('.accordion-item').last()
+      .locator(':scope > .accordion-header > .accordion-button'))
+      .toHaveText('Aktuálne akcie')
+})
+
+test('price offer - wien', async ({page}) => {
+  await page.goto('/')
+
+  const configurator = page.locator('.offcanvas.show')
+  const doorCategories = configurator.locator('.accordion-item').first()
+  const wienOneCategory = doorCategories.locator('.door-miniature').filter({hasText: 'Wien 1'})
+  await wienOneCategory.locator('img').click()
+
+  const addToPriceOfferButton = page.locator('.configurator-canvas')
+      .getByRole('button', {name: 'Pridať do cenovej ponuky'})
+  await addToPriceOfferButton.click()
+
+  await expect(page).toHaveURL('http://localhost:8080/#/sk/interior-doors?panel=price-offer')
+  const priceOffer = page.locator('.offcanvas.show')
+  await expect(priceOffer.locator('.nav-link-price-offer.active'))
+      .toHaveText('Cenová ponuka')
+
+  const doorsSection = priceOffer.locator('.accordion-item').first()
+  await expect(doorsSection.locator('.accordion-badge')).toHaveText('808 €')
+  const selectedDoor = doorsSection.locator('.selected-doors-badge')
+      .locator('..').locator('..').locator('..')
+  await expect(selectedDoor).toContainText('W1_L2_K2_O1')
+  await expect(selectedDoor.locator('input[type="checkbox"]')).toBeChecked()
+  await expect(selectedDoor.locator('.selected-doors-badge')).toHaveText('808 €')
+
+  await selectedDoor.locator('select').selectOption('W90')
+  await expect(selectedDoor.locator('.selected-doors-badge')).toHaveText('817 €')
+  await expect(doorsSection.locator('.accordion-badge')).toHaveText('817 €')
+
+  const handlesSection = priceOffer.locator('.accordion-item').nth(1)
+  await expect(handlesSection.locator('.accordion-badge')).toHaveText('43 €')
+  await handlesSection.locator(':scope > .accordion-header > .accordion-button').click()
+
+  const selectedHandleRow = handlesSection.locator('.list-group-item').first()
+  await expect(selectedHandleRow).toContainText('ALT WIEN Štít')
+  await expect(selectedHandleRow.locator('input[type="number"]').first()).toHaveValue('1')
+  await expect(selectedHandleRow.locator('.price-offer-badge')).toHaveText('38 €')
+
+  const handleInstallationRow = handlesSection.locator('.list-group-item')
+      .filter({hasText: 'Montáž kľučiek a roziet'})
+  await expect(handleInstallationRow.locator('input[type="number"]')).toHaveValue('1')
+  await expect(handleInstallationRow.locator('.price-offer-badge')).toHaveText('5 €')
+
+  const deliverySection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Dovoz'})})
+  await expect(deliverySection.locator('.accordion-badge')).toHaveText('0 €')
+  await deliverySection.locator(':scope > .accordion-header > .accordion-button').click()
+  const districtSelect = deliverySection.locator('select').nth(1)
+  await districtSelect.selectOption('own-transport')
+  await expect(districtSelect.locator('option:checked')).toHaveText('Vlastný odber Čachtice')
+  await expect(deliverySection.locator('.price-offer-badge')).toHaveText('0 €')
+  await expect(deliverySection.locator('.accordion-badge')).toHaveText('0 €')
+
+  const assemblySection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Montáž'})})
+  await expect(assemblySection.locator('.accordion-badge')).toHaveText('210 €')
+  await assemblySection.locator(':scope > .accordion-header > .accordion-button').click()
+  await expect(assemblySection).toContainText('Akciová montáž')
+  await expect(assemblySection.locator('#assemblyDoorsCount')).toHaveValue('1')
+  await expect(assemblySection.locator('.price-offer-badge')).toHaveText('210 €')
+
+  const aestheticSection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Estetické doplnky'})})
+  await expect(aestheticSection.locator('.accordion-badge')).toHaveText('0 €')
+
+  const technicalSection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Technické príplatky'})})
+  await expect(technicalSection.locator('.accordion-badge')).toHaveText('14,2 €')
+
+  const specialSurchargesSection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: /Príplatkové otvárania dverí/})})
+  await expect(specialSurchargesSection.locator('.accordion-badge')).toHaveText('0 €')
+
+  const contactSection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Kontaktné údaje'})})
+  const contactEmail = contactSection.locator('#contact-email')
+  await contactEmail.fill('peter.hutasrs@gmail.com')
+  await contactEmail.blur()
+  await expect(contactEmail).toHaveValue('peter.hutasrs@gmail.com')
+  await expect(priceOffer.getByRole('button', {name: 'Odoslať ponuku na email'})).toBeEnabled()
+
+  const totalWithoutVat = priceOffer.getByText('Cena spolu bez DPH', {exact: true})
+      .locator('..').locator('.price-offer-badge')
+  const totalWithVat = priceOffer.getByText('Cena spolu s DPH', {exact: true})
+      .locator('..').locator('.price-offer-badge')
+  await expect(totalWithoutVat).toHaveText('1 084,2 €')
+  await expect(totalWithVat).toHaveText('1 333,57 €')
+
+  await priceOffer.getByRole('button', {name: 'Odoslať ponuku na email'}).click()
+  await expect(page).toHaveURL('http://localhost:8080/#/sk/price-offer-finished')
+  await expect(page.getByText('Cenovú ponuku sme Vám poslali na e-mailovú adresu.'))
+      .toBeVisible()
+
+  await page.getByRole('button', {name: 'Vrátiť sa na domovskú stránku'}).click()
+  await expect(page).toHaveURL('http://localhost:8080/#/sk/interior-doors?panel=configurator')
+  await expect(page.locator('.offcanvas.show').locator('.nav-link-configurator.active'))
+      .toHaveText('Vizualizácia')
+})
+
+test('price offer - add door', async ({page}) => {
+  await page.goto('/')
+
+  await page.locator('.configurator-canvas')
+      .getByRole('button', {name: 'Pridať do cenovej ponuky'})
+      .click()
+
+  await expect(page).toHaveURL('http://localhost:8080/#/sk/interior-doors?panel=price-offer')
+  const priceOffer = page.locator('.offcanvas.show')
+  await expect(priceOffer.locator('.nav-link-price-offer.active'))
+      .toHaveText('Cenová ponuka')
+
+  const doorsSection = priceOffer.locator('.accordion-item').first()
+  await expect(doorsSection.locator(':scope > .accordion-header > .accordion-button'))
+      .toContainText('Interiérové dvere')
+  await expect(doorsSection.locator('.accordion-badge')).toHaveText('219 €')
+
+  const selectedDoor = doorsSection.locator('.selected-doors-badge').locator('..').locator('..').locator('..')
+  await expect(selectedDoor).toContainText('V1')
+
+  const widthSelect = selectedDoor.locator('select')
+  await expect(widthSelect.locator('option')).toHaveText(['Šírka', '60', '70', '80', '90'])
+  await expect(selectedDoor.locator('input[type="checkbox"]')).toBeChecked()
+  await expect(selectedDoor.locator('.selected-doors-badge')).toHaveText('219 €')
+
+  await widthSelect.selectOption('W90')
+  await expect(selectedDoor.locator('.selected-doors-badge')).toHaveText('228 €')
+  await expect(doorsSection.locator('.accordion-badge')).toHaveText('228 €')
+
+  const handlesSection = priceOffer.locator('.accordion-item').nth(1)
+  await expect(handlesSection.locator(':scope > .accordion-header > .accordion-button > .flex-grow-1'))
+      .toHaveText('Kľučky')
+  await expect(handlesSection.locator('.accordion-badge')).toHaveText('20 €')
+  await handlesSection.locator(':scope > .accordion-header > .accordion-button').click()
+
+  const selectedHandleRow = handlesSection.locator('.list-group-item')
+      .filter({has: page.locator('img[alt="Nova_nerez_R"]')})
+  await expect(selectedHandleRow).toContainText('Nova nerez R')
+  await expect(selectedHandleRow.locator('input[type="number"]').first()).toHaveValue('1')
+
+  const handleInstallationRow = handlesSection.locator('.list-group-item')
+      .filter({hasText: 'Montáž kľučiek a roziet'})
+  await expect(handleInstallationRow.locator('input[type="number"]')).toHaveValue('1')
+  await expect(handleInstallationRow.locator('.price-offer-badge')).toHaveText('5 €')
+
+  const deliverySection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Dovoz'})})
+  await expect(deliverySection.locator('.accordion-badge')).toHaveText('0 €')
+  await deliverySection.locator(':scope > .accordion-header > .accordion-button').click()
+
+  const deliveryCountry = deliverySection.locator('select').nth(0)
+  await expect(deliveryCountry.locator('option:checked')).toHaveText('Slovensko')
+  const districtSelect = deliverySection.locator('select').nth(1)
+  await districtSelect.selectOption('rimavska-sobota')
+  await expect(districtSelect.locator('option:checked')).toHaveText('Rimavská Sobota')
+  await expect(deliverySection.locator('.price-offer-badge')).toHaveText('279 €')
+  await expect(deliverySection.locator('.accordion-badge')).toHaveText('279 €')
+  await expect(deliverySection).toContainText(
+      'Cena prepravy je 0,5 € za km. Preprava sa počíta od výroby v obci Čachtice.'
+  )
+
+  await deliverySection.locator('#address-street').fill('Street')
+  await deliverySection.locator('#address-streetNumber').fill('1')
+  await deliverySection.locator('#address-city').fill('Rimavska Sobota')
+  await deliverySection.locator('#address-zipCode').fill('979 01')
+
+  const assemblySection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Montáž'})})
+  await expect(assemblySection.locator('.accordion-badge')).toHaveText('210 €')
+  await assemblySection.locator(':scope > .accordion-header > .accordion-button').click()
+  await expect(assemblySection.locator('#assemblyDoorsCount')).toHaveValue('1')
+  await expect(assemblySection.locator('.price-offer-badge')).toHaveText('210 €')
+
+  const aestheticSection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Estetické doplnky'})})
+  await expect(aestheticSection.locator('.accordion-badge')).toHaveText('0 €')
+
+  const technicalSection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Technické príplatky'})})
+  await expect(technicalSection.locator('.accordion-badge')).toHaveText('14,2 €')
+  await technicalSection.locator(':scope > .accordion-header > .accordion-button').click()
+
+  const siliconeSurcharge = technicalSection.locator('.list-group-item')
+      .filter({hasText: 'Silikónové tesnenie do zárubne'})
+  await expect(siliconeSurcharge.locator('input[type="number"]')).toHaveValue('1')
+  await expect(siliconeSurcharge.locator('.price-offer-badge')).toHaveText('10 €')
+
+  const wallFrameSurcharge = technicalSection.locator('.list-group-item')
+      .filter({hasText: 'Vytmelenie nerovností medzi stenou a zárubňou'})
+  await expect(wallFrameSurcharge.locator('input[type="number"]')).toHaveValue('1')
+  await expect(wallFrameSurcharge.locator('.price-offer-badge')).toHaveText('4,2 €')
+
+  const specialSurchargesSection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: /Príplatkové otvárania dverí/})})
+  await expect(specialSurchargesSection.locator('.accordion-badge')).toHaveText('0 €')
+
+  const contactSection = priceOffer.locator('.accordion-item')
+      .filter({has: page.getByRole('button', {name: 'Kontaktné údaje'})})
+  await contactSection.locator('#contact-fullName').fill('Meno')
+  await contactSection.locator('#contact-email').fill('peter.hutasrs@gmail.com')
+  await contactSection.locator('#contact-phoneNumber').fill('0917054975')
+  await contactSection.locator('#price-offer-note').fill('Poznamka')
+
+  const firstDoorImage = selectedDoor.locator('a[role="button"] img').first()
+  await firstDoorImage.hover()
+  await expect(page.locator('.popover')).toContainText('Kliknutím duplikovať.')
+  await firstDoorImage.click()
+
+  const duplicatedDoor = doorsSection.locator('.selected-doors-badge').nth(1)
+      .locator('..').locator('..').locator('..')
+  await expect(duplicatedDoor).toContainText('V1')
+  await expect(duplicatedDoor.locator('select')).toHaveValue('W90')
+  await expect(duplicatedDoor.locator('.selected-doors-badge')).toHaveText('228 €')
+  await expect(doorsSection.locator('.selected-doors-badge')).toHaveCount(2)
+  await expect(doorsSection.locator('.accordion-badge')).toHaveText('456 €')
+
+  await expect(handlesSection.locator('.accordion-badge')).toHaveText('40 €')
+  await expect(selectedHandleRow.locator('input[type="number"]').first()).toHaveValue('2')
+  await expect(selectedHandleRow.locator('.price-offer-badge')).toHaveText('30 €')
+  await expect(handleInstallationRow.locator('input[type="number"]')).toHaveValue('2')
+  await expect(handleInstallationRow.locator('.price-offer-badge')).toHaveText('10 €')
+
+  await expect(deliverySection.locator('.accordion-badge')).toHaveText('279 €')
+  await expect(deliveryCountry.locator('option:checked')).toHaveText('Slovensko')
+  await expect(districtSelect.locator('option:checked')).toHaveText('Rimavská Sobota')
+  await expect(deliverySection.locator('#address-street')).toHaveValue('Street')
+  await expect(deliverySection.locator('#address-streetNumber')).toHaveValue('1')
+  await expect(deliverySection.locator('#address-city')).toHaveValue('Rimavska Sobota')
+  await expect(deliverySection.locator('#address-zipCode')).toHaveValue('979 01')
+  await expect(assemblySection.locator('.accordion-badge')).toHaveText('210 €')
+  await expect(assemblySection.locator('#assemblyDoorsCount')).toHaveValue('2')
+  await expect(aestheticSection.locator('.accordion-badge')).toHaveText('0 €')
+  await expect(technicalSection.locator('.accordion-badge')).toHaveText('28,4 €')
+  await expect(siliconeSurcharge.locator('input[type="number"]')).toHaveValue('2')
+  await expect(siliconeSurcharge.locator('.price-offer-badge')).toHaveText('20 €')
+  await expect(wallFrameSurcharge.locator('input[type="number"]')).toHaveValue('2')
+  await expect(wallFrameSurcharge.locator('.price-offer-badge')).toHaveText('8,4 €')
+  await expect(specialSurchargesSection.locator('.accordion-badge')).toHaveText('0 €')
+  await expect(contactSection.locator('#contact-fullName')).toHaveValue('Meno')
+  await expect(contactSection.locator('#contact-email')).toHaveValue('peter.hutasrs@gmail.com')
+  await expect(contactSection.locator('#contact-phoneNumber')).toHaveValue('0917054975')
+  await expect(contactSection.locator('#price-offer-note')).toHaveValue('Poznamka')
+
+  const totalWithoutVat = priceOffer.getByText('Cena spolu bez DPH', {exact: true})
+      .locator('..').locator('.price-offer-badge')
+  const totalWithVat = priceOffer.getByText('Cena spolu s DPH', {exact: true})
+      .locator('..').locator('.price-offer-badge')
+  await expect(totalWithoutVat).toHaveText('1 013,4 €')
+  await expect(totalWithVat).toHaveText('1 246,48 €')
+
+  await priceOffer.getByRole('button', {name: 'Odoslať ponuku na email'}).click()
+  await expect(page).toHaveURL('http://localhost:8080/#/sk/price-offer-finished')
+  await expect(page.getByText('Cenovú ponuku sme Vám poslali na e-mailovú adresu.'))
+      .toBeVisible()
+
+  await page.getByRole('button', {name: 'Vrátiť sa na domovskú stránku'}).click()
+  await expect(page).toHaveURL('http://localhost:8080/#/sk/interior-doors?panel=configurator')
+  await expect(page.locator('.offcanvas.show')).toBeVisible()
+  await expect(page.locator('.offcanvas.show').locator('.nav-link-configurator.active'))
+      .toHaveText('Vizualizácia')
+})

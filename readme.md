@@ -43,17 +43,17 @@ npm run build
 
 Application Configuration
 -
-The application configuration is stored in the file:
+The application configuration is stored in the `env` directory:
 
 ```
-app-config.json
+env/app-config.json
 ```
 
 Available configuration profiles:
 
-- DEV
-- STAGE
-- PROD
+- dev
+- stage
+- prod
 
 Configuration Options
 
@@ -62,7 +62,7 @@ Configuration Options
 *dbFilename* — Path to the SQLite3 database, currently used to store the price offer number.
 It is recommended to place the database outside the source code directory to prevent data loss or accidental overwrites.
 
-*isProductionSmtp* — If set to true, SMTP credentials from app-config.json are used.
+*isProductionSmtp* — If set to true, SMTP credentials from the selected profile configuration in `env` are used.
 If set to false, localhost is used.
 
 *isProductionVueBuild* — Must be set to true for production environments.

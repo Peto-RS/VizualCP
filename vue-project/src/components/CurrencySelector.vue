@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {CurrencyEnum} from "@/model/enums/CurrencyEnum.js";
+import {CurrencyEnum} from "@/model/common/enums/CurrencyEnum.js";
 
 const supportedCurrencies: Record<string, string> = {
   [CurrencyEnum.EUR]: CurrencyEnum.EUR,

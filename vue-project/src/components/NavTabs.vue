@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {useI18n} from 'vue-i18n'
-import {useAppState} from "@/composables/app-state.js";
+import {usePanelQuery} from "@/composables/panel-query.js";
 
-const {offCanvasActiveView} = useAppState()
+const {panel} = usePanelQuery()
 const {t} = useI18n()
 
 const emit = defineEmits<{
@@ -15,16 +15,16 @@ const emit = defineEmits<{
   <ul class="nav nav-underline fs-6 font-bold">
     <li class="nav-item">
       <a class="nav-link nav-link-configurator"
-         :class="{active: offCanvasActiveView === 'configurator'}"
-         @click="emit('handle-configurator-click'); offCanvasActiveView = 'configurator';">
+         :class="{active: panel === 'configurator'}"
+         @click="emit('handle-configurator-click')">
         {{ t('components.Navbar.configurator') }}
       </a>
     </li>
 
     <li class="nav-item">
       <a class="nav-link nav-link-price-offer"
-         :class="{ active: offCanvasActiveView === 'priceOffer' }"
-         @click="emit('handle-price-offer-click'); offCanvasActiveView = 'priceOffer';">
+         :class="{ active: panel === 'price-offer' }"
+         @click="emit('handle-price-offer-click')">
         {{ t('components.Navbar.priceOffer') }}
       </a>
     </li>

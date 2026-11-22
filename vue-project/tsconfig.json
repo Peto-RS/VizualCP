@@ -13,7 +13,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["grecaptcha", "node"]
+    "types": ["grecaptcha", "node", "vite/client"]
   },
   "include": ["src/**/*"]
 }

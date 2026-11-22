@@ -1,0 +1,17 @@
+[
+  {
+    "categoryId": "security",
+    "name": "TODO:",
+    "nameKey": "TODO:",
+    "doorConfiguratorDefault": {
+      "handle": null,
+      "material": "dub_bielo_sedy",
+      "type": "v1"
+    },
+    "doorTypes": {
+      "v1": {
+        "price": 139
+      }
+    }
+  }
+]

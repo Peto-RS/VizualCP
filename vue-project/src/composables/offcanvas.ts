@@ -1,7 +1,7 @@
 import {shallowRef, ref} from 'vue'
-import type {Component} from 'vue'
 import {Offcanvas} from 'bootstrap'
-import {isMobileDevice} from "@/model/functions/responsivity-utils.js";
+import {isMobileDevice} from "@/model/common/functions/responsivity-utils.js";
+import type {Component} from 'vue'
 
 interface OffCanvasParameters {
     height?: string
@@ -10,11 +10,13 @@ interface OffCanvasParameters {
 const component = shallowRef<Component | null>(null)
 const offCanvasParameters = ref<OffCanvasParameters>({})
 const props = ref<Record<string, any>>({})
-const keys = new Map<Component, number>()
+const componentKey = ref(0)
 
 let instance: Offcanvas | null = null
 let element: HTMLElement | null = null
 let hideBsOffcanvas: (() => void) | null = null
+let isHiding = false
+let reopenAfterHide = false
 
 function register(el: HTMLElement) {
     element = el
@@ -26,8 +28,23 @@ function register(el: HTMLElement) {
 
     // Attach listener ONCE
     element.addEventListener('hide.bs.offcanvas', () => {
+        isHiding = true
         hideBsOffcanvas?.()
         hideBsOffcanvas = null
+    })
+
+    element.addEventListener('hidden.bs.offcanvas', () => {
+        isHiding = false
+
+        if (reopenAfterHide) {
+            reopenAfterHide = false
+            instance?.show()
+            return
+        }
+
+        component.value = null
+        props.value = {}
+        offCanvasParameters.value = {}
     })
 }
 
@@ -39,29 +56,32 @@ function open(
     parameters: OffCanvasParameters = {}
 ) {
     if (reset) {
-        resetFnc(comp)
+        componentKey.value += 1
     }
 
     component.value = comp
     props.value = componentProps
     hideBsOffcanvas = hideBsOffcanvasCallback ?? null
     offCanvasParameters.value = parameters
+
+    if (isHiding) {
+        reopenAfterHide = true
+        return
+    }
+
     instance?.show()
 }
 
 function close() {
+    reopenAfterHide = false
     instance?.hide()
-}
-
-function resetFnc(comp: Component) {
-    keys.set(comp, (keys.get(comp) ?? 0) + 1)
 }
 
 export const offcanvas = {
     parameters: offCanvasParameters,
     component,
+    componentKey,
     props,
-    keys,
     register,
     open: open,
     close,

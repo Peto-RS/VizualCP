@@ -1,0 +1,22 @@
+{
+  "ral9016": {
+    "color": "#d6d5d0",
+    "label": "RAL 9016"
+  },
+  "ral1015": {
+    "color": "#d3c8ac",
+    "label": "RAL 1015"
+  },
+  "ral7016": {
+    "color": "#31393c",
+    "label": "RAL 7016"
+  },
+  "ral8017": {
+    "color": "#3b2c29",
+    "label": "RAL 8017"
+  },
+  "ral9005": {
+    "color": "#0f1513",
+    "label": "RAL 9005"
+  }
+}

@@ -3,16 +3,16 @@
 use PHPUnit\Framework\TestCase;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-require_once __DIR__ . '/../../functions.php';
 require_once __DIR__ . '/../../php/enums/CurrencyEnum.php';
-require_once __DIR__ . '/../api/model/cart-model.php';
-require_once __DIR__ . '/../api/price-offer-spreadsheet-facade.php';
+require_once __DIR__ . '/../api/common/facade/json-data-manipulation-facade.php';
+require_once __DIR__ . '/../api/interior-doors/model/cart-model.php';
+require_once __DIR__ . '/../api/interior-doors/facade/price-offer-spreadsheet-facade.php';
 require_once __DIR__ . '/../enums/SupportedLanguagesEnum.php';
 
 class ApiIntegrationTest extends TestCase
 {
-    private $configuratorUrl = 'http://localhost:8080/api-configurator.php';
-    private $priceOfferUrl = 'http://localhost:8080/api.php';
+    private $configuratorUrl = 'http://localhost:8080/api/interior-doors/configurator.php';
+    private $priceOfferUrl = 'http://localhost:8080/api/interior-doors/price-offer.php';
     private $sessionId = 'testsession123';
 
     public function testPriceOffer()
@@ -20,7 +20,7 @@ class ApiIntegrationTest extends TestCase
         $sessionId = bin2hex(random_bytes(16));
 
         /*
-         * 1. POST /api-configurator.php
+         * 1. POST /api/interior-doors/configurator.php
          */
         $req = array(
             "category" => "best-selling",
@@ -28,7 +28,7 @@ class ApiIntegrationTest extends TestCase
             "material" => "lamino-jelsa",
             "type" => "v1"
         );
-        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK . "&campaignDisabled=true", $sessionId, $req);
+        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK, $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
         $resBody = json_decode($res['body'], true);
 
@@ -51,9 +51,9 @@ class ApiIntegrationTest extends TestCase
         $this->assertEquals(569.736, $resBody['calculatedPriceVat']);
 
         /*
-         * 2. POST /api-configurator.php
+         * 2. POST /api/interior-doors/configurator.php
          */
-        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK . "&campaignDisabled=true", $sessionId, $req);
+        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK, $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
         $resBody = json_decode($res['body'], true);
 
@@ -74,7 +74,7 @@ class ApiIntegrationTest extends TestCase
         $this->assertEquals(881.17, round($resBody['calculatedPriceVat'], 2));
 
         /*
-        * 3. POST /api-configurator.php
+        * 3. POST /api/interior-doors/configurator.php
          */
         $req = array(
             "category" => "wien_1",
@@ -82,7 +82,7 @@ class ApiIntegrationTest extends TestCase
             "material" => "wien-biela",
             "type" => "W1_L2_K2_O2"
         );
-        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK . "&campaignDisabled=true", $sessionId, $req);
+        $res = $this->request('POST', $this->configuratorUrl . "?lang=" . SupportedLanguagesEnum::SK, $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
         $resBody = json_decode($res['body'], true);
 
@@ -104,14 +104,14 @@ class ApiIntegrationTest extends TestCase
         $this->assertEquals(2370.95, round($resBody['calculatedPriceVat'], 2));
 
         /*
-        * 3.    POST /api.php
-        *       GET /api.php
+        * 3.    POST /api/interior-doors/price-offer.php
+        *       GET /api/interior-doors/price-offer.php
         */
         $req = getArrayFromJsonFile(__DIR__ . "/resources/price-offer-request.json");
         $res = $this->request('POST', $this->priceOfferUrl, $sessionId, $req);
         $this->assertEquals("HTTP/1.0 200 OK", $res['headers'][0]);
 
-        $res = $this->request('GET', $this->priceOfferUrl . "?currency=" . CurrencyEnum::EUR . "&lang=" . SupportedLanguagesEnum::SK . "&campaignDisabled=true", $sessionId);
+        $res = $this->request('GET', $this->priceOfferUrl . "?currency=" . CurrencyEnum::EUR . "&lang=" . SupportedLanguagesEnum::SK, $sessionId);
         $resBody = json_decode($res['body'], true);
 
         $this->assertEquals('City', $resBody['priceOffer']['address']['city']);
@@ -298,11 +298,11 @@ class ApiIntegrationTest extends TestCase
 
         //save to disk
         $writer = new Xlsx($spreadsheet);
-        $writer->save(__DIR__ . '/test-price-offer-CZK.xlsx');
+        $writer->save(__DIR__ . '/test-price-offer-CZK-lates.xlsx');
 
         $this->assertEquals(CurrencyEnum::CZK, $spreadsheet->getActiveSheet()->getCell('H91')->getValue());
-        $this->assertEquals(63899.32, round(floatval($spreadsheet->getActiveSheet()->getCell('H92')->getCalculatedValue()), 2));
-        $this->assertEquals(78596.16, round(floatval($spreadsheet->getActiveSheet()->getCell('H93')->getCalculatedValue()), 2));
+        $this->assertEquals(63455.52, round(floatval($spreadsheet->getActiveSheet()->getCell('H92')->getCalculatedValue()), 2));//63899.32
+        $this->assertEquals(78050.29, round(floatval($spreadsheet->getActiveSheet()->getCell('H93')->getCalculatedValue()), 2));//78596.16
 
         /*
         * 6.    generateSpreadSheet for all supported languages

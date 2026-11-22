@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
-import {formatPrice} from "@/model/functions/formatters.js";
+import {CURRENCY_SIGN} from "@/model/common/enums/CurrencyEnum.js";
+import {formatPrice} from "@/model/common/functions/formatters.js";
 import {useAppState} from "@/composables/app-state.js";
 const {currency} = useAppState()
 

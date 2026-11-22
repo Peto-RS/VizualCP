@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {FormLineItem} from "@/model/functions/price-offer-form-builder.js";
-import {LineItemResponse} from "@/model/api/res/price-offer/LineItemResponse.js";
+import {FormLineItem} from "@/model/interior-doors/function/price-offer-form-builder.js";
+import {LineItemResponse} from "@/model/interior-doors/price-offer/res/LineItemResponse.js";
 import BadgePrice from "../components/BadgePrice.vue";
 import {useI18n} from "vue-i18n";
 

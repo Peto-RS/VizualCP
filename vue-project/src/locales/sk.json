@@ -603,5 +603,83 @@
     "priceWoVatFinal": "Cena spolu bez DPH",
     "title": "Cenová ponuka interiérové dvere"
   },
-  "priceOfferMail": "<div>\n    <p>Dobrý deň,</p>\n\n    <p>\n        V prílohe Vám posielame Vami vygenerovanú cenovú ponuku <strong>interiérových dverí</strong>.\n    </p>\n\n    <p>\n        Dvere si môžete osobne prezrieť v ČACHTICIACH, BRATISLAVE alebo TRNAVE.\n    </p>\n\n    <p>\n        Ak si prajete dvere objednať, alebo potrebujete viac informácií,<br>\n        pošlite nám prosím e-mail na adresu:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        alebo volajte na telefónne číslo:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        S pozdravom,<br>\n        Ing. Peter Sučanský\n    </p>\n</div>"
+  "priceOfferMail": "<div>\n    <p>Dobrý deň,</p>\n\n    <p>\n        V prílohe Vám posielame Vami vygenerovanú cenovú ponuku <strong>interiérových dverí</strong>.\n    </p>\n\n    <p>\n        Dvere si môžete osobne prezrieť v ČACHTICIACH, BRATISLAVE alebo TRNAVE.\n    </p>\n\n    <p>\n        Ak si prajete dvere objednať, alebo potrebujete viac informácií,<br>\n        pošlite nám prosím e-mail na adresu:\n        <a href=\"mailto:stolarstvo.sucansky@gmail.com\">\n            stolarstvo.sucansky@gmail.com\n        </a>\n    </p>\n\n    <p>\n        alebo volajte na telefónne číslo:\n    </p>\n\n    <p>\n        ČACHTICE: 032/7787 301<br>\n        BRATISLAVA: 0904 901 799<br>\n        TRNAVA: 0904 901 799\n    </p>\n\n    <p>\n        S pozdravom,<br>\n        Ing. Peter Sučanský\n    </p>\n</div>",
+  "securityDoors": {
+    "db": {
+      "equipmentIncluded": {
+        "peephole": "Kukátko",
+        "doorKnob": "Guľa",
+        "leverHandle1": "Fabka 1",
+        "leverHandle2": "Fabka 2",
+        "handle": "Madlo",
+        "keys": "5 kľúčov",
+        "seal": "Tesnenie",
+        "cover": "Krytka",
+        "securityLock": "Bezpečnostný zámok",
+        "anchors": "8 kotiev"
+      },
+      "equipmentOptional": {
+        "safetyClamp": "Bezpečnostná svorka",
+        "stainlessSteelDoorSillGuard": "Nerezový kryt na prah"
+      },
+      "materials": {
+        "borovica_biela": {
+          "label": "Borovica biela"
+        },
+        "buk": {
+          "label": "Buk"
+        },
+        "drevo_biele": {
+          "label": "Drevo biele"
+        },
+        "dub_arizona": {
+          "label": "Dub Arizona"
+        },
+        "dub_bardolino": {
+          "label": "Dub Bardolino"
+        },
+        "dub_bielo_sedy": {
+          "label": "Dub bielo-šedý"
+        },
+        "dub_dayton": {
+          "label": "Dub Dayton"
+        },
+        "dub_prirodny": {
+          "label": "Dub prírodný"
+        },
+        "dub_royal": {
+          "label": "Dub Royal"
+        },
+        "orech_portland": {
+          "label": "Orech Portland"
+        },
+        "wenge": {
+          "label": "Wenge"
+        },
+        "wob4": {
+          "label": "WOB4"
+        },
+        "wob5": {
+          "label": "WOB5"
+        },
+        "wob7": {
+          "label": "WOB7"
+        }
+      }
+    },
+    "configurator": {
+      "accordionHeaders": {
+        "doorType": "Typy bezpečnostných dverí",
+        "equipmentIncluded": "Výbava v cene dverí",
+        "equipmentOptional": "Spoplatnená výbava",
+        "frameColor": "Farba zárubne",
+        "materials": "Dekory"
+      }
+    },
+    "priceOffer": {
+      "assemblyDoors": {
+        "note": "Montáž dverí {assemblyDoorsCost} / kus."
+      }
+    }
+  }
 }

@@ -1,24 +1,38 @@
 <script setup lang="ts">
-import {useRouter} from 'vue-router'
+import {computed, onMounted} from "vue";
+import {useRoute, useRouter} from 'vue-router'
 import {useI18n} from "vue-i18n";
-import {useAppState} from "@/composables/app-state.js";
-import {onMounted} from "vue";
+import {defaultLocale} from "@/model/common/functions/translation-utils.js";
 
-const {appConfig} = useAppState()
 const router = useRouter()
+const route = useRoute()
 const {t} = useI18n()
+const completedOffer = sessionStorage.getItem('offerCompleted')
+const offerType = completedOffer === 'interior-doors' || completedOffer === 'security-doors'
+  ? completedOffer
+  : null
 
-if (sessionStorage.getItem('offerCompleted') !== 'true') {
+if (!offerType) {
   router.replace('/')
 } else {
   sessionStorage.removeItem('offerCompleted')
 }
 
+const returnRoute = computed(() => ({
+  name: offerType === 'security-doors' ? 'SecurityDoors' : 'InteriorDoors',
+  params: {lang: route.params.lang ?? defaultLocale}
+}))
+
 onMounted(() => {
-  if (window.gtag) {
+  if (offerType && window.gtag) {
+    const isSecurityDoors = offerType === 'security-doors'
     window.gtag('event', 'page_view', {
-      page_title: 'Price offer finished',
-      page_path: '/price-offer-finished'
+      page_title: isSecurityDoors
+        ? 'Security doors price offer finished'
+        : 'Interior doors price offer finished',
+      page_path: isSecurityDoors
+        ? '/security-doors/price-offer-finished'
+        : '/interior-doors/price-offer-finished'
     })
   }
 })
@@ -33,9 +47,9 @@ onMounted(() => {
       <h3>STOLÁRSTVO - SUČANSKÝ</h3>
     </div>
     <div>
-      <a :href="appConfig!.baseUrl ?? '/'">
+      <RouterLink :to="returnRoute">
         <button class="btn btn-primary">{{ t('returnToHomepage') }}</button>
-      </a>
+      </RouterLink>
     </div>
   </div>
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {ref, onMounted, watch, WatchHandle, onBeforeUnmount} from 'vue'
-import {HintInterface} from "../model/interface/HintInterface.js";
+import {HintInterface} from "@/model/common/interfaces/HintInterface.js";
 import {modal} from "@/composables/modal.js";
 import ModalYoutubeVideo from "@/components/ModalYoutubeVideo.vue";
 import {useAppState} from "@/composables/app-state.js";
-import {usePhotoSwipeGallery} from "@/model/functions/photoswipe-utils.js";
+import {usePhotoSwipeGallery} from "@/model/common/functions/photoswipe-utils.js";
 
 const props = defineProps<{
   hintObj: HintInterface

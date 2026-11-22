@@ -4,8 +4,11 @@ import LoadingBar from "@/components/generic/LoadingBar.vue";
 import {useAppState} from "@/composables/app-state.js";
 import LanguageSelector from "@/components/generic/LanguageSelector.vue";
 import CurrencySelector from "@/components/CurrencySelector.vue";
+import {computed} from "vue";
+import {usePanelQuery} from "@/composables/panel-query.js";
 
-const {currency, offCanvasActiveView} = useAppState()
+const {appConfig, currency} = useAppState()
+const {panel} = usePanelQuery()
 const {t} = useI18n()
 
 const emit = defineEmits<{
@@ -19,12 +22,12 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <!--      <router-link class="navbar-brand" to="/">-->
-  <!--        <img v-if="navbarImgSrc"-->
-  <!--             :src="navbarImgSrc"-->
-  <!--             alt="Logo"-->
-  <!--             class="navbar-logo"/>-->
-  <!--      </router-link>-->
+<!--  <router-link class="navbar-brand" to="/">-->
+<!--    <img v-if="navbarImgSrc"-->
+<!--         :src="navbarImgSrc"-->
+<!--         alt="Logo"-->
+<!--         class="navbar-logo"/>-->
+<!--  </router-link>-->
 
   <nav class="d-none d-sm-flex navbar position-fixed top-0 end-0 z-1 w-100">
     <div class="container-fluid">
@@ -36,16 +39,16 @@ const emit = defineEmits<{
         <ul class="nav nav-underline fs-3 font-bold">
           <li class="nav-item">
             <a class="nav-link nav-link-configurator"
-               :class="{active: offCanvasActiveView === 'configurator'}"
-               @click="emit('handle-configurator-click'); offCanvasActiveView = 'configurator';">
+               :class="{active: panel === 'configurator'}"
+               @click="emit('handle-configurator-click')">
               {{ t('components.Navbar.configurator') }}
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link nav-link-price-offer"
-               :class="{ active: offCanvasActiveView === 'priceOffer' }"
-               @click="emit('handle-price-offer-click'); offCanvasActiveView = 'priceOffer';">
+               :class="{ active: panel === 'price-offer' }"
+               @click="emit('handle-price-offer-click')">
               {{ t('components.Navbar.priceOffer') }}
             </a>
           </li>
@@ -69,16 +72,16 @@ const emit = defineEmits<{
       <ul class="nav nav-underline w-100 nav-justified">
         <li class="nav-item">
           <a class="nav-link nav-link-configurator"
-             :class="{ active: offCanvasActiveView === 'configurator' }"
-             @click="emit('handle-configurator-click'); offCanvasActiveView = 'configurator';">
+             :class="{ active: panel === 'configurator' }"
+             @click="emit('handle-configurator-click')">
             {{ t('components.Navbar.configurator') }}
           </a>
         </li>
 
         <li class="nav-item" data-bs-theme="price-offer">
           <a class="nav-link nav-link-price-offer"
-             :class="{ active: offCanvasActiveView === 'priceOffer' }"
-             @click="emit('handle-price-offer-click'); offCanvasActiveView = 'priceOffer';">
+             :class="{ active: panel === 'price-offer' }"
+             @click="emit('handle-price-offer-click')">
             <span>
               {{ t('components.Navbar.priceOffer') }}
             </span>

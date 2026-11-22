@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useI18n} from "vue-i18n";
-import {SupportedLocale, switchLanguage} from "@/model/functions/translation-utils.js";
+import {SupportedLocale, switchLanguage} from "@/model/common/functions/translation-utils.js";
 
 const {locale} = useI18n()
 
@@ -37,5 +37,9 @@ const changeLocale = async (event: any) => {
 </template>
 
 <style scoped>
-
+select.form-select {
+  width: max-content;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
 </style>

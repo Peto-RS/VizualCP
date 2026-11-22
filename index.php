@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . "/php/api/model/cart-model.php";
-require_once __DIR__ . "/php/api/json-data-manipulation-facade.php";
+require_once __DIR__ . "/php/api/common/facade/json-data-manipulation-facade.php";
 
 $nonce = bin2hex(random_bytes(16));
 
@@ -75,7 +74,7 @@ if ($_SERVER['HTTPS'] != "on"){
           href="<?php echo(AppConfigJsonDataManipulation::getAll()["isProductionVueBuild"] ? AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/assets/main.css" : "http://localhost:5173/src/main.css") ?>">
 
     <?php
-    require_once __DIR__ . "/php/api/json-data-manipulation-facade.php";
+    require_once __DIR__ . "/php/api/common/facade/json-data-manipulation-facade.php";
     ?>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -84,7 +83,7 @@ if ($_SERVER['HTTPS'] != "on"){
 
 <body>
 <?php
-require_once __DIR__ . "/php/api/json-data-manipulation-facade.php";
+require_once __DIR__ . "/php/api/common/facade/json-data-manipulation-facade.php";
 $config = AppConfigJsonDataManipulation::getAll();
 
 if (!empty($config['ga4']) && is_array($config['ga4'])) {
@@ -111,7 +110,7 @@ if (!empty($config['ga4']) && is_array($config['ga4'])) {
 ?>
 
 <?php
-require_once __DIR__ . "/php/api/json-data-manipulation-facade.php";
+require_once __DIR__ . "/php/api/common/facade/json-data-manipulation-facade.php";
 ?>
 <script type="module"
         src="<?php echo(AppConfigJsonDataManipulation::getAll()["isProductionVueBuild"] ? AppConfigJsonDataManipulation::getAll()["baseUrl"] . "/public/app.js" : "http://localhost:5173/src/main.ts") ?>"></script>

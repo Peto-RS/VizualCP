@@ -1,27 +1,27 @@
 <script setup lang="ts">
 
 import {computed, nextTick, onBeforeMount, onMounted, ref, Ref, watch} from "vue";
-import {Room} from "@/model/api/res/configurator/Room.js";
-import {getConfigurator, postAddDoor} from "../model/api/rest.js";
+import {Room} from "@/model/interior-doors/configurator/Room.js";
+import {getConfigurator, postAddDoorInteriorDoors} from "../model/interior-doors/rest.js";
 import {useAppState} from "../composables/app-state.js";
 import {useI18n} from "vue-i18n";
 import DoorMiniature from "@/components/DoorMiniature.vue";
-import {ConfiguratorResponse, Handle, Material} from "@/model/api/res/configurator/ConfiguratorResponse.js";
-import {DoorCategory} from "@/model/api/res/configurator/DoorCategory.js";
-import {DoorState} from "@/model/interface/configurator/DoorState.js";
-import {SelectedDoor} from "@/model/interface/configurator/SelectedDoor.js";
+import {ConfiguratorResponse, Handle, Material} from "@/model/interior-doors/configurator/res/ConfiguratorResponse.js";
+import {DoorCategory} from "@/model/interior-doors/configurator/DoorCategory.js";
+import {DoorState} from "@/model/interior-doors/configurator/interface/DoorState.js";
+import {SelectedDoor} from "@/model/interior-doors/configurator/interface/SelectedDoor.js";
 import ImageWithLoadingPlaceholder from "@/components/generic/ImageWithLoadingPlaceholder.vue";
 import 'photoswipe/style.css';
 import {useAlerts} from "@/composables/alert-composables.js";
-import {usePhotoSwipeGallery} from "@/model/functions/photoswipe-utils.js";
-import {formatPrice} from "@/model/functions/formatters.js";
+import {usePhotoSwipeGallery} from "@/model/common/functions/photoswipe-utils.js";
+import {formatPrice} from "@/model/common/functions/formatters.js";
 import BadgePrice from "@/components/BadgePrice.vue";
 import Footer from "@/components/Footer.vue";
 import AccordionItem from "@/components/AccordionItem.vue";
 import {offcanvas} from "@/composables/offcanvas.js";
 import NavTabs from "@/components/NavTabs.vue";
-import {safeT} from "@/model/functions/translation-utils.js";
-import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
+import {safeT} from "@/model/common/functions/translation-utils.js";
+import {CURRENCY_SIGN} from "@/model/common/enums/CurrencyEnum.js";
 
 const {addAlert} = useAlerts()
 const {appConfig, currency} = useAppState()
@@ -32,7 +32,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'door-selected', door: SelectedDoor): void,
+  (e: 'door-updated', door: SelectedDoor): void,
   (e: 'room-selected', room: Room): void,
   (e: 'configurator-clicked'): void,
   (e: 'price-offer-clicked'): void
@@ -110,13 +110,13 @@ function handleDoorCategoryChange(doorCategory: DoorCategory) {
     type: doorCategory.doorConfiguratorDefault.type
   }
 
-  emit('door-selected', selectedDoor.value)
+  emit('door-updated', selectedDoor.value)
 }
 
 async function handleAddDoorButtonClick(): Promise<any> {
   if (selectedDoor.value) {
     try {
-      const response = await postAddDoor({
+      const response = await postAddDoorInteriorDoors({
         category: selectedDoor.value.categoryId!,
         handleId: selectedDoor.value.handleId,
         material: selectedDoor.value.material!,
@@ -144,21 +144,21 @@ async function handleDoorCategoryChangeWithScrollIntoView(doorCategory: DoorCate
 function handleDoorTypeChange(type: string) {
   if (selectedDoor.value) {
     selectedDoor.value.type = type
-    emit('door-selected', selectedDoor.value)
+    emit('door-updated', selectedDoor.value)
   }
 }
 
 function handleHandleChange(handleId: string) {
   if (selectedDoor.value) {
     selectedDoor.value.handleId = handleId
-    emit('door-selected', selectedDoor.value)
+    emit('door-updated', selectedDoor.value)
   }
 }
 
 function handleMaterialChange(material: string) {
   if (selectedDoor.value) {
     selectedDoor.value.material = material
-    emit('door-selected', selectedDoor.value)
+    emit('door-updated', selectedDoor.value)
   }
 }
 
@@ -177,23 +177,23 @@ onBeforeMount(async () => {
 })
 
 onMounted(async () => {
-  watch(() => configuratorApiResponse.value?.glasses, () => {
+  watch(glassGalleryRef, () => {
     if (glassGalleryRef.value) {
       usePhotoSwipeGallery(glassGalleryRef.value);
     }
-  }, {immediate: true})
+  }, {immediate: true, flush: 'post'})
 
   watch(galleryRef, () => {
     if (galleryRef.value) {
       usePhotoSwipeGallery(galleryRef.value);
     }
-  }, {immediate: true})
+  }, {immediate: true, flush: 'post'})
 
   watch(doorsGalleryRef, () => {
     if (doorsGalleryRef.value) {
       usePhotoSwipeGallery(doorsGalleryRef.value);
     }
-  }, {immediate: true})
+  }, {immediate: true, flush: 'post'})
 
   watch(currency, async () => {
     configuratorApiResponse.value = await getConfiguratorResponse();

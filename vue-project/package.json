@@ -9,24 +9,26 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
     "photoswipe": "^5.4.4",
     "vue": "^3.5.22",
-    "vue-i18n": "^11.2.2",
+    "vue-i18n": "^11.4.14",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.1",
     "@types/bootstrap": "^5.2.10",
     "@types/grecaptcha": "^3.0.9",
     "@types/node": "^24.10.1",
-    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitejs/plugin-vue": "^6.0.11",
     "sass": "^1.94.2",
     "typescript": "^5.9.3",
-    "vite": "8.0.5",
-    "vite-plugin-vue-devtools": "^8.0.3",
+    "vite": "^8.3.3",
+    "vite-plugin-vue-devtools": "^8.2.1",
     "vue-tsc": "^3.1.5"
   }
 }

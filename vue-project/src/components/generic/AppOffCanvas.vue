@@ -42,13 +42,11 @@ onBeforeUnmount(() => {
        :style="canvasPlacement === 'offcanvas-bottom'
     ? { height: offcanvas.parameters.value.height || offCanvasBottomDefaultHeight }
     : {}">
-    <keep-alive>
-      <component
-          :is="offcanvas.component.value"
-          :key="offcanvas.component.value ? offcanvas.keys.get(offcanvas.component.value) : 0"
-          v-bind="offcanvas.props.value"
-      />
-    </keep-alive>
+    <component
+        :is="offcanvas.component.value"
+        :key="offcanvas.componentKey.value"
+        v-bind="offcanvas.props.value"
+    />
   </div>
 </template>
 

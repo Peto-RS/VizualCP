@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {computed, nextTick, onMounted, Ref, ref, toRaw, watch} from 'vue'
-import {PriceOfferViewResponse} from "@/model/api/res/price-offer/PriceOfferViewResponse.js";
+import {PriceOfferViewResponse} from "@/model/interior-doors/price-offer/res/PriceOfferViewResponse.js";
 import {
   constructReactiveFormPriceOffer, DoorMeta,
   findTechnicalSurchargeById,
@@ -8,13 +8,13 @@ import {
   findAestheticAccessoryById,
   findSpecialSurchargeById, FormDoor,
   FormPriceOffer
-} from "@/model/functions/price-offer-form-builder.js";
-import {prepareRequest} from "@/model/functions/price-offer-api-request-builder.js";
+} from "@/model/interior-doors/function/price-offer-form-builder.js";
+import {prepareRequest} from "@/model/interior-doors/function/price-offer-api-request-builder.js";
 import BadgePrice from "./BadgePrice.vue";
 import AccordionItem from "./AccordionItem.vue";
-import {formatPrice} from "@/model/functions/formatters.js";
-import {deleteForm, getForm, submitForm, updateForm} from "../model/api/rest.js";
-import {ValidationMessage} from "../model/validation-message.js";
+import {formatPrice} from "@/model/common/functions/formatters.js";
+import {deleteForm, getForm, submitForm, updateForm} from "../model/interior-doors/rest.js";
+import {ValidationMessage} from "../model/common/validation-message.js";
 import ValidationMessages from "./ValidationMessages.vue";
 import Hint from "./Hint.vue";
 import LineItems from "./LineItems.vue";
@@ -22,18 +22,18 @@ import {useAlerts} from "../composables/alert-composables.js";
 import {useI18n} from "vue-i18n";
 import Toasts from "./generic/Toasts.vue";
 import {useRouter} from "vue-router";
-import {HintInterface} from "../model/interface/HintInterface.js";
-import SelectedDoorsLineItems from "./SelectedDoorsLineItems.vue";
-import SelectedDoors from "./SelectedDoors.vue";
+import {HintInterface} from "@/model/common/interfaces/HintInterface.js";
+import SelectedDoorsLineItems from "./interior-doors/SelectedDoorsLineItems.vue";
+import SelectedDoors from "./interior-doors/SelectedDoors.vue";
 import {useAppState} from "../composables/app-state.js";
 import Footer from "@/components/Footer.vue";
-import {ConfiguratorResponse, Handle} from "@/model/api/res/configurator/ConfiguratorResponse.js";
+import {ConfiguratorResponse, Handle} from "@/model/interior-doors/configurator/res/ConfiguratorResponse.js";
 import ImageWithLoadingPlaceholder from "@/components/generic/ImageWithLoadingPlaceholder.vue";
 import {offcanvas} from "@/composables/offcanvas.js";
 import NavTabs from "@/components/NavTabs.vue";
-import {safeT} from "@/model/functions/translation-utils.js";
-import {CURRENCY_SIGN} from "@/model/enums/CurrencyEnum.js";
-import {DistrictResponse} from "@/model/api/res/price-offer/DistrictResponse.js";
+import {safeT} from "@/model/common/functions/translation-utils.js";
+import {CURRENCY_SIGN} from "@/model/common/enums/CurrencyEnum.js";
+import {DistrictResponse} from "@/model/interior-doors/price-offer/res/DistrictResponse.js";
 import {useRecaptcha} from "@/composables/use-recaptcha.js";
 
 const router = useRouter()
@@ -149,7 +149,7 @@ async function handleFormSubmit(e: Event): Promise<void> {
 
     if (response.ok) {
       await deleteForm()
-      sessionStorage.setItem('offerCompleted', 'true')
+      sessionStorage.setItem('offerCompleted', 'interior-doors')
       await router.push({name: 'PriceOfferFinished'})
     } else {
       addAlert(t("alerts.MAIL_SENDING_ERROR"));

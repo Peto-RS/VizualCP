@@ -4,10 +4,10 @@ import {router} from "./router.js";
 import Home from "./views/Home.vue";
 import {
     i18n
-} from "@/model/functions/translation-utils.js";
+} from "@/model/common/functions/translation-utils.js";
 import {useAppState} from "@/composables/app-state.js";
-import {getAppConfig} from "@/model/api/rest.js";
-import {CurrencyEnum} from "@/model/enums/CurrencyEnum.js";
+import {getAppConfig} from "@/model/common/rest.js";
+import {CurrencyEnum} from "@/model/common/enums/CurrencyEnum.js";
 
 /*
 let vueAppInstance: ReturnType<typeof createApp> | null = null

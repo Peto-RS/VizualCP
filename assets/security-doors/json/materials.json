@@ -1,0 +1,58 @@
+{
+  "drevo_biele": {
+    "label": "Drevo biele",
+    "labelKey": "securityDoors.db.materials.drevo_biele.label"
+  },
+  "dub_bielo_sedy": {
+    "label": "Dub bielo-šedý",
+    "labelKey": "securityDoors.db.materials.dub_bielo_sedy.label"
+  },
+  "borovica_biela": {
+    "label": "Borovica biela",
+    "labelKey": "securityDoors.db.materials.borovica_biela.label"
+  },
+  "dub_royal": {
+    "label": "Dub Royal",
+    "labelKey": "securityDoors.db.materials.dub_royal.label"
+  },
+  "dub_prirodny": {
+    "label": "Dub prírodný",
+    "labelKey": "securityDoors.db.materials.dub_prirodny.label"
+  },
+  "buk": {
+    "label": "Buk",
+    "labelKey": "securityDoors.db.materials.buk.label"
+  },
+  "dub_bardolino": {
+    "label": "Dub Bardolino",
+    "labelKey": "securityDoors.db.materials.dub_bardolino.label"
+  },
+  "wob4": {
+    "label": "WOB4",
+    "labelKey": "securityDoors.db.materials.wob4.label"
+  },
+  "dub_arizona": {
+    "label": "Dub Arizona",
+    "labelKey": "securityDoors.db.materials.dub_arizona.label"
+  },
+  "dub_dayton": {
+    "label": "Dub Dayton",
+    "labelKey": "securityDoors.db.materials.dub_dayton.label"
+  },
+  "wob7": {
+    "label": "WOB7",
+    "labelKey": "securityDoors.db.materials.wob7.label"
+  },
+  "orech_portland": {
+    "label": "Orech Portland",
+    "labelKey": "securityDoors.db.materials.orech_portland.label"
+  },
+  "wob5": {
+    "label": "WOB5",
+    "labelKey": "securityDoors.db.materials.wob5.label"
+  },
+  "wenge": {
+    "label": "Wenge",
+    "labelKey": "securityDoors.db.materials.wenge.label"
+  }
+}

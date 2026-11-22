@@ -3,6 +3,8 @@
     "categoryId": "best-selling",
     "description": "Do kategórie najpredávanejšie sme pre Vás vybrali zoznam interiérových dverí, ktoré si naši zákazníci najčastejšie objednávajú a zároveň predstavujú najpriaznivejší pomer medzi kvalitou a cenou.",
     "descriptionKey": "db.doorCategories.best-selling.description",
+    "imgSrcDoorClosed": "/images/doors/best-selling/min/door-closed.jpg",
+    "imgSrcDoorOpen": "",
     "name": "Najpredávanejšie",
     "nameKey": "db.doorCategories.best-selling.name",
     "doorConfiguratorDefault": {

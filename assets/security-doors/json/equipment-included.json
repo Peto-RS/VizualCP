@@ -1,0 +1,52 @@
+[
+  {
+    "imgSrc": "images/security-doors/equipment-included/kukatko.jpg",
+    "label": "Kukátko",
+    "labelKey": "securityDoors.db.equipmentIncluded.peephole"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/gula.jpg",
+    "label": "Guľa",
+    "labelKey": "securityDoors.db.equipmentIncluded.doorKnob"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/fab1.jpg",
+    "label": "Fabka 1",
+    "labelKey": "securityDoors.db.equipmentIncluded.leverHandle1"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/fab2.jpg",
+    "label": "Fabka 2",
+    "labelKey": "securityDoors.db.equipmentIncluded.leverHandle2"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/madlo.jpg",
+    "label": "Madlo",
+    "labelKey": "securityDoors.db.equipmentIncluded.handle"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/kluce.jpg",
+    "label": "5 kľúčov",
+    "labelKey": "securityDoors.db.equipmentIncluded.keys"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/tesnenie.jpg",
+    "label": "Tesnenie",
+    "labelKey": "securityDoors.db.equipmentIncluded.seal"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/krytka.jpg",
+    "label": "Krytka",
+    "labelKey": "securityDoors.db.equipmentIncluded.cover"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/zamok.jpg",
+    "label": "Bezpečnostný zámok",
+    "labelKey": "securityDoors.db.equipmentIncluded.securityLock"
+  },
+  {
+    "imgSrc": "images/security-doors/equipment-included/kotvy.jpg",
+    "label": "8 kotiev",
+    "labelKey": "securityDoors.db.equipmentIncluded.anchors"
+  }
+]

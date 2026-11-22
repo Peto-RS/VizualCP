@@ -1,0 +1,16 @@
+[
+  {
+    "id": "safetyClamp",
+    "imgSrc": "images/security-doors/equipment-optional/doplnok18.jpg",
+    "label": "Bezpečnostná svorka",
+    "labelKey": "securityDoors.db.equipmentOptional.safetyClamp",
+    "price": 20
+  },
+  {
+    "id": "stainlessSteelDoorSillGuard",
+    "imgSrc": "images/security-doors/equipment-optional/prahy-ku-dveram.jpg",
+    "label": "Nerezový kryt na prah",
+    "labelKey": "securityDoors.db.equipmentOptional.stainlessSteelDoorSillGuard",
+    "price": 20
+  }
+]

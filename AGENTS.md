@@ -1,0 +1,3 @@
+In this repository, you will find the source code for the Vizualizácia Dverí web application. The application is built using PHP for the backend and Vue.js for the frontend. It provides a configurator for interior and security doors, allowing users to customize their door options and receive price offers.
+
+Frontend is located in the `vue-project` directory, while the backend PHP code is in the `php` directory, however API controllers part is located in the folder `api`. The application uses SQLite3 for data storage and Composer for managing PHP dependencies.
